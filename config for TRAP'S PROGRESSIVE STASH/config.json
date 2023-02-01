@@ -1,0 +1,470 @@
+{
+  "debug": true,
+  "initial_stash_size": 50,
+  "stash_upgrades": [
+    {
+      "// Tier 2: Left Behind stash": true,
+      "size": 100,
+      "requirements": [
+        {
+          "// hand drill": true,
+          "type": "Item",
+          "templateId": "5d1b317c86f7742523398392",
+          "count": 1
+        },
+        {
+          "// pack of screws": true,
+          "type": "Item",
+          "templateId": "59e35ef086f7741777737012",
+          "count": 10
+        },
+        {
+          "// WD-40 (100ml)": true,
+          "type": "Item",
+          "templateId": "590c5bbd86f774785762df04",
+          "count": 4
+        },
+        {
+          "// vents area": true,
+          "type": "Area",
+          "areaType": 0,
+          "requiredLevel": 1
+        },
+        {
+          "// roubles": true,
+          "type": "Item",
+          "templateId": "5449016a4bdc2d6f028b456f",
+          "count": 250000
+        },
+        {
+          "// stash area": true,
+          "type": "Area",
+          "areaType": 3,
+          "requiredLevel": 0
+        },
+        {
+          "// pack of nails": true,
+          "type": "Item",
+          "templateId": "590c31c586f774245e3141b2",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "// Tier 3: Prepare for Escape stash": true,
+      "size": 150,
+      "requirements": [
+        {
+          "// vents area": true,
+          "type": "Area",
+          "areaType": 0,
+          "requiredLevel": 2
+        },
+        {
+          "// heating area": true,
+          "type": "Area",
+          "areaType": 5,
+          "requiredLevel": 2
+        },
+        {
+          "type": "Item",
+          "templateId": "59e35de086f7741778269d84",
+          "count": 2
+        },
+        {
+          "type": "Item",
+          "templateId": "59e35ef086f7741777737012",
+          "count": 15
+        },
+        {
+          "type": "Item",
+          "templateId": "5449016a4bdc2d6f028b456f",
+          "count": 850000
+        },
+        {
+          "// prapor trader": true,
+          "type": "TraderLoyalty",
+          "traderId": "54cb50c76803fa8b248b4571",
+          "loyaltyLevel": 3
+        },
+        {
+          "// stash area": true,
+          "type": "Area",
+          "areaType": 3,
+          "requiredLevel": 1
+        },
+        {
+          "// ragman trader": true,
+          "type": "TraderLoyalty",
+          "traderId": "5ac3b934156ae10c4430e83c",
+          "loyaltyLevel": 3
+        },
+        {
+          "type": "Item",
+          "templateId": "590c31c586f774245e3141b2",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "// Tier 4: Edge of Darkness stash": true,
+      "size": 200,
+      "requirements": [
+        {
+          "// generator area": true,
+          "type": "Area",
+          "areaType": 4,
+          "requiredLevel": 3
+        },
+        {
+          "// workbench area": true,
+          "type": "Area",
+          "areaType": 10,
+          "requiredLevel": 3
+        },
+        {
+          "// heating area": true,
+          "type": "Area",
+          "areaType": 5,
+          "requiredLevel": 3
+        },
+        {
+          "type": "Item",
+          "templateId": "569668774bdc2da2298b4568",
+          "count": 20000
+        },
+        {
+          "// peacekeeper trader": true,
+          "type": "TraderLoyalty",
+          "traderId": "5935c25fb3acc3127c3d8cd9",
+          "loyaltyLevel": 4
+        },
+        {
+          "// stash area": true,
+          "type": "Area",
+          "areaType": 3,
+          "requiredLevel": 2
+        },
+        {
+          "// intel center area": true,
+          "type": "Area",
+          "areaType": 11,
+          "requiredLevel": 2
+        },
+        {
+          "// ragman trader": true,
+          "type": "TraderLoyalty",
+          "traderId": "5ac3b934156ae10c4430e83c",
+          "loyaltyLevel": 4
+        },
+        {
+          "type": "Item",
+          "templateId": "57347c5b245977448d35f6e1",
+          "count": 10
+        },
+        {
+          "type": "Item",
+          "templateId": "57347c77245977448d35f6e2",
+          "count": 10
+        },
+        {
+          "type": "Item",
+          "templateId": "590c35a486f774273531c822",
+          "count": 5
+        },
+        {
+          "type": "Item",
+          "templateId": "60391afc25aff57af81f7085",
+          "count": 2
+        }
+      ]
+    }
+  ],
+  "secure_containers": {
+    "pouch": {
+      "not_craftable": true,
+      "dimensions": [3, 3],
+      "requirements": []
+    },
+    "alpha": {
+      "dimensions": [3, 3],
+      "requirements": [
+        {
+          "// Flat Screwdriver": true,
+          "type": "Tool",
+          "templateId": "5d63d33b86f7746ea9275524"
+        },
+        {
+          "// Screwdriver": true,
+          "type": "Tool",
+          "templateId": "590c2d8786f774245b1f03f3"
+        },
+        {
+          "// bolts": true,
+          "type": "Item",
+          "templateId": "57347c5b245977448d35f6e1",
+          "count": 4
+        },
+        {
+          "// screw nuts": true,
+          "type": "Item",
+          "templateId": "57347c77245977448d35f6e2",
+          "count": 4
+        },
+        {
+          "// duct tape": true,
+          "type": "Item",
+          "templateId": "57347c1124597737fb1379e3",
+          "count": 2
+        },
+        {
+          "// Printed circuit board": true,
+          "type": "Item",
+          "templateId": "590a3b0486f7743954552bdb",
+          "count": 2
+        },
+        {
+          "// Bundle of wires": true,
+          "type": "Item",
+          "templateId": "5c06779c86f77426e00dd782",
+          "count": 4
+        },
+        {
+          "// workbench area": true,
+          "type": "Area",
+          "areaType": 10,
+          "requiredLevel": 1
+        }
+      ]
+    },
+    "beta": {
+      "dimensions": [3, 4],
+      "requirements": [
+        {
+          "// alpha container": true,
+          "type": "Item",
+          "templateId": "544a11ac4bdc2d470e8b456a",
+          "count": 2
+        },
+        {
+          "// Nippers": true,
+          "type": "Tool",
+          "templateId": "5d40425986f7743185265461"
+        },
+        {
+          "// Pliers": true,
+          "type": "Tool",
+          "templateId": "590c2b4386f77425357b6123"
+        },
+        {
+          "// bolts": true,
+          "type": "Item",
+          "templateId": "57347c5b245977448d35f6e1",
+          "count": 8
+        },
+        {
+          "// screw nuts": true,
+          "type": "Item",
+          "templateId": "57347c77245977448d35f6e2",
+          "count": 8
+        },
+        {
+          "// pack of screws": true,
+          "type": "Item",
+          "templateId": "59e35ef086f7741777737012",
+          "count": 4
+        },
+        {
+          "// silicon tube": true,
+          "type": "Item",
+          "templateId": "5d1b39a386f774252339976f",
+          "count": 4
+        },
+        {
+          "// insulating (blue) tape": true,
+          "type": "Item",
+          "templateId": "5734795124597738002c6176",
+          "count": 2
+        },
+        {
+          "// workbench area": true,
+          "type": "Area",
+          "areaType": 10,
+          "requiredLevel": 1
+        }
+      ]
+    },
+    "epsilon": {
+      "dimensions": [4, 4],
+      "requirements": [
+        {
+          "// beta container": true,
+          "type": "Item",
+          "templateId": "5857a8b324597729ab0a0e7d",
+          "count": 2
+        },
+        {
+          "// Measuring tape": true,
+          "type": "Tool",
+          "templateId": "590c2c9c86f774245b1f03f2"
+        },
+        {
+          "// Pliers elite": true,
+          "type": "Tool",
+          "templateId": "5af04b6486f774195a3ebb49"
+        },
+        {
+          "// poxeram": true,
+          "type": "Item",
+          "templateId": "5e2af22086f7746d3f3c33fa",
+          "count": 4
+        },
+        {
+          "// silicon tube": true,
+          "type": "Item",
+          "templateId": "5d1b39a386f774252339976f",
+          "count": 8
+        },
+        {
+          "// corrugated hose": true,
+          "type": "Item",
+          "templateId": "59e35cbb86f7741778269d83",
+          "count": 4
+        },
+        {
+          "// kektape duct tape": true,
+          "type": "Item",
+          "templateId": "5e2af29386f7746d4159f077",
+          "count": 2
+        },
+        {
+          "// radiator helix": true,
+          "type": "Item",
+          "templateId": "5d1c774f86f7746d6620f8db",
+          "count": 2
+        },
+        {
+          "// workbench area": true,
+          "type": "Area",
+          "areaType": 10,
+          "requiredLevel": 2
+        }
+      ]
+    },
+    "gamma": {
+      "dimensions": [4, 5],
+      "requirements": [
+        {
+          "// epsilon container": true,
+          "type": "Item",
+          "templateId": "59db794186f77448bc595262",
+          "count": 2
+        },
+        {
+          "// Flat Screwdriver (long)": true,
+          "type": "Tool",
+          "templateId": "5d4042a986f7743185265463"
+        },
+        {
+          "// Metal cutting scissors": true,
+          "type": "Tool",
+          "templateId": "5d40419286f774318526545f"
+        },
+        {
+          "// weapon parts": true,
+          "type": "Item",
+          "templateId": "5d1c819a86f774771b0acd6c",
+          "count": 2
+        },
+        {
+          "// metal spare parts": true,
+          "type": "Item",
+          "templateId": "61bf7b6302b3924be92fa8c3",
+          "count": 2
+        },
+        {
+          "// plexiglass piece": true,
+          "type": "Item",
+          "templateId": "59e366c186f7741778269d85",
+          "count": 2
+        },
+        {
+          "// radiator helix": true,
+          "type": "Item",
+          "templateId": "5d1c774f86f7746d6620f8db",
+          "count": 4
+        },
+        {
+          "// silicon tube": true,
+          "type": "Item",
+          "templateId": "5d1b39a386f774252339976f",
+          "count": 8
+        },
+        {
+          "// workbench area": true,
+          "type": "Area",
+          "areaType": 10,
+          "requiredLevel": 3
+        }
+      ]
+    },
+    "kappa": {
+      "not_craftable": true,
+      "dimensions": [5, 5],
+      "requirements": [
+        {
+          "// gamma container": true,
+          "type": "Item",
+          "templateId": "5857a8bc2459772bad15db29",
+          "count": 1
+        },
+        {
+          "// bulbex cable cutter": true,
+          "type": "Tool",
+          "templateId": "619cbfeb6b8a1b37a54eebfa"
+        },
+        {
+          "// electric drill": true,
+          "type": "Tool",
+          "templateId": "59e35de086f7741778269d84"
+        },
+        {
+          "// kektape duct tape": true,
+          "type": "Item",
+          "templateId": "5e2af29386f7746d4159f077",
+          "count": 4
+        },
+        {
+          "// military circuit board": true,
+          "type": "Item",
+          "templateId": "5d0376a486f7747d8050965c",
+          "count": 4
+        },
+        {
+          "// military corrugated tube": true,
+          "type": "Item",
+          "templateId": "619cbf476b8a1b37a54eebf8",
+          "count": 2
+        },
+        {
+          "// military cable": true,
+          "type": "Item",
+          "templateId": "5d0375ff86f774186372f685",
+          "count": 4
+        },
+        {
+          "// military gyrotachometer": true,
+          "type": "Item",
+          "templateId": "5d03784a86f774203e7e0c4d",
+          "count": 1
+        },
+        {
+          "// workbench area": true,
+          "type": "Area",
+          "areaType": 10,
+          "requiredLevel": 3
+        }
+      ]
+    }
+  }
+}
