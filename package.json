@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "main": "src/mod.js",
     "license": "MIT",
-    "author": "ODT",
+    "author": "x-ODT",
     "akiVersion": "3.4.1",
     "scripts": {
         "setup": "npm i",

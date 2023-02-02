@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const ConfigTypes_1 = require("C:/snapshot/project/obj/models/enums/ConfigTypes");
+// import { ITrader } from "C:/snapshot/project/obj/models/eft/common/tables/ITrader";
 const whiteListHandbookCategoriesID = [
     "5b47574386f77428ca22b2ed",
     "5b47574386f77428ca22b2ee",
@@ -558,8 +559,6 @@ class Mod {
         const traderConfig = configServer.getConfig(ConfigTypes_1.ConfigTypes.TRADER);
         const ragfairConfig = configServer.getConfig(ConfigTypes_1.ConfigTypes.RAGFAIR);
         const hideoutConfig = configServer.getConfig(ConfigTypes_1.ConfigTypes.HIDEOUT);
-        const inventoryConfig = configServer.getConfig(ConfigTypes_1.ConfigTypes.INVENTORY);
-        const itemConfig = configServer.getConfig(ConfigTypes_1.ConfigTypes.ITEM);
         const insuranceConfig = configServer.getConfig(ConfigTypes_1.ConfigTypes.INSURANCE);
         const prapor = tables.traders["54cb50c76803fa8b248b4571"];
         const therapist = tables.traders["54cb57776803fa99248b456e"];
@@ -665,6 +664,7 @@ class Mod {
         ragfairConfig.dynamic.barter.priceRangeVariancePercent = 35; // more variance for flea barters, seems actually fun!
         // Max 2 for 1 barters.
         ragfairConfig.dynamic.barter.itemCountMax = 2;
+        ragfairConfig.dynamic.condition.min = 1;
         // Sligtly increase flea prices, but with bigger variance, you still get a lot of great trades. Hustle.
         ragfairConfig.dynamic.price.min = 0.9;
         ragfairConfig.dynamic.price.max = 1.3;
@@ -690,7 +690,11 @@ class Mod {
         traderConfig.fence.assortSize = 30;
         traderConfig.fence.blacklist = commonBlacklist; //itemid or baseid
         traderConfig.fence.maxPresetsPercent = 0;
-        traderConfig.fence.itemPriceMult = 0.79; // at 6 Fence karma you buy items almost at a price Therapist buys from you. Go grind.
+        traderConfig.fence.itemPriceMult = 0.8; // at 6 Fence karma you buy items almost at a price Therapist buys from you. Go grind.
+        traderConfig.fence.presetMaxDurabilityPercentMinMax.min = 100;
+        traderConfig.fence.presetMaxDurabilityPercentMinMax.max = 100;
+        traderConfig.fence.armorMaxDurabilityPercentMinMax.min = 100;
+        traderConfig.fence.armorMaxDurabilityPercentMinMax.max = 100;
         // Other opinionated tweaks:
         // keytool buff to make it 5x5
         tables.templates.items["59fafd4b86f7745ca07e1232"]._props.Grids[0]._props.cellsH = 5;

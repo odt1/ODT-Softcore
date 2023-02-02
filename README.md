@@ -18,11 +18,13 @@ All items, even the cheapest, are somewhat valuable now.
 Ever thought about looting AA batteries or Crickents? 
 Well, now you will actually look for them to trade in similar value tiers on flea. 
 
-Barters are random avd vary a lot in value. 
+Barters are random and vary a lot in value. 
+This results in higly engaging simulation of a war broken society, with some wild trades included. 
+Trully immersive experience.
 
-Almost all hideout crafts are great and usefull (Toilet paper craft nerfed, was too OP).
+Hideout crafts are great and usefull (toilet paper craft nerfed, was too OP).
 
-Leveling traders is your only hope of survival. 
+Leveling traders and crafting is your only hope of survival. 
 
 ## Hideout features:
 - 100x faster hideout construction.
@@ -30,7 +32,7 @@ Leveling traders is your only hope of survival.
 - 10x faster bitcoin mining, purified water and moonshine production.
 - 10x bigger fuel draw to compensate. (Now you will have to think about fuel. A little, but still.)
 - New crafts (Ophthalmoscope, Zagustin, CALOK, Adrenaline, 3bTG, AHF1) and rebalanced some of the vanilla ones (Clin, Paracord, Water filter, Toilet paper, EWR, MULE, Surv12, AFAK, LEDX, GRIZZLY). Working on more (Workbench and intelligence center crafts), suggestions and discussion are encouraged!
-- Did you always want to run your own meth lab in Tarkov? Obdolbos is now craftable at massive profit. 
+- Did you always want to run your own personal underground meth lab in Tarkov? Obdolbos is now craftable at massive profit. 
 
 ## Various tweaks:
 - Flea is open on level 5.
@@ -49,4 +51,4 @@ Leveling traders is your only hope of survival.
 None. Deal with it. For now. 
 
 ## Notes:
-No, you cannot use your new fastly mined bitcoins for barters. Because of well, reasons. Like inflation, man. 
+- No, you cannot use your new fastly mined bitcoins for barters. Because of well, reasons. Like inflation, man. It hits all of us. No one cares about crypto anymore, except you and your nerd friend Mechanic. 

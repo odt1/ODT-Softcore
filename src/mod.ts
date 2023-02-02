@@ -5,6 +5,7 @@ import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 import { ConfigServer } from "@spt-aki/servers/ConfigServer";
 import { ConfigTypes } from "@spt-aki/models/enums/ConfigTypes";
 import { ObjectId } from "@spt-aki/utils/ObjectId";
+// import { ITrader } from "@spt-aki/models/eft/common/tables/ITrader";
 
 const whiteListHandbookCategoriesID = [
 	"5b47574386f77428ca22b2ed", // Energy elements
@@ -565,16 +566,12 @@ class Mod implements IPostDBLoadMod {
 		const handbook = tables.templates.handbook;
 		const prices = tables.templates.prices;
 		const globals = tables.globals.config;
-		const traderConfig = configServer.getConfig<TRADER>(ConfigTypes.TRADER);
+		const traderConfig = configServer.getConfig<ITraderConfig>(ConfigTypes.TRADER);
 		const ragfairConfig = configServer.getConfig<IRagfairConfig>(ConfigTypes.RAGFAIR);
 		const hideoutConfig = configServer.getConfig<IHideoutConfig>(ConfigTypes.HIDEOUT);
-		const inventoryConfig = configServer.getConfig<IInventoryConfig>(ConfigTypes.INVENTORY);
-		const itemConfig = configServer.getConfig<IItemConfig>(ConfigTypes.ITEM);
-
 		const insuranceConfig = configServer.getConfig<IInsuranceConfig>(ConfigTypes.INSURANCE);
 		const prapor = tables.traders["54cb50c76803fa8b248b4571"];
 		const therapist = tables.traders["54cb57776803fa99248b456e"];
-
 
 		// Object.values(items)
 		// .filter((x) => x._props.CanSellOnRagfair == false && x._type == "Item")
@@ -695,7 +692,7 @@ class Mod implements IPostDBLoadMod {
 		ragfairConfig.dynamic.barter.itemCountMax = 2;
 
 		ragfairConfig.dynamic.condition.min = 1
-		
+
 		// Sligtly increase flea prices, but with bigger variance, you still get a lot of great trades. Hustle.
 		ragfairConfig.dynamic.price.min = 0.9;
 		ragfairConfig.dynamic.price.max = 1.3;
@@ -719,16 +716,15 @@ class Mod implements IPostDBLoadMod {
 		// Max 2 items per offer. Feels nice. Loot more shit, it might come in handy.
 		ragfairConfig.dynamic.nonStackableCount.min = 1;
 		ragfairConfig.dynamic.nonStackableCount.max = 2;
-
-
 		// Add BSGblacklist and mod custom blacklist to Fence blacklists
 		let commonBlacklist = [];
 		commonBlacklist.push(...BSGblacklist, ...fleaBarterBlacklistClassesIDs);
+
 		// Fence sells only items that are not in the flea blacklist
 		traderConfig.fence.assortSize = 30;
 		traderConfig.fence.blacklist = commonBlacklist; //itemid or baseid
 		traderConfig.fence.maxPresetsPercent = 0;
-		traderConfig.fence.itemPriceMult = 0.79; // at 6 Fence karma you buy items almost at a price Therapist buys from you. Go grind.
+		traderConfig.fence.itemPriceMult = 0.8; // at 6 Fence karma you buy items almost at a price Therapist buys from you. Go grind.
 
 		// Other opinionated tweaks:
 		// keytool buff to make it 5x5
