@@ -665,7 +665,7 @@ class Mod implements IPostDBLoadMod {
 			items[item]._props.CanSellOnRagfair = true
 		}
 
-		// Hard fix for important items. Too low prices can't convert to barters.
+		// Hardcode fix for important or unbalanced items. Too low prices can't convert to barters.
 		prices["5aa2b923e5b5b000137b7589"] *= 5 // Round frame sunglasses
 		prices["59e770b986f7742cbd762754"] *= 2 // Anti-fragmentation glasses
 		prices["5f5e45cc5021ce62144be7aa"] *= 2 // LolKek 3F Transfer tourist backpack
@@ -718,23 +718,19 @@ class Mod implements IPostDBLoadMod {
 		// Min level is 5
 		globals.RagFair.minUserLevel = 5
 
-		// globals.RagFair.ratingSumForDecrease = 10000
-		// globals.RagFair.ratingSumForIncrease = 10000
-
 		// Completely disable selling items
-		// Since prices are the same as for vendors, allow selling for full item price
-		// ragfairConfig.sell.chance.base = 0;
-		ragfairConfig.sell.reputation.gain *= 10
-		ragfairConfig.sell.reputation.loss *= 10
-		ragfairConfig.sell.time.base = 0
-		ragfairConfig.sell.time.min = 0
-		ragfairConfig.sell.time.max = 0
+		ragfairConfig.sell.chance.base = 0
+		// Untill this is fixed (https://dev.sp-tarkov.com/SPT-AKI/Server/issues/3098), no sellorino amigo.
+		//ragfairConfig.sell.chance.overprices = 0 // block overpriced abuse. you have to sell for < DB fleaprice (use my Item info mod to see it)
+		//ragfairConfig.sell.reputation.gain *= 10
+		//ragfairConfig.sell.reputation.loss *= 10
+		//ragfairConfig.sell.time.base = 1
+		//ragfairConfig.sell.time.min = 1
+		//ragfairConfig.sell.time.max = 1
+		//ragfairConfig.sell.fees = false
 
-		globals.RagFair.isOnlyFoundInRaidAllowed = false
-
-		// Barters only for items that cost > 100
 		ragfairConfig.dynamic.barter.chancePercent = 80 // Allow 20% of listings for cash
-		ragfairConfig.dynamic.barter.minRoubleCostToBecomeBarter = 100
+		ragfairConfig.dynamic.barter.minRoubleCostToBecomeBarter = 100 // Barters only for items that cost > 100
 		ragfairConfig.dynamic.barter.priceRangeVariancePercent = 40 // more variance for flea barters, seems actually fun!
 
 		// Max 2 for 1 barters.
@@ -743,23 +739,25 @@ class Mod implements IPostDBLoadMod {
 		ragfairConfig.dynamic.condition.min = 1
 
 		// Sligtly increase flea prices, but with bigger variance, you still get a lot of great trades. Hustle.
-		ragfairConfig.dynamic.price.min *= 1.3
-		ragfairConfig.dynamic.price.max *= 1.3
+		ragfairConfig.dynamic.price.min *= 1.3 // 0.8 -> 1.04
+		ragfairConfig.dynamic.price.max *= 1.3 // 1.2 -> 1.56
 
 		//Allow FIR only items for barters. This is default, so just in case. To make a point.
-		// globals.RagFair.isOnlyFoundInRaidAllowed = true;
+		globals.RagFair.isOnlyFoundInRaidAllowed = true
 
 		// Can only barter from items not in the blacklist. Only allows base classes, and not itemIDs =(
 		ragfairConfig.dynamic.barter.itemTypeBlacklist = fleaBarterBlacklist
 
 		// dirty hack to block BSG blacklisted items (dogtags, BITCOINS, ornaments and others) from barters, since you can't buy them on flea anyway, so it should not matter.
 		// 2 is used to pass getFleaPriceForItem check and not trigger generateStaticPrices
-		// Allowing fast farming bitcoins for barters would be an extremly cheap money printing abuse. The balance if fine, don't worry about it.
 		BSGblacklist.filter((x) => {
-			if (x == "59faff1d86f7746c51718c9c" && config.Economy.UnbanBitcoin.enabled == true) {
+			if (x == "59faff1d86f7746c51718c9c" && config.Economy.UnbanBitcoinForBarters.enabled == true) {
 				// do nothing
 			} else {
 				prices[x] = 2
+				if (items[x]._props.CanSellOnRagfair == true) {
+					log(`Item ${getItemName(x)} can be bought on flea for free, you dirty cheater!!!`)
+				}
 			}
 		})
 

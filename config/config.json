@@ -6,7 +6,7 @@
 	"Economy": {
 		"_description": "",
 		"enabled": true,
-		"UnbanBitcoin": {
+		"UnbanBitcoinForBarters": {
 			"_description": "",
 			"enabled": true
 		},
