@@ -1,10 +1,10 @@
-import { DependencyContainer } from "tsyringe";
+import { DependencyContainer } from "tsyringe"
 
-import { IPostDBLoadMod } from "@spt-aki/models/external/IPostDBLoadMod";
-import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
-import { ConfigServer } from "@spt-aki/servers/ConfigServer";
-import { ConfigTypes } from "@spt-aki/models/enums/ConfigTypes";
-import { ObjectId } from "@spt-aki/utils/ObjectId";
+import { IPostDBLoadMod } from "@spt-aki/models/external/IPostDBLoadMod"
+import { DatabaseServer } from "@spt-aki/servers/DatabaseServer"
+import { ConfigServer } from "@spt-aki/servers/ConfigServer"
+import { ConfigTypes } from "@spt-aki/models/enums/ConfigTypes"
+import { ObjectId } from "@spt-aki/utils/ObjectId"
 
 import config from "../config/config.json"
 
@@ -96,7 +96,7 @@ const fleaWhitelist = [
 	// "5b619f1a86f77450a702a6f3", // Quest items
 	// "5c518ec986f7743b68682ce2", // Mechanical keys
 	// "5c518ed586f774119a772aee", // Electronic keys
-];
+]
 
 const baseClasses = [
 	// unused, for reference
@@ -208,7 +208,7 @@ const baseClasses = [
 	"5447e0e74bdc2d3c308b4567", // Special item
 	"5661632d4bdc2d903d8b456b", // Stackable item
 	"543be6564bdc2df4348b4568", // Throwable weapon
-];
+]
 
 const fleaBarterBlacklist = [
 	// base classes IDs (parent ID)
@@ -320,7 +320,7 @@ const fleaBarterBlacklist = [
 	"5447e0e74bdc2d3c308b4567", // Special item
 	"5661632d4bdc2d903d8b456b", // Stackable item
 	"543be6564bdc2df4348b4568", // Throwable weapon
-];
+]
 
 const questKeys = [
 	"59387a4986f77401cc236e62", // Dorm room 114 key
@@ -366,7 +366,7 @@ const questKeys = [
 	"5a0eee1486f77402aa773226", // Health Resort east wing room 328 key
 	"591afe0186f77431bd616a11", // ZB-014 key
 	// "5d08d21286f774736e7c94c3", // Shturman's stash key
-];
+]
 
 const itemWhitelist = [
 	"60363c0c92ec1c31037959f5", // GP-7 gas mask
@@ -390,7 +390,7 @@ const itemWhitelist = [
 	"5c165d832e2216398b5a7e36", // Peltor Tactical Sport headset
 	"5e4d34ca86f774264f758330", // Walker's Razor Digital headset
 	"628e4e576d783146b124c64d", // Peltor ComTac 4 Hybrid
-];
+]
 
 const BSGblacklist = [
 	"59faff1d86f7746c51718c9c", // Physical bitcoin
@@ -559,25 +559,25 @@ const BSGblacklist = [
 	// "5449016a4bdc2d6f028b456f", // Roubles
 	"617fd91e5539a84ec44ce155", // RGN hand grenade
 	"618a431df1eb8e24b8741deb", // RGO hand grenade
-];
+]
 
 class Mod implements IPostDBLoadMod {
 	public postDBLoad(container: DependencyContainer): void {
-		const databaseServer = container.resolve<DatabaseServer>("DatabaseServer");
-		const configServer = container.resolve<ConfigServer>("ConfigServer");
-		const ObjectId = container.resolve<ObjectId>("ObjectId");
-		const tables = databaseServer.getTables();
-		const locales = tables.locales.global;
-		const items = tables.templates.items;
-		const handbook = tables.templates.handbook;
-		const prices = tables.templates.prices;
-		const globals = tables.globals.config;
-		const traderConfig = configServer.getConfig<ITraderConfig>(ConfigTypes.TRADER);
-		const ragfairConfig = configServer.getConfig<IRagfairConfig>(ConfigTypes.RAGFAIR);
-		const hideoutConfig = configServer.getConfig<IHideoutConfig>(ConfigTypes.HIDEOUT);
-		const insuranceConfig = configServer.getConfig<IInsuranceConfig>(ConfigTypes.INSURANCE);
-		const prapor = tables.traders["54cb50c76803fa8b248b4571"];
-		const therapist = tables.traders["54cb57776803fa99248b456e"];
+		const databaseServer = container.resolve<DatabaseServer>("DatabaseServer")
+		const configServer = container.resolve<ConfigServer>("ConfigServer")
+		const ObjectId = container.resolve<ObjectId>("ObjectId")
+		const tables = databaseServer.getTables()
+		const locales = tables.locales.global
+		const items = tables.templates.items
+		const handbook = tables.templates.handbook
+		const prices = tables.templates.prices
+		const globals = tables.globals.config
+		const traderConfig = configServer.getConfig<ITraderConfig>(ConfigTypes.TRADER)
+		const ragfairConfig = configServer.getConfig<IRagfairConfig>(ConfigTypes.RAGFAIR)
+		const hideoutConfig = configServer.getConfig<IHideoutConfig>(ConfigTypes.HIDEOUT)
+		const insuranceConfig = configServer.getConfig<IInsuranceConfig>(ConfigTypes.INSURANCE)
+		const prapor = tables.traders["54cb50c76803fa8b248b4571"]
+		const therapist = tables.traders["54cb57776803fa99248b456e"]
 
 		// Object.values(items)
 		// .filter((x) => x._props.CanSellOnRagfair == false && x._type == "Item")
@@ -586,16 +586,16 @@ class Mod implements IPostDBLoadMod {
 
 		// 100x Faster hideout production, 10x superwater and moonshine production, bitcoins
 		for (let prod in tables.hideout.production) {
-			const endProduct = tables.hideout.production[prod].endProduct;
-			let productionTime = tables.hideout.production[prod].productionTime;
+			const endProduct = tables.hideout.production[prod].endProduct
+			let productionTime = tables.hideout.production[prod].productionTime
 			if (endProduct == "5d1b376e86f774252519444e" || endProduct == "5d1b33a686f7742523398398") {
 				// superwater and moonshine
-				tables.hideout.production[prod].productionTime = Math.round(productionTime / 10);
+				tables.hideout.production[prod].productionTime = Math.round(productionTime / 10)
 			} else if (endProduct == "59faff1d86f7746c51718c9c") {
 				// bitcoins
-				tables.hideout.production[prod].productionTime = Math.round(productionTime / 2);
+				tables.hideout.production[prod].productionTime = Math.round(productionTime / 2)
 			} else {
-				tables.hideout.production[prod].productionTime = Math.round(productionTime / 100);
+				tables.hideout.production[prod].productionTime = Math.round(productionTime / 100)
 			}
 		}
 		// Instead of modifing base farming time try this:
@@ -625,170 +625,167 @@ class Mod implements IPostDBLoadMod {
 		// 25× GPU: 1h 37min (97 min) x25
 		// 50× GPU: 0h 48min (48 min) x50
 
-		hideoutConfig.gpuBoostRate *= 33;
+		hideoutConfig.gpuBoostRate *= 33
 
 		// 100x Faster hideout construction
 		for (const area in tables.hideout.areas) {
 			for (const stage in tables.hideout.areas[area].stages) {
-				tables.hideout.areas[area].stages[stage].constructionTime = Math.round(tables.hideout.areas[area].stages[stage].constructionTime / 100);
+				tables.hideout.areas[area].stages[stage].constructionTime = Math.round(tables.hideout.areas[area].stages[stage].constructionTime / 100)
 			}
 		}
 
 		// Buff to hideout exp rate, more testing needed
-		hideoutConfig.hoursForSkillCrafting /= 10;
+		hideoutConfig.hoursForSkillCrafting /= 10
 
 		// 10x faster fuel draw
-		tables.hideout.settings.generatorFuelFlowRate *= 10;
+		tables.hideout.settings.generatorFuelFlowRate *= 10
 
 		for (let handbookItem in tables.templates.handbook.Items) {
-			const itemInHandbook = tables.templates.handbook.Items[handbookItem];
-			const itemID = itemInHandbook.Id;
+			const itemInHandbook = tables.templates.handbook.Items[handbookItem]
+			const itemID = itemInHandbook.Id
 
 			if (prices[itemID] != undefined) {
 				// Change all Flea prices to handbook prices.
-				prices[itemID] = itemInHandbook.Price;
+				prices[itemID] = itemInHandbook.Price
 			}
 			if (!fleaWhitelist.includes(itemInHandbook.ParentId)) {
 				// Ban everything on flea except whitelist handbook categories above.
-				items[itemID]._props.CanSellOnRagfair = false;
+				items[itemID]._props.CanSellOnRagfair = false
 			}
 		}
 
 		// Unban random spawn only quest keys from flea, make them 2x expensive
 		for (const questKey of questKeys) {
-			prices[questKey] *= 2;
-			items[questKey]._props.CanSellOnRagfair = true;
+			prices[questKey] *= 2
+			items[questKey]._props.CanSellOnRagfair = true
 		}
 
 		// Unban whitelist
 		for (const item of itemWhitelist) {
-			items[item]._props.CanSellOnRagfair = true;
+			items[item]._props.CanSellOnRagfair = true
 		}
 
 		// Hard fix for important items. Too low prices can't convert to barters.
-		prices["5aa2b923e5b5b000137b7589"] *= 5; // Round frame sunglasses
-		prices["59e770b986f7742cbd762754"] *= 2; // Anti-fragmentation glasses
-		prices["5f5e45cc5021ce62144be7aa"] *= 2; // LolKek 3F Transfer tourist backpack
-		prices["5751487e245977207e26a315"] = 1500; // Emelya
-		prices["57347d3d245977448f7b7f61"] = 2000; // Croutons
+		prices["5aa2b923e5b5b000137b7589"] *= 5 // Round frame sunglasses
+		prices["59e770b986f7742cbd762754"] *= 2 // Anti-fragmentation glasses
+		prices["5f5e45cc5021ce62144be7aa"] *= 2 // LolKek 3F Transfer tourist backpack
+		prices["5751487e245977207e26a315"] = 1500 // Emelya
+		prices["57347d3d245977448f7b7f61"] = 2000 // Croutons
 
 		// Buff Vitality, Sniper and Surgery skill leveling
-		globals.SkillsSettings.Vitality.DamageTakenAction *= 100; // I believe even this is a conservative number for a normal gameplay...
-		globals.SkillsSettings.Sniper.WeaponShotAction *= 10;
-		globals.SkillsSettings.Surgery.SurgeryAction *= 10;
+		globals.SkillsSettings.Vitality.DamageTakenAction *= 100 // I believe even this is a conservative number for a normal gameplay...
+		globals.SkillsSettings.Sniper.WeaponShotAction *= 10
+		globals.SkillsSettings.Surgery.SurgeryAction *= 10
 
 		// Faster ExamineTime
 		Object.values(items)
 			.filter((x) => x._props.ExamineTime != undefined)
-			.forEach((x) => (x._props.ExamineTime /= 5));
+			.forEach((x) => (x._props.ExamineTime /= 5))
 
 		// Remove backpack restrictions (for containers [ammo, med, etc] mostly).
 		// Never again I'll see an unlootable medcase in 314...
 		for (const itemID in items) {
-			const item = items[itemID];
+			const item = items[itemID]
 			//if (item._props.ExaminedByDefault != undefined) {
 			//	// item._props.ExaminedByDefault = true //debug
 			//}
 			if (true) {
-				let filtered;
+				let filtered
 				try {
-					filtered = item._props.Grids[0]._props.filters[0].ExcludedFilter;
+					filtered = item._props.Grids[0]._props.filters[0].ExcludedFilter
 				} catch (error) {}
 				if (filtered !== undefined) {
 					if (filtered.includes("5aafbcd986f7745e590fff23")) {
-						item._props.Grids[0]._props.filters[0].ExcludedFilter = [];
+						item._props.Grids[0]._props.filters[0].ExcludedFilter = []
 					}
 				}
 			}
 		}
 
 		// Redo insurance. Prapor in an instant return with 50% chance, costs 10% of item value, Therapist has 2 hour return with 80% chance, costs 20%.
-		prapor.base.insurance.min_return_hour = 0;
-		prapor.base.insurance.max_return_hour = 0;
-		prapor.base.insurance.max_storage_time = 720;
-		therapist.base.insurance.min_return_hour = 2;
-		therapist.base.insurance.max_return_hour = 2;
-		therapist.base.insurance.max_storage_time = 720;
-		insuranceConfig.insuranceMultiplier["54cb50c76803fa8b248b4571"] = 0.1;
-		insuranceConfig.insuranceMultiplier["54cb57776803fa99248b456e"] = 0.2;
-		insuranceConfig.returnChancePercent["54cb50c76803fa8b248b4571"] = 50;
-		insuranceConfig.returnChancePercent["54cb57776803fa99248b456e"] = 80;
+		prapor.base.insurance.min_return_hour = 0
+		prapor.base.insurance.max_return_hour = 0
+		prapor.base.insurance.max_storage_time = 720
+		therapist.base.insurance.min_return_hour = 2
+		therapist.base.insurance.max_return_hour = 2
+		therapist.base.insurance.max_storage_time = 720
+		insuranceConfig.insuranceMultiplier["54cb50c76803fa8b248b4571"] = 0.1
+		insuranceConfig.insuranceMultiplier["54cb57776803fa99248b456e"] = 0.2
+		insuranceConfig.returnChancePercent["54cb50c76803fa8b248b4571"] = 50
+		insuranceConfig.returnChancePercent["54cb57776803fa99248b456e"] = 80
 
 		// Ragfair changes:
 		// Min level is 5
-		globals.RagFair.minUserLevel = 5;
+		globals.RagFair.minUserLevel = 5
 
 		// globals.RagFair.ratingSumForDecrease = 10000
 		// globals.RagFair.ratingSumForIncrease = 10000
 
-
 		// Completely disable selling items
 		// Since prices are the same as for vendors, allow selling for full item price
 		// ragfairConfig.sell.chance.base = 0;
-		ragfairConfig.sell.reputation.gain *= 10;
-		ragfairConfig.sell.reputation.loss *= 10;
-		ragfairConfig.sell.time.base = 0;
-		ragfairConfig.sell.time.min = 0;
-		ragfairConfig.sell.time.max = 0;
+		ragfairConfig.sell.reputation.gain *= 10
+		ragfairConfig.sell.reputation.loss *= 10
+		ragfairConfig.sell.time.base = 0
+		ragfairConfig.sell.time.min = 0
+		ragfairConfig.sell.time.max = 0
 
-		globals.RagFair.isOnlyFoundInRaidAllowed = false;
+		globals.RagFair.isOnlyFoundInRaidAllowed = false
 
 		// Barters only for items that cost > 100
-		ragfairConfig.dynamic.barter.chancePercent = 80; // Allow 20% of listings for cash
-		ragfairConfig.dynamic.barter.minRoubleCostToBecomeBarter = 100;
-		ragfairConfig.dynamic.barter.priceRangeVariancePercent = 40; // more variance for flea barters, seems actually fun!
+		ragfairConfig.dynamic.barter.chancePercent = 80 // Allow 20% of listings for cash
+		ragfairConfig.dynamic.barter.minRoubleCostToBecomeBarter = 100
+		ragfairConfig.dynamic.barter.priceRangeVariancePercent = 40 // more variance for flea barters, seems actually fun!
 
 		// Max 2 for 1 barters.
-		ragfairConfig.dynamic.barter.itemCountMax = 2;
+		ragfairConfig.dynamic.barter.itemCountMax = 2
 
-		ragfairConfig.dynamic.condition.min = 1;
+		ragfairConfig.dynamic.condition.min = 1
 
 		// Sligtly increase flea prices, but with bigger variance, you still get a lot of great trades. Hustle.
-		ragfairConfig.dynamic.price.min *= 1.3;
-		ragfairConfig.dynamic.price.max *= 1.3;
-
+		ragfairConfig.dynamic.price.min *= 1.3
+		ragfairConfig.dynamic.price.max *= 1.3
 
 		//Allow FIR only items for barters. This is default, so just in case. To make a point.
 		// globals.RagFair.isOnlyFoundInRaidAllowed = true;
 
 		// Can only barter from items not in the blacklist. Only allows base classes, and not itemIDs =(
-		ragfairConfig.dynamic.barter.itemTypeBlacklist = fleaBarterBlacklist;
+		ragfairConfig.dynamic.barter.itemTypeBlacklist = fleaBarterBlacklist
 
 		// dirty hack to block BSG blacklisted items (dogtags, BITCOINS, ornaments and others) from barters, since you can't buy them on flea anyway, so it should not matter.
 		// 2 is used to pass getFleaPriceForItem check and not trigger generateStaticPrices
 		// Allowing fast farming bitcoins for barters would be an extremly cheap money printing abuse. The balance if fine, don't worry about it.
 		BSGblacklist.filter((x) => {
-			if(x == "59faff1d86f7746c51718c9c" && config.Economy.UnbanBitcoin.enabled == true){
+			if (x == "59faff1d86f7746c51718c9c" && config.Economy.UnbanBitcoin.enabled == true) {
 				// do nothing
 			} else {
-				prices[x] = 2;
+				prices[x] = 2
 			}
-		});
-
+		})
 
 		// ragfairConfig.dynamic.barter.itemCountMax = 3
 		// Max 30 offers. Too low of a number breaks AKI server for some reason, with constant client errors on completed trades.
 		// More random trades variance anyway, this is fun.
-		ragfairConfig.dynamic.offerItemCount.min = 10;
-		ragfairConfig.dynamic.offerItemCount.max = 30;
+		ragfairConfig.dynamic.offerItemCount.min = 10
+		ragfairConfig.dynamic.offerItemCount.max = 30
 
 		// Max 2 items per offer. Feels nice. Loot more shit, it might come in handy.
-		ragfairConfig.dynamic.nonStackableCount.min = 1;
-		ragfairConfig.dynamic.nonStackableCount.max = 2;
+		ragfairConfig.dynamic.nonStackableCount.min = 1
+		ragfairConfig.dynamic.nonStackableCount.max = 2
 		// Add BSGblacklist and mod custom blacklist to Fence blacklists
-		let commonBlacklist = [];
-		commonBlacklist.push(...BSGblacklist, ...fleaBarterBlacklist);
+		let commonBlacklist = []
+		commonBlacklist.push(...BSGblacklist, ...fleaBarterBlacklist)
 
 		// Fence sells only items that are not in the flea blacklist
-		traderConfig.fence.assortSize = 30;
-		traderConfig.fence.blacklist = commonBlacklist; //itemid or baseid
-		traderConfig.fence.maxPresetsPercent = 0;
-		traderConfig.fence.itemPriceMult = 0.8; // at 6 Fence karma you buy items almost at a price Therapist buys from you. Go grind.
+		traderConfig.fence.assortSize = 30
+		traderConfig.fence.blacklist = commonBlacklist //itemid or baseid
+		traderConfig.fence.maxPresetsPercent = 0
+		traderConfig.fence.itemPriceMult = 0.8 // at 6 Fence karma you buy items almost at a price Therapist buys from you. Go grind.
 
 		// Other opinionated tweaks:
 		// keytool buff to make it 5x5
-		tables.templates.items["59fafd4b86f7745ca07e1232"]._props.Grids[0]._props.cellsH = 5;
-		tables.templates.items["59fafd4b86f7745ca07e1232"]._props.Grids[0]._props.cellsV = 5;
+		tables.templates.items["59fafd4b86f7745ca07e1232"]._props.Grids[0]._props.cellsH = 5
+		tables.templates.items["59fafd4b86f7745ca07e1232"]._props.Grids[0]._props.cellsV = 5
 
 		// Huge buff to SICC case to make it actually not shit and a direct upgrade to Docs. And while we are here, allow it to hold keytool. It's Softcore, who cares.
 		let mergeFilters = [
@@ -797,47 +794,47 @@ class Mod implements IPostDBLoadMod {
 				...tables.templates.items["5d235bb686f77443f4331278"]._props.Grids[0]._props.filters[0].Filter, // SICC
 				"59fafd4b86f7745ca07e1232", // keytool
 			]),
-		];
-		tables.templates.items["5d235bb686f77443f4331278"]._props.Grids[0]._props.filters[0].Filter = mergeFilters;
+		]
+		tables.templates.items["5d235bb686f77443f4331278"]._props.Grids[0]._props.filters[0].Filter = mergeFilters
 		// log(mergeFilters.map(x => getItemName(x)))
 
 		// Reshala always has his Golden TT
-		tables.bots.types.bossbully.chances.equipment.Holster = 100;
-		tables.bots.types.bossbully.inventory.equipment.Holster = { "5b3b713c5acfc4330140bd8d": 1 };
+		tables.bots.types.bossbully.chances.equipment.Holster = 100
+		tables.bots.types.bossbully.inventory.equipment.Holster = { "5b3b713c5acfc4330140bd8d": 1 }
 
 		// Crafts
 
 		// 2x Clin production buff
-		getCraft("59e358a886f7741776641ac3").count = 2;
+		getCraft("59e358a886f7741776641ac3").count = 2
 		// 2x Paracord production buff
-		getCraft("5c12688486f77426843c7d32").count = 2;
+		getCraft("5c12688486f77426843c7d32").count = 2
 		// Water filter < 2 airfilter craft buff
-		getCraft("5d1b385e86f774252167b98a").requirements.find((x) => x.templateId == "590c595c86f7747884343ad7").count = 2;
+		getCraft("5d1b385e86f774252167b98a").requirements.find((x) => x.templateId == "590c595c86f7747884343ad7").count = 2
 		// Toilet paper production nerf lol. Who would have thought this craft would be OP, huh?
-		getCraft("5c13cef886f774072e618e82").count = 1;
+		getCraft("5c13cef886f774072e618e82").count = 1
 		// EWR buff
-		getCraft("60098b1705871270cd5352a1").count = 3;
+		getCraft("60098b1705871270cd5352a1").count = 3
 		// Buff MULE
-		getCraft("5ed51652f6c34d2cc26336a1").count = 2;
+		getCraft("5ed51652f6c34d2cc26336a1").count = 2
 		// Surv12 nerf
-		getCraft("5d02797c86f774203f38e30a").requirements.find((x) => x.templateId == "5e831507ea0a7c419c2f9bd9").templateId = "5af0454c86f7746bf20992e8";
-		getCraft("5d02797c86f774203f38e30a").count = 1;
+		getCraft("5d02797c86f774203f38e30a").requirements.find((x) => x.templateId == "5e831507ea0a7c419c2f9bd9").templateId = "5af0454c86f7746bf20992e8"
+		getCraft("5d02797c86f774203f38e30a").count = 1
 		// AFAK buff
-		getCraft("60098ad7c2240c0fe85c570a").requirements.find((x) => x.templateId == "590c678286f77426c9660122").count = 1;
-		getCraft("60098ad7c2240c0fe85c570a").requirements.find((x) => x.templateId == "5751a25924597722c463c472").templateId = "5e8488fa988a8701445df1e4";
+		getCraft("60098ad7c2240c0fe85c570a").requirements.find((x) => x.templateId == "590c678286f77426c9660122").count = 1
+		getCraft("60098ad7c2240c0fe85c570a").requirements.find((x) => x.templateId == "5751a25924597722c463c472").templateId = "5e8488fa988a8701445df1e4"
 		// LEDX buff
 		getCraft("5c0530ee86f774697952d952").requirements.forEach((x) => {
 			if (x.count) {
-				x.count = 1;
+				x.count = 1
 			}
-		});
+		})
 		// CMS nerf
-		getCraft("5d02778e86f774203e7dedbe").requirements.find((x) => x.templateId == "619cc01e0a7c3a1a2731940c").count = 2;
+		getCraft("5d02778e86f774203e7dedbe").requirements.find((x) => x.templateId == "619cc01e0a7c3a1a2731940c").count = 2
 		// GRIzZLY nerf
-		getCraft("590c657e86f77412b013051d").count = 1;
+		getCraft("590c657e86f77412b013051d").count = 1
 
 		// coffee
-		getCraft("5af0484c86f7740f02001f7f").count = 3;
+		getCraft("5af0484c86f7740f02001f7f").count = 3
 
 		// 63da4dbee8fa73e225000001
 		// 63da4dbee8fa73e225000002
@@ -892,7 +889,7 @@ class Mod implements IPostDBLoadMod {
 			continuous: false,
 			count: 1,
 			productionLimitCount: 0,
-		};
+		}
 		const Zagustin = {
 			_id: "63da4dbee8fa73e225000002",
 
@@ -924,7 +921,7 @@ class Mod implements IPostDBLoadMod {
 			continuous: false,
 			count: 3,
 			productionLimitCount: 0,
-		};
+		}
 		const Obdolbos = {
 			// Did you always want to run your own meth lab in Tarkov? Now you can.
 			_id: "63da4dbee8fa73e225000003",
@@ -985,7 +982,7 @@ class Mod implements IPostDBLoadMod {
 			continuous: false,
 			count: 8,
 			productionLimitCount: 0,
-		};
+		}
 		const CALOK = {
 			_id: "63da4dbee8fa73e225000004",
 
@@ -1011,7 +1008,7 @@ class Mod implements IPostDBLoadMod {
 			continuous: false,
 			count: 2,
 			productionLimitCount: 0,
-		};
+		}
 		const Adrenaline = {
 			_id: "63da4dbee8fa73e225000005",
 
@@ -1037,7 +1034,7 @@ class Mod implements IPostDBLoadMod {
 			continuous: false,
 			count: 1,
 			productionLimitCount: 0,
-		};
+		}
 		const ThreebTG = {
 			_id: "63da4dbee8fa73e225000006",
 
@@ -1069,7 +1066,7 @@ class Mod implements IPostDBLoadMod {
 			continuous: false,
 			count: 2,
 			productionLimitCount: 0,
-		};
+		}
 		const AHF1 = {
 			_id: "63da4dbee8fa73e225000007",
 
@@ -1095,33 +1092,33 @@ class Mod implements IPostDBLoadMod {
 			continuous: false,
 			count: 1,
 			productionLimitCount: 0,
-		};
-		tables.hideout.production.push(ThreebTG, Adrenaline, AHF1, CALOK, Ophthalmoscope, Zagustin, Obdolbos);
+		}
+		tables.hideout.production.push(ThreebTG, Adrenaline, AHF1, CALOK, Ophthalmoscope, Zagustin, Obdolbos)
 
 		function getCraftRequirements(endProductID, requirementsID) {
-			return getCraft(endProductID).requirements.find((x) => x.templateId == requirementsID);
+			return getCraft(endProductID).requirements.find((x) => x.templateId == requirementsID)
 		}
 
 		function getCraft(endProductID) {
-			return tables.hideout.production.find((x) => x.endProduct == endProductID && x.areaType != 21);
+			return tables.hideout.production.find((x) => x.endProduct == endProductID && x.areaType != 21)
 		}
 
 		function getItemInHandbook(itemID) {
-			return handbook.Items.filter((i) => i.Id === itemID)[0]; // Outs: @Id, @ParentId, @Price
+			return handbook.Items.filter((i) => i.Id === itemID)[0] // Outs: @Id, @ParentId, @Price
 		}
 		function getItemName(itemID, locale = "en") {
 			if (locales[locale][`${itemID} Name`] != undefined) {
 				// return items[itemID]._name
-				return locales[locale][`${itemID} Name`];
+				return locales[locale][`${itemID} Name`]
 			} else {
-				return items[itemID]?._name;
+				return items[itemID]?._name
 			}
 		}
 	}
 }
 
 const log = (i: any) => {
-	console.log(i);
-};
+	console.log(i)
+}
 
-module.exports = { mod: new Mod() };
+module.exports = { mod: new Mod() }
