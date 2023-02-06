@@ -625,8 +625,8 @@ class Mod implements IPostDBLoadMod {
 		// 25× GPU: 1h 37min (97 min) x25
 		// 50× GPU: 0h 48min (48 min) x50
 
-		hideoutConfig.gpuBoostRate *= 33
-
+		// hideoutConfig.gpuBoostRate *= 33
+		tables.hideout.settings.gpuBoostRate = 0.5
 		// 100x Faster hideout construction
 		for (const area in tables.hideout.areas) {
 			for (const stage in tables.hideout.areas[area].stages) {
@@ -826,13 +826,32 @@ class Mod implements IPostDBLoadMod {
 				x.count = 1
 			}
 		})
+		// Virtex
+		getCraft("5c05308086f7746b2101e90b").requirements.forEach((x) => {
+			if (x.count) {
+				x.count = 1
+			}
+		})
 		// CMS nerf
 		getCraft("5d02778e86f774203e7dedbe").requirements.find((x) => x.templateId == "619cc01e0a7c3a1a2731940c").count = 2
+
 		// GRIzZLY nerf
 		getCraft("590c657e86f77412b013051d").count = 1
 
 		// coffee
 		getCraft("5af0484c86f7740f02001f7f").count = 3
+		
+		// MPPV buff
+		getCraft("5df8a42886f77412640e2e75").requirements.find((x) => x.templateId == "5e2af29386f7746d4159f077").count = 1
+
+		// bottled water buff water
+		getCraft("5448fee04bdc2dbc018b4567").count = 16
+
+		// Topographic survey maps
+		getCraft("62a0a124de7ac81993580542").count = 2
+
+		// Aquamari
+		getCraft("5c0fa877d174af02a012e1cf").count = 5
 
 		// 63da4dbee8fa73e225000001
 		// 63da4dbee8fa73e225000002
@@ -1070,7 +1089,7 @@ class Mod implements IPostDBLoadMod {
 
 			areaType: 7,
 			requirements: [
-				{ areaType: 7, requiredLevel: 3, type: "Area" },
+				{ areaType: 7, requiredLevel: 2, type: "Area" },
 				{
 					templateId: "590c695186f7741e566b64a2",
 					count: 1,
@@ -1091,7 +1110,92 @@ class Mod implements IPostDBLoadMod {
 			count: 1,
 			productionLimitCount: 0,
 		}
-		tables.hideout.production.push(ThreebTG, Adrenaline, AHF1, CALOK, Ophthalmoscope, Zagustin, Obdolbos)
+		const OLOLO = {
+			_id: "63da4dbee8fa73e225000008",
+
+			areaType: 8,
+			requirements: [
+				{ areaType: 8, requiredLevel: 3, type: "Area" },
+				{
+					templateId: "57513f9324597720a7128161",
+					count: 1,
+					isFunctional: false,
+					type: "Item",
+				},
+				{
+					templateId: "57513fcc24597720a31c09a6",
+					count: 1,
+					isFunctional: false,
+					type: "Item",
+				},
+				{
+					templateId: "57513f07245977207e26a311",
+					count: 1,
+					isFunctional: false,
+					type: "Item",
+				},
+				{
+					templateId: "575062b524597720a31c09a1",
+					count: 1,
+					isFunctional: false,
+					type: "Item",
+				},
+				{
+					templateId: "544fb62a4bdc2dfb738b4568",
+					count: 1,
+					isFunctional: false,
+					type: "Item",
+				},
+				{
+					templateId: "544fb37f4bdc2dee738b4567",
+					count: 1,
+					isFunctional: false,
+					type: "Item",
+				},
+				{
+					templateId: "5d1b385e86f774252167b98a",
+					type: "Tool",
+				},
+				{
+					templateId: "590de71386f774347051a052",
+					type: "Tool",
+				},
+			],
+			productionTime: 71,
+			boosters: null,
+			endProduct: "62a0a043cf4a99369e2624a5",
+			continuous: false,
+			count: 3,
+			productionLimitCount: 0,
+		}		
+		const L1 = {
+			_id: "63da4dbee8fa73e225000009",
+
+			areaType: 7,
+			requirements: [
+				{ areaType: 7, requiredLevel: 3, type: "Area" },
+				{
+					templateId: "5c10c8fd86f7743d7d706df3",
+					count: 1,
+					isFunctional: false,
+					type: "Item",
+				},
+				{
+					templateId: "5c0e531d86f7747fa23f4d42",
+					count: 1,
+					isFunctional: false,
+					type: "Item",
+				},
+			],
+			productionTime: 71,
+			boosters: null,
+			endProduct: "5ed515e03a40a50460332579",
+			continuous: false,
+			count: 1,
+			productionLimitCount: 0,
+		}
+
+		tables.hideout.production.push(ThreebTG, Adrenaline, L1, AHF1, CALOK, Ophthalmoscope, Zagustin, Obdolbos, OLOLO)
 
 		function getCraftRequirements(endProductID, requirementsID) {
 			return getCraft(endProductID).requirements.find((x) => x.templateId == requirementsID)
