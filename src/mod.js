@@ -2,7 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const ConfigTypes_1 = require("C:/snapshot/project/obj/models/enums/ConfigTypes");
 // import { ITrader } from "C:/snapshot/project/obj/models/eft/common/tables/ITrader";
-const whiteListHandbookCategoriesID = [
+const fleaWhitelist = [
+    // Handbook Categories IDs
     "5b47574386f77428ca22b2ed",
     "5b47574386f77428ca22b2ee",
     "5b47574386f77428ca22b2ef",
@@ -199,7 +200,8 @@ const baseClasses = [
     "5661632d4bdc2d903d8b456b",
     "543be6564bdc2df4348b4568", // Throwable weapon
 ];
-const fleaBarterBlacklistClassesIDs = [
+const fleaBarterBlacklist = [
+    // base classes IDs (parent ID)
     // "54009119af1c881c07000029", // Item
     "5d650c3e815116009f6201d2",
     // "57864ee62459775490116fc1", // Battery
@@ -566,17 +568,45 @@ class Mod {
         // .filter((x) => x._props.CanSellOnRagfair == false && x._type == "Item")
         // .map((x) => log(`"${x._id}", // ${getItemName(x._id)}`));
         // itemWhitelist.map((x) => log(`"${x}", // ${getItemName(x)}`));
-        // 100x Faster hideout production, 10x faster bitcoin, superwater and moonshine production
+        // 100x Faster hideout production, 10x superwater and moonshine production, bitcoins
         for (let prod in tables.hideout.production) {
             const endProduct = tables.hideout.production[prod].endProduct;
             let productionTime = tables.hideout.production[prod].productionTime;
-            if (endProduct == "59faff1d86f7746c51718c9c" || endProduct == "5d1b376e86f774252519444e" || endProduct == "5d1b33a686f7742523398398") {
+            if (endProduct == "5d1b376e86f774252519444e" || endProduct == "5d1b33a686f7742523398398") {
+                // superwater and moonshine
                 tables.hideout.production[prod].productionTime = Math.round(productionTime / 10);
+            }
+            else if (endProduct == "59faff1d86f7746c51718c9c") {
+                // bitcoins
+                tables.hideout.production[prod].productionTime = Math.round(productionTime / 2);
             }
             else {
                 tables.hideout.production[prod].productionTime = Math.round(productionTime / 100);
             }
         }
+        // Instead of modifing base farming time try this:
+        // TODO: replace getBTCSlots() in HideoutHelper to add bonus slots per farm level. lv2 - 4 slots, lv3 - 5, elite - 7
+        // Vanilla: Base time (x1): 40h 17min (2417 min), GPU Boost: x1, each GPU is only ~1.5% efficient
+        // 2× GPU: 39h 41min (2381 min) x1.01
+        // 10× GPU: 35h 29min (2129 min) x1.14
+        // 25× GPU: 29h 37min (1777 min) x1.36
+        // 50× GPU: 23h 13min (1393 min) x1.74
+        // Softcore v0.1: Base time (x10): 4h 2min (242 min), GPU Boost: x1
+        // 2× GPU: 3h 58min (238 min) x1.01
+        // 10× GPU: 3h 33min (213 min) x1.14
+        // 25× GPU: 2h 58min (178 min) x1.36
+        // 50× GPU: 2h 19min (139 min) x1.74
+        // Softcore v0.2: Base time (x2): 20h 8min (1208 min), GPU Boost (~0.5): x33, each GPU is ~50% efficient
+        // 2× GPU: 13h 28min (808 min) x1.5
+        // 10× GPU: 3h 42min (222 min) x5.46 - LV1: 3 Bitcoins per 13 hours
+        // 25× GPU: 1h 34min (94 min) x12.88 - LV2: 1 bitcoin every second raid
+        // 50× GPU: 0h 48min (48 min) x25.26 - LV3: 1 bitcoin every raid. Overall seems pretty well balanced.
+        // Linear: Base time (x1): 40h 17min (2417 min), GPU Boost (=1): x66.67, each GPU is 100% efficient
+        // 2× GPU: 20h 8min (1208 min) x2
+        // 10× GPU: 4h 2min (242 min) x10
+        // 25× GPU: 1h 37min (97 min) x25
+        // 50× GPU: 0h 48min (48 min) x50
+        hideoutConfig.gpuBoostRate *= 33;
         // 100x Faster hideout construction
         for (const area in tables.hideout.areas) {
             for (const stage in tables.hideout.areas[area].stages) {
@@ -587,15 +617,15 @@ class Mod {
         hideoutConfig.hoursForSkillCrafting /= 10;
         // 10x faster fuel draw
         tables.hideout.settings.generatorFuelFlowRate *= 10;
-        // Ban everything on flea except whitelist handbook categories above.
-        // Change all Flea prices to handbook prices.
         for (let handbookItem in tables.templates.handbook.Items) {
             const itemInHandbook = tables.templates.handbook.Items[handbookItem];
             const itemID = itemInHandbook.Id;
-            if (!items[itemID]._props.QuestItem || !items[itemID]._props.CanSellOnRagfair) {
+            if (prices[itemID] != undefined) {
+                // Change all Flea prices to handbook prices.
                 prices[itemID] = itemInHandbook.Price;
             }
-            if (!whiteListHandbookCategoriesID.includes(itemInHandbook.ParentId)) {
+            if (!fleaWhitelist.includes(itemInHandbook.ParentId)) {
+                // Ban everything on flea except whitelist handbook categories above.
                 items[itemID]._props.CanSellOnRagfair = false;
             }
         }
@@ -608,10 +638,10 @@ class Mod {
         for (const item of itemWhitelist) {
             items[item]._props.CanSellOnRagfair = true;
         }
-        prices["5aa2b923e5b5b000137b7589"] *= 5;
-        prices["59e770b986f7742cbd762754"] *= 2;
-        prices["5f5e45cc5021ce62144be7aa"] *= 2;
         // Hard fix for important items. Too low prices can't convert to barters.
+        prices["5aa2b923e5b5b000137b7589"] *= 5; // Round frame sunglasses
+        prices["59e770b986f7742cbd762754"] *= 2; // Anti-fragmentation glasses
+        prices["5f5e45cc5021ce62144be7aa"] *= 2; // LolKek 3F Transfer tourist backpack
         prices["5751487e245977207e26a315"] = 1500; // Emelya
         prices["57347d3d245977448f7b7f61"] = 2000; // Croutons
         // Buff Vitality, Sniper and Surgery skill leveling
@@ -656,25 +686,39 @@ class Mod {
         // Ragfair changes:
         // Min level is 5
         globals.RagFair.minUserLevel = 5;
+        // globals.RagFair.ratingSumForDecrease = 10000
+        // globals.RagFair.ratingSumForIncrease = 10000
         // Completely disable selling items
-        ragfairConfig.sell.chance.base = 0;
+        // Since prices are the same as for vendors, allow selling for full item price
+        // ragfairConfig.sell.chance.base = 0;
+        ragfairConfig.sell.reputation.gain *= 10;
+        ragfairConfig.sell.reputation.loss *= 10;
+        ragfairConfig.sell.time.base = 0;
+        ragfairConfig.sell.time.min = 0;
+        ragfairConfig.sell.time.max = 0;
+        globals.RagFair.isOnlyFoundInRaidAllowed = false;
         // Barters only for items that cost > 100
-        ragfairConfig.dynamic.barter.chancePercent = 100;
-        ragfairConfig.dynamic.barter.minRoubleCostToBecomeBarter = 100; // Everything is a barter, EVERYTHING.
-        ragfairConfig.dynamic.barter.priceRangeVariancePercent = 35; // more variance for flea barters, seems actually fun!
+        ragfairConfig.dynamic.barter.chancePercent = 80; // Allow 20% of listings for cash
+        ragfairConfig.dynamic.barter.minRoubleCostToBecomeBarter = 100;
+        ragfairConfig.dynamic.barter.priceRangeVariancePercent = 40; // more variance for flea barters, seems actually fun!
         // Max 2 for 1 barters.
         ragfairConfig.dynamic.barter.itemCountMax = 2;
         ragfairConfig.dynamic.condition.min = 1;
         // Sligtly increase flea prices, but with bigger variance, you still get a lot of great trades. Hustle.
-        ragfairConfig.dynamic.price.min = 0.9;
-        ragfairConfig.dynamic.price.max = 1.3;
+        // ragfairConfig.dynamic.price.min *= 1.3;
+        // ragfairConfig.dynamic.price.max *= 1.3;
+        ragfairConfig.dynamic.price.min *= 100;
+        ragfairConfig.dynamic.price.max *= 100;
         //Allow FIR only items for barters. This is default, so just in case. To make a point.
-        globals.RagFair.isOnlyFoundInRaidAllowed = true;
+        // globals.RagFair.isOnlyFoundInRaidAllowed = true;
         // Can only barter from items not in the blacklist. Only allows base classes, and not itemIDs =(
-        ragfairConfig.dynamic.barter.itemTypeBlacklist = fleaBarterBlacklistClassesIDs;
+        ragfairConfig.dynamic.barter.itemTypeBlacklist = fleaBarterBlacklist;
         // dirty hack to block BSG blacklisted items (dogtags, BITCOINS, ornaments and others) from barters, since you can't buy them on flea anyway, so it should not matter.
+        // 2 is used to pass getFleaPriceForItem check and not trigger generateStaticPrices
         // Allowing fast farming bitcoins for barters would be an extremly cheap money printing abuse. The balance if fine, don't worry about it.
-        BSGblacklist.filter((x) => (prices[x] = 1));
+        BSGblacklist.filter((x) => {
+            prices[x] = 2;
+        });
         // ragfairConfig.dynamic.barter.itemCountMax = 3
         // Max 30 offers. Too low of a number breaks AKI server for some reason, with constant client errors on completed trades.
         // More random trades variance anyway, this is fun.
@@ -685,16 +729,12 @@ class Mod {
         ragfairConfig.dynamic.nonStackableCount.max = 2;
         // Add BSGblacklist and mod custom blacklist to Fence blacklists
         let commonBlacklist = [];
-        commonBlacklist.push(...BSGblacklist, ...fleaBarterBlacklistClassesIDs);
+        commonBlacklist.push(...BSGblacklist, ...fleaBarterBlacklist);
         // Fence sells only items that are not in the flea blacklist
         traderConfig.fence.assortSize = 30;
         traderConfig.fence.blacklist = commonBlacklist; //itemid or baseid
         traderConfig.fence.maxPresetsPercent = 0;
         traderConfig.fence.itemPriceMult = 0.8; // at 6 Fence karma you buy items almost at a price Therapist buys from you. Go grind.
-        traderConfig.fence.presetMaxDurabilityPercentMinMax.min = 100;
-        traderConfig.fence.presetMaxDurabilityPercentMinMax.max = 100;
-        traderConfig.fence.armorMaxDurabilityPercentMinMax.min = 100;
-        traderConfig.fence.armorMaxDurabilityPercentMinMax.max = 100;
         // Other opinionated tweaks:
         // keytool buff to make it 5x5
         tables.templates.items["59fafd4b86f7745ca07e1232"]._props.Grids[0]._props.cellsH = 5;
@@ -712,14 +752,6 @@ class Mod {
         // Reshala always has his Golden TT
         tables.bots.types.bossbully.chances.equipment.Holster = 100;
         tables.bots.types.bossbully.inventory.equipment.Holster = { "5b3b713c5acfc4330140bd8d": 1 };
-        // 2x longer raids
-        //		for (const map in tables.locations) {
-        //			let time = tables.locations[map].base?.EscapeTimeLimit;
-        //			if (time != undefined) {
-        //				time *= 2;
-        //				tables.locations[map].base.EscapeTimeLimit = time;
-        //			}
-        //		}
         // Crafts
         // 2x Clin production buff
         getCraft("59e358a886f7741776641ac3").count = 2;
@@ -749,6 +781,8 @@ class Mod {
         getCraft("5d02778e86f774203e7dedbe").requirements.find((x) => x.templateId == "619cc01e0a7c3a1a2731940c").count = 2;
         // GRIzZLY nerf
         getCraft("590c657e86f77412b013051d").count = 1;
+        // coffee
+        getCraft("5af0484c86f7740f02001f7f").count = 3;
         // 63da4dbee8fa73e225000001
         // 63da4dbee8fa73e225000002
         // 63da4dbee8fa73e225000003

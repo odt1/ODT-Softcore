@@ -1,0 +1,52 @@
+{
+	"dummy": {
+		"_description": "",
+		"enabled": true
+	},
+	"Economy": {
+		"_description": "",
+		"enabled": true,
+		"UnbanBitcoin": {
+			"_description": "",
+			"enabled": true
+		},
+		"dummy": {
+			"_description": "",
+			"enabled": true
+		},
+		"dummy": {
+			"_description": "",
+			"enabled": true
+		}
+	},
+	"dummy": {
+		"_description": "",
+		"enabled": {
+			"_description": "",
+			"enabled": true
+		}
+	},
+	"dummy": {
+		"_description": "",
+		"enabled": {
+			"_description": "",
+			"enabled": true
+		}
+	},
+	"dummy": {
+		"_description": "",
+		"enabled": {
+			"_description": "",
+			"enabled": true
+		}
+	},
+	"dummy": {
+		"_description": "",
+		"enabled": true
+	},
+	"dummy": {
+		"_description": "",
+		"enabled": true
+	},
+	"dummyend": true
+}
