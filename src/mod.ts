@@ -803,58 +803,81 @@ class Mod implements IPostDBLoadMod {
 		tables.bots.types.bossbully.chances.equipment.Holster = 100
 		tables.bots.types.bossbully.inventory.equipment.Holster = { "5b3b713c5acfc4330140bd8d": 1 }
 
-		// Crafts
+		// Crafts:
 
 		// 2x Clin production buff
 		getCraft("59e358a886f7741776641ac3").count = 2
+
 		// 2x Paracord production buff
 		getCraft("5c12688486f77426843c7d32").count = 2
+
 		// Water filter < 2 airfilter craft buff
 		getCraft("5d1b385e86f774252167b98a").requirements.find((x) => x.templateId == "590c595c86f7747884343ad7").count = 2
+
 		// Toilet paper production nerf lol. Who would have thought this craft would be OP, huh?
 		getCraft("5c13cef886f774072e618e82").count = 1
+
 		// EWR buff
 		getCraft("60098b1705871270cd5352a1").count = 3
+
 		// Buff MULE
 		getCraft("5ed51652f6c34d2cc26336a1").count = 2
+
 		// Surv12 nerf
 		getCraft("5d02797c86f774203f38e30a").requirements.find((x) => x.templateId == "5e831507ea0a7c419c2f9bd9").templateId = "5af0454c86f7746bf20992e8"
 		getCraft("5d02797c86f774203f38e30a").count = 1
+
 		// AFAK buff
 		getCraft("60098ad7c2240c0fe85c570a").requirements.find((x) => x.templateId == "590c678286f77426c9660122").count = 1
 		getCraft("60098ad7c2240c0fe85c570a").requirements.find((x) => x.templateId == "5751a25924597722c463c472").templateId = "5e8488fa988a8701445df1e4"
-		// LEDX buff
+
+		// LEDX buff (Huge buff, 1 of each component only)
 		getCraft("5c0530ee86f774697952d952").requirements.forEach((x) => {
 			if (x.count) {
 				x.count = 1
 			}
 		})
-		// Virtex
-		getCraft("5c05308086f7746b2101e90b").requirements.forEach((x) => {
+
+		// Virtex buff (Military circuit board 2 -> 1)
+		getCraft("5c05308086f7746b2101e90b").requirements.find((x) => x.templateId == "5d0376a486f7747d8050965c").count = 1
+
+		// Military flash drive buff (Secure Flash drive and Topographic survey maps 2 -> 1)
+		getCraft("62a0a16d0b9d3c46de5b6e97").requirements.forEach((x) => {
 			if (x.count) {
 				x.count = 1
 			}
 		})
-		// CMS nerf
+
+		// VPX buff (RAM and Broken GPhone smartphone 3 -> 2)
+		getCraft("5c05300686f7746dce784e5d").requirements.forEach((x) => {
+			if (x.count) {
+				x.count = 2
+			}
+		})
+
+		// CMS nerf (Medical tools 1 -> 2)
 		getCraft("5d02778e86f774203e7dedbe").requirements.find((x) => x.templateId == "619cc01e0a7c3a1a2731940c").count = 2
 
-		// GRIzZLY nerf
+		// GRIzZLY nerf (1 -> 2)
 		getCraft("590c657e86f77412b013051d").count = 1
 
-		// coffee
+		// coffee buff (2 -> 3)
 		getCraft("5af0484c86f7740f02001f7f").count = 3
 
-		// MPPV buff
+		// MPPV buff (KEKTAPE duct tape 2 -> 1)
 		getCraft("5df8a42886f77412640e2e75").requirements.find((x) => x.templateId == "5e2af29386f7746d4159f077").count = 1
 
-		// bottled water buff water
+		// bottled water buff water (8 -> 16)
 		getCraft("5448fee04bdc2dbc018b4567").count = 16
 
-		// Topographic survey maps
+		// Topographic survey maps buff (1 -> 2)
 		getCraft("62a0a124de7ac81993580542").count = 2
 
-		// Aquamari
+		// Aquamari buff (3 -> 5)
 		getCraft("5c0fa877d174af02a012e1cf").count = 5
+
+		// SJ6 buff (2 -> 3)
+		getCraft("5c0e531d86f7747fa23f4d42").count = 3
 
 		// 63da4dbee8fa73e225000001
 		// 63da4dbee8fa73e225000002
