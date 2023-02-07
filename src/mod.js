@@ -589,29 +589,29 @@ class Mod {
             }
         }
         // Instead of modifing base farming time try this:
-        // TODO: replace getBTCSlots() in HideoutHelper to add bonus slots per farm level. lv2 - 4 slots, lv3 - 5, elite - 7
-        // Vanilla: Base time (x1): 40h 17min (2417 min), GPU Boost: x1, each GPU is only ~1.5% efficient
-        // 2× GPU: 39h 41min (2381 min) x1.01
-        // 10× GPU: 35h 29min (2129 min) x1.14
-        // 25× GPU: 29h 37min (1777 min) x1.36
-        // 50× GPU: 23h 13min (1393 min) x1.74
-        // Softcore v0.1: Base time (x10): 4h 2min (242 min), GPU Boost: x1
-        // 2× GPU: 3h 58min (238 min) x1.01
-        // 10× GPU: 3h 33min (213 min) x1.14
-        // 25× GPU: 2h 58min (178 min) x1.36
-        // 50× GPU: 2h 19min (139 min) x1.74
-        // Softcore v0.2: Base time (x2): 20h 8min (1208 min), GPU Boost (~0.5): x33, each GPU is ~50% efficient
-        // 2× GPU: 13h 28min (808 min) x1.5
-        // 10× GPU: 3h 42min (222 min) x5.46 - LV1: 3 Bitcoins per 13 hours
-        // 25× GPU: 1h 34min (94 min) x12.88 - LV2: 1 bitcoin every second raid
-        // 50× GPU: 0h 48min (48 min) x25.26 - LV3: 1 bitcoin every raid. Overall seems pretty well balanced.
-        // Linear: Base time (x1): 40h 17min (2417 min), GPU Boost (=1): x66.67, each GPU is 100% efficient
-        // 2× GPU: 20h 8min (1208 min) x2
-        // 10× GPU: 4h 2min (242 min) x10
-        // 25× GPU: 1h 37min (97 min) x25
-        // 50× GPU: 0h 48min (48 min) x50
-        // hideoutConfig.gpuBoostRate *= 33
         tables.hideout.settings.gpuBoostRate = 0.5;
+        // TODO: replace getBTCSlots() in HideoutHelper to add bonus slots per farm level. lv2 - 4 slots, lv3 - 5, elite - 7
+        // Instead of modifing base farming time try this:
+        // Vanilla: Base time (x1): 40h 17min (2417 min), GPU Boost (0.041225): x1, each GPU has only ~4.12% efficiency
+        // 2× GPU: 38h 41min x1.04
+        // 10× GPU: 29h 23min x1.37
+        // 25× GPU: 20h 15min x1.99
+        // 50× GPU: 13h 20min x3.02
+        // Softcore v0.1: Base time (x10): 4h 2min, GPU Boost (0.041225): x1
+        // 2× GPU: 3h 52min x1.04
+        // 10× GPU: 2h 56min x1.37
+        // 25× GPU: 2h 1min x1.99
+        // 50× GPU: 1h 20min x3.02
+        // Softcore v0.2: Base time (x2): 20h 8min, GPU Boost(0.5): x12.13, each GPU has ~50% efficiency
+        // 2× GPU: 13h 26min x1.5
+        // 10× GPU: 3h 40min x5.5
+        // 25× GPU: 1h 33min x13
+        // 50× GPU: 0h 47min x25.5
+        // Linear: Base time (x1): 40h 17min, GPU Boost (1): x24.26, each GPU is 100% efficient
+        // 2× GPU: 20h 8min x2
+        // 10× GPU: 4h 2min x10
+        // 25× GPU: 1h 37min x25
+        // 50× GPU: 0h 48min x50
         // 100x Faster hideout construction
         for (const area in tables.hideout.areas) {
             for (const stage in tables.hideout.areas[area].stages) {
@@ -701,7 +701,7 @@ class Mod {
         //ragfairConfig.sell.time.min = 1
         //ragfairConfig.sell.time.max = 1
         //ragfairConfig.sell.fees = false
-        ragfairConfig.dynamic.barter.chancePercent = 80; // Allow 20% of listings for cash
+        ragfairConfig.dynamic.barter.chancePercent = 90; // Allow 10% of listings for cash
         ragfairConfig.dynamic.barter.minRoubleCostToBecomeBarter = 100; // Barters only for items that cost > 100
         ragfairConfig.dynamic.barter.priceRangeVariancePercent = 40; // more variance for flea barters, seems actually fun!
         // Max 2 for 1 barters.
@@ -712,7 +712,6 @@ class Mod {
         ragfairConfig.dynamic.price.max *= 1.3; // 1.2 -> 1.56
         //Allow FIR only items for barters. This is default, so just in case. To make a point.
         globals.RagFair.isOnlyFoundInRaidAllowed = true;
-        globals.RagFair.includePveTraderSales = true; //test
         // Can only barter from items not in the blacklist. Only allows base classes, and not itemIDs =(
         ragfairConfig.dynamic.barter.itemTypeBlacklist = fleaBarterBlacklist;
         // dirty hack to block BSG blacklisted items (dogtags, BITCOINS, ornaments and others) from barters, since you can't buy them on flea anyway, so it should not matter.
@@ -729,13 +728,12 @@ class Mod {
             }
         });
         // ragfairConfig.dynamic.barter.itemCountMax = 3
-        // Max 30 offers. Too low of a number breaks AKI server for some reason, with constant client errors on completed trades.
+        // Max 20 offers. Too low of a number breaks AKI server for some reason, with constant client errors on completed trades.
         // More random trades variance anyway, this is fun.
         ragfairConfig.dynamic.offerItemCount.min = 10;
-        ragfairConfig.dynamic.offerItemCount.max = 30;
+        ragfairConfig.dynamic.offerItemCount.max = 20;
         // Max 2 items per offer. Feels nice. Loot more shit, it might come in handy.
         ragfairConfig.dynamic.nonStackableCount.min = 1;
-        ragfairConfig.traders["579dc571d53a0658a154fbec"] = true; //test
         ragfairConfig.dynamic.nonStackableCount.max = 2;
         // Add BSGblacklist and mod custom blacklist to Fence blacklists
         let commonBlacklist = [];
