@@ -1267,7 +1267,7 @@ class Mod implements IPostDBLoadMod {
 							// 2 is used to pass getFleaPriceForItem check and not trigger generateStaticPrices
 							prices[x] = 2
 							if (items[x]._props.CanSellOnRagfair == true) {
-								log(`Item ${getItemName(x)} can be bought on flea for free, you dirty cheater!!!`)
+								log(`Item ${getItemName(x)} can be bought on flea for free, you dirty cheater!`)
 							}
 						}
 					})

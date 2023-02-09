@@ -58,14 +58,14 @@
 			}
 		},
 		"Barter_Economy": {
-			"_description": "CORE feature of this mod. Only allow to buy items on flea using other random FiR or crafted items. Uses hardcoded fleaBarterBlacklist array as filter for allowed items (meds, barter items, food and info items are enabled, exceptions are stimulants and fuel). NOT recommended to disable.",
+			"_description": "CORE feature of this mod. Only allows to buy items on flea using other random FiR or crafted items. Uses hardcoded fleaBarterBlacklist array as filter for allowed items (meds, barter items, food and info items are enabled, exceptions are stimulants and fuel). NOT recommended to disable.",
 			"enabled": true,
 			"Cash_Offers_Percentage": {
 				"_description": "Allow small, random percentage of listings to be buyable for cash. 0 is true barter-only ecomnomy (except the cheapest items like AA battery, but this is a SPT-AKI limitation), I'd say this is a preferred way to play with this mod, but it might be a little too hard sometimes. 10% seems like a fine number that makes life just a little bit easier to avoid item deadlocks. Recommendation: 0 to 15.",
 				"value": 10
 			},
 			"Barter_Price_Variance": {
-				"_description": "± percent of price variance between item listing and it's barter value. Bigger number - more wild and varied random trades, eg you can see a Defiblirator (that has 224k value) offered for a Lion (162k value) or a Tank Battery (330k value). This CORE feature makes the whole mod tick, that what makes it fun, random and engaging and stimulates hustling in a war broken society. You can get lucky, and get a great deal, or you might desperately need an item that is way overvalued but you only have the expencive item that it is asked for. Also more variance means it's easier to encounter an offer you have an item for. Recomendation: 20-50",
+				"_description": "± percent of price variance between item listing and it's barter value. Bigger number - more wild and varied random trades, eg you can see a Defiblirator (that has 224k value) offered for a Lion (162k value) or a Tank Battery (330k value). This CORE feature makes the whole mod tick, that what makes it fun, random and engaging and stimulates hustling in a war broken society. You can get lucky, and get a great deal, or you might desperately need an item that is way overvalued but you only have the expensive item that it is asked for. Also more variance means it's easier to encounter an offer you have an item for and easier trades. Recomendation: 20-50",
 				"value": 40
 			},
 			"offerItemCount": {
@@ -79,7 +79,7 @@
 				"max": 2
 			},
 			"itemCountMax": {
-				"_description": "Limits number of items asked for barter. Default is max 2 for 1 barters.",
+				"_description": "Limits maximum number of items asked for barter. Default is 2 for 1 barters max.",
 				"value": 2
 			},
 			"Unban_Bitcoins_For_Barters": {
@@ -104,12 +104,12 @@
 			"enabled": true
 		},
 		"Pacifist_Fence": {
-			"_description": "To go algong with the theme of this mod, Fence is also sells only pacifist items. But his prices are great, and dependant on scav karma, at 6 karma he sells items almost at the same prices Therapist buys them from you.",
+			"_description": "To go algong with the theme of this mod, Fence also sells only pacifist items. But his prices are at 80% of item value, and dependant on scav karma, so at 6 karma he will sell items almost at the same price Therapist buys them from you.",
 			"enabled": true,
 			"Number_Of_Fence_Offers": 30
 		},
 		"Only_Found_In_Raid_Items_Allowed_For_Barters": {
-			"_description": "Be a man, don't change this. This is borderline cheating option.",
+			"_description": "Be a man, don't change this. This is borderline cheating option for infinite money.",
 			"enabled": true
 		}
 	},
@@ -134,7 +134,7 @@
 			"SpeedMultiplier": 10
 		},
 		"Rebalance": {
-			"_description": "MAJOR rebalance of scav case rewards, very opinionated, but FEELS great for single player experience. Changes all cash launches to alcohol for lore-friendly experience (Pevko -> Vodka -> Whiskey -> Moonshine -> Intel). Completely alters internal rewards tiers (common: under 20,000, rare: 20,000 to 60,000, superrare: 60,000 to 1,200,000), makes every launch tier valuable, fair and TARGETABLE for different item tiers. Pevko is very fast, gives 2 to 3 common items. Vodka gives 3 to 4 common items, with a chance to give 1 rare item. Whiskey gives 4 to 5 common items, and 1 to 2 rare items. Moonshine is fun for gambling, gives 2 to 3 commons, 0 to 3 rares, 1 to 2 superrare items. Intelligence folder is the most consistent, 2 to 3 commons, 3 to 5 rares and 0 to 1 superrares.",
+			"_description": "MAJOR rebalance of scav case rewards, FEELS great for single player experience. Changes all cash launches to alcohol for lore-friendly experience (Pevko -> Vodka -> Whiskey -> Moonshine -> Intel). Completely alters internal rewards tiers (common: under 20,000, rare: 20,000 to 60,000, superrare: 60,000 to 1,200,000), makes every launch tier valuable, fair and TARGETABLE for different item tiers. Pevko is very fast, gives 2 to 3 common items. Vodka gives 3 to 4 common items, with a chance to give 1 rare item. Whiskey gives 4 to 5 common items, and 1 to 2 rare items. Moonshine is fun for gambling, gives 2 to 3 commons, 0 to 3 rares, 1 to 2 superrare items. Intelligence folder is the most consistent, 2 to 3 commons, 3 to 5 rares and 0 to 1 superrares.",
 			"enabled": true
 		}
 	},

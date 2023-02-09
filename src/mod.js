@@ -1191,8 +1191,13 @@ class Mod {
                     // Only pristine items are offered on flea.
                     ragfairConfig.dynamic.condition.min = 1;
                 }
-                //Allow FIR only items for barters. This is default, so just in case. To make a point.
-                globals.RagFair.isOnlyFoundInRaidAllowed = true;
+                if (config_json_1.default.EconomyOptions.Only_Found_In_Raid_Items_Allowed_For_Barters.enabled == true) {
+                    //Allow FIR only items for barters. This is default, so just in case. To make a point.
+                    globals.RagFair.isOnlyFoundInRaidAllowed = true;
+                }
+                else {
+                    globals.RagFair.isOnlyFoundInRaidAllowed = false;
+                }
                 if (config_json_1.default.EconomyOptions.Barter_Economy.enabled == true) {
                     // Can only barter from items not in the blacklist. Only allows base classes, and not itemIDs =(
                     ragfairConfig.dynamic.barter.itemTypeBlacklist = fleaBarterBlacklist;
@@ -1210,7 +1215,7 @@ class Mod {
                             // 2 is used to pass getFleaPriceForItem check and not trigger generateStaticPrices
                             prices[x] = 2;
                             if (items[x]._props.CanSellOnRagfair == true) {
-                                log(`Item ${getItemName(x)} can be bought on flea for free, you dirty cheater!!!`);
+                                log(`Item ${getItemName(x)} can be bought on flea for free, you dirty cheater!`);
                             }
                         }
                     });
