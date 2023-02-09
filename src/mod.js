@@ -721,7 +721,6 @@ class Mod {
         const peacekeeper = tables.traders["5935c25fb3acc3127c3d8cd9"];
         const skier = tables.traders["58330581ace78e27b8b10cee"];
         const traderlist = [prapor, therapist, ragman, jaeger, mechanic, peacekeeper, skier];
-        // config.map(x)
         if (config_json_1.default.ScavCaseOptions.enabled == true) {
             if (config_json_1.default.ScavCaseOptions.BetterRewards.enabled == true) {
                 // buyableitems generator, to make sure rare unbuyable items always are in reward pool (eg anodised red gear)
@@ -1061,7 +1060,7 @@ class Mod {
         if (config_json_1.default.OtherTweaks.enabled == true) {
             if (config_json_1.default.OtherTweaks.Skill_Exp_Buffs.enabled) {
                 // Buff Vitality, Sniper and Surgery skill leveling
-                globals.SkillsSettings.Vitality.DamageTakenAction *= 100; // I believe even this is a conservative number for a normal gameplay...
+                globals.SkillsSettings.Vitality.DamageTakenAction *= 10;
                 globals.SkillsSettings.Sniper.WeaponShotAction *= 10;
                 globals.SkillsSettings.Surgery.SurgeryAction *= 10;
                 globals.SkillsSettings.StressResistance.LowHPDuration *= 10;

@@ -1111,9 +1111,9 @@ class Mod implements IPostDBLoadMod {
 				// Never again I'll see an unlootable medcase in 314...
 				for (const itemID in items) {
 					const item = items[itemID]
-					if (item._props.ExaminedByDefault != undefined) {
-						item._props.ExaminedByDefault = true //debug
-					}
+					//if (item._props.ExaminedByDefault != undefined) {
+					//	// item._props.ExaminedByDefault = true // [Debug]
+					//}
 					if (true) {
 						let filtered
 						try {
