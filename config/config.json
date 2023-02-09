@@ -47,7 +47,7 @@
 		},
 		"Pacifist_FleaMarket": {
 			"_description": "CORE feature of this mod. Only meds, barter items, food and info items can be bought on flea market. Uses hardcoded fleaWhitelist array as filter. NOT recommended to disable.",
-			"enabled": true,
+			"enabled": false,
 			"Enable_Whitelist": {
 				"_description": "Small list of items used in crafts and trader barters is availiable on flea (and headsets. Because it's mostly preference, cmon.) Uses hardcoded itemWhitelist array.",
 				"enabled": true
@@ -96,7 +96,7 @@
 			"value": 5
 		},
 		"Flea_Prices_Increased": {
-			"_description": "Slightly increase flea market prices to stimulate looting and crafting, instead of buying everything on flea. With barter economy and variance you still get a lot of great trades lower then actual item value. Hustle.",
+			"_description": "Slightly increase flea market prices to stimulate looting and crafting, instead of buying everything on flea. With barter economy and variance enabled you still get a lot of great trades lower then actual item value. Hustle!",
 			"multiplier": 1.3
 		},
 		"Flea_Pristine_Items": {
@@ -107,6 +107,10 @@
 			"_description": "To go algong with the theme of this mod, Fence is also sells only pacifist items. But his prices are great, and dependant on scav karma, at 6 karma he sells items almost at the same prices Therapist buys them from you.",
 			"enabled": true,
 			"Number_Of_Fence_Offers": 30
+		},
+		"Only_Found_In_Raid_Items_Allowed_For_Barters": {
+			"_description": "Be a man, don't change this. This is borderline cheating option.",
+			"enabled": true
 		}
 	},
 	"CraftingRebalance": {
