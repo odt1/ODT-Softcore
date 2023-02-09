@@ -8,7 +8,7 @@ const ConfigTypes_1 = require("C:/snapshot/project/obj/models/enums/ConfigTypes"
 // import * as fs from "fs" // [Debug] Used for file saving
 const config_json_1 = __importDefault(require("../config/config.json"));
 const fleaWhitelist = [
-    // Whitelist for disabling global flea offers
+    // Whitelist for disabling global flea offers, used in Pacifist_FleaMarket
     // Handbook Categories IDs
     "5b47574386f77428ca22b2ed",
     "5b47574386f77428ca22b2ee",
@@ -207,7 +207,7 @@ const baseClasses = [
     "543be6564bdc2df4348b4568", // Throwable weapon
 ];
 const fleaBarterBlacklist = [
-    // Blacklist for items that can be bartered with.
+    // Blacklist for items that can be bartered with, used in Barter_Economy and Pacifist_Fence
     // base classes IDs (parent IDs)
     // "54009119af1c881c07000029", // Item
     "5d650c3e815116009f6201d2",
@@ -721,8 +721,9 @@ class Mod {
         const peacekeeper = tables.traders["5935c25fb3acc3127c3d8cd9"];
         const skier = tables.traders["58330581ace78e27b8b10cee"];
         const traderlist = [prapor, therapist, ragman, jaeger, mechanic, peacekeeper, skier];
-        if (config_json_1.default.ScavCaseOptions.enabled) {
-            if (config_json_1.default.ScavCaseOptions.BetterRewards.enabled) {
+        // config.map(x)
+        if (config_json_1.default.ScavCaseOptions.enabled == true) {
+            if (config_json_1.default.ScavCaseOptions.BetterRewards.enabled == true) {
                 // buyableitems generator, to make sure rare unbuyable items always are in reward pool (eg anodised red gear)
                 let buyableitems = new Set();
                 for (const trader of traderlist) {
@@ -753,7 +754,7 @@ class Mod {
                     }
                 }
             }
-            if (config_json_1.default.ScavCaseOptions.Rebalance.enabled) {
+            if (config_json_1.default.ScavCaseOptions.Rebalance.enabled == true) {
                 scavcaseConfig.rewardItemValueRangeRub = {
                     common: {
                         // AVG 7941
@@ -905,7 +906,7 @@ class Mod {
                 ];
                 tables.hideout.scavcase = scavCaseRedone; // mi donta undestanda tem red wavy lines, tis bad? tis worka! tis gooda! donta cera wavy lines.
             }
-            if (config_json_1.default.ScavCaseOptions.FasterScavcase.enabled) {
+            if (config_json_1.default.ScavCaseOptions.FasterScavcase.enabled == true) {
                 tables.hideout.scavcase.forEach((x) => (x.ProductionTime /= config_json_1.default.ScavCaseOptions.FasterScavcase.SpeedMultiplier));
             }
             if (false) {
@@ -996,7 +997,7 @@ class Mod {
                 //		})
             }
         }
-        if (config_json_1.default.HideoutOptions.enabled) {
+        if (config_json_1.default.HideoutOptions.enabled == true) {
             // 100x Faster hideout production, 10x superwater and moonshine production, bitcoins
             for (let prod in tables.hideout.production) {
                 const endProduct = tables.hideout.production[prod].endProduct;
@@ -1057,34 +1058,7 @@ class Mod {
                 tables.hideout.settings.generatorFuelFlowRate *= config_json_1.default.HideoutOptions.Increased_Fuel_Consumption.Fuel_Consumption_Multiplier;
             }
         }
-        for (let handbookItem in tables.templates.handbook.Items) {
-            const itemInHandbook = tables.templates.handbook.Items[handbookItem];
-            const itemID = itemInHandbook.Id;
-            if (prices[itemID] != undefined) {
-                // Change all Flea prices to handbook prices.
-                prices[itemID] = itemInHandbook.Price;
-            }
-            if (!fleaWhitelist.includes(itemInHandbook.ParentId)) {
-                // Ban everything on flea except whitelist handbook categories above.
-                items[itemID]._props.CanSellOnRagfair = false;
-            }
-        }
-        // Unban random spawn only quest keys from flea, make them 2x expensive
-        for (const questKey of questKeys) {
-            prices[questKey] *= 2;
-            items[questKey]._props.CanSellOnRagfair = true;
-        }
-        // Unban whitelist
-        for (const item of itemWhitelist) {
-            items[item]._props.CanSellOnRagfair = true;
-        }
-        // Hardcode fix for important or unbalanced items. Too low prices can't convert to barters.
-        prices["5aa2b923e5b5b000137b7589"] *= 5; // Round frame sunglasses
-        prices["59e770b986f7742cbd762754"] *= 2; // Anti-fragmentation glasses
-        prices["5f5e45cc5021ce62144be7aa"] *= 2; // LolKek 3F Transfer tourist backpack
-        prices["5751487e245977207e26a315"] = 1500; // Emelya
-        prices["57347d3d245977448f7b7f61"] = 2000; // Croutons
-        if (config_json_1.default.OtherTweaks.enabled) {
+        if (config_json_1.default.OtherTweaks.enabled == true) {
             if (config_json_1.default.OtherTweaks.Skill_Exp_Buffs.enabled) {
                 // Buff Vitality, Sniper and Surgery skill leveling
                 globals.SkillsSettings.Vitality.DamageTakenAction *= 100; // I believe even this is a conservative number for a normal gameplay...
@@ -1136,7 +1110,7 @@ class Mod {
                     ]),
                 ];
                 tables.templates.items["5d235bb686f77443f4331278"]._props.Grids[0]._props.filters[0].Filter = mergeFilters;
-                log(mergeFilters.map((x) => getItemName(x)));
+                // log(mergeFilters.map((x) => getItemName(x)))
             }
             if (config_json_1.default.OtherTweaks.Reshala_Always_Has_GoldenTT.enabled) {
                 // Reshala always has his Golden TT
@@ -1144,7 +1118,7 @@ class Mod {
                 tables.bots.types.bossbully.inventory.equipment.Holster = { "5b3b713c5acfc4330140bd8d": 1 };
             }
         }
-        if (config_json_1.default.InsuranceChanges.enabled) {
+        if (config_json_1.default.InsuranceChanges.enabled == true) {
             // Redo insurance. Prapor in an instant return with 50% chance, costs 10% of item value, Therapist has 2 hour return with 80% chance, costs 20%.
             prapor.base.insurance.min_return_hour = 0;
             prapor.base.insurance.max_return_hour = 0;
@@ -1157,504 +1131,549 @@ class Mod {
             insuranceConfig.returnChancePercent["54cb50c76803fa8b248b4571"] = 50;
             insuranceConfig.returnChancePercent["54cb57776803fa99248b456e"] = 80;
         }
-        if (config_json_1.default.EconomyOptions.enabled) {
+        if (config_json_1.default.EconomyOptions.enabled == true) {
             // Ragfair changes:
-            if (config_json_1.default.EconomyOptions.Disable_Flea_Market_Completely.disable) {
+            if (config_json_1.default.EconomyOptions.Disable_Flea_Market_Completely.disable == true) {
                 globals.RagFair.minUserLevel = 99;
             }
             else {
-                // Min level is 5
-                globals.RagFair.minUserLevel = 5;
-            }
-            // Completely disable selling items
-            ragfairConfig.sell.chance.base = 0;
-            // Untill this is fixed (https://dev.sp-tarkov.com/SPT-AKI/Server/issues/3098), no sellorino amigo. 
-            // Will enable selling in SPT 3.5 with further tweaks, since prices are quite balanced now.
-            //ragfairConfig.sell.chance.overprices = 0 // block overpriced abuse. you have to sell for < DB fleaprice (use my Item info mod to see it)
-            //ragfairConfig.sell.reputation.gain *= 10
-            //ragfairConfig.sell.reputation.loss *= 10
-            //ragfairConfig.sell.time.base = 1
-            //ragfairConfig.sell.time.min = 1
-            //ragfairConfig.sell.time.max = 1
-            ragfairConfig.dynamic.barter.chancePercent = 90; // Allow 10% of listings for cash
-            ragfairConfig.dynamic.barter.minRoubleCostToBecomeBarter = 100; // Barters only for items that cost > 100
-            ragfairConfig.dynamic.barter.priceRangeVariancePercent = 40; // more variance for flea barters, seems actually fun!
-            // Max 2 for 1 barters.
-            ragfairConfig.dynamic.barter.itemCountMax = 2;
-            ragfairConfig.dynamic.condition.min = 1;
-            // Sligtly increase flea prices, but with bigger variance, you still get a lot of great trades. Hustle.
-            ragfairConfig.dynamic.price.min *= 1.3; // 0.8 -> 1.04
-            ragfairConfig.dynamic.price.max *= 1.3; // 1.2 -> 1.56
-            //Allow FIR only items for barters. This is default, so just in case. To make a point.
-            globals.RagFair.isOnlyFoundInRaidAllowed = true;
-            // Can only barter from items not in the blacklist. Only allows base classes, and not itemIDs =(
-            ragfairConfig.dynamic.barter.itemTypeBlacklist = fleaBarterBlacklist;
-            BSGblacklist.filter((x) => {
-                // dirty hack to block BSG blacklisted items (dogtags, bitcoins, ornaments and others) from barters, since you can't buy them on flea anyway, so it should not matter.
-                if (x == "59faff1d86f7746c51718c9c" && config_json_1.default.EconomyOptions.Unban_Bitcoins_For_Barters.enabled == true) {
-                    // do nothing
-                }
-                else {
-                    // 2 is used to pass getFleaPriceForItem check and not trigger generateStaticPrices
-                    prices[x] = 2;
-                    if (items[x]._props.CanSellOnRagfair == true) {
-                        log(`Item ${getItemName(x)} can be bought on flea for free, you dirty cheater!!!`);
+                globals.RagFair.minUserLevel = config_json_1.default.EconomyOptions.Fleamarket_Opened_at_Level.value;
+                for (let handbookItem in tables.templates.handbook.Items) {
+                    const itemInHandbook = tables.templates.handbook.Items[handbookItem];
+                    const itemID = itemInHandbook.Id;
+                    if (prices[itemID] != undefined && config_json_1.default.EconomyOptions.Price_Rebalance.enabled == true) {
+                        // Change all Flea prices to handbook prices.
+                        prices[itemID] = itemInHandbook.Price;
+                    }
+                    if (!fleaWhitelist.includes(itemInHandbook.ParentId) && config_json_1.default.EconomyOptions.Pacifist_FleaMarket.enabled == true) {
+                        // Ban everything on flea except whitelist handbook categories above.
+                        items[itemID]._props.CanSellOnRagfair = false;
                     }
                 }
-            });
-            // ragfairConfig.dynamic.barter.itemCountMax = 3
-            // Max 20 offers. Too low of a number breaks AKI server for some reason, with constant client errors on completed trades.
-            // More random trades variance anyway, this is fun.
-            ragfairConfig.dynamic.offerItemCount.min = 10;
-            ragfairConfig.dynamic.offerItemCount.max = 20;
-            // Max 2 items per offer. Feels nice. Loot more shit, it might come in handy.
-            ragfairConfig.dynamic.nonStackableCount.min = 1;
-            ragfairConfig.dynamic.nonStackableCount.max = 2;
-            // Add BSGblacklist and mod custom blacklist to Fence blacklists
-            let commonBlacklist = [];
-            commonBlacklist.push(...BSGblacklist, ...fleaBarterBlacklist);
-            // Fence sells only items that are not in the flea blacklist
-            traderConfig.fence.assortSize = 30;
-            traderConfig.fence.blacklist = commonBlacklist; //itemid or baseid
-            traderConfig.fence.maxPresetsPercent = 0;
-            traderConfig.fence.itemPriceMult = 0.8; // at 6 Fence karma you buy items almost at a price Therapist buys from you. Go grind.
+                if (config_json_1.default.EconomyOptions.Price_Rebalance.enabled == true) {
+                    // Hardcode fix for important or unbalanced items. Too low prices can't convert to barters.
+                    prices["5aa2b923e5b5b000137b7589"] *= 5; // Round frame sunglasses
+                    prices["59e770b986f7742cbd762754"] *= 2; // Anti-fragmentation glasses
+                    prices["5f5e45cc5021ce62144be7aa"] *= 2; // LolKek 3F Transfer tourist backpack
+                    prices["5751487e245977207e26a315"] = 1500; // Emelya
+                    prices["57347d3d245977448f7b7f61"] = 2000; // Croutons
+                }
+                // Unban random spawn only quest keys from flea, make them 2x expensive
+                if (config_json_1.default.EconomyOptions.Pacifist_FleaMarket.Enable_QuestKeys.enabled == true) {
+                    for (const questKey of questKeys) {
+                        prices[questKey] *= 2;
+                        items[questKey]._props.CanSellOnRagfair = true;
+                    }
+                }
+                if (config_json_1.default.EconomyOptions.Pacifist_FleaMarket.Enable_Whitelist.enabled) {
+                    // Unban whitelist
+                    for (const item of itemWhitelist) {
+                        items[item]._props.CanSellOnRagfair = true;
+                    }
+                }
+                if (config_json_1.default.EconomyOptions.Disable_Selling_on_Flea.sellingDisabled == true) {
+                    // Completely disable selling items
+                    ragfairConfig.sell.chance.base = 0;
+                    // Untill this is fixed (https://dev.sp-tarkov.com/SPT-AKI/Server/issues/3098), no sellorino amigo.
+                    // Will enable selling in SPT 3.5 with further tweaks, since prices are quite balanced now.
+                    // WIP
+                    //ragfairConfig.sell.chance.overprices = 0 // block overpriced abuse. you have to sell for < DB fleaprice (use my Item info mod to see it)
+                    //ragfairConfig.sell.reputation.gain *= 10
+                    //ragfairConfig.sell.reputation.loss *= 10
+                    //ragfairConfig.sell.time.base = 1
+                    //ragfairConfig.sell.time.min = 1
+                    //ragfairConfig.sell.time.max = 1
+                }
+                // Sligtly increase flea prices, but with bigger variance, you still get a lot of great trades. Hustle.
+                ragfairConfig.dynamic.price.min *= config_json_1.default.EconomyOptions.Flea_Prices_Increased.multiplier; // 0.8 -> 1.04
+                ragfairConfig.dynamic.price.max *= config_json_1.default.EconomyOptions.Flea_Prices_Increased.multiplier; // 1.2 -> 1.56
+                if (config_json_1.default.EconomyOptions.Flea_Pristine_Items.enabled == true) {
+                    // Only pristine items are offered on flea.
+                    ragfairConfig.dynamic.condition.min = 1;
+                }
+                //Allow FIR only items for barters. This is default, so just in case. To make a point.
+                globals.RagFair.isOnlyFoundInRaidAllowed = true;
+                if (config_json_1.default.EconomyOptions.Barter_Economy.enabled == true) {
+                    // Can only barter from items not in the blacklist. Only allows base classes, and not itemIDs =(
+                    ragfairConfig.dynamic.barter.itemTypeBlacklist = fleaBarterBlacklist;
+                    ragfairConfig.dynamic.barter.chancePercent = 100 - config_json_1.default.EconomyOptions.Barter_Economy.Cash_Offers_Percentage.value; // Allow 10% of listings for cash
+                    ragfairConfig.dynamic.barter.minRoubleCostToBecomeBarter = 100; // Barters only for items that cost > 100
+                    ragfairConfig.dynamic.barter.priceRangeVariancePercent = config_json_1.default.EconomyOptions.Barter_Economy.Barter_Price_Variance.value; // more variance for flea barters, seems actually fun!
+                    // Max 2 for 1 barters.
+                    ragfairConfig.dynamic.barter.itemCountMax = config_json_1.default.EconomyOptions.Barter_Economy.itemCountMax.value;
+                    BSGblacklist.filter((x) => {
+                        // dirty hack to block BSG blacklisted items (dogtags, bitcoins, ornaments and others) from barters, since you can't buy them on flea anyway, so it should not matter.
+                        if (x == "59faff1d86f7746c51718c9c" && config_json_1.default.EconomyOptions.Barter_Economy.Unban_Bitcoins_For_Barters.enabled == true) {
+                            // do nothing
+                        }
+                        else {
+                            // 2 is used to pass getFleaPriceForItem check and not trigger generateStaticPrices
+                            prices[x] = 2;
+                            if (items[x]._props.CanSellOnRagfair == true) {
+                                log(`Item ${getItemName(x)} can be bought on flea for free, you dirty cheater!!!`);
+                            }
+                        }
+                    });
+                    // Max 20 offers. Too low of a number breaks AKI server for some reason, with constant client errors on completed trades.
+                    // More random trades variance anyway, this is fun.
+                    ragfairConfig.dynamic.offerItemCount.min = config_json_1.default.EconomyOptions.Barter_Economy.offerItemCount.min;
+                    ragfairConfig.dynamic.offerItemCount.max = config_json_1.default.EconomyOptions.Barter_Economy.offerItemCount.max;
+                    // Max 2 items per offer. Feels nice. Loot more shit, it might come in handy.
+                    ragfairConfig.dynamic.nonStackableCount.min = config_json_1.default.EconomyOptions.Barter_Economy.nonStackableCount.min;
+                    ragfairConfig.dynamic.nonStackableCount.max = config_json_1.default.EconomyOptions.Barter_Economy.nonStackableCount.max;
+                }
+            }
+            if (config_json_1.default.EconomyOptions.Pacifist_Fence.enabled == true) {
+                // Add BSGblacklist and mod custom blacklist to Fence blacklists
+                let commonBlacklist = [];
+                commonBlacklist.push(...BSGblacklist, ...fleaBarterBlacklist);
+                // Fence sells only items that are not in the flea blacklist
+                traderConfig.fence.assortSize = config_json_1.default.EconomyOptions.Pacifist_Fence.Number_Of_Fence_Offers;
+                traderConfig.fence.blacklist = commonBlacklist; //itemid or baseid
+                traderConfig.fence.maxPresetsPercent = 0;
+                traderConfig.fence.itemPriceMult = 0.8; // at 6 Fence karma you buy items almost at a price Therapist buys from you. Go grind.
+            }
         }
-        // Crafts:
-        // This here, is some dumb stuff, I should've created some special class, controller, pushed the data out of the code or some other OOP bullcrap, but I'm not a programmer, so this will have to suffice. Sorry, not sorry.
-        // 2x Clin production buff
-        getCraft("59e358a886f7741776641ac3").count = 2;
-        // 2x Paracord production buff
-        getCraft("5c12688486f77426843c7d32").count = 2;
-        // Water filter < 2 airfilter craft buff
-        getCraft("5d1b385e86f774252167b98a").requirements.find((x) => x.templateId == "590c595c86f7747884343ad7").count = 2;
-        // Toilet paper production nerf lol. Who would have thought this craft would be OP, huh?
-        getCraft("5c13cef886f774072e618e82").count = 1;
-        // EWR buff
-        getCraft("60098b1705871270cd5352a1").count = 3;
-        // Buff MULE
-        getCraft("5ed51652f6c34d2cc26336a1").count = 2;
-        // Surv12 nerf
-        getCraft("5d02797c86f774203f38e30a").requirements.find((x) => x.templateId == "5e831507ea0a7c419c2f9bd9").templateId = "5af0454c86f7746bf20992e8";
-        getCraft("5d02797c86f774203f38e30a").count = 1;
-        // AFAK buff
-        getCraft("60098ad7c2240c0fe85c570a").requirements.find((x) => x.templateId == "590c678286f77426c9660122").count = 1;
-        getCraft("60098ad7c2240c0fe85c570a").requirements.find((x) => x.templateId == "5751a25924597722c463c472").templateId = "5e8488fa988a8701445df1e4";
-        // Portable defibrillator big nerf (Portable Powerbank 1 -> 4). Lore-friendly and still profitable, just not as ridiculous.
-        getCraft("5c052e6986f7746b207bc3c9").requirements.find((x) => x.templateId == "5af0561e86f7745f5f3ad6ac").count = 4;
-        // LEDX buff (Huge buff, 1 of each component only). Now it is actually only sometimes bother to craft it.
-        getCraft("5c0530ee86f774697952d952").requirements.forEach((x) => {
-            if (x.count) {
-                x.count = 1;
-            }
-        });
-        // Virtex buff (Military circuit board 2 -> 1)
-        getCraft("5c05308086f7746b2101e90b").requirements.find((x) => x.templateId == "5d0376a486f7747d8050965c").count = 1;
-        // Military circuit board buff (1 -> 2)
-        getCraft("5d0376a486f7747d8050965c").count = 2;
-        // Military flash drive lore-based change (2 Secure Flash drive -> 1 VPX, and Topographic survey maps 2 -> 1). Not "profitable", but will change Intel folder craft to compensate.
-        getCraft("62a0a16d0b9d3c46de5b6e97").requirements.forEach((x) => {
-            if (x.count) {
-                x.count = 1;
-            }
-        });
-        getCraft("62a0a16d0b9d3c46de5b6e97").requirements.find((x) => x.templateId == "590c621186f774138d11ea29").templateId = "5c05300686f7746dce784e5d";
-        // Intelligence folder buff (Military flash drive 2 -> 1)
-        getCraft("5c12613b86f7743bbe2c3f76").requirements.find((x) => x.templateId == "62a0a16d0b9d3c46de5b6e97").count = 1;
-        // VPX buff (RAM and Broken GPhone smartphone 3 -> 2)
-        getCraft("5c05300686f7746dce784e5d").requirements.forEach((x) => {
-            if (x.count) {
-                x.count = 2;
-            }
-        });
-        // FLIR huge buff (everything is 1, plus change SAS drive (wtf?!) to Armasight Vulcan MG 3.5x Bravo night vision scope)
-        getCraft("5d1b5e94d7ad1a2b865a96b0").requirements.forEach((x) => {
-            if (x.count) {
-                x.count = 1;
-            }
-        });
-        getCraft("5d1b5e94d7ad1a2b865a96b0").requirements.find((x) => x.templateId == "590c37d286f77443be3d7827").templateId = "5b3b6e495acfc4330140bd88";
-        // CMS nerf (Medical tools 1 -> 2)
-        getCraft("5d02778e86f774203e7dedbe").requirements.find((x) => x.templateId == "619cc01e0a7c3a1a2731940c").count = 2;
-        // GRIzZLY nerf (1 -> 2)
-        getCraft("590c657e86f77412b013051d").count = 1;
-        // coffee buff (2 -> 3)
-        getCraft("5af0484c86f7740f02001f7f").count = 3;
-        // MPPV buff (KEKTAPE duct tape 2 -> 1)
-        getCraft("5df8a42886f77412640e2e75").requirements.find((x) => x.templateId == "5e2af29386f7746d4159f077").count = 1;
-        // bottled water buff water (8 -> 16)
-        getCraft("5448fee04bdc2dbc018b4567").count = 16;
-        // Topographic survey maps buff (1 -> 2)
-        getCraft("62a0a124de7ac81993580542").count = 2;
-        // Aquamari buff (3 -> 5)
-        getCraft("5c0fa877d174af02a012e1cf").count = 5;
-        // SJ6 buff (2 -> 3)
-        getCraft("5c0e531d86f7747fa23f4d42").count = 3;
-        // GPU buff (3 VPX -> 1 Virtex, 10 PCB -> 1, 10 CPU -> 1)
-        getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "5c05300686f7746dce784e5d").count = 1;
-        getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "5c05300686f7746dce784e5d").templateId = "5c05308086f7746b2101e90b";
-        getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "573477e124597737dd42e191").count = 1;
-        getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "590a3b0486f7743954552bdb").count = 1;
-        // UHF RFID Reader huge buff (only Broken GPhone X smartphone + Signal Jammer)
-        getCraft("5c052fb986f7746b2101e909").requirements = [
-            {
-                areaType: 11,
-                requiredLevel: 2,
-                type: "Area",
-            },
-            {
-                templateId: "5c1265fc86f7743f896a21c2",
+        if (config_json_1.default.CraftingRebalance.enabled == true) {
+            // Crafts:
+            // This here, is some dumb stuff, I should've created some special class, controller, pushed the data out of the code or some other OOP bullcrap, but I'm not a programmer, so this will have to suffice. Sorry, not sorry.
+            // 2x Clin production buff
+            getCraft("59e358a886f7741776641ac3").count = 2;
+            // 2x Paracord production buff
+            getCraft("5c12688486f77426843c7d32").count = 2;
+            // Water filter < 2 airfilter craft buff
+            getCraft("5d1b385e86f774252167b98a").requirements.find((x) => x.templateId == "590c595c86f7747884343ad7").count = 2;
+            // Toilet paper production nerf lol. Who would have thought this craft would be OP, huh?
+            getCraft("5c13cef886f774072e618e82").count = 1;
+            // EWR buff
+            getCraft("60098b1705871270cd5352a1").count = 3;
+            // Buff MULE
+            getCraft("5ed51652f6c34d2cc26336a1").count = 2;
+            // Surv12 nerf
+            getCraft("5d02797c86f774203f38e30a").requirements.find((x) => x.templateId == "5e831507ea0a7c419c2f9bd9").templateId = "5af0454c86f7746bf20992e8";
+            getCraft("5d02797c86f774203f38e30a").count = 1;
+            // AFAK buff
+            getCraft("60098ad7c2240c0fe85c570a").requirements.find((x) => x.templateId == "590c678286f77426c9660122").count = 1;
+            getCraft("60098ad7c2240c0fe85c570a").requirements.find((x) => x.templateId == "5751a25924597722c463c472").templateId = "5e8488fa988a8701445df1e4";
+            // Portable defibrillator big nerf (Portable Powerbank 1 -> 4). Lore-friendly and still profitable, just not as ridiculous.
+            getCraft("5c052e6986f7746b207bc3c9").requirements.find((x) => x.templateId == "5af0561e86f7745f5f3ad6ac").count = 4;
+            // LEDX buff (Huge buff, 1 of each component only). Now it is actually only sometimes bother to craft it.
+            getCraft("5c0530ee86f774697952d952").requirements.forEach((x) => {
+                if (x.count) {
+                    x.count = 1;
+                }
+            });
+            // Virtex buff (Military circuit board 2 -> 1)
+            getCraft("5c05308086f7746b2101e90b").requirements.find((x) => x.templateId == "5d0376a486f7747d8050965c").count = 1;
+            // Military circuit board buff (1 -> 2)
+            getCraft("5d0376a486f7747d8050965c").count = 2;
+            // Military flash drive lore-based change (2 Secure Flash drive -> 1 VPX, and Topographic survey maps 2 -> 1). Not "profitable", but will change Intel folder craft to compensate.
+            getCraft("62a0a16d0b9d3c46de5b6e97").requirements.forEach((x) => {
+                if (x.count) {
+                    x.count = 1;
+                }
+            });
+            getCraft("62a0a16d0b9d3c46de5b6e97").requirements.find((x) => x.templateId == "590c621186f774138d11ea29").templateId = "5c05300686f7746dce784e5d";
+            // Intelligence folder buff (Military flash drive 2 -> 1)
+            getCraft("5c12613b86f7743bbe2c3f76").requirements.find((x) => x.templateId == "62a0a16d0b9d3c46de5b6e97").count = 1;
+            // VPX buff (RAM and Broken GPhone smartphone 3 -> 2)
+            getCraft("5c05300686f7746dce784e5d").requirements.forEach((x) => {
+                if (x.count) {
+                    x.count = 2;
+                }
+            });
+            // FLIR huge buff (everything is 1, plus change SAS drive (wtf?!) to Armasight Vulcan MG 3.5x Bravo night vision scope)
+            getCraft("5d1b5e94d7ad1a2b865a96b0").requirements.forEach((x) => {
+                if (x.count) {
+                    x.count = 1;
+                }
+            });
+            getCraft("5d1b5e94d7ad1a2b865a96b0").requirements.find((x) => x.templateId == "590c37d286f77443be3d7827").templateId = "5b3b6e495acfc4330140bd88";
+            // CMS nerf (Medical tools 1 -> 2)
+            getCraft("5d02778e86f774203e7dedbe").requirements.find((x) => x.templateId == "619cc01e0a7c3a1a2731940c").count = 2;
+            // GRIzZLY nerf (1 -> 2)
+            getCraft("590c657e86f77412b013051d").count = 1;
+            // coffee buff (2 -> 3)
+            getCraft("5af0484c86f7740f02001f7f").count = 3;
+            // MPPV buff (KEKTAPE duct tape 2 -> 1)
+            getCraft("5df8a42886f77412640e2e75").requirements.find((x) => x.templateId == "5e2af29386f7746d4159f077").count = 1;
+            // bottled water buff water (8 -> 16)
+            getCraft("5448fee04bdc2dbc018b4567").count = 16;
+            // Topographic survey maps buff (1 -> 2)
+            getCraft("62a0a124de7ac81993580542").count = 2;
+            // Aquamari buff (3 -> 5)
+            getCraft("5c0fa877d174af02a012e1cf").count = 5;
+            // SJ6 buff (2 -> 3)
+            getCraft("5c0e531d86f7747fa23f4d42").count = 3;
+            // GPU buff (3 VPX -> 1 Virtex, 10 PCB -> 1, 10 CPU -> 1)
+            getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "5c05300686f7746dce784e5d").count = 1;
+            getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "5c05300686f7746dce784e5d").templateId = "5c05308086f7746b2101e90b";
+            getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "573477e124597737dd42e191").count = 1;
+            getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "590a3b0486f7743954552bdb").count = 1;
+            // UHF RFID Reader huge buff (only Broken GPhone X smartphone + Signal Jammer)
+            getCraft("5c052fb986f7746b2101e909").requirements = [
+                {
+                    areaType: 11,
+                    requiredLevel: 2,
+                    type: "Area",
+                },
+                {
+                    templateId: "5c1265fc86f7743f896a21c2",
+                    count: 1,
+                    isFunctional: false,
+                    type: "Item",
+                },
+                {
+                    templateId: "5ac78a9b86f7741cca0bbd8d",
+                    count: 1,
+                    isFunctional: false,
+                    type: "Item",
+                },
+                {
+                    templateId: "5d4042a986f7743185265463",
+                    type: "Tool",
+                },
+                {
+                    templateId: "5d63d33b86f7746ea9275524",
+                    type: "Tool",
+                },
+            ];
+        }
+        if (config_json_1.default.AdditionalCraftingRecipes.enabled == true) {
+            // 63da4dbee8fa73e225000001
+            // 63da4dbee8fa73e225000002
+            // 63da4dbee8fa73e225000003
+            // 63da4dbee8fa73e225000004
+            // 63da4dbee8fa73e225000005
+            // 63da4dbee8fa73e225000006
+            // 63da4dbee8fa73e225000007
+            // 63da4dbee8fa73e225000008
+            // 63da4dbee8fa73e225000009
+            // 63da4dbee8fa73e22500000a
+            const Ophthalmoscope = {
+                _id: "63da4dbee8fa73e225000001",
+                areaType: 7,
+                requirements: [
+                    { areaType: 7, requiredLevel: 3, type: "Area" },
+                    {
+                        templateId: "5e2aedd986f7746d404f3aa4",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                    {
+                        templateId: "619cc01e0a7c3a1a2731940c",
+                        count: 2,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                    {
+                        templateId: "57d17c5e2459775a5c57d17d",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                    {
+                        templateId: "5b4391a586f7745321235ab2",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                    {
+                        templateId: "57347c1124597737fb1379e3",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                ],
+                productionTime: 105,
+                boosters: null,
+                endProduct: "5af0534a86f7743b6f354284",
+                continuous: false,
                 count: 1,
-                isFunctional: false,
-                type: "Item",
-            },
-            {
-                templateId: "5ac78a9b86f7741cca0bbd8d",
+                productionLimitCount: 0,
+            };
+            const Zagustin = {
+                _id: "63da4dbee8fa73e225000002",
+                areaType: 7,
+                requirements: [
+                    { areaType: 7, requiredLevel: 3, type: "Area" },
+                    {
+                        templateId: "5c0e530286f7747fa1419862",
+                        count: 2,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                    {
+                        templateId: "5e8488fa988a8701445df1e4",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                    {
+                        templateId: "5ed515f6915ec335206e4152",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                ],
+                productionTime: 105,
+                boosters: null,
+                endProduct: "5c0e533786f7747fa23f4d47",
+                continuous: false,
+                count: 3,
+                productionLimitCount: 0,
+            };
+            const Obdolbos = {
+                // Did you always want to run your own meth lab in Tarkov? Now you can.
+                _id: "63da4dbee8fa73e225000003",
+                areaType: 7,
+                requirements: [
+                    { areaType: 7, requiredLevel: 3, type: "Area" },
+                    {
+                        templateId: "5c0e531286f7747fa54205c2",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                    {
+                        templateId: "5b43575a86f77424f443fe62",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                    {
+                        templateId: "5e2af00086f7746d3f3c33f7",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                    {
+                        templateId: "62a09f32621468534a797acb",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                    {
+                        templateId: "5d40407c86f774318526545a",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                    {
+                        templateId: "5d403f9186f7743cac3f229b",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                    {
+                        templateId: "5d1b376e86f774252519444e",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                    {
+                        templateId: "5d1b2f3f86f774252167a52c",
+                        type: "Tool",
+                    },
+                ],
+                productionTime: 564,
+                boosters: null,
+                endProduct: "5ed5166ad380ab312177c100",
+                continuous: false,
+                count: 8,
+                productionLimitCount: 0,
+            };
+            const CALOK = {
+                _id: "63da4dbee8fa73e225000004",
+                areaType: 7,
+                requirements: [
+                    { areaType: 7, requiredLevel: 2, type: "Area" },
+                    {
+                        templateId: "5751a25924597722c463c472",
+                        count: 2,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                    {
+                        templateId: "5755383e24597772cb798966",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                ],
+                productionTime: 48,
+                boosters: null,
+                endProduct: "5e8488fa988a8701445df1e4",
+                continuous: false,
+                count: 2,
+                productionLimitCount: 0,
+            };
+            const Adrenaline = {
+                _id: "63da4dbee8fa73e225000005",
+                areaType: 7,
+                requirements: [
+                    { areaType: 7, requiredLevel: 2, type: "Area" },
+                    {
+                        templateId: "5751496424597720a27126da",
+                        count: 3,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                    {
+                        templateId: "5755356824597772cb798962",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                ],
+                productionTime: 23,
+                boosters: null,
+                endProduct: "5c10c8fd86f7743d7d706df3",
+                continuous: false,
                 count: 1,
-                isFunctional: false,
-                type: "Item",
-            },
-            {
-                templateId: "5d4042a986f7743185265463",
-                type: "Tool",
-            },
-            {
-                templateId: "5d63d33b86f7746ea9275524",
-                type: "Tool",
-            },
-        ];
-        // 63da4dbee8fa73e225000001
-        // 63da4dbee8fa73e225000002
-        // 63da4dbee8fa73e225000003
-        // 63da4dbee8fa73e225000004
-        // 63da4dbee8fa73e225000005
-        // 63da4dbee8fa73e225000006
-        // 63da4dbee8fa73e225000007
-        // 63da4dbee8fa73e225000008
-        // 63da4dbee8fa73e225000009
-        // 63da4dbee8fa73e22500000a
-        const Ophthalmoscope = {
-            _id: "63da4dbee8fa73e225000001",
-            areaType: 7,
-            requirements: [
-                { areaType: 7, requiredLevel: 3, type: "Area" },
-                {
-                    templateId: "5e2aedd986f7746d404f3aa4",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-                {
-                    templateId: "619cc01e0a7c3a1a2731940c",
-                    count: 2,
-                    isFunctional: false,
-                    type: "Item",
-                },
-                {
-                    templateId: "57d17c5e2459775a5c57d17d",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-                {
-                    templateId: "5b4391a586f7745321235ab2",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-                {
-                    templateId: "57347c1124597737fb1379e3",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-            ],
-            productionTime: 105,
-            boosters: null,
-            endProduct: "5af0534a86f7743b6f354284",
-            continuous: false,
-            count: 1,
-            productionLimitCount: 0,
-        };
-        const Zagustin = {
-            _id: "63da4dbee8fa73e225000002",
-            areaType: 7,
-            requirements: [
-                { areaType: 7, requiredLevel: 3, type: "Area" },
-                {
-                    templateId: "5c0e530286f7747fa1419862",
-                    count: 2,
-                    isFunctional: false,
-                    type: "Item",
-                },
-                {
-                    templateId: "5e8488fa988a8701445df1e4",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-                {
-                    templateId: "5ed515f6915ec335206e4152",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-            ],
-            productionTime: 105,
-            boosters: null,
-            endProduct: "5c0e533786f7747fa23f4d47",
-            continuous: false,
-            count: 3,
-            productionLimitCount: 0,
-        };
-        const Obdolbos = {
-            // Did you always want to run your own meth lab in Tarkov? Now you can.
-            _id: "63da4dbee8fa73e225000003",
-            areaType: 7,
-            requirements: [
-                { areaType: 7, requiredLevel: 3, type: "Area" },
-                {
-                    templateId: "5c0e531286f7747fa54205c2",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-                {
-                    templateId: "5b43575a86f77424f443fe62",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-                {
-                    templateId: "5e2af00086f7746d3f3c33f7",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-                {
-                    templateId: "62a09f32621468534a797acb",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-                {
-                    templateId: "5d40407c86f774318526545a",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-                {
-                    templateId: "5d403f9186f7743cac3f229b",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-                {
-                    templateId: "5d1b376e86f774252519444e",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-                {
-                    templateId: "5d1b2f3f86f774252167a52c",
-                    type: "Tool",
-                },
-            ],
-            productionTime: 564,
-            boosters: null,
-            endProduct: "5ed5166ad380ab312177c100",
-            continuous: false,
-            count: 8,
-            productionLimitCount: 0,
-        };
-        const CALOK = {
-            _id: "63da4dbee8fa73e225000004",
-            areaType: 7,
-            requirements: [
-                { areaType: 7, requiredLevel: 2, type: "Area" },
-                {
-                    templateId: "5751a25924597722c463c472",
-                    count: 2,
-                    isFunctional: false,
-                    type: "Item",
-                },
-                {
-                    templateId: "5755383e24597772cb798966",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-            ],
-            productionTime: 48,
-            boosters: null,
-            endProduct: "5e8488fa988a8701445df1e4",
-            continuous: false,
-            count: 2,
-            productionLimitCount: 0,
-        };
-        const Adrenaline = {
-            _id: "63da4dbee8fa73e225000005",
-            areaType: 7,
-            requirements: [
-                { areaType: 7, requiredLevel: 2, type: "Area" },
-                {
-                    templateId: "5751496424597720a27126da",
-                    count: 3,
-                    isFunctional: false,
-                    type: "Item",
-                },
-                {
-                    templateId: "5755356824597772cb798962",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-            ],
-            productionTime: 23,
-            boosters: null,
-            endProduct: "5c10c8fd86f7743d7d706df3",
-            continuous: false,
-            count: 1,
-            productionLimitCount: 0,
-        };
-        const ThreebTG = {
-            _id: "63da4dbee8fa73e225000006",
-            areaType: 7,
-            requirements: [
-                { areaType: 7, requiredLevel: 3, type: "Area" },
-                {
-                    templateId: "5c10c8fd86f7743d7d706df3",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-                {
-                    templateId: "59e361e886f774176c10a2a5",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-                {
-                    templateId: "57505f6224597709a92585a9",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-            ],
-            productionTime: 31,
-            boosters: null,
-            endProduct: "5ed515c8d380ab312177c0fa",
-            continuous: false,
-            count: 2,
-            productionLimitCount: 0,
-        };
-        const AHF1 = {
-            _id: "63da4dbee8fa73e225000007",
-            areaType: 7,
-            requirements: [
-                { areaType: 7, requiredLevel: 2, type: "Area" },
-                {
-                    templateId: "590c695186f7741e566b64a2",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-                {
-                    templateId: "544fb3f34bdc2d03748b456a",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-            ],
-            productionTime: 47,
-            boosters: null,
-            endProduct: "5ed515f6915ec335206e4152",
-            continuous: false,
-            count: 1,
-            productionLimitCount: 0,
-        };
-        const OLOLO = {
-            _id: "63da4dbee8fa73e225000008",
-            areaType: 8,
-            requirements: [
-                { areaType: 8, requiredLevel: 3, type: "Area" },
-                {
-                    templateId: "57513f9324597720a7128161",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-                {
-                    templateId: "57513fcc24597720a31c09a6",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-                {
-                    templateId: "57513f07245977207e26a311",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-                {
-                    templateId: "575062b524597720a31c09a1",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-                {
-                    templateId: "544fb62a4bdc2dfb738b4568",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-                {
-                    templateId: "544fb37f4bdc2dee738b4567",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-                {
-                    templateId: "5d1b385e86f774252167b98a",
-                    type: "Tool",
-                },
-                {
-                    templateId: "590de71386f774347051a052",
-                    type: "Tool",
-                },
-            ],
-            productionTime: 71,
-            boosters: null,
-            endProduct: "62a0a043cf4a99369e2624a5",
-            continuous: false,
-            count: 3,
-            productionLimitCount: 0,
-        };
-        const L1 = {
-            _id: "63da4dbee8fa73e225000009",
-            areaType: 7,
-            requirements: [
-                { areaType: 7, requiredLevel: 3, type: "Area" },
-                {
-                    templateId: "5c10c8fd86f7743d7d706df3",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-                {
-                    templateId: "5c0e531d86f7747fa23f4d42",
-                    count: 1,
-                    isFunctional: false,
-                    type: "Item",
-                },
-            ],
-            productionTime: 71,
-            boosters: null,
-            endProduct: "5ed515e03a40a50460332579",
-            continuous: false,
-            count: 1,
-            productionLimitCount: 0,
-        };
-        tables.hideout.production.push(ThreebTG, Adrenaline, L1, AHF1, CALOK, Ophthalmoscope, Zagustin, Obdolbos, OLOLO);
+                productionLimitCount: 0,
+            };
+            const ThreebTG = {
+                _id: "63da4dbee8fa73e225000006",
+                areaType: 7,
+                requirements: [
+                    { areaType: 7, requiredLevel: 3, type: "Area" },
+                    {
+                        templateId: "5c10c8fd86f7743d7d706df3",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                    {
+                        templateId: "59e361e886f774176c10a2a5",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                    {
+                        templateId: "57505f6224597709a92585a9",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                ],
+                productionTime: 31,
+                boosters: null,
+                endProduct: "5ed515c8d380ab312177c0fa",
+                continuous: false,
+                count: 2,
+                productionLimitCount: 0,
+            };
+            const AHF1 = {
+                _id: "63da4dbee8fa73e225000007",
+                areaType: 7,
+                requirements: [
+                    { areaType: 7, requiredLevel: 2, type: "Area" },
+                    {
+                        templateId: "590c695186f7741e566b64a2",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                    {
+                        templateId: "544fb3f34bdc2d03748b456a",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                ],
+                productionTime: 47,
+                boosters: null,
+                endProduct: "5ed515f6915ec335206e4152",
+                continuous: false,
+                count: 1,
+                productionLimitCount: 0,
+            };
+            const OLOLO = {
+                _id: "63da4dbee8fa73e225000008",
+                areaType: 8,
+                requirements: [
+                    { areaType: 8, requiredLevel: 3, type: "Area" },
+                    {
+                        templateId: "57513f9324597720a7128161",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                    {
+                        templateId: "57513fcc24597720a31c09a6",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                    {
+                        templateId: "57513f07245977207e26a311",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                    {
+                        templateId: "575062b524597720a31c09a1",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                    {
+                        templateId: "544fb62a4bdc2dfb738b4568",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                    {
+                        templateId: "544fb37f4bdc2dee738b4567",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                    {
+                        templateId: "5d1b385e86f774252167b98a",
+                        type: "Tool",
+                    },
+                    {
+                        templateId: "590de71386f774347051a052",
+                        type: "Tool",
+                    },
+                ],
+                productionTime: 71,
+                boosters: null,
+                endProduct: "62a0a043cf4a99369e2624a5",
+                continuous: false,
+                count: 3,
+                productionLimitCount: 0,
+            };
+            const L1 = {
+                _id: "63da4dbee8fa73e225000009",
+                areaType: 7,
+                requirements: [
+                    { areaType: 7, requiredLevel: 3, type: "Area" },
+                    {
+                        templateId: "5c10c8fd86f7743d7d706df3",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                    {
+                        templateId: "5c0e531d86f7747fa23f4d42",
+                        count: 1,
+                        isFunctional: false,
+                        type: "Item",
+                    },
+                ],
+                productionTime: 71,
+                boosters: null,
+                endProduct: "5ed515e03a40a50460332579",
+                continuous: false,
+                count: 1,
+                productionLimitCount: 0,
+            };
+            tables.hideout.production.push(ThreebTG, Adrenaline, L1, AHF1, CALOK, Ophthalmoscope, Zagustin, Obdolbos, OLOLO);
+        }
         function getCraft(endProductID) {
             return tables.hideout.production.find((x) => x.endProduct == endProductID && x.areaType != 21);
         }
