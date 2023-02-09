@@ -733,8 +733,6 @@ class Mod implements IPostDBLoadMod {
 		const skier = tables.traders["58330581ace78e27b8b10cee"]
 		const traderlist = [prapor, therapist, ragman, jaeger, mechanic, peacekeeper, skier]
 
-		// config.map(x)
-
 		if (config.ScavCaseOptions.enabled == true) {
 			if (config.ScavCaseOptions.BetterRewards.enabled == true) {
 				// buyableitems generator, to make sure rare unbuyable items always are in reward pool (eg anodised red gear)
@@ -1095,7 +1093,7 @@ class Mod implements IPostDBLoadMod {
 		if (config.OtherTweaks.enabled == true) {
 			if (config.OtherTweaks.Skill_Exp_Buffs.enabled) {
 				// Buff Vitality, Sniper and Surgery skill leveling
-				globals.SkillsSettings.Vitality.DamageTakenAction *= 100 // I believe even this is a conservative number for a normal gameplay...
+				globals.SkillsSettings.Vitality.DamageTakenAction *= 10
 				globals.SkillsSettings.Sniper.WeaponShotAction *= 10
 				globals.SkillsSettings.Surgery.SurgeryAction *= 10
 				globals.SkillsSettings.StressResistance.LowHPDuration *= 10
