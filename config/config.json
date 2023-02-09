@@ -47,7 +47,7 @@
 		},
 		"Pacifist_FleaMarket": {
 			"_description": "CORE feature of this mod. Only meds, barter items, food and info items can be bought on flea market. Uses hardcoded fleaWhitelist array as filter. NOT recommended to disable.",
-			"enabled": false,
+			"enabled": true,
 			"Enable_Whitelist": {
 				"_description": "Small list of items used in crafts and trader barters is availiable on flea (and headsets. Because it's mostly preference, cmon.) Uses hardcoded itemWhitelist array.",
 				"enabled": true
