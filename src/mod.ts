@@ -1366,12 +1366,15 @@ class Mod implements IPostDBLoadMod {
 			// Military circuit board buff (1 -> 2)
 			getCraft("5d0376a486f7747d8050965c").count = 2
 
-			// Military flash drive lore-based change (2 Secure Flash drive -> 1 VPX, and Topographic survey maps 2 -> 1). Not "profitable", but will change Intel folder craft to compensate.
+			// Military flash drive lore-based change (2 Secure Flash drive -> 1 VPX, and Topographic survey maps 2 -> 1). 
+			// Not "profitable", but will change Intel folder craft to compensate, and allow it to be crafted on level 2.
 			getCraft("62a0a16d0b9d3c46de5b6e97").requirements.forEach((x) => {
 				if (x.count) {
 					x.count = 1
 				}
 			})
+			getCraft("62a0a16d0b9d3c46de5b6e97").requirements.find((x) => x.type == "Area").requiredLevel = 2
+
 			getCraft("62a0a16d0b9d3c46de5b6e97").requirements.find((x) => x.templateId == "590c621186f774138d11ea29").templateId = "5c05300686f7746dce784e5d"
 
 			// Intelligence folder buff (Military flash drive 2 -> 1)
