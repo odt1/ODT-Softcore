@@ -206,7 +206,7 @@ const baseClasses = [
     "5661632d4bdc2d903d8b456b",
     "543be6564bdc2df4348b4568", // Throwable weapon
 ];
-const fleaBarterBlacklist = [
+const fleaBarterRequestBlacklist = [
     // Blacklist for items that can be bartered with, used in Barter_Economy and Pacifist_Fence
     // base classes IDs (parent IDs)
     // "54009119af1c881c07000029", // Item
@@ -735,6 +735,18 @@ class Mod {
                     const item = items[i];
                     if (item._type == "Item") {
                         const itemInHandbook = getItemInHandbook(item._id);
+                        if (item._parent == "543be5cb4bdc2deb348b4568") {
+                            // Ammo boxes price patch/fix, their data in handbook is always 1k, this makes them valued as ammo*count they contain.
+                            let count = item._props.StackSlots[0]._max_count;
+                            let ammo = item._props.StackSlots[0]._props.filters[0].Filter[0];
+                            let value = Math.round(getItemInHandbook(ammo).Price * count);
+                            try {
+                                handbook.Items.find((x) => x.Id == item._id).Price = value;
+                            }
+                            catch (error) {
+                                log(error);
+                            }
+                        }
                         if ((itemInHandbook?.Price >= 10000 || scavcaseWhitelist.includes(item._parent) || !buyableitems.has(item._id)) &&
                             !scavcaseItemBlacklist.includes(item._id) &&
                             item._props.QuestItem != true &&
@@ -752,6 +764,8 @@ class Mod {
                         }
                     }
                 }
+                // Object.values(scavcaseConfig.ammoRewards.ammoRewardBlacklist).forEach(x => x.push(scavcaseItemBlacklist))
+                // log(scavcaseConfig)
             }
             if (config_json_1.default.ScavCaseOptions.Rebalance.enabled == true) {
                 scavcaseConfig.rewardItemValueRangeRub = {
@@ -1068,7 +1082,7 @@ class Mod {
             if (config_json_1.default.OtherTweaks.Faster_Examine_Time.enabled) {
                 // Faster ExamineTime
                 Object.values(items)
-                    .filter((x) => x._props.ExamineTime != undefined)
+                    .filter((x) => x?._props?.ExamineTime != undefined)
                     .forEach((x) => (x._props.ExamineTime /= 5));
             }
             if (config_json_1.default.OtherTweaks.Remove_Backpack_Restrictions.enabled) {
@@ -1076,9 +1090,9 @@ class Mod {
                 // Never again I'll see an unlootable medcase in 314...
                 for (const itemID in items) {
                     const item = items[itemID];
-                    if (item._props.ExaminedByDefault != undefined) {
-                        item._props.ExaminedByDefault = true; //debug
-                    }
+                    //if (item._props.ExaminedByDefault != undefined) {
+                    //	// item._props.ExaminedByDefault = true // [Debug]
+                    //}
                     if (true) {
                         let filtered;
                         try {
@@ -1199,7 +1213,8 @@ class Mod {
                 }
                 if (config_json_1.default.EconomyOptions.Barter_Economy.enabled == true) {
                     // Can only barter from items not in the blacklist. Only allows base classes, and not itemIDs =(
-                    ragfairConfig.dynamic.barter.itemTypeBlacklist = fleaBarterBlacklist;
+                    // To diable barter requests for individual item, its flea price should be set to 2, like in the code below.
+                    ragfairConfig.dynamic.barter.itemTypeBlacklist = fleaBarterRequestBlacklist;
                     ragfairConfig.dynamic.barter.chancePercent = 100 - config_json_1.default.EconomyOptions.Barter_Economy.Cash_Offers_Percentage.value; // Allow 10% of listings for cash
                     ragfairConfig.dynamic.barter.minRoubleCostToBecomeBarter = 100; // Barters only for items that cost > 100
                     ragfairConfig.dynamic.barter.priceRangeVariancePercent = config_json_1.default.EconomyOptions.Barter_Economy.Barter_Price_Variance.value; // more variance for flea barters, seems actually fun!
@@ -1210,12 +1225,14 @@ class Mod {
                         if (x == "59faff1d86f7746c51718c9c" && config_json_1.default.EconomyOptions.Barter_Economy.Unban_Bitcoins_For_Barters.enabled == true) {
                             // do nothing
                         }
-                        else {
+                        else if (!fleaBarterRequestBlacklist.includes(items[x]._parent)) {
+                            // Only mod items in categories ALLOWED on flea request list
+                            // Actually, I could have just hardcoded this lol. By default it's just Cristmass ornaments, dogtags and bitcoins.
                             // 2 is used to pass getFleaPriceForItem check and not trigger generateStaticPrices
                             prices[x] = 2;
-                            if (items[x]._props.CanSellOnRagfair == true) {
-                                log(`Item ${getItemName(x)} can be bought on flea for free, you dirty cheater!`);
-                            }
+                            // if (items[x]._props.CanSellOnRagfair == true) {
+                            // 	log(`Item ${getItemName(x)} can be bought on flea for free, you dirty cheater!`)
+                            // }
                         }
                     });
                     // Max 20 offers. Too low of a number breaks AKI server for some reason, with constant client errors on completed trades.
@@ -1229,11 +1246,14 @@ class Mod {
             }
             if (config_json_1.default.EconomyOptions.Pacifist_Fence.enabled == true) {
                 // Add BSGblacklist and mod custom blacklist to Fence blacklists
-                let commonBlacklist = [];
-                commonBlacklist.push(...BSGblacklist, ...fleaBarterBlacklist);
+                let fenceBlacklist = [];
+                // In addition to other blacklists, no medikits, medical items and drugs for Fence, because he sells them not in pristine condition.
+                fenceBlacklist.push(...BSGblacklist, ...fleaBarterRequestBlacklist, "5448f39d4bdc2d0a728b4568", "5448f3ac4bdc2dce718b4569", "5448f3a14bdc2d27728b4569");
+                // Instead, allow him to sell stims!
+                fenceBlacklist = fenceBlacklist.filter((x) => x != "5448f3a64bdc2d60728b456a");
                 // Fence sells only items that are not in the flea blacklist
                 traderConfig.fence.assortSize = config_json_1.default.EconomyOptions.Pacifist_Fence.Number_Of_Fence_Offers;
-                traderConfig.fence.blacklist = commonBlacklist; //itemid or baseid
+                traderConfig.fence.blacklist = fenceBlacklist; //itemid or baseid
                 traderConfig.fence.maxPresetsPercent = 0;
                 traderConfig.fence.itemPriceMult = 0.8; // at 6 Fence karma you buy items almost at a price Therapist buys from you. Go grind.
             }
@@ -1682,7 +1702,12 @@ class Mod {
             return tables.hideout.production.find((x) => x.endProduct == endProductID && x.areaType != 21);
         }
         function getItemInHandbook(itemID) {
-            return handbook.Items?.find((i) => i.Id === itemID); // Outs: @Id, @ParentId, @Price
+            try {
+                return handbook.Items.find((i) => i.Id === itemID); // Outs: @Id, @ParentId, @Price
+            }
+            catch (error) {
+                log(error);
+            }
         }
         function getItemName(itemID, locale = "en") {
             if (locales[locale][`${itemID} Name`] != undefined) {
