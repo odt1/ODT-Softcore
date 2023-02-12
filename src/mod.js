@@ -731,7 +731,7 @@ class Mod {
                         trader.assort.items.filter((x) => buyableitems.add(x._tpl));
                     }
                     catch (error) {
-                        log(`trader.assort.items.filter for buyableitems function threw an error bacause of the other mod. Ignore the error and continue. Send bug report.`);
+                        log(`trader.assort.items.filter for buyableitems function threw an error bacause of the other mod. Ignore this error safely and continue. Send bug report.`);
                         log(error);
                     }
                 }
@@ -751,7 +751,7 @@ class Mod {
                                 handbook.Items.find((x) => x.Id == item._id).Price = value;
                             }
                             catch (error) {
-                                logger.error(`handbook.Items.find((x) => x.Id == item._id).Price = value function threw an error bacause of the other mod. Ignore the error and continue. Send bug report.`);
+                                logger.error(`handbook.Items.find((x) => x.Id == item._id).Price = value function threw an error bacause of the other mod. Ignore this error safely and continue. Send bug report.`);
                                 log(error);
                             }
                         }
@@ -1095,7 +1095,7 @@ class Mod {
                         .forEach((x) => (x._props.ExamineTime /= 5));
                 }
                 catch (error) {
-                    logger.error(`OtherTweaks.Faster_Examine_Time threw an error bacause of the other mod. Ignore the error and continue. Send bug report.`);
+                    logger.error(`OtherTweaks.Faster_Examine_Time threw an error bacause of the other mod. Ignore this error safely and continue. Send bug report.`);
                     log(error);
                 }
             }
@@ -1104,9 +1104,6 @@ class Mod {
                 // Never again I'll see an unlootable medcase in 314...
                 for (const itemID in items) {
                     const item = items[itemID];
-                    //if (item._props.ExaminedByDefault != undefined) {
-                    //	// item._props.ExaminedByDefault = true // [Debug]
-                    //}
                     if (item._type == "Item") {
                         let filtered;
                         try {
@@ -1114,12 +1111,12 @@ class Mod {
                             filtered = item._props?.Grids[0]?._props?.filters[0]?.ExcludedFilter;
                         }
                         catch (error) {
-                            // logger.error(`This always throws erros, but whatever`)
+                            // logger.error(`This ALWAYS throws errors, but whatever`)
                             // log(error)
                         }
                         if (filtered !== undefined) {
                             if (filtered.includes("5aafbcd986f7745e590fff23")) {
-                                log(getItemName(item._id));
+                                // log(getItemName(item._id))
                                 item._props.Grids[0]._props.filters[0].ExcludedFilter = [];
                             }
                         }
@@ -1724,7 +1721,8 @@ class Mod {
                 return tables.hideout.production.find((x) => x.endProduct == endProductID && x.areaType != 21);
             }
             catch (error) {
-                logger.error(`getCraft function threw an error bacause of the other mod. Ignore the error and continue. Send bug report.`);
+                logger.error(`getCraft function threw an error bacause of the other mod. Ignore this error safely and continue. Send bug report.`);
+                log(endProductID);
                 log(error);
             }
         }
@@ -1733,7 +1731,8 @@ class Mod {
                 return handbook.Items.find((i) => i.Id === itemID); // Outs: @Id, @ParentId, @Price
             }
             catch (error) {
-                logger.error(`getItemInHandbook function threw an error bacause of the other mod. Ignore the error and continue. Send bug report.`);
+                logger.error(`getItemInHandbook function threw an error bacause of the other mod. Ignore this error safely and continue. Send bug report.`);
+                log(itemID);
                 log(error);
             }
         }

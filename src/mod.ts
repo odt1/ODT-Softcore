@@ -709,6 +709,7 @@ const scavcaseItemBlacklist = [
 	"5df8a77486f77412672a1e3f", // Christmas tree ornament (Violet)
 	"5c0e541586f7747fa54205c9", // 6B13 M modified assault armor (Tan) (Killa)
 	"628bc7fb408e2b2e9c0801b1", // Mystery Ranch NICE COMM 3 BVS frame system
+	"628baf0b967de16aab5a4f36", // LBT-1961A Load Bearing chest rig (Goons Edition)
 ]
 
 class Mod implements IPostDBLoadMod {
