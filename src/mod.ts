@@ -4,6 +4,9 @@ import { IPostDBLoadMod } from "@spt-aki/models/external/IPostDBLoadMod"
 import { DatabaseServer } from "@spt-aki/servers/DatabaseServer"
 import { ConfigServer } from "@spt-aki/servers/ConfigServer"
 import { ConfigTypes } from "@spt-aki/models/enums/ConfigTypes"
+import { ILogger } from "@spt-aki/models/spt/utils/ILogger"
+import { LogTextColor } from "@spt-aki/models/spt/logging/LogTextColor"
+import { LogBackgroundColor } from "@spt-aki/models/spt/logging/LogBackgroundColor"
 // import { ObjectId } from "@spt-aki/utils/ObjectId" // [Debug]
 
 // import * as fs from "fs" // [Debug] Used for file saving
@@ -710,6 +713,7 @@ const scavcaseItemBlacklist = [
 
 class Mod implements IPostDBLoadMod {
 	public postDBLoad(container: DependencyContainer): void {
+		const logger = container.resolve<ILogger>("WinstonLogger")
 		const databaseServer = container.resolve<DatabaseServer>("DatabaseServer")
 		const configServer = container.resolve<ConfigServer>("ConfigServer")
 		// const ObjectId = container.resolve<ObjectId>("ObjectId") // [Debug]
@@ -738,7 +742,12 @@ class Mod implements IPostDBLoadMod {
 				// buyableitems generator, to make sure rare unbuyable items always are in reward pool (eg anodised red gear)
 				let buyableitems = new Set()
 				for (const trader of traderlist) {
-					trader.assort.items.filter((x) => buyableitems.add(x._tpl))
+					try {
+						trader.assort.items.filter((x) => buyableitems.add(x._tpl))
+					} catch (error) {
+						log(`trader.assort.items.filter for buyableitems function threw an error bacause of the other mod. Ignore this error safely and continue. Send bug report.`)
+						log(error)
+					}
 				}
 
 				// Shitlist generator for scav case rewards. Filters A LOT of crap out, but very conservatevely. Blacklist included in ./docs folder check it out.
@@ -759,6 +768,9 @@ class Mod implements IPostDBLoadMod {
 							try {
 								handbook.Items.find((x) => x.Id == item._id).Price = value
 							} catch (error) {
+								logger.error(
+									`handbook.Items.find((x) => x.Id == item._id).Price = value function threw an error bacause of the other mod. Ignore this error safely and continue. Send bug report.`
+								)
 								log(error)
 							}
 						}
@@ -1119,9 +1131,14 @@ class Mod implements IPostDBLoadMod {
 
 			if (config.OtherTweaks.Faster_Examine_Time.enabled) {
 				// Faster ExamineTime
-				Object.values(items)
-					.filter((x) => x?._props?.ExamineTime != undefined)
-					.forEach((x) => (x._props.ExamineTime /= 5))
+				try {
+					Object.values(items)
+						.filter((x) => x?._props?.ExamineTime != undefined)
+						.forEach((x) => (x._props.ExamineTime /= 5))
+				} catch (error) {
+					logger.error(`OtherTweaks.Faster_Examine_Time threw an error bacause of the other mod. Ignore this error safely and continue. Send bug report.`)
+					log(error)
+				}
 			}
 
 			if (config.OtherTweaks.Remove_Backpack_Restrictions.enabled) {
@@ -1129,16 +1146,18 @@ class Mod implements IPostDBLoadMod {
 				// Never again I'll see an unlootable medcase in 314...
 				for (const itemID in items) {
 					const item = items[itemID]
-					//if (item._props.ExaminedByDefault != undefined) {
-					//	// item._props.ExaminedByDefault = true // [Debug]
-					//}
-					if (true) {
+					if (item._type == "Item") {
 						let filtered
 						try {
-							filtered = item._props.Grids[0]._props.filters[0].ExcludedFilter
-						} catch (error) {}
+							// bruteforce, needs a proper fix, but works
+							filtered = item._props?.Grids[0]?._props?.filters[0]?.ExcludedFilter
+						} catch (error) {
+							// logger.error(`This ALWAYS throws errors, but whatever`)
+							// log(error)
+						}
 						if (filtered !== undefined) {
 							if (filtered.includes("5aafbcd986f7745e590fff23")) {
+								// log(getItemName(item._id))
 								item._props.Grids[0]._props.filters[0].ExcludedFilter = []
 							}
 						}
@@ -1366,7 +1385,7 @@ class Mod implements IPostDBLoadMod {
 			// Military circuit board buff (1 -> 2)
 			getCraft("5d0376a486f7747d8050965c").count = 2
 
-			// Military flash drive lore-based change (2 Secure Flash drive -> 1 VPX, and Topographic survey maps 2 -> 1). 
+			// Military flash drive lore-based change (2 Secure Flash drive -> 1 VPX, and Topographic survey maps 2 -> 1).
 			// Not "profitable", but will change Intel folder craft to compensate, and allow it to be crafted on level 2.
 			getCraft("62a0a16d0b9d3c46de5b6e97").requirements.forEach((x) => {
 				if (x.count) {
@@ -1802,13 +1821,21 @@ class Mod implements IPostDBLoadMod {
 			tables.hideout.production.push(ThreebTG, Adrenaline, L1, AHF1, CALOK, Ophthalmoscope, Zagustin, Obdolbos, OLOLO)
 		}
 		function getCraft(endProductID) {
-			return tables.hideout.production.find((x) => x.endProduct == endProductID && x.areaType != 21)
+			try {
+				return tables.hideout.production.find((x) => x.endProduct == endProductID && x.areaType != 21)
+			} catch (error) {
+				logger.error(`getCraft function threw an error bacause of the other mod. Ignore this error safely and continue. Send bug report.`)
+				log(endProductID)
+				log(error)
+			}
 		}
 
 		function getItemInHandbook(itemID) {
 			try {
 				return handbook.Items.find((i) => i.Id === itemID) // Outs: @Id, @ParentId, @Price
 			} catch (error) {
+				logger.error(`getItemInHandbook function threw an error bacause of the other mod. Ignore this error safely and continue. Send bug report.`)
+				log(itemID)
 				log(error)
 			}
 		}

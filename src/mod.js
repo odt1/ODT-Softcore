@@ -699,6 +699,7 @@ const scavcaseItemBlacklist = [
 ];
 class Mod {
     postDBLoad(container) {
+        const logger = container.resolve("WinstonLogger");
         const databaseServer = container.resolve("DatabaseServer");
         const configServer = container.resolve("ConfigServer");
         // const ObjectId = container.resolve<ObjectId>("ObjectId") // [Debug]
@@ -726,7 +727,13 @@ class Mod {
                 // buyableitems generator, to make sure rare unbuyable items always are in reward pool (eg anodised red gear)
                 let buyableitems = new Set();
                 for (const trader of traderlist) {
-                    trader.assort.items.filter((x) => buyableitems.add(x._tpl));
+                    try {
+                        trader.assort.items.filter((x) => buyableitems.add(x._tpl));
+                    }
+                    catch (error) {
+                        log(`trader.assort.items.filter for buyableitems function threw an error bacause of the other mod. Ignore the error and continue. Send bug report.`);
+                        log(error);
+                    }
                 }
                 // Shitlist generator for scav case rewards. Filters A LOT of crap out, but very conservatevely. Blacklist included in ./docs folder check it out.
                 // Always includes items in carefully curated whitelist. Always includes unbuyable and/or cheap items not included in whitelist (such as anodized red gear, but also some crap like scav only hats). Always includes items worth > 10000. Filters everything else out. Spent a lot of time thinking about this, really proud of myself. In the end, just makes sure you almost always get something of valuable or usable.
@@ -744,6 +751,7 @@ class Mod {
                                 handbook.Items.find((x) => x.Id == item._id).Price = value;
                             }
                             catch (error) {
+                                logger.error(`handbook.Items.find((x) => x.Id == item._id).Price = value function threw an error bacause of the other mod. Ignore the error and continue. Send bug report.`);
                                 log(error);
                             }
                         }
@@ -1081,9 +1089,15 @@ class Mod {
             }
             if (config_json_1.default.OtherTweaks.Faster_Examine_Time.enabled) {
                 // Faster ExamineTime
-                Object.values(items)
-                    .filter((x) => x?._props?.ExamineTime != undefined)
-                    .forEach((x) => (x._props.ExamineTime /= 5));
+                try {
+                    Object.values(items)
+                        .filter((x) => x?._props?.ExamineTime != undefined)
+                        .forEach((x) => (x._props.ExamineTime /= 5));
+                }
+                catch (error) {
+                    logger.error(`OtherTweaks.Faster_Examine_Time threw an error bacause of the other mod. Ignore the error and continue. Send bug report.`);
+                    log(error);
+                }
             }
             if (config_json_1.default.OtherTweaks.Remove_Backpack_Restrictions.enabled) {
                 // Remove backpack restrictions (for containers [ammo, med, etc] mostly).
@@ -1093,14 +1107,19 @@ class Mod {
                     //if (item._props.ExaminedByDefault != undefined) {
                     //	// item._props.ExaminedByDefault = true // [Debug]
                     //}
-                    if (true) {
+                    if (item._type == "Item") {
                         let filtered;
                         try {
-                            filtered = item._props.Grids[0]._props.filters[0].ExcludedFilter;
+                            // bruteforce, needs a proper fix, but works
+                            filtered = item._props?.Grids[0]?._props?.filters[0]?.ExcludedFilter;
                         }
-                        catch (error) { }
+                        catch (error) {
+                            // logger.error(`This always throws erros, but whatever`)
+                            // log(error)
+                        }
                         if (filtered !== undefined) {
                             if (filtered.includes("5aafbcd986f7745e590fff23")) {
+                                log(getItemName(item._id));
                                 item._props.Grids[0]._props.filters[0].ExcludedFilter = [];
                             }
                         }
@@ -1291,12 +1310,14 @@ class Mod {
             getCraft("5c05308086f7746b2101e90b").requirements.find((x) => x.templateId == "5d0376a486f7747d8050965c").count = 1;
             // Military circuit board buff (1 -> 2)
             getCraft("5d0376a486f7747d8050965c").count = 2;
-            // Military flash drive lore-based change (2 Secure Flash drive -> 1 VPX, and Topographic survey maps 2 -> 1). Not "profitable", but will change Intel folder craft to compensate.
+            // Military flash drive lore-based change (2 Secure Flash drive -> 1 VPX, and Topographic survey maps 2 -> 1).
+            // Not "profitable", but will change Intel folder craft to compensate, and allow it to be crafted on level 2.
             getCraft("62a0a16d0b9d3c46de5b6e97").requirements.forEach((x) => {
                 if (x.count) {
                     x.count = 1;
                 }
             });
+            getCraft("62a0a16d0b9d3c46de5b6e97").requirements.find((x) => x.type == "Area").requiredLevel = 2;
             getCraft("62a0a16d0b9d3c46de5b6e97").requirements.find((x) => x.templateId == "590c621186f774138d11ea29").templateId = "5c05300686f7746dce784e5d";
             // Intelligence folder buff (Military flash drive 2 -> 1)
             getCraft("5c12613b86f7743bbe2c3f76").requirements.find((x) => x.templateId == "62a0a16d0b9d3c46de5b6e97").count = 1;
@@ -1699,13 +1720,20 @@ class Mod {
             tables.hideout.production.push(ThreebTG, Adrenaline, L1, AHF1, CALOK, Ophthalmoscope, Zagustin, Obdolbos, OLOLO);
         }
         function getCraft(endProductID) {
-            return tables.hideout.production.find((x) => x.endProduct == endProductID && x.areaType != 21);
+            try {
+                return tables.hideout.production.find((x) => x.endProduct == endProductID && x.areaType != 21);
+            }
+            catch (error) {
+                logger.error(`getCraft function threw an error bacause of the other mod. Ignore the error and continue. Send bug report.`);
+                log(error);
+            }
         }
         function getItemInHandbook(itemID) {
             try {
                 return handbook.Items.find((i) => i.Id === itemID); // Outs: @Id, @ParentId, @Price
             }
             catch (error) {
+                logger.error(`getItemInHandbook function threw an error bacause of the other mod. Ignore the error and continue. Send bug report.`);
                 log(error);
             }
         }
