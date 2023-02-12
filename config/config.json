@@ -115,7 +115,7 @@
 	},
 	"CraftingRebalance": {
 		"_description": "Major rebalance of crafting recipes balanced around components rarities, usefullness, trader prices and plain lore logic. Some nerfs, but a lot of huge buffs. Main idea was to make most of the crafts usefull and/or profitable. I'm pretty content with lavatory, medstation, nutrition and intel center crafts,but it's a constant WIP feature, looking for feedback! TODO: look into workbench crafts, they are mostly untouched.",
-		"enabled": true
+		"enabled": false
 	},
 	"AdditionalCraftingRecipes": {
 		"_description": "New custon lore-friendly and balanced crafting recipes added for 3-b-TG, Adrenaline, L1, AHF1, CALOK, Ophthalmoscope, Zagustin, Obdolbos, OLOLO. Looking for feedback on balance and more crafting ideas.",
