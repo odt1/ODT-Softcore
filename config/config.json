@@ -49,12 +49,18 @@
 			"_description": "CORE feature of this mod. Only meds, barter items, food and info items can be bought on flea market. Uses hardcoded fleaWhitelist array as filter. NOT recommended to disable.",
 			"enabled": true,
 			"Enable_Whitelist": {
-				"_description": "Small list of items used in crafts and trader barters is availiable on flea (and headsets. Because it's mostly preference, cmon.) Uses hardcoded itemWhitelist array.",
+				"_description": "Small list of items used in crafts and trader barters is available on flea. Uses hardcoded itemWhitelist array.",
 				"enabled": true
 			},
 			"Enable_QuestKeys": {
-				"_description": "Random-only QUEST keys are availiable on flea. Uses hardcoded questKeys array.",
-				"enabled": true
+				"_description": "Random-only QUEST keys are available on flea. Uses hardcoded questKeys array.",
+				"enabled": true,
+				"PriceMultiplier": 2
+			},
+			"Enable_Marked_Keys": {
+				"_description": "Marked keys are available on flea market.",
+				"enabled": true,
+				"PriceMultiplier": 2
 			}
 		},
 		"Barter_Economy": {
@@ -62,7 +68,7 @@
 			"enabled": true,
 			"Cash_Offers_Percentage": {
 				"_description": "Allow small, random percentage of listings to be buyable for cash. 0 is true barter-only ecomnomy (except the cheapest items like AA battery, but this is a SPT-AKI limitation), I'd say this is a preferred way to play with this mod, but it might be a little too hard sometimes. 10% seems like a fine number that makes life just a little bit easier to avoid item deadlocks. Recommendation: 0 to 15.",
-				"value": 10
+				"value": 0
 			},
 			"Barter_Price_Variance": {
 				"_description": "± percent of price variance between item listing and it's barter value. Bigger number - more wild and varied random trades, eg you can see a Defiblirator (that has 224k value) offered for a Lion (162k value) or a Tank Battery (330k value). This CORE feature makes the whole mod tick, that what makes it fun, random and engaging and stimulates hustling in a war broken society. You can get lucky, and get a great deal, or you might desperately need an item that is way overvalued but you only have the expensive item that it is asked for. Also more variance means it's easier to encounter an offer you have an item for and easier trades. Recomendation: 20-50",
@@ -88,7 +94,7 @@
 			}
 		},
 		"Disable_Selling_on_Flea": {
-			"_description": "NOT RECOMMENDED to enable. 1) SPI-AKI 3.4.1 has a major bug that guarantees sales of almost any item at extreme prices, and it's impossible to balance sales around with this bug present. Fixed in 3.5. 2) This mod has NOT been balanced around selling on flea. Will look into enabling it in the future.",
+			"_description": "If option is CHANGED below, it will ALLOW selling on flea market (default is NO SELLING ON FLEA). Also increases fleamarket reputation gain by a factior of 10. Will allow you to sell weapons and other blocked by Softcore items like in Vanilla. Not really playtested and balanced around this. Also SPT 3.5.0 has wierd default configuration for time, will have to investigete further.",
 			"sellingDisabled": true
 		},
 		"Fleamarket_Opened_at_Level": {
@@ -104,18 +110,18 @@
 			"enabled": true
 		},
 		"Pacifist_Fence": {
-			"_description": "To go algong with the theme of this mod, Fence also sells only pacifist items. But his prices are at 80% of item value, and dependant on scav karma, so at 6 karma he will sell items almost at the same price Therapist buys them from you.",
+			"_description": "To go algong with the theme of this mod, Fence also sells only pacifist items. But his prices are at 90% of item value, and dependant on scav karma, so at 6 karma he will sell items almost at the same price Therapist buys them from you and you will have three times more offers.",
 			"enabled": true,
 			"Number_Of_Fence_Offers": 30
 		},
 		"Only_Found_In_Raid_Items_Allowed_For_Barters": {
-			"_description": "Be a man, don't change this. This is borderline cheating option for infinite money.",
+			"_description": "Be a man, don't change this. This is borderline cheating option for infinite money because of variance changes.",
 			"enabled": true
 		}
 	},
 	"CraftingRebalance": {
 		"_description": "Major rebalance of crafting recipes balanced around components rarities, usefullness, trader prices and plain lore logic. Some nerfs, but a lot of huge buffs. Main idea was to make most of the crafts usefull and/or profitable. I'm pretty content with lavatory, medstation, nutrition and intel center crafts,but it's a constant WIP feature, looking for feedback! TODO: look into workbench crafts, they are mostly untouched.",
-		"enabled": false
+		"enabled": true
 	},
 	"AdditionalCraftingRecipes": {
 		"_description": "New custon lore-friendly and balanced crafting recipes added for 3-b-TG, Adrenaline, L1, AHF1, CALOK, Ophthalmoscope, Zagustin, Obdolbos, OLOLO. Looking for feedback on balance and more crafting ideas.",
@@ -131,7 +137,7 @@
 		"FasterScavcase": {
 			"_description": "Faster scavcase launches, speed multiplier is below. x10 feels just right.",
 			"enabled": true,
-			"SpeedMultiplier": 10
+			"SpeedMultiplier": 10000
 		},
 		"Rebalance": {
 			"_description": "MAJOR rebalance of scav case rewards, FEELS great for single player experience. Changes all cash launches to alcohol for lore-friendly experience (Pevko -> Vodka -> Whiskey -> Moonshine -> Intel). Completely alters internal rewards tiers (common: under 20,000, rare: 20,000 to 60,000, superrare: 60,000 to 1,200,000), makes every launch tier valuable, fair and TARGETABLE for different item tiers. Pevko is very fast, gives 2 to 3 common items. Vodka gives 3 to 4 common items, with a chance to give 1 rare item. Whiskey gives 4 to 5 common items, and 1 to 2 rare items. Moonshine is fun for gambling, gives 2 to 3 commons, 0 to 3 rares, 1 to 2 superrare items. Intelligence folder is the most consistent, 2 to 3 commons, 3 to 5 rares and 0 to 1 superrares.",
@@ -141,6 +147,10 @@
 	"OtherTweaks": {
 		"_description": "Master toggle for all other options below.",
 		"enabled": true,
+		"CollectorQuestEarlyStart": {
+			"_description": "Unknown item examine time buff (x5)",
+			"enabled": true
+		},
 		"Skill_Exp_Buffs": {
 			"_description": "Buff Vitality (x100 - I believe even this is a conservative number for a normal gameplay), Sniper (x10), Surgery (x10) and Stress Resistance (x10) skill leveling. Semi-experimental, need further community feedback.",
 			"enabled": true
