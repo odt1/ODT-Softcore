@@ -13,7 +13,7 @@ const config_json_1 = __importDefault(require("../config/config.json"));
 const fleaListingsWhitelist = require("../config/fleaListingsWhitelist.ts"); // this Node.js module/require shit is bullshit.
 const fleaBarterRequestsWhitelist = require("../config/fleaBarterRequestsWhitelist.ts"); // why I can't use import in config directory? Anyway, is there any alternative to JSON data storage? THIS is the only way to save commented data?!
 const fleaItemsWhiteList = require("../config/fleaItemsWhitelist.ts");
-const debug = true; // [Debug] Debug!
+const debug = false; // [Debug] Debug!
 class Mod {
     postDBLoad(container) {
         const logger = container.resolve("WinstonLogger");
@@ -635,8 +635,8 @@ class Mod {
                 traderConfig.fence.assortSize = config_json_1.default.EconomyOptions.Pacifist_Fence.Number_Of_Fence_Offers;
                 traderConfig.fence.blacklist = fenceBlacklist; //itemid or baseid
                 traderConfig.fence.maxPresetsPercent = 0;
-                traderConfig.fence.discountOptions.assortSize = config_json_1.default.EconomyOptions.Pacifist_Fence.Number_Of_Fence_Offers * 2;
-                traderConfig.fence.itemPriceMult = 0.9; // at 6 Fence karma you buy items almost at a price Therapist buys from you. Go grind.
+                traderConfig.fence.discountOptions.assortSize = config_json_1.default.EconomyOptions.Pacifist_Fence.Number_Of_Fence_Offers; // doesnt seem to work properly
+                traderConfig.fence.itemPriceMult = 0.8; // at 6 Fence karma you buy items almost at a price Therapist buys from you. Go grind.
             }
             if (config_json_1.default.EconomyOptions.Reasonably_Priced_Cases.enabled == true) {
                 therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0352"][0].forEach((x) => (x.count = 5)); // THICC case (LEDX)

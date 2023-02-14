@@ -115,7 +115,7 @@
 			"enabled": true
 		},
 		"Pacifist_Fence": {
-			"_description": "To go algong with the theme of this mod, Fence also sells only pacifist items. But his prices are at 90% of item value, and dependant on scav karma, so at 6 karma he will sell items almost at the same price Therapist buys them from you and you will have three times more offers.",
+			"_description": "To go algong with the theme of this mod, Fence also sells only pacifist items. But his prices are at 90% of item value, and dependant on scav karma, so at 6 karma he will sell items almost at the same price Therapist buys them from you.",
 			"enabled": true,
 			"Number_Of_Fence_Offers": 30
 		},
