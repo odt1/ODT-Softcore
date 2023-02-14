@@ -1,4 +1,20 @@
 {
+	"SecureContainersRedone": {
+		"_description": "Master toggle for all secure containers options below. Inspired by Trap's Progressive Stash, redone from scratch. Disabled by default to not confuse existing profiles.",
+		"enabled": true,
+		"Craftable_Containers": {
+			"_description": "Start your NEW profile with just a Waist Pouch 2x2 container, and work your way up all the way up to Gamma with insanely complex and expensive, but fun and fair custom container crafts.",
+			"enabled": true,
+			"Collector_Quest_Redone": {
+				"_description": "Collector quest is startable just at level 20. No longer you need all other quests done, only items. BUT, don't think it's going to be easy, there is an additional end-game grind ending condition waiting for you. Should be much more fun then vanilla 'grind to level 55, duh'.",
+				"enabled": true
+			}
+		},
+		"Bigger_Containers": {
+			"_description": "Waist Pouch is 2x4, Alpha is now 3x3 (like EoD), Beta 3x4, Epsilon 3x5, Gamma 4x5, Kappa 5x5",
+			"enabled": true
+		}
+	},
 	"HideoutOptions": {
 		"_description": "Master toggle for all hideout options below.",
 		"enabled": true,
@@ -8,6 +24,22 @@
 			"Revert_Bitcoin_Price_To_v012": true,
 			"Base_Bitcoin_Time_Multiplier": 2,
 			"GPU_Efficiency": 0.5
+		},
+		"BiggerStash": {
+			"_description": "Master toggle for all stash options below. Also inspired by Trap's Progressive Stash. Bigger stash option, from 28/38/48/68 to 50/100/150/200 lines.",
+			"enabled": true,
+			"Less_Currency_For_Construction": {
+				"_description": "Reduses cash requirements for stage construction by a factor of 10",
+				"enabled": true
+			},
+			"Easier_Loyalty": {
+				"_description": "Reduses loyalty level requirements for stage construction (Prapor, Ragman and Peacekeeper) by 1.",
+				"enabled": true
+			},
+			"Progressive_Stash": {
+				"_description": "Makes every new profile start with LVL1 stash",
+				"enabled": true
+			}
 		},
 		"Faster_Crafting_Time": {
 			"_description": "Make all recipes except bitcoin, moonshine and purified water much faster.",

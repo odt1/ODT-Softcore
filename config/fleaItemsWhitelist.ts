@@ -77,6 +77,7 @@ const itemWhitelist = [
 	"579204f224597773d619e051", // Makarov PM (t) 9x18PM pistol
 	"5c010e350db83400232feec7", // SP-8 Survival Machete
 	// "5656eb674bdc2d35148b457c", // 40mm VOG-25 grenade
+	"5783c43d2459774bbe137486", // Simple wallet
 ];
 
 const markedKeys = [

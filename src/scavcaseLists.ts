@@ -150,4 +150,10 @@ export const scavcaseItemBlacklist = [
 	"6389c7f115805221fb410466", // Far-forward GPS Signal Amplifier Unit
 	"6389c7750ef44505c87f5996", // Microcontroller board
 	"6389c85357baa773a825b356", // Far-forward current converter
+	"619bddc6c9546643a67df6ee", // DEADSKUL armband
+	"619bc61e86e01e16f839a999", // Alpha armband
+	"619bddffc9546643a67df6f0", // Train Hard armband
+	"619bde3dc9546643a67df6f2", // Kiba Arms armband
+	"619bdeb986e01e16f839a99e", // RFARMY armband
+	"619bdf9cc9546643a67df6f8", // UNTAR armband
 ]

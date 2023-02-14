@@ -49,6 +49,7 @@ class Mod implements IPostDBLoadMod {
 		const peacekeeper = tables.traders["5935c25fb3acc3127c3d8cd9"]
 		const skier = tables.traders["58330581ace78e27b8b10cee"]
 		const traderlist = [prapor, therapist, ragman, jaeger, mechanic, peacekeeper, skier]
+		const profileList = ["Standard", "Left Behind", "Prepare To Escape", "Edge Of Darkness", "SPT Zero to hero"]
 
 		// Noice.
 		var fleaBarterRequestBlacklist = itemBaseClasses.filter((x) => !fleaBarterRequestsWhitelist.includes(x))
@@ -60,6 +61,264 @@ class Mod implements IPostDBLoadMod {
 				if (x._type != "Item") {
 					// log(`"${x._id}", // ${locales["en"][`${x._id} Name`]}`)
 					// log(`"${x._id}", // ${x._name}`)
+				}
+			}
+		}
+
+		if (config.SecureContainersRedone.enabled == true) {
+			if (config.SecureContainersRedone.Bigger_Containers.enabled == true) {
+				// Waist Pouch
+				items["5732ee6a24597719ae0c0281"]._props.Grids[0]._props.cellsV = 2
+				items["5732ee6a24597719ae0c0281"]._props.Grids[0]._props.cellsH = 4
+
+				// Secure container Alpha
+				items["544a11ac4bdc2d470e8b456a"]._props.Grids[0]._props.cellsV = 3
+				items["544a11ac4bdc2d470e8b456a"]._props.Grids[0]._props.cellsH = 3
+
+				// Secure container Beta
+				items["5857a8b324597729ab0a0e7d"]._props.Grids[0]._props.cellsV = 3
+				items["5857a8b324597729ab0a0e7d"]._props.Grids[0]._props.cellsH = 4
+
+				// Secure container Epsilon
+				items["59db794186f77448bc595262"]._props.Grids[0]._props.cellsV = 3
+				items["59db794186f77448bc595262"]._props.Grids[0]._props.cellsH = 5
+
+				// Secure container Gamma
+				items["5857a8bc2459772bad15db29"]._props.Grids[0]._props.cellsV = 4
+				items["5857a8bc2459772bad15db29"]._props.Grids[0]._props.cellsH = 5
+
+				// Secure container Kappa
+				items["5c093ca986f7740a1867ab12"]._props.Grids[0]._props.cellsV = 5
+				items["5c093ca986f7740a1867ab12"]._props.Grids[0]._props.cellsH = 5
+			}
+
+			if (config.SecureContainersRedone.Craftable_Containers.enabled == true) {
+				for (const profile of profileList) {
+					tables.templates.profiles[profile].bear.character.Inventory.items.find((x) => x.slotId == "SecuredContainer")._tpl = "5732ee6a24597719ae0c0281"
+					tables.templates.profiles[profile].usec.character.Inventory.items.find((x) => x.slotId == "SecuredContainer")._tpl = "5732ee6a24597719ae0c0281"
+				}
+
+				// Beta container from PK "removal"
+				peacekeeper.assort.barter_scheme["63d385c6b3eba6c95d0efa0a"][0].forEach((x) => (x.count = 15))
+
+				const Alpha = {
+					_id: "63da4dbee8fa73e22500001a",
+
+					areaType: 10,
+					requirements: [
+						{ areaType: 10, requiredLevel: 1, type: "Area" },
+						{
+							templateId: "567143bf4bdc2d1a0f8b4567",
+							count: 2,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "5783c43d2459774bbe137486",
+							count: 2,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "5c093e3486f77430cb02e593",
+							count: 2,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "590c621186f774138d11ea29",
+							count: 2,
+							isFunctional: false,
+							type: "Item",
+						},
+					],
+					productionTime: 5600,
+					boosters: null,
+					endProduct: "544a11ac4bdc2d470e8b456a",
+					continuous: false,
+					count: 1,
+					productionLimitCount: 0,
+				}
+				const Beta = {
+					_id: "63da4dbee8fa73e22500001b",
+
+					areaType: 10,
+					requirements: [
+						{ areaType: 10, requiredLevel: 1, type: "Area" },
+						{
+							templateId: "544a11ac4bdc2d470e8b456a",
+							count: 2,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "5aafbde786f774389d0cbc0f",
+							count: 2,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "590c60fc86f77412b13fddcf",
+							count: 2,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "62a0a16d0b9d3c46de5b6e97",
+							count: 2,
+							isFunctional: false,
+							type: "Item",
+						},
+					],
+					productionTime: 10800,
+					boosters: null,
+					endProduct: "5857a8b324597729ab0a0e7d",
+					continuous: false,
+					count: 1,
+					productionLimitCount: 0,
+				}
+				const Epsilon = {
+					_id: "63da4dbee8fa73e22500001c",
+
+					areaType: 10,
+					requirements: [
+						{ areaType: 10, requiredLevel: 2, type: "Area" },
+						{
+							templateId: "5857a8b324597729ab0a0e7d",
+							count: 2,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "5c127c4486f7745625356c13",
+							count: 2,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "59fafd4b86f7745ca07e1232",
+							count: 2,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "619cbf9e0a7c3a1a2731940a",
+							count: 2,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "61bf7c024770ee6f9c6b8b53",
+							count: 2,
+							isFunctional: false,
+							type: "Item",
+						},
+					],
+					productionTime: 35000,
+					boosters: null,
+					endProduct: "59db794186f77448bc595262",
+					continuous: false,
+					count: 1,
+					productionLimitCount: 0,
+				}
+				const Gamma = {
+					_id: "63da4dbee8fa73e22500001d",
+
+					areaType: 10,
+					requirements: [
+						{ areaType: 10, requiredLevel: 3, type: "Area" },
+						{
+							templateId: "59db794186f77448bc595262",
+							count: 2,
+							isFunctional: false,
+							type: "Item",
+						},
+
+						{
+							templateId: "5e2af55f86f7746d4159f07c",
+							count: 2,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "59fb016586f7746d0d4b423a",
+							count: 2,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "5d235bb686f77443f4331278",
+							count: 2,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "619cbf7d23893217ec30b689",
+							count: 2,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "6389c7750ef44505c87f5996",
+							count: 2,
+							isFunctional: false,
+							type: "Item",
+						},
+					],
+					productionTime: 61200,
+					boosters: null,
+					endProduct: "5857a8bc2459772bad15db29",
+					continuous: false,
+					count: 1,
+					productionLimitCount: 0,
+				}
+
+				tables.hideout.production.push(Alpha, Beta, Epsilon, Gamma)
+
+				if (config.SecureContainersRedone.Craftable_Containers.Collector_Quest_Redone.enabled == true) {
+					// Add the surprise
+					tables.templates.quests["5c51aac186f77432ea65c552"].conditions.AvailableForFinish.push({
+						_parent: "HandoverItem",
+						_props: {
+							dogtagLevel: 0,
+							id: "639135534b15ca31f76bc319",
+							index: 69, // nice
+							maxDurability: 100,
+							minDurability: 0,
+							parentId: "",
+							isEncoded: false,
+							onlyFoundInRaid: false,
+							dynamicLocale: false,
+							target: ["5857a8bc2459772bad15db29"],
+							value: "2",
+							visibilityConditions: [],
+						},
+						dynamicLocale: false,
+					})
+
+					tables.locales.global["ru"]["639135534b15ca31f76bc319"] = "Передать носитель" // Тут нужен только фикс для русского, для всех остальных языков звучит как "Hand over the storage device"
+
+					// Remove level req from finish
+					tables.templates.quests["5c51aac186f77432ea65c552"].conditions.AvailableForFinish = tables.templates.quests[
+						"5c51aac186f77432ea65c552"
+					].conditions.AvailableForFinish.filter((x) => x._parent != "Level")
+
+					// Start condition
+					tables.templates.quests["5c51aac186f77432ea65c552"].conditions.AvailableForStart = [
+						{
+							_parent: "Level",
+							_props: {
+								id: "51d33b2d4fad9e61441772c0",
+								index: 1,
+								parentId: "",
+								dynamicLocale: false,
+								value: 20,
+								compareMethod: ">=",
+								visibilityConditions: [],
+							},
+							dynamicLocale: false,
+						},
+					]
 				}
 			}
 		}
@@ -291,7 +550,11 @@ class Mod implements IPostDBLoadMod {
 					},
 				]
 
-				tables.hideout.scavcase = scavCaseRedone // mi donta undestanda tem red wavy lines, tis bad? tis worka! tis gooda! donta cera wavy lines.
+				try {
+					tables.hideout.scavcase = scavCaseRedone // mi donta undestanda tem red wavy lines, tis bad? tis worka! tis gooda! donta cera wavy lines.
+				} catch (error) {
+					log(error) // Akey, mi kinda scary red ~~~ lines. Mi try-ketchup it.
+				}
 			}
 			if (config.ScavCaseOptions.FasterScavcase.enabled == true) {
 				tables.hideout.scavcase.forEach((x) => {
@@ -390,6 +653,83 @@ class Mod implements IPostDBLoadMod {
 		}
 
 		if (config.HideoutOptions.enabled == true) {
+			if (config.HideoutOptions.BiggerStash.enabled == true) {
+				// Fix for ADHD.
+
+				// stash area id 5d484fc0654e76006657e0ab
+				// "_id": "566abbc34bdc2d92178b4576",
+				// "_name": "Standard stash 10x28",
+				// "_id": "5811ce572459770cba1a34ea",
+				// "_name": "Left Behind stash 10x38",
+				// "_id": "5811ce662459770f6f490f32",
+				// "_name": "Prepare for escape stash 10x48",
+				// "_id": "5811ce772459770e9e5f9532",
+				// "_name": "Edge of darkness stash 10x68",
+
+				items["566abbc34bdc2d92178b4576"]._props.Grids[0]._props.cellsV = 50
+				items["5811ce572459770cba1a34ea"]._props.Grids[0]._props.cellsV = 100
+				items["5811ce662459770f6f490f32"]._props.Grids[0]._props.cellsV = 150
+				items["5811ce772459770e9e5f9532"]._props.Grids[0]._props.cellsV = 200
+
+				let originalStages = tables.hideout.areas.find((x) => x._id == "5d484fc0654e76006657e0ab").stages
+
+				for (const stage in originalStages) {
+					if (config.HideoutOptions.BiggerStash.Easier_Loyalty.enabled == true) {
+						originalStages[stage].requirements
+							.filter((x) => x.loyaltyLevel != undefined)
+							.forEach((x) => {
+								x.loyaltyLevel -= 1
+							})
+					}
+
+					if (config.HideoutOptions.BiggerStash.Less_Currency_For_Construction.enabled == true) {
+						originalStages[stage].requirements
+							.filter((x) => x.templateId == "5449016a4bdc2d6f028b456f" || x.templateId == "569668774bdc2da2298b4568")
+							.forEach((x) => {
+								x.count /= 10
+							})
+					}
+
+					// log(JSON.stringify(originalStages))
+					try {
+						tables.hideout.areas.find((x) => x._id == "5d484fc0654e76006657e0ab").stages = originalStages
+					} catch (error) {
+						logger.warning(`config.HideoutOptions.BiggerStash error`)
+						log(error)
+					}
+				}
+
+				if (config.HideoutOptions.BiggerStash.Progressive_Stash.enabled == true) {
+					const basicStashBonuses = [
+						{
+							type: "StashSize",
+							templateId: "566abbc34bdc2d92178b4576",
+						},
+					]
+					for (const profile of profileList) {
+						try {
+							tables.templates.profiles[profile].bear.character.Hideout.Areas.find((x) => x.type == "3").level = 1
+							tables.templates.profiles[profile].usec.character.Hideout.Areas.find((x) => x.type == "3").level = 1
+
+							tables.templates.profiles[profile].bear.character.Inventory.items
+								.filter((x) => x._tpl == "5811ce572459770cba1a34ea" || x._tpl == "5811ce662459770f6f490f32" || x._tpl == "5811ce772459770e9e5f9532")
+								.forEach((element) => {
+									element._tpl = "566abbc34bdc2d92178b4576"
+								})
+							tables.templates.profiles[profile].usec.character.Inventory.items
+								.filter((x) => x._tpl == "5811ce572459770cba1a34ea" || x._tpl == "5811ce662459770f6f490f32" || x._tpl == "5811ce772459770e9e5f9532")
+								.forEach((element) => {
+									element._tpl = "566abbc34bdc2d92178b4576"
+								})
+							tables.templates.profiles[profile].bear.character.Bonuses = basicStashBonuses
+							tables.templates.profiles[profile].usec.character.Bonuses = basicStashBonuses
+						} catch (error) {
+							logger.warning(`config.HideoutOptions.BiggerStash.Progressive_Stash error`)
+							log(error)
+						}
+					}
+				}
+			}
 			// 100x Faster hideout production, 10x superwater and moonshine production, bitcoins
 			for (let prod in tables.hideout.production) {
 				const endProduct = tables.hideout.production[prod].endProduct
@@ -1200,28 +1540,6 @@ class Mod implements IPostDBLoadMod {
 
 			tables.hideout.production.push(ThreebTG, Adrenaline, L1, AHF1, CALOK, Ophthalmoscope, Zagustin, Obdolbos, OLOLO)
 		}
-
-		const cases = [
-			"5aafbde786f774389d0cbc0f", // Ammunition case
-			"5e2af55f86f7746d4159f07c", // Grenade case
-			"5c0a840b86f7742ffa4f2482", // T H I C C item case
-			"5b7c710788a4506dec015957", // Lucky Scav Junk box
-			"5c127c4486f7745625356c13", // Magazine case
-			"5aafbcd986f7745e590fff23", // Medicine case
-			"59fb016586f7746d0d4b423a", // Money case
-			"5c093e3486f77430cb02e593", // Dogtag case
-			"59fb042886f7746c5005a7b2", // Item case
-			"59fb023c86f7746d0d4b423c", // Weapon case
-			"5b6d9ce188a4501afc1b2b25", // T H I C C Weapon case
-			"5c093db286f7740a1b2617e3", // Mr. Holodilnick thermal bag
-			"60b0f6c058e0b0481a09ad11", // WZ Wallet
-			"619cbf9e0a7c3a1a2731940a", // Keycard holder case
-			"619cbf7d23893217ec30b689", // Injector case
-			"59fafd4b86f7745ca07e1232", // Key tool
-			"62a09d3bcf4a99369e262447", // Gingy keychain
-			"5d235bb686f77443f4331278", // S I C C organizational pouch
-			"590c60fc86f77412b13fddcf", // Documents case
-		]
 
 		// if (config.OtherTweaks.CollectorQuestEarlyStart.enabled == true) {
 		// WIP, waiting for SPT to update
