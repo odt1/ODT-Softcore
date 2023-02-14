@@ -138,33 +138,6 @@ class Mod {
                             },
                             Rare: {
                                 min: "0",
-                                max: "3",
-                            },
-                            Superrare: {
-                                min: "1",
-                                max: "2",
-                            },
-                        },
-                        ProductionTime: 16800,
-                        Requirements: [
-                            {
-                                count: 5,
-                                isEncoded: false,
-                                isFunctional: false,
-                                templateId: "5449016a4bdc2d6f028b456f",
-                                type: "Item",
-                            },
-                        ],
-                        _id: "6271093e621b0a76055cd61e",
-                    },
-                    {
-                        EndProducts: {
-                            Common: {
-                                min: "2",
-                                max: "3",
-                            },
-                            Rare: {
-                                min: "0",
                                 max: "0",
                             },
                             Superrare: {
@@ -178,65 +151,11 @@ class Mod {
                                 count: 1,
                                 isEncoded: false,
                                 isFunctional: false,
-                                templateId: "5449016a4bdc2d6f028b456f",
+                                templateId: "62a09f32621468534a797acb",
                                 type: "Item",
                             },
                         ],
                         _id: "62710974e71632321e5afd5f",
-                    },
-                    {
-                        EndProducts: {
-                            Common: {
-                                min: "2",
-                                max: "3",
-                            },
-                            Rare: {
-                                min: "3",
-                                max: "5",
-                            },
-                            Superrare: {
-                                min: "0",
-                                max: "1",
-                            },
-                        },
-                        ProductionTime: 19200,
-                        Requirements: [
-                            {
-                                count: 4,
-                                isEncoded: false,
-                                isFunctional: false,
-                                templateId: "5449016a4bdc2d6f028b456f",
-                                type: "Item",
-                            },
-                        ],
-                        _id: "62710a0e436dcc0b9c55f4ec",
-                    },
-                    {
-                        EndProducts: {
-                            Common: {
-                                min: "4",
-                                max: "5",
-                            },
-                            Rare: {
-                                min: "1",
-                                max: "2",
-                            },
-                            Superrare: {
-                                min: "0",
-                                max: "0",
-                            },
-                        },
-                        ProductionTime: 8100,
-                        Requirements: [
-                            {
-                                count: 3,
-                                isEncoded: false,
-                                isFunctional: false,
-                                templateId: "5449016a4bdc2d6f028b456f",
-                                type: "Item",
-                            },
-                        ],
-                        _id: "62710a69adfbd4354d79c58e",
                     },
                     {
                         EndProducts: {
@@ -256,15 +175,96 @@ class Mod {
                         ProductionTime: 7700,
                         Requirements: [
                             {
-                                count: 2,
+                                count: 1,
                                 isEncoded: false,
                                 isFunctional: false,
-                                templateId: "5449016a4bdc2d6f028b456f",
+                                templateId: "5d40407c86f774318526545a",
                                 type: "Item",
                             },
                         ],
                         _id: "62710a8c403346379e3de9be",
                     },
+                    {
+                        EndProducts: {
+                            Common: {
+                                min: "4",
+                                max: "5",
+                            },
+                            Rare: {
+                                min: "1",
+                                max: "2",
+                            },
+                            Superrare: {
+                                min: "0",
+                                max: "0",
+                            },
+                        },
+                        ProductionTime: 8100,
+                        Requirements: [
+                            {
+                                count: 1,
+                                isEncoded: false,
+                                isFunctional: false,
+                                templateId: "5d403f9186f7743cac3f229b",
+                                type: "Item",
+                            },
+                        ],
+                        _id: "62710a69adfbd4354d79c58e",
+                    },
+                    {
+                        EndProducts: {
+                            Common: {
+                                min: "2",
+                                max: "3",
+                            },
+                            Rare: {
+                                min: "0",
+                                max: "3",
+                            },
+                            Superrare: {
+                                min: "1",
+                                max: "2",
+                            },
+                        },
+                        ProductionTime: 16800,
+                        Requirements: [
+                            {
+                                count: 1,
+                                isEncoded: false,
+                                isFunctional: false,
+                                templateId: "5d1b376e86f774252519444e",
+                                type: "Item",
+                            },
+                        ],
+                        _id: "6271093e621b0a76055cd61e",
+                    },
+                    {
+                        EndProducts: {
+                            Common: {
+                                min: "2",
+                                max: "3",
+                            },
+                            Rare: {
+                                min: "3",
+                                max: "5",
+                            },
+                            Superrare: {
+                                min: "0",
+                                max: "1",
+                            },
+                        },
+                        ProductionTime: 19200,
+                        Requirements: [
+                            {
+                                count: 1,
+                                isEncoded: false,
+                                isFunctional: false,
+                                templateId: "5c12613b86f7743bbe2c3f76",
+                                type: "Item",
+                            },
+                        ],
+                        _id: "62710a0e436dcc0b9c55f4ec",
+                    }
                 ];
                 tables.hideout.scavcase = scavCaseRedone; // mi donta undestanda tem red wavy lines, tis bad? tis worka! tis gooda! donta cera wavy lines.
             }
@@ -431,7 +431,8 @@ class Mod {
                 globals.SkillsSettings.Vitality.DamageTakenAction *= 10;
                 globals.SkillsSettings.Sniper.WeaponShotAction *= 10;
                 globals.SkillsSettings.Surgery.SurgeryAction *= 10;
-                globals.SkillsSettings.StressResistance.LowHPDuration *= 10;
+                Object.values(globals.SkillsSettings.Immunity).forEach((x) => x * 10);
+                Object.values(globals.SkillsSettings.StressResistance).forEach((x) => x * 10);
             }
             if (config_json_1.default.OtherTweaks.Faster_Examine_Time.enabled) {
                 // Faster ExamineTime
@@ -494,6 +495,9 @@ class Mod {
                 // Reshala always has his Golden TT
                 tables.bots.types.bossbully.chances.equipment.Holster = 100;
                 tables.bots.types.bossbully.inventory.equipment.Holster = { "5b3b713c5acfc4330140bd8d": 1 };
+            }
+            if (config_json_1.default.OtherTweaks.Remove_Item_In_Raid_Restrictions.enabled) {
+                globals.RestrictionsInRaid = [];
             }
         }
         if (config_json_1.default.InsuranceChanges.enabled == true) {
@@ -634,111 +638,97 @@ class Mod {
                 traderConfig.fence.discountOptions.assortSize = config_json_1.default.EconomyOptions.Pacifist_Fence.Number_Of_Fence_Offers * 2;
                 traderConfig.fence.itemPriceMult = 0.9; // at 6 Fence karma you buy items almost at a price Therapist buys from you. Go grind.
             }
+            if (config_json_1.default.EconomyOptions.Reasonably_Priced_Cases.enabled == true) {
+                therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0352"][0].forEach((x) => (x.count = 5)); // THICC case (LEDX)
+                therapist.assort.barter_scheme["63d385d7b3eba6c95d0f036e"][0].forEach((x) => (x.count = 10)); // THICC case (Moonshine)
+                therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0334"][0].forEach((x) => (x.count = 5941)); // Item case (Euro)
+                therapist.assort.barter_scheme["63d385d7b3eba6c95d0f034a"][0].forEach((x) => (x.count = 8)); // Item case (OScope)
+                therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0380"][0].forEach((x) => (x.count = 20)); // Item case (Dogtags)
+                therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0382"][0].forEach((x) => (x.count = 15)); // Lucky Scav Junk box (Dogtags)
+                therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0350"][0].forEach((x) => (x.count = 806138)); // Lucky Scav Junk box (Rubles)
+                therapist.assort.barter_scheme["63d385d7b3eba6c95d0f033c"][0].forEach((x) => (x.count = 248610)); // Medcase (Rubles)
+                therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0384"][0].forEach((x) => (x.count /= 10)); // LEDX (Dogtags) // Really BSG? 160 kills for a non-FIR item? REALLY?!
+                peacekeeper.assort.barter_scheme["63d385cab3eba6c95d0eff5f"][0].forEach((x) => (x.count = x.count / 5 + 1)); // THICC case (SMT+Bluefolder)
+                skier.assort.barter_scheme["63d385b7b3eba6c95d0eef5c"][0].forEach((x) => (x.count = 4)); // Weapon case (Moonshine)
+                mechanic.assort.barter_scheme["63d385bfb3eba6c95d0ef4d1"][0].forEach((x) => (x.count = 5)); // Weapon case (Bitcoins)
+                mechanic.assort.barter_scheme["63d385c0b3eba6c95d0ef5d8"][0].forEach((x) => (x.count = 10)); // THICC Weapon case (Bitcoins)
+            }
         }
         if (config_json_1.default.CraftingRebalance.enabled == true) {
             // Crafts:
             // This here, is some dumb stuff, I should've created some special class, controller, pushed the data out of the code or some other OOP bullcrap, but I'm not a programmer, so this will have to suffice. Sorry, not sorry.
             // 2x Clin production buff
             getCraft("59e358a886f7741776641ac3").count = 2;
-            /*
             // 2x Paracord production buff
-            getCraft("5c12688486f77426843c7d32").count = 2
-
+            getCraft("5c12688486f77426843c7d32").count = 2;
             // Water filter < 2 airfilter craft buff
-            getCraft("5d1b385e86f774252167b98a").requirements.find((x) => x.templateId == "590c595c86f7747884343ad7").count = 2
-
+            getCraft("5d1b385e86f774252167b98a").requirements.find((x) => x.templateId == "590c595c86f7747884343ad7").count = 2;
             // Toilet paper production nerf lol. Who would have thought this craft would be OP, huh?
-            getCraft("5c13cef886f774072e618e82").count = 1
-
+            getCraft("5c13cef886f774072e618e82").count = 1;
             // EWR buff
-            getCraft("60098b1705871270cd5352a1").count = 3
-
+            getCraft("60098b1705871270cd5352a1").count = 3;
             // Buff MULE
-            getCraft("5ed51652f6c34d2cc26336a1").count = 2
-
-            // Surv12 nerf
-            getCraft("5d02797c86f774203f38e30a").requirements.find((x) => x.templateId == "5e831507ea0a7c419c2f9bd9").templateId = "5af0454c86f7746bf20992e8"
-            getCraft("5d02797c86f774203f38e30a").count = 1
-
+            getCraft("5ed51652f6c34d2cc26336a1").count = 2;
             // AFAK buff
-            getCraft("60098ad7c2240c0fe85c570a").requirements.find((x) => x.templateId == "590c678286f77426c9660122").count = 1
-            getCraft("60098ad7c2240c0fe85c570a").requirements.find((x) => x.templateId == "5751a25924597722c463c472").templateId = "5e8488fa988a8701445df1e4"
-
+            getCraft("60098ad7c2240c0fe85c570a").requirements.find((x) => x.templateId == "590c678286f77426c9660122").count = 1;
+            getCraft("60098ad7c2240c0fe85c570a").requirements.find((x) => x.templateId == "5751a25924597722c463c472").templateId = "5e8488fa988a8701445df1e4";
             // Portable defibrillator big nerf (Portable Powerbank 1 -> 4). Lore-friendly and still profitable, just not as ridiculous.
-            getCraft("5c052e6986f7746b207bc3c9").requirements.find((x) => x.templateId == "5af0561e86f7745f5f3ad6ac").count = 4
-
+            getCraft("5c052e6986f7746b207bc3c9").requirements.find((x) => x.templateId == "5af0561e86f7745f5f3ad6ac").count = 4;
             // LEDX buff (Huge buff, 1 of each component only). Now it is actually only sometimes bother to craft it.
             getCraft("5c0530ee86f774697952d952").requirements.forEach((x) => {
                 if (x.count) {
-                    x.count = 1
+                    x.count = 1;
                 }
-            })
-
+            });
             // Virtex buff (Military circuit board 2 -> 1)
-            getCraft("5c05308086f7746b2101e90b").requirements.find((x) => x.templateId == "5d0376a486f7747d8050965c").count = 1
-
+            getCraft("5c05308086f7746b2101e90b").requirements.find((x) => x.templateId == "5d0376a486f7747d8050965c").count = 1;
             // Military circuit board buff (1 -> 2)
-            getCraft("5d0376a486f7747d8050965c").count = 2
-
+            getCraft("5d0376a486f7747d8050965c").count = 2;
             // Military flash drive lore-based change (2 Secure Flash drive -> 1 VPX, and Topographic survey maps 2 -> 1).
             // Not "profitable", but will change Intel folder craft to compensate, and allow it to be crafted on level 2.
             getCraft("62a0a16d0b9d3c46de5b6e97").requirements.forEach((x) => {
                 if (x.count) {
-                    x.count = 1
+                    x.count = 1;
                 }
-            })
-            getCraft("62a0a16d0b9d3c46de5b6e97").requirements.find((x) => x.type == "Area").requiredLevel = 2
-
-            getCraft("62a0a16d0b9d3c46de5b6e97").requirements.find((x) => x.templateId == "590c621186f774138d11ea29").templateId = "5c05300686f7746dce784e5d"
-
+            });
+            getCraft("62a0a16d0b9d3c46de5b6e97").requirements.find((x) => x.type == "Area").requiredLevel = 2;
+            getCraft("62a0a16d0b9d3c46de5b6e97").requirements.find((x) => x.templateId == "590c621186f774138d11ea29").templateId = "5c05300686f7746dce784e5d";
             // Intelligence folder buff (Military flash drive 2 -> 1)
-            getCraft("5c12613b86f7743bbe2c3f76").requirements.find((x) => x.templateId == "62a0a16d0b9d3c46de5b6e97").count = 1
-
+            getCraft("5c12613b86f7743bbe2c3f76").requirements.find((x) => x.templateId == "62a0a16d0b9d3c46de5b6e97").count = 1;
             // VPX buff (RAM and Broken GPhone smartphone 3 -> 2)
             getCraft("5c05300686f7746dce784e5d").requirements.forEach((x) => {
                 if (x.count) {
-                    x.count = 2
+                    x.count = 2;
                 }
-            })
-
+            });
             // FLIR huge buff (everything is 1, plus change SAS drive (wtf?!) to Armasight Vulcan MG 3.5x Bravo night vision scope)
             getCraft("5d1b5e94d7ad1a2b865a96b0").requirements.forEach((x) => {
                 if (x.count) {
-                    x.count = 1
+                    x.count = 1;
                 }
-            })
-            getCraft("5d1b5e94d7ad1a2b865a96b0").requirements.find((x) => x.templateId == "590c37d286f77443be3d7827").templateId = "5b3b6e495acfc4330140bd88"
-
+            });
+            getCraft("5d1b5e94d7ad1a2b865a96b0").requirements.find((x) => x.templateId == "590c37d286f77443be3d7827").templateId = "5b3b6e495acfc4330140bd88";
             // CMS nerf (Medical tools 1 -> 2)
-            getCraft("5d02778e86f774203e7dedbe").requirements.find((x) => x.templateId == "619cc01e0a7c3a1a2731940c").count = 2
-
+            getCraft("5d02778e86f774203e7dedbe").requirements.find((x) => x.templateId == "619cc01e0a7c3a1a2731940c").count = 2;
             // GRIzZLY nerf (1 -> 2)
-            getCraft("590c657e86f77412b013051d").count = 1
-
+            getCraft("590c657e86f77412b013051d").count = 1;
             // coffee buff (2 -> 3)
-            getCraft("5af0484c86f7740f02001f7f").count = 3
-
+            getCraft("5af0484c86f7740f02001f7f").count = 3;
             // MPPV buff (KEKTAPE duct tape 2 -> 1)
-            getCraft("5df8a42886f77412640e2e75").requirements.find((x) => x.templateId == "5e2af29386f7746d4159f077").count = 1
-
+            getCraft("5df8a42886f77412640e2e75").requirements.find((x) => x.templateId == "5e2af29386f7746d4159f077").count = 1;
             // bottled water buff water (8 -> 16)
-            getCraft("5448fee04bdc2dbc018b4567").count = 16
-
+            getCraft("5448fee04bdc2dbc018b4567").count = 16;
             // Topographic survey maps buff (1 -> 2)
-            getCraft("62a0a124de7ac81993580542").count = 2
-
+            getCraft("62a0a124de7ac81993580542").count = 2;
             // Aquamari buff (3 -> 5)
-            getCraft("5c0fa877d174af02a012e1cf").count = 5
-
+            getCraft("5c0fa877d174af02a012e1cf").count = 5;
             // SJ6 buff (2 -> 3)
-            getCraft("5c0e531d86f7747fa23f4d42").count = 3
-
+            getCraft("5c0e531d86f7747fa23f4d42").count = 3;
             // GPU buff (3 VPX -> 1 Virtex, 10 PCB -> 1, 10 CPU -> 1)
-            getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "5c05300686f7746dce784e5d").count = 1
-            getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "5c05300686f7746dce784e5d").templateId = "5c05308086f7746b2101e90b"
-            getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "573477e124597737dd42e191").count = 1
-            getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "590a3b0486f7743954552bdb").count = 1
-
+            getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "5c05300686f7746dce784e5d").count = 1;
+            getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "5c05300686f7746dce784e5d").templateId = "5c05308086f7746b2101e90b";
+            getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "573477e124597737dd42e191").count = 1;
+            getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "590a3b0486f7743954552bdb").count = 1;
             // UHF RFID Reader huge buff (only Broken GPhone X smartphone + Signal Jammer)
             getCraft("5c052fb986f7746b2101e909").requirements = [
                 {
@@ -766,26 +756,8 @@ class Mod {
                     templateId: "5d63d33b86f7746ea9275524",
                     type: "Tool",
                 },
-            ]*/
-        }
-        if (config_json_1.default.OtherTweaks.CollectorQuestEarlyStart.enabled == true) {
-            // Object.values()
-            tables.templates.quests["5c51aac186f77432ea65c552"].conditions.AvailableForFinish.push(tables.templates.quests["5c51aac186f77432ea65c552"].conditions.AvailableForStart[0]);
-            tables.templates.quests["5c51aac186f77432ea65c552"].conditions.AvailableForStart = [
-                {
-                    _parent: "Level",
-                    _props: {
-                        id: "51d33b2d4fad9e61441772c0",
-                        index: 1,
-                        parentId: "",
-                        dynamicLocale: false,
-                        value: 1,
-                        compareMethod: ">=",
-                        visibilityConditions: [],
-                    },
-                    dynamicLocale: false,
-                },
             ];
+            // */
         }
         if (config_json_1.default.AdditionalCraftingRecipes.enabled == true) {
             // 63da4dbee8fa73e225000001
@@ -1122,6 +1094,49 @@ class Mod {
             };
             tables.hideout.production.push(ThreebTG, Adrenaline, L1, AHF1, CALOK, Ophthalmoscope, Zagustin, Obdolbos, OLOLO);
         }
+        const cases = [
+            "5aafbde786f774389d0cbc0f",
+            "5e2af55f86f7746d4159f07c",
+            "5c0a840b86f7742ffa4f2482",
+            "5b7c710788a4506dec015957",
+            "5c127c4486f7745625356c13",
+            "5aafbcd986f7745e590fff23",
+            "59fb016586f7746d0d4b423a",
+            "5c093e3486f77430cb02e593",
+            "59fb042886f7746c5005a7b2",
+            "59fb023c86f7746d0d4b423c",
+            "5b6d9ce188a4501afc1b2b25",
+            "5c093db286f7740a1b2617e3",
+            "60b0f6c058e0b0481a09ad11",
+            "619cbf9e0a7c3a1a2731940a",
+            "619cbf7d23893217ec30b689",
+            "59fafd4b86f7745ca07e1232",
+            "62a09d3bcf4a99369e262447",
+            "5d235bb686f77443f4331278",
+            "590c60fc86f77412b13fddcf", // Documents case
+        ];
+        // if (config.OtherTweaks.CollectorQuestEarlyStart.enabled == true) {
+        // WIP, waiting for SPT to update
+        // 	// Object.values()
+        // 	tables.templates.quests["5c51aac186f77432ea65c552"].conditions.AvailableForFinish.push(
+        // 		tables.templates.quests["5c51aac186f77432ea65c552"].conditions.AvailableForStart[0]
+        // 	)
+        // 	tables.templates.quests["5c51aac186f77432ea65c552"].conditions.AvailableForStart = [
+        // 		{
+        // 			_parent: "Level",
+        // 			_props: {
+        // 				id: "51d33b2d4fad9e61441772c0",
+        // 				index: 1,
+        // 				parentId: "",
+        // 				dynamicLocale: false,
+        // 				value: 1,
+        // 				compareMethod: ">=",
+        // 				visibilityConditions: [],
+        // 			},
+        // 			dynamicLocale: false,
+        // 		},
+        // 	]
+        // }
         function getCraft(endProductID) {
             try {
                 return tables.hideout.production.find((x) => x.endProduct == endProductID && x.areaType != 21);

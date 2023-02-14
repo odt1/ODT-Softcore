@@ -86,18 +86,19 @@ class Mod implements IPostDBLoadMod {
 					const item = items[i]
 					if (item._type == "Item") {
 						if (debug) {
-							item._props.ExaminedByDefault = true
+							item._props.ExaminedByDefault = true // For my sanity
 						}
 						const itemInHandbook = getItemInHandbook(item._id)
 
 						if (item._parent == "543be5cb4bdc2deb348b4568") {
+							try {
 							// Ammo boxes price patch/fix, their data in handbook is always 1k, this makes them valued as ammo*count they contain.
 							let count = item._props.StackSlots[0]._max_count
 							let ammo = item._props.StackSlots[0]._props.filters[0].Filter[0]
 
 							let value = Math.round(getItemInHandbook(ammo).Price * count)
 
-							try {
+
 								handbook.Items.find((x) => x.Id == item._id).Price = value
 							} catch (error) {
 								logger.warning(
@@ -161,33 +162,6 @@ class Mod implements IPostDBLoadMod {
 							},
 							Rare: {
 								min: "0",
-								max: "3",
-							},
-							Superrare: {
-								min: "1",
-								max: "2",
-							},
-						},
-						ProductionTime: 16800,
-						Requirements: [
-							{
-								count: 5,
-								isEncoded: false,
-								isFunctional: false,
-								templateId: "5449016a4bdc2d6f028b456f", // Moonshine 5d1b376e86f774252519444e
-								type: "Item",
-							},
-						],
-						_id: "6271093e621b0a76055cd61e",
-					},
-					{
-						EndProducts: {
-							Common: {
-								min: "2",
-								max: "3",
-							},
-							Rare: {
-								min: "0",
 								max: "0",
 							},
 							Superrare: {
@@ -201,65 +175,11 @@ class Mod implements IPostDBLoadMod {
 								count: 1,
 								isEncoded: false,
 								isFunctional: false,
-								templateId: "5449016a4bdc2d6f028b456f", // Pevko, T1 62a09f32621468534a797acb
+								templateId: "62a09f32621468534a797acb", // Pevko, T1 62a09f32621468534a797acb
 								type: "Item",
 							},
 						],
 						_id: "62710974e71632321e5afd5f",
-					},
-					{
-						EndProducts: {
-							Common: {
-								min: "2",
-								max: "3",
-							},
-							Rare: {
-								min: "3",
-								max: "5",
-							},
-							Superrare: {
-								min: "0",
-								max: "1",
-							},
-						},
-						ProductionTime: 19200,
-						Requirements: [
-							{
-								count: 4,
-								isEncoded: false,
-								isFunctional: false,
-								templateId: "5449016a4bdc2d6f028b456f", // Intel, 5c12613b86f7743bbe2c3f76
-								type: "Item",
-							},
-						],
-						_id: "62710a0e436dcc0b9c55f4ec",
-					},
-					{
-						EndProducts: {
-							Common: {
-								min: "4",
-								max: "5",
-							},
-							Rare: {
-								min: "1",
-								max: "2",
-							},
-							Superrare: {
-								min: "0",
-								max: "0",
-							},
-						},
-						ProductionTime: 8100,
-						Requirements: [
-							{
-								count: 3,
-								isEncoded: false,
-								isFunctional: false,
-								templateId: "5449016a4bdc2d6f028b456f", // Whisky T3 5d403f9186f7743cac3f229b
-								type: "Item",
-							},
-						],
-						_id: "62710a69adfbd4354d79c58e",
 					},
 					{
 						EndProducts: {
@@ -279,15 +199,97 @@ class Mod implements IPostDBLoadMod {
 						ProductionTime: 7700,
 						Requirements: [
 							{
-								count: 2,
+								count: 1,
 								isEncoded: false,
 								isFunctional: false,
-								templateId: "5449016a4bdc2d6f028b456f", // Vodka T2 5d40407c86f774318526545a
+								templateId: "5d40407c86f774318526545a", // Vodka T2 5d40407c86f774318526545a
 								type: "Item",
 							},
 						],
 						_id: "62710a8c403346379e3de9be",
 					},
+
+					{
+						EndProducts: {
+							Common: {
+								min: "4",
+								max: "5",
+							},
+							Rare: {
+								min: "1",
+								max: "2",
+							},
+							Superrare: {
+								min: "0",
+								max: "0",
+							},
+						},
+						ProductionTime: 8100,
+						Requirements: [
+							{
+								count: 1,
+								isEncoded: false,
+								isFunctional: false,
+								templateId: "5d403f9186f7743cac3f229b", // Whisky T3 5d403f9186f7743cac3f229b
+								type: "Item",
+							},
+						],
+						_id: "62710a69adfbd4354d79c58e",
+					},
+					{
+						EndProducts: {
+							Common: {
+								min: "2",
+								max: "3",
+							},
+							Rare: {
+								min: "0",
+								max: "3",
+							},
+							Superrare: {
+								min: "1",
+								max: "2",
+							},
+						},
+						ProductionTime: 16800,
+						Requirements: [
+							{
+								count: 1,
+								isEncoded: false,
+								isFunctional: false,
+								templateId: "5d1b376e86f774252519444e", // Moonshine 5d1b376e86f774252519444e
+								type: "Item",
+							},
+						],
+						_id: "6271093e621b0a76055cd61e",
+					},
+					{
+						EndProducts: {
+							Common: {
+								min: "2",
+								max: "3",
+							},
+							Rare: {
+								min: "3",
+								max: "5",
+							},
+							Superrare: {
+								min: "0",
+								max: "1",
+							},
+						},
+						ProductionTime: 19200,
+						Requirements: [
+							{
+								count: 1,
+								isEncoded: false,
+								isFunctional: false,
+								templateId: "5c12613b86f7743bbe2c3f76", // Intel, 5c12613b86f7743bbe2c3f76
+								type: "Item",
+							},
+						],
+						_id: "62710a0e436dcc0b9c55f4ec",
+					}
 				]
 
 				tables.hideout.scavcase = scavCaseRedone // mi donta undestanda tem red wavy lines, tis bad? tis worka! tis gooda! donta cera wavy lines.
@@ -471,7 +473,8 @@ class Mod implements IPostDBLoadMod {
 				globals.SkillsSettings.Vitality.DamageTakenAction *= 10
 				globals.SkillsSettings.Sniper.WeaponShotAction *= 10
 				globals.SkillsSettings.Surgery.SurgeryAction *= 10
-				globals.SkillsSettings.StressResistance.LowHPDuration *= 10
+				Object.values(globals.SkillsSettings.Immunity).forEach((x) => x * 10)
+				Object.values(globals.SkillsSettings.StressResistance).forEach((x) => x * 10)
 			}
 
 			if (config.OtherTweaks.Faster_Examine_Time.enabled) {
@@ -539,6 +542,10 @@ class Mod implements IPostDBLoadMod {
 				// Reshala always has his Golden TT
 				tables.bots.types.bossbully.chances.equipment.Holster = 100
 				tables.bots.types.bossbully.inventory.equipment.Holster = { "5b3b713c5acfc4330140bd8d": 1 }
+			}
+
+			if (config.OtherTweaks.Remove_Item_In_Raid_Restrictions.enabled) {
+				globals.RestrictionsInRaid = []
 			}
 		}
 
@@ -697,6 +704,24 @@ class Mod implements IPostDBLoadMod {
 				traderConfig.fence.discountOptions.assortSize = config.EconomyOptions.Pacifist_Fence.Number_Of_Fence_Offers * 2
 				traderConfig.fence.itemPriceMult = 0.9 // at 6 Fence karma you buy items almost at a price Therapist buys from you. Go grind.
 			}
+
+			if (config.EconomyOptions.Reasonably_Priced_Cases.enabled == true) {
+				therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0352"][0].forEach((x) => (x.count = 5)) // THICC case (LEDX)
+				therapist.assort.barter_scheme["63d385d7b3eba6c95d0f036e"][0].forEach((x) => (x.count = 10)) // THICC case (Moonshine)
+				therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0334"][0].forEach((x) => (x.count = 5941)) // Item case (Euro)
+				therapist.assort.barter_scheme["63d385d7b3eba6c95d0f034a"][0].forEach((x) => (x.count = 8)) // Item case (OScope)
+				therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0380"][0].forEach((x) => (x.count = 20)) // Item case (Dogtags)
+				therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0382"][0].forEach((x) => (x.count = 15)) // Lucky Scav Junk box (Dogtags)
+				therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0350"][0].forEach((x) => (x.count = 806138)) // Lucky Scav Junk box (Rubles)
+				therapist.assort.barter_scheme["63d385d7b3eba6c95d0f033c"][0].forEach((x) => (x.count = 248610)) // Medcase (Rubles)
+				therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0384"][0].forEach((x) => (x.count /= 10)) // LEDX (Dogtags) // Really BSG? 160 kills for a non-FIR item? REALLY?!
+				peacekeeper.assort.barter_scheme["63d385cab3eba6c95d0eff5f"][0].forEach((x) => (x.count = x.count / 5 + 1)) // THICC case (SMT+Bluefolder)
+
+				skier.assort.barter_scheme["63d385b7b3eba6c95d0eef5c"][0].forEach((x) => (x.count = 4)) // Weapon case (Moonshine)
+
+				mechanic.assort.barter_scheme["63d385bfb3eba6c95d0ef4d1"][0].forEach((x) => (x.count = 5)) // Weapon case (Bitcoins)
+				mechanic.assort.barter_scheme["63d385c0b3eba6c95d0ef5d8"][0].forEach((x) => (x.count = 10)) // THICC Weapon case (Bitcoins)
+			}
 		}
 
 		if (config.CraftingRebalance.enabled == true) {
@@ -705,7 +730,7 @@ class Mod implements IPostDBLoadMod {
 
 			// 2x Clin production buff
 			getCraft("59e358a886f7741776641ac3").count = 2
-			/*
+
 			// 2x Paracord production buff
 			getCraft("5c12688486f77426843c7d32").count = 2
 
@@ -720,10 +745,6 @@ class Mod implements IPostDBLoadMod {
 
 			// Buff MULE
 			getCraft("5ed51652f6c34d2cc26336a1").count = 2
-
-			// Surv12 nerf
-			getCraft("5d02797c86f774203f38e30a").requirements.find((x) => x.templateId == "5e831507ea0a7c419c2f9bd9").templateId = "5af0454c86f7746bf20992e8"
-			getCraft("5d02797c86f774203f38e30a").count = 1
 
 			// AFAK buff
 			getCraft("60098ad7c2240c0fe85c570a").requirements.find((x) => x.templateId == "590c678286f77426c9660122").count = 1
@@ -831,7 +852,8 @@ class Mod implements IPostDBLoadMod {
 					templateId: "5d63d33b86f7746ea9275524",
 					type: "Tool",
 				},
-			]*/
+			]
+			// */
 		}
 
 		if (config.AdditionalCraftingRecipes.enabled == true) {
@@ -1180,6 +1202,28 @@ class Mod implements IPostDBLoadMod {
 
 			tables.hideout.production.push(ThreebTG, Adrenaline, L1, AHF1, CALOK, Ophthalmoscope, Zagustin, Obdolbos, OLOLO)
 		}
+
+		const cases = [
+			"5aafbde786f774389d0cbc0f", // Ammunition case
+			"5e2af55f86f7746d4159f07c", // Grenade case
+			"5c0a840b86f7742ffa4f2482", // T H I C C item case
+			"5b7c710788a4506dec015957", // Lucky Scav Junk box
+			"5c127c4486f7745625356c13", // Magazine case
+			"5aafbcd986f7745e590fff23", // Medicine case
+			"59fb016586f7746d0d4b423a", // Money case
+			"5c093e3486f77430cb02e593", // Dogtag case
+			"59fb042886f7746c5005a7b2", // Item case
+			"59fb023c86f7746d0d4b423c", // Weapon case
+			"5b6d9ce188a4501afc1b2b25", // T H I C C Weapon case
+			"5c093db286f7740a1b2617e3", // Mr. Holodilnick thermal bag
+			"60b0f6c058e0b0481a09ad11", // WZ Wallet
+			"619cbf9e0a7c3a1a2731940a", // Keycard holder case
+			"619cbf7d23893217ec30b689", // Injector case
+			"59fafd4b86f7745ca07e1232", // Key tool
+			"62a09d3bcf4a99369e262447", // Gingy keychain
+			"5d235bb686f77443f4331278", // S I C C organizational pouch
+			"590c60fc86f77412b13fddcf", // Documents case
+		]
 
 		// if (config.OtherTweaks.CollectorQuestEarlyStart.enabled == true) {
 		// WIP, waiting for SPT to update

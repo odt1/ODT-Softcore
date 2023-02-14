@@ -147,4 +147,7 @@ export const scavcaseItemBlacklist = [
 	"62e910aaf957f2915e0a5e36", // Digital secure DSP radio transmitter
 	"6399f54b0a36db13c823ad21", // Radio transmitter body
 	"63a0b2eabea67a6d93009e52", // Radio repeater
+	"6389c7f115805221fb410466", // Far-forward GPS Signal Amplifier Unit
+	"6389c7750ef44505c87f5996", // Microcontroller board
+	"6389c85357baa773a825b356", // Far-forward current converter
 ]
