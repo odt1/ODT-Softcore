@@ -92,12 +92,11 @@ class Mod implements IPostDBLoadMod {
 
 						if (item._parent == "543be5cb4bdc2deb348b4568") {
 							try {
-							// Ammo boxes price patch/fix, their data in handbook is always 1k, this makes them valued as ammo*count they contain.
-							let count = item._props.StackSlots[0]._max_count
-							let ammo = item._props.StackSlots[0]._props.filters[0].Filter[0]
+								// Ammo boxes price patch/fix, their data in handbook is always 1k, this makes them valued as ammo*count they contain.
+								let count = item._props.StackSlots[0]._max_count
+								let ammo = item._props.StackSlots[0]._props.filters[0].Filter[0]
 
-							let value = Math.round(getItemInHandbook(ammo).Price * count)
-
+								let value = Math.round(getItemInHandbook(ammo).Price * count)
 
 								handbook.Items.find((x) => x.Id == item._id).Price = value
 							} catch (error) {
@@ -289,7 +288,7 @@ class Mod implements IPostDBLoadMod {
 							},
 						],
 						_id: "62710a0e436dcc0b9c55f4ec",
-					}
+					},
 				]
 
 				tables.hideout.scavcase = scavCaseRedone // mi donta undestanda tem red wavy lines, tis bad? tis worka! tis gooda! donta cera wavy lines.
@@ -403,11 +402,14 @@ class Mod implements IPostDBLoadMod {
 					tables.hideout.production[prod].productionTime = Math.round(
 						productionTime / config.HideoutOptions.Faster_Moonshine_and_Purified_Water_Production.Base_Moonshine_And_Water_Time_Multiplier
 					)
-				} else if (endProduct == "59faff1d86f7746c51718c9c" && config.HideoutOptions.Faster_Bitcoin_Farming.enabled) {
+				} else if (endProduct == "59faff1d86f7746c51718c9c" && config.HideoutOptions.Faster_Bitcoin_Farming.enabled == true) {
 					// bitcoins
 					tables.hideout.production[prod].productionTime = Math.round(
 						productionTime / config.HideoutOptions.Faster_Bitcoin_Farming.Base_Bitcoin_Time_Multiplier
 					)
+					if (config.HideoutOptions.Faster_Bitcoin_Farming.Revert_Bitcoin_Price_To_v012 == true) {
+						tables.templates.handbook.Items.find((x) => x.Id == "59faff1d86f7746c51718c9c").Price = 100000
+					}
 				} else if (config.HideoutOptions.Faster_Crafting_Time.enabled) {
 					// all other crafts
 					tables.hideout.production[prod].productionTime = Math.round(productionTime / config.HideoutOptions.Faster_Crafting_Time.Base_Crafting_Time_Multiplier)
@@ -542,10 +544,6 @@ class Mod implements IPostDBLoadMod {
 				// Reshala always has his Golden TT
 				tables.bots.types.bossbully.chances.equipment.Holster = 100
 				tables.bots.types.bossbully.inventory.equipment.Holster = { "5b3b713c5acfc4330140bd8d": 1 }
-			}
-
-			if (config.OtherTweaks.Remove_Item_In_Raid_Restrictions.enabled) {
-				globals.RestrictionsInRaid = []
 			}
 		}
 

@@ -71,15 +71,15 @@ class Mod {
                     const item = items[i];
                     if (item._type == "Item") {
                         if (debug) {
-                            item._props.ExaminedByDefault = true;
+                            item._props.ExaminedByDefault = true; // For my sanity
                         }
                         const itemInHandbook = getItemInHandbook(item._id);
                         if (item._parent == "543be5cb4bdc2deb348b4568") {
-                            // Ammo boxes price patch/fix, their data in handbook is always 1k, this makes them valued as ammo*count they contain.
-                            let count = item._props.StackSlots[0]._max_count;
-                            let ammo = item._props.StackSlots[0]._props.filters[0].Filter[0];
-                            let value = Math.round(getItemInHandbook(ammo).Price * count);
                             try {
+                                // Ammo boxes price patch/fix, their data in handbook is always 1k, this makes them valued as ammo*count they contain.
+                                let count = item._props.StackSlots[0]._max_count;
+                                let ammo = item._props.StackSlots[0]._props.filters[0].Filter[0];
+                                let value = Math.round(getItemInHandbook(ammo).Price * count);
                                 handbook.Items.find((x) => x.Id == item._id).Price = value;
                             }
                             catch (error) {
@@ -264,7 +264,7 @@ class Mod {
                             },
                         ],
                         _id: "62710a0e436dcc0b9c55f4ec",
-                    }
+                    },
                 ];
                 tables.hideout.scavcase = scavCaseRedone; // mi donta undestanda tem red wavy lines, tis bad? tis worka! tis gooda! donta cera wavy lines.
             }
@@ -374,9 +374,12 @@ class Mod {
                     // superwater and moonshine
                     tables.hideout.production[prod].productionTime = Math.round(productionTime / config_json_1.default.HideoutOptions.Faster_Moonshine_and_Purified_Water_Production.Base_Moonshine_And_Water_Time_Multiplier);
                 }
-                else if (endProduct == "59faff1d86f7746c51718c9c" && config_json_1.default.HideoutOptions.Faster_Bitcoin_Farming.enabled) {
+                else if (endProduct == "59faff1d86f7746c51718c9c" && config_json_1.default.HideoutOptions.Faster_Bitcoin_Farming.enabled == true) {
                     // bitcoins
                     tables.hideout.production[prod].productionTime = Math.round(productionTime / config_json_1.default.HideoutOptions.Faster_Bitcoin_Farming.Base_Bitcoin_Time_Multiplier);
+                    if (config_json_1.default.HideoutOptions.Faster_Bitcoin_Farming.Revert_Bitcoin_Price_To_v012 == true) {
+                        tables.templates.handbook.Items.find((x) => x.Id == "59faff1d86f7746c51718c9c").Price = 100000;
+                    }
                 }
                 else if (config_json_1.default.HideoutOptions.Faster_Crafting_Time.enabled) {
                     // all other crafts
@@ -495,9 +498,6 @@ class Mod {
                 // Reshala always has his Golden TT
                 tables.bots.types.bossbully.chances.equipment.Holster = 100;
                 tables.bots.types.bossbully.inventory.equipment.Holster = { "5b3b713c5acfc4330140bd8d": 1 };
-            }
-            if (config_json_1.default.OtherTweaks.Remove_Item_In_Raid_Restrictions.enabled) {
-                globals.RestrictionsInRaid = [];
             }
         }
         if (config_json_1.default.InsuranceChanges.enabled == true) {

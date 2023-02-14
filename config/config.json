@@ -3,8 +3,9 @@
 		"_description": "Master toggle for all hideout options below.",
 		"enabled": true,
 		"Faster_Bitcoin_Farming": {
-			"_description": "Modifies base farming time and dramatically increases each GPU efficiency (from ~4% to 50%). It means that each additional GPU has a much greater impact on farming time and lvl3 bitcoin farm is very profitable and desirable. EG - Vanilla 1x GPU: 40h 17min, at 50x GPU: 13h 20min for 1 bitcoin. Default Softcore settings - 1x GPU: 20h 8min, 50x GPU: 0h 47min per bitcoin.",
+			"_description": "Modifies base farming time and dramatically increases each GPU efficiency (from ~4% to 50%). It means that each additional GPU has a much greater impact on farming time and lvl3 bitcoin farm is very profitable and desirable. EG - Vanilla 1x GPU: 40h 17min, at 50x GPU: 13h 20min for 1 bitcoin. Default Softcore settings - 1x GPU: 20h 8min, 50x GPU: 0h 47min per bitcoin. Revert_Bitcoin_Price_To_v012 option sets Bitcoin price from 225k in 0.13 to 100k like in 0.12, this is intented way for balance.",
 			"enabled": true,
+			"Revert_Bitcoin_Price_To_v012": true,
 			"Base_Bitcoin_Time_Multiplier": 2,
 			"GPU_Efficiency": 0.5
 		},
@@ -68,7 +69,7 @@
 			"enabled": true,
 			"Cash_Offers_Percentage": {
 				"_description": "Allow small, random percentage of listings to be buyable for cash. 0 is true barter-only ecomnomy (except the cheapest items like AA battery, but this is a SPT-AKI limitation), I'd say this is a preferred way to play with this mod, but it might be a little too hard sometimes. 5% seems like a fine number that makes life just a little bit easier to avoid item deadlocks. Recommendation: 0 to 15.",
-				"value": 5
+				"value": 8
 			},
 			"Barter_Price_Variance": {
 				"_description": "± percent of price variance between item listing and it's barter value. Bigger number - more wild and varied random trades, eg you can see a Defiblirator (that has 224k value) offered for a Lion (162k value) or a Tank Battery (330k value). This CORE feature makes the whole mod tick, that what makes it fun, random and engaging and stimulates hustling in a war broken society. You can get lucky, and get a great deal, or you might desperately need an item that is way overvalued but you only have the expensive item that it is asked for. Also more variance means it's easier to encounter an offer you have an item for and easier trades. Recomendation: 20-50",
@@ -89,7 +90,7 @@
 				"value": 2
 			},
 			"Unban_Bitcoins_For_Barters": {
-				"_description": "Allow Bitcoins to be used for barters. Debatable feature to leave enabled, since you can farm them so much faster, but whatever.",
+				"_description": "Allow Bitcoins to be used for barters.",
 				"enabled": true
 			}
 		},
@@ -107,7 +108,7 @@
 		},
 		"Flea_Prices_Increased": {
 			"_description": "Slightly increase flea market prices to stimulate looting and crafting, instead of buying everything on flea. With barter economy and variance enabled you still get a lot of great trades lower then actual item value. Hustle!",
-			"multiplier": 1.4
+			"multiplier": 1.3
 		},
 		"Flea_Pristine_Items": {
 			"_description": "Only pristine condition items are offered on flea.",
@@ -173,10 +174,6 @@
 		},
 		"Reshala_Always_Has_GoldenTT": {
 			"_description": "Reshala always has his Golden TT.",
-			"enabled": true
-		},
-		"Remove_Item_In_Raid_Restrictions": {
-			"_description": "Remove expensive items restirictions to take with in raid.",
 			"enabled": true
 		}
 	},
