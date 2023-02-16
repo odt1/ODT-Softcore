@@ -29,11 +29,11 @@
 			"_description": "Master toggle for all stash options below. Also inspired by Trap's Progressive Stash. Bigger stash option, from 28/38/48/68 to 50/100/150/200 lines.",
 			"enabled": true,
 			"Less_Currency_For_Construction": {
-				"_description": "Reduses cash requirements for stage construction by a factor of 10",
+				"_description": "Reduces ridiculous cash requirements for stage construction by a factor of 10",
 				"enabled": true
 			},
 			"Easier_Loyalty": {
-				"_description": "Reduses loyalty level requirements for stage construction (Prapor, Ragman and Peacekeeper) by 1.",
+				"_description": "Reduces loyalty level requirements for stage construction (Prapor, Ragman and Peacekeeper) by 1.",
 				"enabled": true
 			},
 			"Progressive_Stash": {

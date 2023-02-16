@@ -777,14 +777,14 @@ class Mod {
                             try {
                                 // Safety level 2
                                 filtered = item._props?.Grids[0]?._props?.filters[0]?.ExcludedFilter;
+                                if (filtered.includes("5aafbcd986f7745e590fff23")) {
+                                    // log(getItemName(item._id))
+                                    item._props.Grids[0]._props.filters[0].ExcludedFilter = [];
+                                }
                             }
                             catch (error) {
-                                logger.warning(`config.OtherTweaks.Remove_Backpack_Restrictions threw an error bacause of the other mod. Ignore this error safely and continue. Send bug report.`);
-                                log(error);
-                            }
-                            if (filtered.includes("5aafbcd986f7745e590fff23")) {
-                                // log(getItemName(item._id))
-                                item._props.Grids[0]._props.filters[0].ExcludedFilter = [];
+                                logger.warning(`config.OtherTweaks.Remove_Backpack_Restrictions threw an error bacause of the other mod removed default item filter property (like Valens AIO). Ignore this error safely and continue.`);
+                                // log(error)
                             }
                         }
                     }
@@ -798,15 +798,19 @@ class Mod {
             }
             if (config_json_1.default.OtherTweaks.SICC_Case_Buff.enabled) {
                 // Huge buff to SICC case to make it actually not shit and a direct upgrade to Docs. And while we are here, allow it to hold keytool. It's Softcore, who cares.
-                let mergeFilters = [
-                    ...new Set([
-                        ...tables.templates.items["590c60fc86f77412b13fddcf"]._props.Grids[0]._props.filters[0].Filter,
-                        ...tables.templates.items["5d235bb686f77443f4331278"]._props.Grids[0]._props.filters[0].Filter,
-                        "59fafd4b86f7745ca07e1232", // keytool
-                    ]),
-                ];
-                tables.templates.items["5d235bb686f77443f4331278"]._props.Grids[0]._props.filters[0].Filter = mergeFilters;
-                // log(mergeFilters.map((x) => getItemName(x)))
+                try {
+                    let mergeFilters = [
+                        ...new Set([
+                            ...tables.templates.items["590c60fc86f77412b13fddcf"]._props.Grids[0]._props.filters[0].Filter,
+                            ...tables.templates.items["5d235bb686f77443f4331278"]._props.Grids[0]._props.filters[0].Filter,
+                            "59fafd4b86f7745ca07e1232", // keytool
+                        ]),
+                    ];
+                    tables.templates.items["5d235bb686f77443f4331278"]._props.Grids[0]._props.filters[0].Filter = mergeFilters;
+                }
+                catch (error) {
+                    logger.warning(`config.OtherTweaks.SICC_Case_Buff threw an error because of the other mod (most likely Valen's AIO, because it removed default item property. Because of that, now SICC case allows all items.) Ignore and continue.`);
+                } // log(mergeFilters.map((x) => getItemName(x)))
             }
             if (config_json_1.default.OtherTweaks.Reshala_Always_Has_GoldenTT.enabled) {
                 // Reshala always has his Golden TT
@@ -990,6 +994,12 @@ class Mod {
             getCraft("5c052e6986f7746b207bc3c9").requirements.find((x) => x.templateId == "5af0561e86f7745f5f3ad6ac").count = 4;
             // LEDX buff (Huge buff, 1 of each component only). Now it is actually only sometimes bother to craft it.
             getCraft("5c0530ee86f774697952d952").requirements.forEach((x) => {
+                if (x.count) {
+                    x.count = 1;
+                }
+            });
+            // Gasan buff
+            getCraft("5672cb724bdc2dc2088b456b").requirements.forEach((x) => {
                 if (x.count) {
                     x.count = 1;
                 }
