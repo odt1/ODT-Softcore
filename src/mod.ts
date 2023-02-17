@@ -939,7 +939,7 @@ class Mod implements IPostDBLoadMod {
 						prices[itemID] = itemInHandbook.Price
 					}
 
-					if (!fleaListingsWhitelist.includes(itemInHandbook.ParentId) && config.EconomyOptions.Pacifist_FleaMarket.enabled == true) {
+					if (!fleaListingsWhitelist.includes(itemInHandbook.ParentId) && config.EconomyOptions.Pacifist_FleaMarket.enabled == true || items[itemID]._props.QuestItem == true) {
 						// Ban everything on flea except whitelist handbook categories above.
 						ragfairConfig.dynamic.blacklist.custom.push(itemID) // Better semantics then CanSellOnRagfair
 						// items[itemID]._props.CanSellOnRagfair = false

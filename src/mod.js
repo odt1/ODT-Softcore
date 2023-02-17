@@ -860,7 +860,7 @@ class Mod {
                         // Change all Flea prices to handbook prices.
                         prices[itemID] = itemInHandbook.Price;
                     }
-                    if (!fleaListingsWhitelist.includes(itemInHandbook.ParentId) && config_json_1.default.EconomyOptions.Pacifist_FleaMarket.enabled == true) {
+                    if (!fleaListingsWhitelist.includes(itemInHandbook.ParentId) && config_json_1.default.EconomyOptions.Pacifist_FleaMarket.enabled == true || items[itemID]._props.QuestItem == true) {
                         // Ban everything on flea except whitelist handbook categories above.
                         ragfairConfig.dynamic.blacklist.custom.push(itemID); // Better semantics then CanSellOnRagfair
                         // items[itemID]._props.CanSellOnRagfair = false
@@ -1820,7 +1820,7 @@ class Mod {
                 // */
             }
             catch (error) {
-                logger.warning(`config.CraftingRebalance failed. Continue`);
+                logger.warning(`config.CraftingRebalance failed. Send bug report. Continue safely.`);
                 log(error);
             }
         }
