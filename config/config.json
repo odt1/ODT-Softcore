@@ -1,7 +1,7 @@
 {
 	"SecureContainersRedone": {
 		"_description": "Master toggle for all secure containers options below. Inspired by Trap's Progressive Stash, redone from scratch. Disabled by default to not confuse existing profiles.",
-		"enabled": true,
+		"enabled": false,
 		"Craftable_Containers": {
 			"_description": "Start your NEW profile with just a Waist Pouch 2x2 container, and work your way up all the way up to Gamma with insanely complex and expensive, but fun and fair custom container crafts.",
 			"enabled": true,

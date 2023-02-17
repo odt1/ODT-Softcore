@@ -57,8 +57,8 @@ class Mod implements IPostDBLoadMod {
 		if (debug) {
 			// [Debug]
 			for (const i in items) {
-				const x = items[i]
-				if (x._type != "Item") {
+				const item = items[i]
+				if (item._type == "Item") {
 					// log(`"${x._id}", // ${locales["en"][`${x._id} Name`]}`)
 					// log(`"${x._id}", // ${x._name}`)
 				}
@@ -93,6 +93,20 @@ class Mod implements IPostDBLoadMod {
 			}
 
 			if (config.SecureContainersRedone.Craftable_Containers.enabled == true) {
+				// It seems Waist pouch does not protect againt in raid restrictions, so need to remove them alltogether.
+				try {
+					for (const i in items) {
+						const item = items[i]
+						if (item._type == "Item") {
+							if (item?._props?.DiscardLimit != undefined) {
+								item._props.DiscardLimit = -1
+							}
+						}
+					}
+				} catch (error) {
+					logger.warning(`item._props.DiscardLimit failed`)
+				}
+
 				for (const profile of profileList) {
 					tables.templates.profiles[profile].bear.character.Inventory.items.find((x) => x.slotId == "SecuredContainer")._tpl = "5732ee6a24597719ae0c0281"
 					tables.templates.profiles[profile].usec.character.Inventory.items.find((x) => x.slotId == "SecuredContainer")._tpl = "5732ee6a24597719ae0c0281"
@@ -560,6 +574,7 @@ class Mod implements IPostDBLoadMod {
 				tables.hideout.scavcase.forEach((x) => {
 					if (debug) {
 						x.ProductionTime = 1
+						x.Requirements[0].templateId = "5449016a4bdc2d6f028b456f"
 					} else {
 						x.ProductionTime /= config.ScavCaseOptions.FasterScavcase.SpeedMultiplier
 					}
@@ -1072,139 +1087,899 @@ class Mod implements IPostDBLoadMod {
 			// Crafts:
 			// This here, is some dumb stuff, I should've created some special class, controller, pushed the data out of the code or some other OOP bullcrap, but I'm not a programmer, so this will have to suffice. Sorry, not sorry.
 
-			// 2x Clin production buff
-			getCraft("59e358a886f7741776641ac3").count = 2
+			try {
+				// 2x Clin production buff
+				getCraft("59e358a886f7741776641ac3").count = 2
 
-			// 2x Paracord production buff
-			getCraft("5c12688486f77426843c7d32").count = 2
+				// 2x Paracord production buff
+				getCraft("5c12688486f77426843c7d32").count = 2
 
-			// Water filter < 2 airfilter craft buff
-			getCraft("5d1b385e86f774252167b98a").requirements.find((x) => x.templateId == "590c595c86f7747884343ad7").count = 2
+				// Water filter < 2 airfilter craft buff
+				getCraft("5d1b385e86f774252167b98a").requirements.find((x) => x.templateId == "590c595c86f7747884343ad7").count = 2
 
-			// Toilet paper production nerf lol. Who would have thought this craft would be OP, huh?
-			getCraft("5c13cef886f774072e618e82").count = 1
+				// Toilet paper production nerf lol. Who would have thought this craft would be OP, huh?
+				getCraft("5c13cef886f774072e618e82").count = 1
 
-			// EWR buff
-			getCraft("60098b1705871270cd5352a1").count = 3
+				// EWR buff
+				getCraft("60098b1705871270cd5352a1").count = 3
 
-			// Buff MULE
-			getCraft("5ed51652f6c34d2cc26336a1").count = 2
+				// Buff MULE
+				getCraft("5ed51652f6c34d2cc26336a1").count = 2
 
-			// AFAK buff
-			getCraft("60098ad7c2240c0fe85c570a").requirements.find((x) => x.templateId == "590c678286f77426c9660122").count = 1
-			getCraft("60098ad7c2240c0fe85c570a").requirements.find((x) => x.templateId == "5751a25924597722c463c472").templateId = "5e8488fa988a8701445df1e4"
+				// AFAK buff
+				getCraft("60098ad7c2240c0fe85c570a").requirements.find((x) => x.templateId == "590c678286f77426c9660122").count = 1
+				getCraft("60098ad7c2240c0fe85c570a").requirements.find((x) => x.templateId == "5751a25924597722c463c472").templateId = "5e8488fa988a8701445df1e4"
 
-			// Portable defibrillator big nerf (Portable Powerbank 1 -> 4). Lore-friendly and still profitable, just not as ridiculous.
-			getCraft("5c052e6986f7746b207bc3c9").requirements.find((x) => x.templateId == "5af0561e86f7745f5f3ad6ac").count = 4
+				// Portable defibrillator big nerf (Portable Powerbank 1 -> 4). Lore-friendly and still profitable, just not as ridiculous.
+				getCraft("5c052e6986f7746b207bc3c9").requirements.find((x) => x.templateId == "5af0561e86f7745f5f3ad6ac").count = 4
 
-			// LEDX buff (Huge buff, 1 of each component only). Now it is actually only sometimes bother to craft it.
-			getCraft("5c0530ee86f774697952d952").requirements.forEach((x) => {
-				if (x.count) {
-					x.count = 1
-				}
-			})
+				// LEDX buff (Huge buff, 1 of each component only). Now it is actually only sometimes bother to craft it.
+				getCraft("5c0530ee86f774697952d952").requirements.forEach((x) => {
+					if (x.count) {
+						x.count = 1
+					}
+				})
 
-			// Gasan buff
-			getCraft("5672cb724bdc2dc2088b456b").requirements.forEach((x) => {
-				if (x.count) {
-					x.count = 1
-				}
-			})
+				// Gasan buff
+				getCraft("590a3efd86f77437d351a25b").requirements.forEach((x) => {
+					if (x.count) {
+						x.count = 1
+					}
+				})
 
-			// Virtex buff (Military circuit board 2 -> 1)
-			getCraft("5c05308086f7746b2101e90b").requirements.find((x) => x.templateId == "5d0376a486f7747d8050965c").count = 1
+				// Hawk nerf
+				getCraftID("5dd3c9c8449c0c31795b0f0b").requirements.find((x) => x.templateId == "57347b8b24597737dd42e192").templateId = "60391a8b3364dc22b04d0ce5"
+				getCraftID("5dd3c9c8449c0c31795b0f0b").requirements.find((x) => x.type == "Area").requiredLevel = 2
 
-			// Military circuit board buff (1 -> 2)
-			getCraft("5d0376a486f7747d8050965c").count = 2
+				// Spark plug buff 1 -> 4
+				getCraft("590a3c0a86f774385a33c450").count = 4
 
-			// Military flash drive lore-based change (2 Secure Flash drive -> 1 VPX, and Topographic survey maps 2 -> 1).
-			// Not "profitable", but will change Intel folder craft to compensate, and allow it to be crafted on level 2.
-			getCraft("62a0a16d0b9d3c46de5b6e97").requirements.forEach((x) => {
-				if (x.count) {
-					x.count = 1
-				}
-			})
-			getCraft("62a0a16d0b9d3c46de5b6e97").requirements.find((x) => x.type == "Area").requiredLevel = 2
+				// PCB -> counter instead of gasan, 3 PCB
+				getCraftID("5ffcac4e1285295b7441ee01").count = 3
+				getCraftID("5ffcac4e1285295b7441ee01").requirements.find((x) => x.templateId == "590a3efd86f77437d351a25b").templateId = "5672cb724bdc2dc2088b456b"
 
-			getCraft("62a0a16d0b9d3c46de5b6e97").requirements.find((x) => x.templateId == "590c621186f774138d11ea29").templateId = "5c05300686f7746dce784e5d"
+				// Geiger-Muller counter uses only 1 gasan at lvl1
+				getCraft("5672cb724bdc2dc2088b456b").requirements = [
+					{
+						areaType: 10,
+						requiredLevel: 1,
+						type: "Area",
+					},
+					{
+						templateId: "590a3efd86f77437d351a25b",
+						count: 1,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "590c2e1186f77425357b6124",
+						type: "Tool",
+					},
+				]
 
-			// Intelligence folder buff (Military flash drive 2 -> 1)
-			getCraft("5c12613b86f7743bbe2c3f76").requirements.find((x) => x.templateId == "62a0a16d0b9d3c46de5b6e97").count = 1
+				// GreenBat
+				getCraft("5e2aedd986f7746d404f3aa4").count = 2
+				getCraft("5e2aedd986f7746d404f3aa4").requirements = [
+					{
+						areaType: 10,
+						requiredLevel: 2,
+						type: "Area",
+					},
+					{
+						templateId: "5af0561e86f7745f5f3ad6ac",
+						count: 1,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "5d1b31ce86f7742523398394",
+						type: "Tool",
+					},
+				]
 
-			// VPX buff (RAM and Broken GPhone smartphone 3 -> 2)
-			getCraft("5c05300686f7746dce784e5d").requirements.forEach((x) => {
-				if (x.count) {
-					x.count = 2
-				}
-			})
+				// VOG-25 Khattabka improvised hand grenade
+				getCraft("5e340dcdcb6d5863cc5e5efb").requirements.forEach((x) => {
+					if (x.count) {
+						x.count = 2
+					}
+				})
 
-			// FLIR huge buff (everything is 1, plus change SAS drive (wtf?!) to Armasight Vulcan MG 3.5x Bravo night vision scope)
-			getCraft("5d1b5e94d7ad1a2b865a96b0").requirements.forEach((x) => {
-				if (x.count) {
-					x.count = 1
-				}
-			})
-			getCraft("5d1b5e94d7ad1a2b865a96b0").requirements.find((x) => x.templateId == "590c37d286f77443be3d7827").templateId = "5b3b6e495acfc4330140bd88"
+				// 23x75mm "Zvezda" flashbang round
+				getCraft("5e85a9f4add9fe03027d9bf1").count = 20
+				getCraft("5e85a9f4add9fe03027d9bf1").requirements = [
+					{
+						areaType: 10,
+						requiredLevel: 2,
+						type: "Area",
+					},
+					{
+						templateId: "5d6fc78386f77449d825f9dc",
+						count: 1,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "5e85a9a6eacf8c039e4e2ac1",
+						count: 20,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "5a0c27731526d80618476ac4",
+						count: 2,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "590c2e1186f77425357b6124",
+						type: "Tool",
+					},
+					{
+						templateId: "544fb5454bdc2df8738b456a",
+						type: "Tool",
+					},
+				]
 
-			// CMS nerf (Medical tools 1 -> 2)
-			getCraft("5d02778e86f774203e7dedbe").requirements.find((x) => x.templateId == "619cc01e0a7c3a1a2731940c").count = 2
+				// Virtex buff (Military circuit board 2 -> 1)
+				getCraft("5c05308086f7746b2101e90b").requirements.find((x) => x.templateId == "5d0376a486f7747d8050965c").count = 1
 
-			// GRIzZLY nerf (1 -> 2)
-			getCraft("590c657e86f77412b013051d").count = 1
+				// Rechargeable battery buff, Portable Powerbank -> Electric drill
+				getCraft("590a358486f77429692b2790").requirements.find((x) => x.templateId == "5af0561e86f7745f5f3ad6ac").templateId = "59e35de086f7741778269d84"
 
-			// coffee buff (2 -> 3)
-			getCraft("5af0484c86f7740f02001f7f").count = 3
+				//// AMMO ////
+				// 9x19mm AP 6.3
+				getCraft("5c925fa22e221601da359b7b").requirements.find((x) => x.templateId == "5d6fc87386f77449db3db94e").count = 1
+				getCraft("5c925fa22e221601da359b7b").requirements.find((x) => x.templateId == "5d6fc87386f77449db3db94e").templateId = "5d6fc78386f77449d825f9dc"
 
-			// MPPV buff (KEKTAPE duct tape 2 -> 1)
-			getCraft("5df8a42886f77412640e2e75").requirements.find((x) => x.templateId == "5e2af29386f7746d4159f077").count = 1
+				// "5efb0da7a29a85116f6ea05f", // 9x19mm PBP gzh
+				getCraft("5efb0da7a29a85116f6ea05f").requirements = [
+					{
+						areaType: 10,
+						requiredLevel: 3,
+						type: "Area",
+					},
+					{
+						templateId: "5c925fa22e221601da359b7b",
+						count: 200,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "5d6fc87386f77449db3db94e",
+						count: 1,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "590c2e1186f77425357b6124",
+						type: "Tool",
+					},
+				]
 
-			// bottled water buff water (8 -> 16)
-			getCraft("5448fee04bdc2dbc018b4567").count = 16
+				// .45 ACP AP buff
+				getCraft("5efb0cabfb3e451d70735af5").count = 120
+				getCraft("5efb0cabfb3e451d70735af5").requirements = [
+					{
+						areaType: 10,
+						requiredLevel: 2,
+						type: "Area",
+					},
+					{
+						templateId: "5efb0d4f4bc50b58e81710f3",
+						count: 120,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "544fb5454bdc2df8738b456a",
+						type: "Tool",
+					},
+					{
+						templateId: "5d6fc78386f77449d825f9dc",
+						count: 1,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "590c31c586f774245e3141b2",
+						count: 1,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "62a0a0bb621468534a797ad5",
+						type: "Tool",
+					},
+				]
 
-			// Topographic survey maps buff (1 -> 2)
-			getCraft("62a0a124de7ac81993580542").count = 2
+				// 5.7x28mm SS190 buff
+				getCraft("5cc80f38e4a949001152b560").requirements = [
+					{
+						areaType: 10,
+						requiredLevel: 2,
+						type: "Area",
+					},
+					{
+						templateId: "5d1b317c86f7742523398392",
+						type: "Tool",
+					},
+					{
+						templateId: "5af04b6486f774195a3ebb49",
+						type: "Tool",
+					},
+					{
+						templateId: "5cc80f8fe4a949033b0224a2",
+						count: 100,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "5d6fc87386f77449db3db94e",
+						count: 1,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "590c31c586f774245e3141b2",
+						count: 1,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+				]
 
-			// Aquamari buff (3 -> 5)
-			getCraft("5c0fa877d174af02a012e1cf").count = 5
+				// 7.62x51mm M80 buff
+				getCraft("58dd3ad986f77403051cba8f").requirements = [
+					{
+						areaType: 10,
+						requiredLevel: 3,
+						type: "Area",
+					},
+					{
+						templateId: "544fb5454bdc2df8738b456a",
+						type: "Tool",
+					},
+					{
+						templateId: "5d1b31ce86f7742523398394",
+						type: "Tool",
+					},
+					{
+						templateId: "5e023e53d4353e3302577c4c",
+						count: 80,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "5d6fc78386f77449d825f9dc",
+						count: 2,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+				]
 
-			// SJ6 buff (2 -> 3)
-			getCraft("5c0e531d86f7747fa23f4d42").count = 3
+				// 5.56x45mm MK 318 Mod 0 (SOST)
+				getCraft("60194943740c5d77f6705eea").requirements = [
+					{
+						areaType: 10,
+						requiredLevel: 2,
+						type: "Area",
+					},
+					{
+						templateId: "59e6927d86f77411da468256",
+						count: 150,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "5d6fc78386f77449d825f9dc",
+						count: 1,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "5af04b6486f774195a3ebb49",
+						type: "Tool",
+					},
+				]
 
-			// GPU buff (3 VPX -> 1 Virtex, 10 PCB -> 1, 10 CPU -> 1)
-			getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "5c05300686f7746dce784e5d").count = 1
-			getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "5c05300686f7746dce784e5d").templateId = "5c05308086f7746b2101e90b"
-			getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "573477e124597737dd42e191").count = 1
-			getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "590a3b0486f7743954552bdb").count = 1
+				// "59e0d99486f7744a32234762", // 7.62x39mm BP gzh
+				getCraft("59e0d99486f7744a32234762").requirements = [
+					{
+						areaType: 10,
+						requiredLevel: 3,
+						type: "Area",
+					},
+					{
+						templateId: "5656d7c34bdc2d9d198b4587",
+						count: 120,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "59e4d24686f7741776641ac7",
+						count: 120,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "5d6fc87386f77449db3db94e",
+						count: 1,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "544fb5454bdc2df8738b456a",
+						type: "Tool",
+					},
+				]
 
-			// UHF RFID Reader huge buff (only Broken GPhone X smartphone + Signal Jammer)
-			getCraft("5c052fb986f7746b2101e909").requirements = [
-				{
-					areaType: 11,
-					requiredLevel: 2,
-					type: "Area",
-				},
-				{
-					templateId: "5c1265fc86f7743f896a21c2",
-					count: 1,
+				// "5c0d56a986f774449d5de529", // 9x19mm RIP
+				getCraft("5c0d56a986f774449d5de529").requirements = [
+					{
+						areaType: 10,
+						requiredLevel: 2,
+						type: "Area",
+					},
+					{
+						templateId: "56d59d3ad2720bdb418b4577",
+						count: 180,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "57e26fc7245977162a14b800",
+						count: 2,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "5af04b6486f774195a3ebb49",
+						type: "Tool",
+					},
+					{
+						templateId: "63a0b208f444d32d6f03ea1e",
+						type: "Tool",
+					},
+				]
+
+				// "5c0d5e4486f77478390952fe", // 5.45x39mm PPBS gs "Igolnik"
+				getCraft("5c0d5e4486f77478390952fe").count = 120
+				getCraft("5c0d5e4486f77478390952fe").requirements = [
+					{
+						areaType: 10,
+						requiredLevel: 3,
+						type: "Area",
+					},
+					{
+						templateId: "590c5a7286f7747884343aea",
+						count: 1,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "5d6fc78386f77449d825f9dc",
+						count: 1,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "5d6fc87386f77449db3db94e",
+						count: 1,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "56dff2ced2720bb4668b4567",
+						count: 120,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "56dfef82d2720bbd668b4567",
+						count: 120,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "5d40425986f7743185265461",
+						type: "Tool",
+					},
+					{
+						templateId: "590c2b4386f77425357b6123",
+						type: "Tool",
+					},
+				]
+
+				// "5cadf6eeae921500134b2799", // 12.7x55mm PS12B
+				getCraft("5cadf6eeae921500134b2799").count = 80
+
+				// "59e690b686f7746c9f75e848", // 5.56x45mm M995
+				getCraft("59e690b686f7746c9f75e848").count = 180
+				getCraft("59e690b686f7746c9f75e848").requirements = [
+					{
+						areaType: 10,
+						requiredLevel: 3,
+						type: "Area",
+					},
+					{
+						templateId: "5d6fc87386f77449db3db94e",
+						count: 1,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "54527ac44bdc2d36668b4567",
+						count: 180,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "590c2e1186f77425357b6124",
+						type: "Tool",
+					},
+					{
+						templateId: "544fb5454bdc2df8738b456a",
+						type: "Tool",
+					},
+				]
+
+				// 9x39mm SP-6 gs
+				getCraft("57a0e5022459774d1673f889").requirements = [
+					{
+						templateId: "59e4d24686f7741776641ac7",
+						count: 300,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "56d59d3ad2720bdb418b4577",
+						count: 300,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "5d6fc87386f77449db3db94e",
+						count: 3,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						areaType: 10,
+						requiredLevel: 2,
+						type: "Area",
+					},
+					{
+						templateId: "590c2e1186f77425357b6124",
+						type: "Tool",
+					},
+				]
+
+				// "5c0d688c86f77413ae3407b2", // 9x39mm BP gs
+				getCraft("5c0d688c86f77413ae3407b2").requirements = [
+					{
+						templateId: "57a0e5022459774d1673f889",
+						count: 160,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "5d6fc87386f77449db3db94e",
+						count: 1,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						areaType: 10,
+						requiredLevel: 3,
+						type: "Area",
+					},
+				]
+
+				// "5c0d668f86f7747ccb7f13b2", // 9x39mm SPP gs
+				getCraft("5c0d668f86f7747ccb7f13b2").requirements = [
+					{
+						areaType: 10,
+						requiredLevel: 3,
+						type: "Area",
+					},
+					{
+						templateId: "57a0dfb82459774d3078b56c",
+						count: 200,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "5efb0da7a29a85116f6ea05f",
+						count: 200,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "5d40425986f7743185265461",
+						type: "Tool",
+					},
+				]
+
+				// 7.62x54mm R SNB gzh nerf lol
+				getCraft("560d61e84bdc2da74d8b4571").requirements.push({
+					templateId: "5e023d34e8a400319a28ed44",
+					count: 80,
 					isFunctional: false,
+					isEncoded: false,
 					type: "Item",
-				},
-				{
-					templateId: "5ac78a9b86f7741cca0bbd8d",
-					count: 1,
+				})
+				getCraft("560d61e84bdc2da74d8b4571").requirements.find((x) => x.type == "Area").requiredLevel = 3
+
+				// 9x21mm BT gzh buff
+				getCraft("5a26ac0ec4a28200741e1e18")
+					.requirements.filter((x) => x.templateId != "5a26abfac4a28232980eabff" && x.areaType == undefined)
+					.forEach((x) => (x.count = 1))
+
+				// "57371aab2459775a77142f22", // 9x18mm PMM PstM gzh
+				getCraft("57371aab2459775a77142f22").requirements.push({
+					templateId: "5737201124597760fc4431f1",
+					count: 140,
 					isFunctional: false,
+					isEncoded: false,
 					type: "Item",
-				},
-				{
-					templateId: "5d4042a986f7743185265463",
-					type: "Tool",
-				},
-				{
-					templateId: "5d63d33b86f7746ea9275524",
-					type: "Tool",
-				},
-			]
-			// */
+				})
+
+				// "5d6e6806a4b936088465b17e", // 12/70 8.5mm Magnum buckshot
+				getCraft("5d6e6806a4b936088465b17e").requirements = [
+					{
+						areaType: 10,
+						requiredLevel: 1,
+						type: "Area",
+					},
+					{
+						templateId: "560d5e524bdc2d25448b4571",
+						count: 120,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "590c5a7286f7747884343aea",
+						count: 1,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+				]
+				// "5d6e6911a4b9361bd5780d52", // 12/70 flechette
+				getCraft("5d6e6911a4b9361bd5780d52").requirements = [
+					{
+						areaType: 10,
+						requiredLevel: 1,
+						type: "Area",
+					},
+					{
+						templateId: "5d1b36a186f7742523398433",
+						count: 1,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "590c5a7286f7747884343aea",
+						count: 1,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "5d6e6869a4b9361c140bcfde",
+						count: 60,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "5d40419286f774318526545f",
+						type: "Tool",
+					},
+					{
+						templateId: "544fb5454bdc2df8738b456a",
+						type: "Tool",
+					},
+				]
+
+				//"5c0d591486f7744c505b416f", // 12/70 RIP
+				getCraft("5c0d591486f7744c505b416f").requirements.push({
+					templateId: "5d6e68dea4b9361bcc29e659",
+					count: 60,
+					isFunctional: false,
+					isEncoded: false,
+					type: "Item",
+				})
+
+				// "5d6e68a8a4b9360b6c0d54e2", // 12/70 AP-20 armor-piercing slug
+				getCraft("5d6e68a8a4b9360b6c0d54e2").requirements = [
+					{
+						areaType: 10,
+						requiredLevel: 2,
+						type: "Area",
+					},
+					{
+						templateId: "5d6e6806a4b936088465b17e",
+						count: 80,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "5c925fa22e221601da359b7b",
+						count: 80,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "5d40425986f7743185265461",
+						type: "Tool",
+					},
+					{
+						templateId: "5d4042a986f7743185265463",
+						type: "Tool",
+					},
+				]
+
+				// 5.56x45mm M856A1 buff
+				getCraft("59e6906286f7746c9f75e847").requirements.find((x) => x.templateId == "5d6fc87386f77449db3db94e").count = 1
+
+				// "5ba26835d4351e0035628ff5", // 4.6x30mm AP SX
+				getCraft("5ba26835d4351e0035628ff5").requirements.forEach((x) => {
+					if (x.count && x.count < 10) {
+						x.count = 1
+					}
+				})
+
+				// "5fd20ff893a8961fc660a954", // .300 Blackout AP
+				getCraft("5fd20ff893a8961fc660a954").requirements = [
+					{
+						areaType: 10,
+						requiredLevel: 3,
+						type: "Area",
+					},
+					{
+						templateId: "62a0a0bb621468534a797ad5",
+						type: "Tool",
+					},
+					{
+						templateId: "5d40425986f7743185265461",
+						type: "Tool",
+					},
+					{
+						templateId: "6196365d58ef8c428c287da1",
+						count: 120,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "5a6086ea4f39f99cd479502f",
+						count: 120,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+				]
+
+				// .366 TKM AP-M change
+				getCraft("5f0596629e22f464da6bbdd9").requirements = [
+					{
+						areaType: 10,
+						requiredLevel: 2,
+						type: "Area",
+					},
+					{
+						templateId: "57a0e5022459774d1673f889",
+						count: 100,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "59e4d3d286f774176a36250a",
+						count: 100,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "590c2b4386f77425357b6123",
+						type: "Tool",
+					},
+				]
+				// 7.62x51mm M61 buff
+				getCraft("5a6086ea4f39f99cd479502f").requirements = [
+					{
+						areaType: 10,
+						requiredLevel: 3,
+						type: "Area",
+					},
+					{
+						templateId: "5d6fc87386f77449db3db94e",
+						count: 2,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "5d1c774f86f7746d6620f8db",
+						count: 1,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "5a608bf24f39f98ffc77720e",
+						count: 80,
+						isFunctional: false,
+						isEncoded: false,
+						type: "Item",
+					},
+					{
+						templateId: "544fb5454bdc2df8738b456a",
+						type: "Tool",
+					},
+				]
+
+				// 5.45x39mm PP gs nerf
+				getCraft("56dff2ced2720bb4668b4567").count = 200
+				getCraft("56dff2ced2720bb4668b4567").requirements.find((x) => x.templateId == "57347c5b245977448d35f6e1").count = 200
+				getCraft("56dff2ced2720bb4668b4567").requirements.find((x) => x.templateId == "57347c5b245977448d35f6e1").templateId = "56dff4ecd2720b5f5a8b4568"
+
+				// "5d0379a886f77420407aa271", // OFZ 30x160mm shell
+				getCraft("5d0379a886f77420407aa271").requirements.forEach((x) => {
+					if (x.count) {
+						x.count = 1
+					}
+				})
+
+				// "5448be9a4bdc2dfd2f8b456a", // RGD-5 hand grenade
+				getCraft("5448be9a4bdc2dfd2f8b456a").requirements.forEach((x) => {
+					if (x.count) {
+						x.count = 1
+					}
+				})
+
+				// "Zarya" stun grenade buff
+				getCraft("5a0c27731526d80618476ac4").requirements.forEach((x) => {
+					if (x.count) {
+						x.count = 1
+					}
+				})
+
+				// Military circuit board buff (1 -> 2)
+				getCraft("5d0376a486f7747d8050965c").count = 2
+
+				// Military flash drive lore-based change (2 Secure Flash drive -> 1 VPX, and Topographic survey maps 2 -> 1).
+				// Not "profitable", but will change Intel folder craft to compensate, and allow it to be crafted on level 2.
+				getCraft("62a0a16d0b9d3c46de5b6e97").requirements.forEach((x) => {
+					if (x.count) {
+						x.count = 1
+					}
+				})
+				getCraft("62a0a16d0b9d3c46de5b6e97").requirements.find((x) => x.type == "Area").requiredLevel = 2
+				getCraft("62a0a16d0b9d3c46de5b6e97").requirements.find((x) => x.templateId == "590c621186f774138d11ea29").templateId = "5c05300686f7746dce784e5d"
+
+				// Intelligence folder buff (Military flash drive 2 -> 1)
+				getCraft("5c12613b86f7743bbe2c3f76").requirements.find((x) => x.templateId == "62a0a16d0b9d3c46de5b6e97").count = 1
+
+				// VPX buff (RAM and Broken GPhone smartphone 3 -> 2)
+				getCraft("5c05300686f7746dce784e5d").requirements.forEach((x) => {
+					if (x.count) {
+						x.count = 2
+					}
+				})
+
+				// FLIR huge buff (everything is 1, plus change SAS drive (wtf?!) to Armasight Vulcan MG 3.5x Bravo night vision scope)
+				getCraft("5d1b5e94d7ad1a2b865a96b0").requirements.forEach((x) => {
+					if (x.count) {
+						x.count = 1
+					}
+				})
+				getCraft("5d1b5e94d7ad1a2b865a96b0").requirements.find((x) => x.templateId == "590c37d286f77443be3d7827").templateId = "5b3b6e495acfc4330140bd88"
+
+				// CMS nerf (Medical tools 1 -> 2)
+				getCraft("5d02778e86f774203e7dedbe").requirements.find((x) => x.templateId == "619cc01e0a7c3a1a2731940c").count = 2
+
+				// GRIzZLY nerf (1 -> 2)
+				getCraft("590c657e86f77412b013051d").count = 1
+
+				// coffee buff (2 -> 3)
+				getCraft("5af0484c86f7740f02001f7f").count = 3
+
+				// MPPV buff (KEKTAPE duct tape 2 -> 1)
+				getCraft("5df8a42886f77412640e2e75").requirements.find((x) => x.templateId == "5e2af29386f7746d4159f077").count = 1
+
+				// bottled water buff water (8 -> 16)
+				getCraft("5448fee04bdc2dbc018b4567").count = 16
+
+				// Topographic survey maps buff (1 -> 2)
+				getCraft("62a0a124de7ac81993580542").count = 2
+
+				// Aquamari buff (3 -> 5)
+				getCraft("5c0fa877d174af02a012e1cf").count = 5
+
+				// SJ6 buff (2 -> 3)
+				getCraft("5c0e531d86f7747fa23f4d42").count = 3
+
+				// GPU buff (3 VPX -> 1 Virtex, 10 PCB -> 1, 10 CPU -> 1)
+				getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "5c05300686f7746dce784e5d").count = 1
+				getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "5c05300686f7746dce784e5d").templateId = "5c05308086f7746b2101e90b"
+				getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "573477e124597737dd42e191").count = 1
+				getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "590a3b0486f7743954552bdb").count = 1
+
+				// UHF RFID Reader huge buff (only Broken GPhone X smartphone + Signal Jammer)
+				getCraft("5c052fb986f7746b2101e909").requirements = [
+					{
+						areaType: 11,
+						requiredLevel: 2,
+						type: "Area",
+					},
+					{
+						templateId: "5c1265fc86f7743f896a21c2",
+						count: 1,
+						isFunctional: false,
+						type: "Item",
+					},
+					{
+						templateId: "5ac78a9b86f7741cca0bbd8d",
+						count: 1,
+						isFunctional: false,
+						type: "Item",
+					},
+					{
+						templateId: "5d4042a986f7743185265463",
+						type: "Tool",
+					},
+					{
+						templateId: "5d63d33b86f7746ea9275524",
+						type: "Tool",
+					},
+				]
+				// */
+			} catch (error) {
+				logger.warning(`config.CraftingRebalance failed. Send bug report. Continue safely.`)
+				log(error)
+			}
 		}
 
 		if (config.AdditionalCraftingRecipes.enabled == true) {
@@ -1583,6 +2358,16 @@ class Mod implements IPostDBLoadMod {
 			} catch (error) {
 				logger.warning(`getCraft function threw an error bacause of the other mod. Ignore this error safely and continue. Send bug report.`)
 				log(endProductID)
+				log(error)
+			}
+		}
+
+		function getCraftID(craftID) {
+			try {
+				return tables.hideout.production.find((x) => x._id == craftID && x.areaType != 21)
+			} catch (error) {
+				logger.warning(`getCraft function threw an error bacause of the other mod. Ignore this error safely and continue. Send bug report.`)
+				log(craftID)
 				log(error)
 			}
 		}

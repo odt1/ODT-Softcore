@@ -76,7 +76,7 @@ const itemWhitelist = [
 	// "5c0e655586f774045612eeb2", // HighCom Trooper TFO body armor (Multicam)
 	"579204f224597773d619e051", // Makarov PM (t) 9x18PM pistol
 	"5c010e350db83400232feec7", // SP-8 Survival Machete
-	// "5656eb674bdc2d35148b457c", // 40mm VOG-25 grenade
+	"5656eb674bdc2d35148b457c", // 40mm VOG-25 grenade
 	"5783c43d2459774bbe137486", // Simple wallet
 ];
 
