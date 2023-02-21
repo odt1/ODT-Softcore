@@ -40,8 +40,9 @@ class Mod {
         const skier = tables.traders["58330581ace78e27b8b10cee"];
         const traderlist = [prapor, therapist, ragman, jaeger, mechanic, peacekeeper, skier];
         const profileList = ["Standard", "Left Behind", "Prepare To Escape", "Edge Of Darkness", "SPT Zero to hero"];
+        const euroPrice = handbook.Items.find((x) => x.Id == "569668774bdc2da2298b4568").Price;
         // Noice.
-        var fleaBarterRequestBlacklist = itemBaseClasses_1.itemBaseClasses.filter((x) => !fleaBarterRequestsWhitelist.includes(x));
+        const fleaBarterRequestBlacklist = itemBaseClasses_1.itemBaseClasses.filter((x) => !fleaBarterRequestsWhitelist.includes(x));
         if (debug) {
             // [Debug]
             for (const i in items) {
@@ -638,7 +639,7 @@ class Mod {
                 items["5811ce572459770cba1a34ea"]._props.Grids[0]._props.cellsV = 100;
                 items["5811ce662459770f6f490f32"]._props.Grids[0]._props.cellsV = 150;
                 items["5811ce772459770e9e5f9532"]._props.Grids[0]._props.cellsV = 200;
-                let originalStages = tables.hideout.areas.find((x) => x._id == "5d484fc0654e76006657e0ab").stages;
+                const originalStages = tables.hideout.areas.find((x) => x._id == "5d484fc0654e76006657e0ab").stages;
                 for (const stage in originalStages) {
                     if (config_json_1.default.HideoutOptions.BiggerStash.Easier_Loyalty.enabled == true) {
                         originalStages[stage].requirements
@@ -765,6 +766,7 @@ class Mod {
                 globals.SkillsSettings.Surgery.SurgeryAction *= 10;
                 Object.values(globals.SkillsSettings.Immunity).forEach((x) => x * 10);
                 Object.values(globals.SkillsSettings.StressResistance).forEach((x) => x * 10);
+                Object.values(globals.SkillsSettings.MagDrills).forEach((x) => x * 5);
             }
             if (config_json_1.default.OtherTweaks.Faster_Examine_Time.enabled) {
                 // Faster ExamineTime
@@ -846,7 +848,69 @@ class Mod {
             insuranceConfig.returnChancePercent["54cb50c76803fa8b248b4571"] = 50;
             insuranceConfig.returnChancePercent["54cb57776803fa99248b456e"] = 80;
         }
-        if (config_json_1.default.EconomyOptions.enabled == true) {
+        if (config_json_1.default.EconomyOptions.enabled) {
+            if (config_json_1.default.EconomyOptions.BetterSalesToTraders.enabled) {
+                if (debug) {
+                    for (const trader in traderlist) {
+                        log(`${traderlist[trader].base.nickname}.base.items_buy = {`);
+                        log(`"category": [`);
+                        traderlist[trader].base.items_buy.category.forEach((x) => log(`"${x}", // ${getItemName(x)}`));
+                        log(`],`);
+                        log(`"id_list": [`);
+                        traderlist[trader].base.items_buy.id_list.forEach((x) => log(`"${x}", // ${getItemName(x)}`));
+                        log(`]}`);
+                    }
+                }
+                if (debug) {
+                    for (const trader in traderlist) {
+                        log(`${traderlist[trader].base.nickname}.base.sell_category = [`);
+                        traderlist[trader].base.sell_category.forEach((x) => log(`"${x}", // ${locales["en"][x]}`));
+                        // traderlist[trader].base.sell_category.forEach((x) => log(locales["en"][`${x}`]))
+                        log(`]`);
+                    }
+                    //
+                    for (const trader in traderlist) {
+                        log(`${traderlist[trader].base.nickname}: ${100 - traderlist[trader].base.loyaltyLevels[3].buy_price_coef}%`);
+                    }
+                }
+                for (const trader in traderlist) {
+                    traderlist[trader].base.loyaltyLevels[0].buy_price_coef = 35;
+                    traderlist[trader].base.loyaltyLevels[1].buy_price_coef = 30;
+                    traderlist[trader].base.loyaltyLevels[2].buy_price_coef = 25;
+                    traderlist[trader].base.loyaltyLevels[3].buy_price_coef = 20;
+                }
+                peacekeeper.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 7));
+                skier.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 6));
+                prapor.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 5));
+                mechanic.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 4));
+                jaeger.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 3));
+                ragman.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 2));
+                therapist.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 1));
+                therapist.base.items_buy.category = [
+                    "543be5664bdc2dd4348b4569",
+                    "543be6674bdc2df1348b4569",
+                    "567849dd4bdc2d150f8b456e",
+                    "543be5e94bdc2df1348b4568",
+                    // "5448eb774bdc2d0a728b4567", // Barter item
+                    "5795f317245977243854e041",
+                    // new:
+                    "57864c8c245977548867e7f1",
+                    "57864c322459775490116fbf", // HouseholdGoods
+                ];
+                ragman.base.items_buy.category.push("57864a3d24597754843f8721"); // Ragman buys Jewelry and Valuables
+            }
+            if (config_json_1.default.EconomyOptions.SkierUsesEuros.enabled) {
+                // WIP
+                skier.base.currency = "EUR";
+                skier.base.balance_eur = 700000;
+                skier.base.loyaltyLevels.forEach((x) => (x.minSalesSum = Math.round(x.minSalesSum / euroPrice)));
+                for (const barter in skier.assort.barter_scheme) {
+                    if (skier.assort.barter_scheme[barter][0][0]._tpl == "5449016a4bdc2d6f028b456f" && barter != "63d385b6b3eba6c95d0eee0c") {
+                        skier.assort.barter_scheme[barter][0][0].count = roundWithPrecision(skier.assort.barter_scheme[barter][0][0].count / euroPrice, 2);
+                        skier.assort.barter_scheme[barter][0][0]._tpl = "569668774bdc2da2298b4568";
+                    }
+                }
+            }
             // Ragfair changes:
             if (config_json_1.default.EconomyOptions.Disable_Flea_Market_Completely.disable == true) {
                 globals.RagFair.minUserLevel = 99;
@@ -860,7 +924,8 @@ class Mod {
                         // Change all Flea prices to handbook prices.
                         prices[itemID] = itemInHandbook.Price;
                     }
-                    if (!fleaListingsWhitelist.includes(itemInHandbook.ParentId) && config_json_1.default.EconomyOptions.Pacifist_FleaMarket.enabled == true || items[itemID]._props.QuestItem == true) {
+                    if ((!fleaListingsWhitelist.includes(itemInHandbook.ParentId) && config_json_1.default.EconomyOptions.Pacifist_FleaMarket.enabled == true) ||
+                        items[itemID]._props.QuestItem == true) {
                         // Ban everything on flea except whitelist handbook categories above.
                         ragfairConfig.dynamic.blacklist.custom.push(itemID); // Better semantics then CanSellOnRagfair
                         // items[itemID]._props.CanSellOnRagfair = false
@@ -948,6 +1013,10 @@ class Mod {
                             // }
                         }
                     });
+                    // Proper fix for quest items appearing in barter requests
+                    Object.keys(prices)
+                        .filter((x) => items[x]?._props?.QuestItem == true)
+                        .forEach((x) => (prices[x] = 2));
                     // Max 20 offers. Too low of a number breaks AKI server for some reason, with constant client errors on completed trades.
                     // More random trades variance anyway, this is fun.
                     ragfairConfig.dynamic.offerItemCount.min = config_json_1.default.EconomyOptions.Barter_Economy.offerItemCount.min;
@@ -969,7 +1038,8 @@ class Mod {
                 traderConfig.fence.blacklist = fenceBlacklist; //itemid or baseid
                 traderConfig.fence.maxPresetsPercent = 0;
                 traderConfig.fence.discountOptions.assortSize = config_json_1.default.EconomyOptions.Pacifist_Fence.Number_Of_Fence_Offers; // doesnt seem to work properly
-                traderConfig.fence.itemPriceMult = 0.8; // at 6 Fence karma you buy items almost at a price Therapist buys from you. Go grind.
+                traderConfig.fence.itemPriceMult = 0.81; // at 6 Fence karma you buy items almost at a price Therapist buys from you. Go grind.
+                traderConfig.fence.discountOptions.itemPriceMult = 1;
             }
             if (config_json_1.default.EconomyOptions.Reasonably_Priced_Cases.enabled == true) {
                 therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0352"][0].forEach((x) => (x.count = 5)); // THICC case (LEDX)
@@ -2219,6 +2289,10 @@ class Mod {
             else {
                 return items[itemID]?._name;
             }
+        }
+        function roundWithPrecision(num, precision) {
+            var multiplier = Math.pow(10, precision);
+            return Math.round(num * multiplier) / multiplier;
         }
         function sort(a, b) {
             if (a > b) {

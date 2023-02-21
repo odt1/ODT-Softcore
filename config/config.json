@@ -78,6 +78,14 @@
 			"_description": "CORE feature of this mod. Completly removes SPT-AKI flea prices snapshot from LIVE, and matches them to internal handbook/traders prices. Everything else is balanced around this. NOT recommended to disable. Obviously not compatible with mods like Lua's Flea Market Price Updater.",
 			"enabled": true
 		},
+		"BetterSalesToTraders": {
+			"_description": "Adjusts trader evaluations for selling items (from Prapor 50%, Therapist 63%, Ragman 62%, Jaeger 60%, Mechanic 56%, Peacekeeper 45%, Skier 49% --> Prapor 60%, Therapist 64%, Ragman 63%, Jaeger 62%, Mechanic 61%, Peacekeeper 58%, Skier 59% at loyalty level 1). Also every loyalty level will give 5% better selling evaluation so e.g. at LL4 Propor will buy items for 75% of their value. But nerfs Therapist buying categories and allows Ragman to buy valuables.",
+			"enabled": true
+		},
+		"SkierUsesEuros": {
+			"_description": "EXPERIMENTAL option, makes Skier use Euros for all trades, mostly just for fun and diversity. Adjusts assorts and loyalty levels accordingly. Turned off by default, because needs adjusting existing profiles salesSum.",
+			"enabled": false
+		},
 		"Pacifist_FleaMarket": {
 			"_description": "CORE feature of this mod. Only meds, barter items, food and info items can be bought on flea market. Uses hardcoded fleaWhitelist array as filter. NOT recommended to disable.",
 			"enabled": true,
