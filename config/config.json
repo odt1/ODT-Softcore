@@ -1,8 +1,8 @@
 {
-	"SecureContainersRedone": {
+	"SecureContainersOptions": {
 		"_description": "Master toggle for all secure containers options below. Inspired by Trap's Progressive Stash, redone from scratch. Disabled by default to not confuse existing profiles.",
 		"enabled": true,
-		"Craftable_Containers": {
+		"Progressive_Containers": {
 			"_description": "Start your NEW profile with just a Waist Pouch 2x2 container, and work your way up all the way up to Gamma with insanely complex and expensive, but fun and fair custom container crafts.",
 			"enabled": true,
 			"Collector_Quest_Redone": {
@@ -18,16 +18,17 @@
 	"HideoutOptions": {
 		"_description": "Master toggle for all hideout options below.",
 		"enabled": true,
-		"Faster_Bitcoin_Farming": {
-			"_description": "Modifies base farming time and dramatically increases each GPU efficiency (from ~4% to 50%). It means that each additional GPU has a much greater impact on farming time and lvl3 bitcoin farm is very profitable and desirable. EG - Vanilla 1x GPU: 40h 17min, at 50x GPU: 13h 20min for 1 bitcoin. Default Softcore settings - 1x GPU: 20h 8min, 50x GPU: 0h 47min per bitcoin. Revert_Bitcoin_Price_To_v012 option sets Bitcoin price from 225k in 0.13 to 100k like in 0.12, this is intented way for balance.",
+		"StashOptions": {
+			"_description": "Master toggle for all stash options below. Inspired by Trap's Progressive Stash.",
 			"enabled": true,
-			"Revert_Bitcoin_Price_To_v012": true,
-			"Base_Bitcoin_Time_Multiplier": 2,
-			"GPU_Efficiency": 0.5
-		},
-		"BiggerStash": {
-			"_description": "Master toggle for all stash options below. Also inspired by Trap's Progressive Stash. Bigger stash option, from 28/38/48/68 to 50/100/150/200 lines.",
-			"enabled": true,
+			"Progressive_Stash": {
+				"_description": "Makes every new profile start with LVL1 stash",
+				"enabled": true
+			},
+			"BiggerStash": {
+				"_description": "Bigger stash option, from 28/38/48/68 to 50/100/150/200 lines.",
+				"enabled": true
+			},
 			"Less_Currency_For_Construction": {
 				"_description": "Reduces ridiculous cash requirements for stage construction by a factor of 10",
 				"enabled": true
@@ -35,11 +36,14 @@
 			"Easier_Loyalty": {
 				"_description": "Reduces loyalty level requirements for stage construction (Prapor, Ragman and Peacekeeper) by 1.",
 				"enabled": true
-			},
-			"Progressive_Stash": {
-				"_description": "Makes every new profile start with LVL1 stash",
-				"enabled": true
 			}
+		},
+		"Faster_Bitcoin_Farming": {
+			"_description": "Modifies base farming time and dramatically increases each GPU efficiency (from ~4% to 50%). It means that each additional GPU has a much greater impact on farming time and lvl3 bitcoin farm is very profitable and desirable. EG - Vanilla 1x GPU: 40h 17min, at 50x GPU: 13h 20min for 1 bitcoin. Default Softcore settings - 1x GPU: 20h 8min, 50x GPU: 0h 47min per bitcoin. Revert_Bitcoin_Price_To_v012 option sets Bitcoin price from 225k in 0.13 to 100k like in 0.12, this is intented way for balance.",
+			"enabled": true,
+			"Revert_Bitcoin_Price_To_v012": true,
+			"Base_Bitcoin_Time_Multiplier": 2,
+			"GPU_Efficiency": 0.5
 		},
 		"Faster_Crafting_Time": {
 			"_description": "Make all recipes except bitcoin, moonshine and purified water much faster.",
@@ -77,14 +81,6 @@
 		"Price_Rebalance": {
 			"_description": "CORE feature of this mod. Completly removes SPT-AKI flea prices snapshot from LIVE, and matches them to internal handbook/traders prices. Everything else is balanced around this. NOT recommended to disable. Obviously not compatible with mods like Lua's Flea Market Price Updater.",
 			"enabled": true
-		},
-		"BetterSalesToTraders": {
-			"_description": "Adjusts trader evaluations for selling items (from Prapor 50%, Therapist 63%, Ragman 62%, Jaeger 60%, Mechanic 56%, Peacekeeper 45%, Skier 49% --> Prapor 60%, Therapist 64%, Ragman 63%, Jaeger 62%, Mechanic 61%, Peacekeeper 58%, Skier 59% at loyalty level 1). Also every loyalty level will give 5% better selling evaluation so e.g. at LL4 Propor will buy items for 75% of their value. But nerfs Therapist buying categories and allows Ragman to buy valuables.",
-			"enabled": true
-		},
-		"SkierUsesEuros": {
-			"_description": "EXPERIMENTAL option, makes Skier use Euros for all trades, mostly just for fun and diversity. Adjusts assorts and loyalty levels accordingly. Turned off by default, because needs adjusting existing profiles salesSum.",
-			"enabled": false
 		},
 		"Pacifist_FleaMarket": {
 			"_description": "CORE feature of this mod. Only meds, barter items, food and info items can be bought on flea market. Uses hardcoded fleaWhitelist array as filter. NOT recommended to disable.",
@@ -134,12 +130,8 @@
 				"enabled": true
 			}
 		},
-		"Reasonably_Priced_Cases": {
-			"_description": "Rebalances costs of hideout cases to fair and resonable prices and barters. Also changes LEDX dogtag barter, ",
-			"enabled": true
-		},
 		"Disable_Selling_on_Flea": {
-			"_description": "If option is CHANGED below, it will ALLOW selling on flea market (default is NO SELLING ON FLEA). Also increases fleamarket reputation gain by a factior of 10. Will allow you to sell weapons and other blocked by Softcore items like in Vanilla. Not playtested and balanced around this, not recommended to enable. Also SPT 3.5.0 has wierd default configuration for time, will have to investigete further.",
+			"_description": "NOT RECOMMENDED TO CHANGE, use TraderChanges options below. If option is CHANGED below, it will ALLOW selling on flea market (default is NO SELLING ON FLEA). Also increases fleamarket reputation gain by a factior of 10. Will allow you to sell weapons and other blocked by Softcore items like in Vanilla. Not playtested and balanced around this, not recommended to enable. Also SPT 3.5.0 has wierd default configuration for time, will have to investigete further.",
 			"sellingDisabled": true
 		},
 		"Fleamarket_Opened_at_Level": {
@@ -154,14 +146,34 @@
 			"_description": "Only pristine condition items are offered on flea.",
 			"enabled": true
 		},
-		"Pacifist_Fence": {
-			"_description": "To go algong with the theme of this mod, Fence also sells only pacifist items. But his prices are at 90% of item value, and dependant on scav karma, so at 6 karma he will sell items almost at the same price Therapist buys them from you.",
-			"enabled": true,
-			"Number_Of_Fence_Offers": 30
-		},
 		"Only_Found_In_Raid_Items_Allowed_For_Barters": {
 			"_description": "Be a man, don't change this. This is borderline cheating option for infinite money because of variance changes.",
 			"enabled": true
+		}
+	},
+	"TraderChanges": {
+		"_description": "Master toggle for all trader changes below",
+		"enabled": true,
+		"BetterSalesToTraders": {
+			"_description": "Adjusts trader evaluations for selling items (from Prapor 50%, Therapist 63%, Ragman 62%, Jaeger 60%, Mechanic 56%, Peacekeeper 45%, Skier 49% --> Prapor 60%, Therapist 64%, Ragman 63%, Jaeger 62%, Mechanic 61%, Peacekeeper 58%, Skier 59% at loyalty level 1). Also every loyalty level will give 5% better selling evaluation so e.g. at LL4 Propor will buy items for 75% of their value.",
+			"enabled": true
+		},
+		"AlternativeCategories": {
+			"_description": "Nerfs Therapist buying categories (instead of all barter items, she buys only meds and household goods, good for trader diversity) and allows Ragman to buy valuables.",
+			"enabled": true
+		},
+		"Pacifist_Fence": {
+			"_description": "To go algong with the theme of this mod, Fence also sells only pacifist items. His prices are dependant on scav karma, so at 6 karma he will sell items almost at the same price Therapist buys them from you.",
+			"enabled": true,
+			"Number_Of_Fence_Offers": 30
+		},
+		"Reasonably_Priced_Cases": {
+			"_description": "Rebalances costs of hideout cases to fair and resonable prices and barters. Also changes LEDX dogtag barter",
+			"enabled": true
+		},
+		"SkierUsesEuros": {
+			"_description": "EXPERIMENTAL option, makes Skier use Euros for all trades, mostly just for fun and diversity. Adjusts assorts and loyalty levels accordingly. Turned off by default, because needs adjusting existing profiles salesSum.",
+			"enabled": false
 		}
 	},
 	"CraftingRebalance": {
@@ -196,6 +208,10 @@
 			"_description": "Buff Vitality, Sniper, Surgery, Immunity and Stress Resistance skill leveling (x10).",
 			"enabled": true
 		},
+		"Signal_Pistol_In_Special_Slots": {
+			"_description": "ZiD SP-81 26x75 signal pistol can be put in special slots and is not removed after death.",
+			"enabled": true
+		},
 		"Faster_Examine_Time": {
 			"_description": "Unknown item examine time buff (x5)",
 			"enabled": true
@@ -211,6 +227,10 @@
 		"SICC_Case_Buff": {
 			"_description": "Huge QoL buff to SICC case to make it actually not shit and a direct upgrade to Docs. And while we are here, allow it to hold keytools. It's an end-game item you cannot easily get on flea market with all other Softcore changes, so who cares. Allowed item list: Physical bitcoin, GP coin, Veritas guitar pick, Keycard holder case, Info, Key, Map, Money, Chain with Prokill medallion, Gold skull ring, Dogtag BEAR, Dogtag USEC, Secure Flash drive, Key tool.",
 			"enabled": true
+		},
+		"Remove_Discard_Limit": {
+			"_description": "Remove discard limit for expensive items (anti-RTM measure by BSG).",
+			"enabled": false
 		},
 		"Reshala_Always_Has_GoldenTT": {
 			"_description": "Reshala always has his Golden TT.",

@@ -53,8 +53,8 @@ class Mod {
                 }
             }
         }
-        if (config_json_1.default.SecureContainersRedone.enabled == true) {
-            if (config_json_1.default.SecureContainersRedone.Bigger_Containers.enabled == true) {
+        if (config_json_1.default.SecureContainersOptions.enabled) {
+            if (config_json_1.default.SecureContainersOptions.Bigger_Containers.enabled) {
                 // Waist Pouch
                 items["5732ee6a24597719ae0c0281"]._props.Grids[0]._props.cellsV = 2;
                 items["5732ee6a24597719ae0c0281"]._props.Grids[0]._props.cellsH = 4;
@@ -74,557 +74,581 @@ class Mod {
                 items["5c093ca986f7740a1867ab12"]._props.Grids[0]._props.cellsV = 5;
                 items["5c093ca986f7740a1867ab12"]._props.Grids[0]._props.cellsH = 5;
             }
-            if (config_json_1.default.SecureContainersRedone.Craftable_Containers.enabled == true) {
-                // It seems Waist pouch does not protect againt in raid restrictions, so need to remove them alltogether.
+            if (config_json_1.default.SecureContainersOptions.Progressive_Containers.enabled) {
                 try {
-                    for (const i in items) {
-                        const item = items[i];
-                        if (item._type == "Item") {
-                            if (item?._props?.DiscardLimit != undefined) {
-                                item._props.DiscardLimit = -1;
-                            }
-                        }
+                    // It seems Waist pouch does not protect againt in raid restrictions, so need to remove them alltogether.
+                    // items["5857a8bc2459772bad15db29"]._props.Grids[0]._props.filters[0].Filter.forEach(x => log(getItemName(x)))
+                    // items["5732ee6a24597719ae0c0281"]._props.Grids[0]._props.filters[0].Filter.forEach(x => log(getItemName(x)))
+                    // log(`---`)
+                    // items["5857a8bc2459772bad15db29"]._props.Grids[0]._props.filters[0].ExcludedFilter.forEach(x => log(getItemName(x)))
+                    // items["5732ee6a24597719ae0c0281"]._props.Grids[0]._props.filters[0].ExcludedFilter.forEach(x => log(getItemName(x)))
+                    try {
+                        items["5732ee6a24597719ae0c0281"]._props.CantRemoveFromSlotsDuringRaid[0] = "SecuredContainer";
                     }
-                }
-                catch (error) {
-                    logger.warning(`item._props.DiscardLimit failed`);
-                }
-                for (const profile of profileList) {
-                    tables.templates.profiles[profile].bear.character.Inventory.items.find((x) => x.slotId == "SecuredContainer")._tpl = "5732ee6a24597719ae0c0281";
-                    tables.templates.profiles[profile].usec.character.Inventory.items.find((x) => x.slotId == "SecuredContainer")._tpl = "5732ee6a24597719ae0c0281";
-                }
-                // Beta container from PK "removal"
-                peacekeeper.assort.barter_scheme["63d385c6b3eba6c95d0efa0a"][0].forEach((x) => (x.count = 15));
-                const Alpha = {
-                    _id: "63da4dbee8fa73e22500001a",
-                    areaType: 10,
-                    requirements: [
-                        { areaType: 10, requiredLevel: 1, type: "Area" },
-                        {
-                            templateId: "567143bf4bdc2d1a0f8b4567",
-                            count: 2,
-                            isFunctional: false,
-                            type: "Item",
-                        },
-                        {
-                            templateId: "5783c43d2459774bbe137486",
-                            count: 2,
-                            isFunctional: false,
-                            type: "Item",
-                        },
-                        {
-                            templateId: "5c093e3486f77430cb02e593",
-                            count: 2,
-                            isFunctional: false,
-                            type: "Item",
-                        },
-                        {
-                            templateId: "590c621186f774138d11ea29",
-                            count: 2,
-                            isFunctional: false,
-                            type: "Item",
-                        },
-                    ],
-                    productionTime: 5600,
-                    boosters: null,
-                    endProduct: "544a11ac4bdc2d470e8b456a",
-                    continuous: false,
-                    count: 1,
-                    productionLimitCount: 0,
-                };
-                const Beta = {
-                    _id: "63da4dbee8fa73e22500001b",
-                    areaType: 10,
-                    requirements: [
-                        { areaType: 10, requiredLevel: 1, type: "Area" },
-                        {
-                            templateId: "544a11ac4bdc2d470e8b456a",
-                            count: 2,
-                            isFunctional: false,
-                            type: "Item",
-                        },
-                        {
-                            templateId: "5aafbde786f774389d0cbc0f",
-                            count: 2,
-                            isFunctional: false,
-                            type: "Item",
-                        },
-                        {
-                            templateId: "590c60fc86f77412b13fddcf",
-                            count: 2,
-                            isFunctional: false,
-                            type: "Item",
-                        },
-                        {
-                            templateId: "62a0a16d0b9d3c46de5b6e97",
-                            count: 2,
-                            isFunctional: false,
-                            type: "Item",
-                        },
-                    ],
-                    productionTime: 10800,
-                    boosters: null,
-                    endProduct: "5857a8b324597729ab0a0e7d",
-                    continuous: false,
-                    count: 1,
-                    productionLimitCount: 0,
-                };
-                const Epsilon = {
-                    _id: "63da4dbee8fa73e22500001c",
-                    areaType: 10,
-                    requirements: [
-                        { areaType: 10, requiredLevel: 2, type: "Area" },
-                        {
-                            templateId: "5857a8b324597729ab0a0e7d",
-                            count: 2,
-                            isFunctional: false,
-                            type: "Item",
-                        },
-                        {
-                            templateId: "5c127c4486f7745625356c13",
-                            count: 2,
-                            isFunctional: false,
-                            type: "Item",
-                        },
-                        {
-                            templateId: "59fafd4b86f7745ca07e1232",
-                            count: 2,
-                            isFunctional: false,
-                            type: "Item",
-                        },
-                        {
-                            templateId: "619cbf9e0a7c3a1a2731940a",
-                            count: 2,
-                            isFunctional: false,
-                            type: "Item",
-                        },
-                        {
-                            templateId: "61bf7c024770ee6f9c6b8b53",
-                            count: 2,
-                            isFunctional: false,
-                            type: "Item",
-                        },
-                    ],
-                    productionTime: 35000,
-                    boosters: null,
-                    endProduct: "59db794186f77448bc595262",
-                    continuous: false,
-                    count: 1,
-                    productionLimitCount: 0,
-                };
-                const Gamma = {
-                    _id: "63da4dbee8fa73e22500001d",
-                    areaType: 10,
-                    requirements: [
-                        { areaType: 10, requiredLevel: 3, type: "Area" },
-                        {
-                            templateId: "59db794186f77448bc595262",
-                            count: 2,
-                            isFunctional: false,
-                            type: "Item",
-                        },
-                        {
-                            templateId: "5e2af55f86f7746d4159f07c",
-                            count: 2,
-                            isFunctional: false,
-                            type: "Item",
-                        },
-                        {
-                            templateId: "59fb016586f7746d0d4b423a",
-                            count: 2,
-                            isFunctional: false,
-                            type: "Item",
-                        },
-                        {
-                            templateId: "5d235bb686f77443f4331278",
-                            count: 2,
-                            isFunctional: false,
-                            type: "Item",
-                        },
-                        {
-                            templateId: "619cbf7d23893217ec30b689",
-                            count: 2,
-                            isFunctional: false,
-                            type: "Item",
-                        },
-                        {
-                            templateId: "6389c7750ef44505c87f5996",
-                            count: 2,
-                            isFunctional: false,
-                            type: "Item",
-                        },
-                    ],
-                    productionTime: 61200,
-                    boosters: null,
-                    endProduct: "5857a8bc2459772bad15db29",
-                    continuous: false,
-                    count: 1,
-                    productionLimitCount: 0,
-                };
-                tables.hideout.production.push(Alpha, Beta, Epsilon, Gamma);
-                if (config_json_1.default.SecureContainersRedone.Craftable_Containers.Collector_Quest_Redone.enabled == true) {
-                    // Add the surprise
-                    tables.templates.quests["5c51aac186f77432ea65c552"].conditions.AvailableForFinish.push({
-                        _parent: "HandoverItem",
-                        _props: {
-                            dogtagLevel: 0,
-                            id: "639135534b15ca31f76bc319",
-                            index: 69,
-                            maxDurability: 100,
-                            minDurability: 0,
-                            parentId: "",
-                            isEncoded: false,
-                            onlyFoundInRaid: false,
-                            dynamicLocale: false,
-                            target: ["5857a8bc2459772bad15db29"],
-                            value: "2",
-                            visibilityConditions: [],
-                        },
-                        dynamicLocale: false,
-                    });
-                    tables.locales.global["ru"]["639135534b15ca31f76bc319"] = "Передать носитель"; // Тут нужен только фикс для русского, для всех остальных языков звучит как "Hand over the storage device"
-                    // Remove level req from finish
-                    tables.templates.quests["5c51aac186f77432ea65c552"].conditions.AvailableForFinish = tables.templates.quests["5c51aac186f77432ea65c552"].conditions.AvailableForFinish.filter((x) => x._parent != "Level");
-                    // Start condition
-                    tables.templates.quests["5c51aac186f77432ea65c552"].conditions.AvailableForStart = [
-                        {
-                            _parent: "Level",
+                    catch (error) {
+                        logger.warning(`\nAdjusting Waist Pouch CantRemoveFromSlotsDuringRaid failed because of another mod. Send bug report. Continue safely.`);
+                        log(error);
+                    }
+                    try {
+                        items["5732ee6a24597719ae0c0281"]._props.Grids[0]._props.filters = items["5857a8bc2459772bad15db29"]._props.Grids[0]._props.filters;
+                    }
+                    catch (error) {
+                        logger.warning(`\nAdjusting Waist Pouch Grids[0]._props.filters failed because of another mod. Send bug report. Continue safely.`);
+                        log(error);
+                    }
+                    for (const profile of profileList) {
+                        tables.templates.profiles[profile].bear.character.Inventory.items.find((x) => x.slotId == "SecuredContainer")._tpl = "5732ee6a24597719ae0c0281";
+                        tables.templates.profiles[profile].usec.character.Inventory.items.find((x) => x.slotId == "SecuredContainer")._tpl = "5732ee6a24597719ae0c0281";
+                    }
+                    // Beta container from PK "removal"
+                    peacekeeper.assort.barter_scheme["63d385c6b3eba6c95d0efa0a"][0].forEach((x) => (x.count = 10));
+                    const Alpha = {
+                        _id: "63da4dbee8fa73e22500001a",
+                        areaType: 10,
+                        requirements: [
+                            { areaType: 10, requiredLevel: 1, type: "Area" },
+                            {
+                                templateId: "567143bf4bdc2d1a0f8b4567",
+                                count: 2,
+                                isFunctional: false,
+                                type: "Item",
+                            },
+                            {
+                                templateId: "5783c43d2459774bbe137486",
+                                count: 2,
+                                isFunctional: false,
+                                type: "Item",
+                            },
+                            {
+                                templateId: "5c093e3486f77430cb02e593",
+                                count: 2,
+                                isFunctional: false,
+                                type: "Item",
+                            },
+                            {
+                                templateId: "590c621186f774138d11ea29",
+                                count: 2,
+                                isFunctional: false,
+                                type: "Item",
+                            },
+                        ],
+                        productionTime: 5600,
+                        boosters: null,
+                        endProduct: "544a11ac4bdc2d470e8b456a",
+                        continuous: false,
+                        count: 1,
+                        productionLimitCount: 0,
+                    };
+                    const Beta = {
+                        _id: "63da4dbee8fa73e22500001b",
+                        areaType: 10,
+                        requirements: [
+                            { areaType: 10, requiredLevel: 1, type: "Area" },
+                            {
+                                templateId: "544a11ac4bdc2d470e8b456a",
+                                count: 2,
+                                isFunctional: false,
+                                type: "Item",
+                            },
+                            {
+                                templateId: "5aafbde786f774389d0cbc0f",
+                                count: 2,
+                                isFunctional: false,
+                                type: "Item",
+                            },
+                            {
+                                templateId: "590c60fc86f77412b13fddcf",
+                                count: 2,
+                                isFunctional: false,
+                                type: "Item",
+                            },
+                            {
+                                templateId: "62a0a16d0b9d3c46de5b6e97",
+                                count: 2,
+                                isFunctional: false,
+                                type: "Item",
+                            },
+                        ],
+                        productionTime: 10800,
+                        boosters: null,
+                        endProduct: "5857a8b324597729ab0a0e7d",
+                        continuous: false,
+                        count: 1,
+                        productionLimitCount: 0,
+                    };
+                    const Epsilon = {
+                        _id: "63da4dbee8fa73e22500001c",
+                        areaType: 10,
+                        requirements: [
+                            { areaType: 10, requiredLevel: 2, type: "Area" },
+                            {
+                                templateId: "5857a8b324597729ab0a0e7d",
+                                count: 2,
+                                isFunctional: false,
+                                type: "Item",
+                            },
+                            {
+                                templateId: "5c127c4486f7745625356c13",
+                                count: 2,
+                                isFunctional: false,
+                                type: "Item",
+                            },
+                            {
+                                templateId: "59fafd4b86f7745ca07e1232",
+                                count: 2,
+                                isFunctional: false,
+                                type: "Item",
+                            },
+                            {
+                                templateId: "619cbf9e0a7c3a1a2731940a",
+                                count: 2,
+                                isFunctional: false,
+                                type: "Item",
+                            },
+                            {
+                                templateId: "61bf7c024770ee6f9c6b8b53",
+                                count: 2,
+                                isFunctional: false,
+                                type: "Item",
+                            },
+                        ],
+                        productionTime: 35000,
+                        boosters: null,
+                        endProduct: "59db794186f77448bc595262",
+                        continuous: false,
+                        count: 1,
+                        productionLimitCount: 0,
+                    };
+                    const Gamma = {
+                        _id: "63da4dbee8fa73e22500001d",
+                        areaType: 10,
+                        requirements: [
+                            { areaType: 10, requiredLevel: 3, type: "Area" },
+                            {
+                                templateId: "59db794186f77448bc595262",
+                                count: 2,
+                                isFunctional: false,
+                                type: "Item",
+                            },
+                            {
+                                templateId: "5e2af55f86f7746d4159f07c",
+                                count: 2,
+                                isFunctional: false,
+                                type: "Item",
+                            },
+                            {
+                                templateId: "59fb016586f7746d0d4b423a",
+                                count: 2,
+                                isFunctional: false,
+                                type: "Item",
+                            },
+                            {
+                                templateId: "5d235bb686f77443f4331278",
+                                count: 2,
+                                isFunctional: false,
+                                type: "Item",
+                            },
+                            {
+                                templateId: "619cbf7d23893217ec30b689",
+                                count: 2,
+                                isFunctional: false,
+                                type: "Item",
+                            },
+                            {
+                                templateId: "6389c7750ef44505c87f5996",
+                                count: 2,
+                                isFunctional: false,
+                                type: "Item",
+                            },
+                        ],
+                        productionTime: 61200,
+                        boosters: null,
+                        endProduct: "5857a8bc2459772bad15db29",
+                        continuous: false,
+                        count: 1,
+                        productionLimitCount: 0,
+                    };
+                    tables.hideout.production.push(Alpha, Beta, Epsilon, Gamma);
+                    if (config_json_1.default.SecureContainersOptions.Progressive_Containers.Collector_Quest_Redone.enabled == true) {
+                        // Add the surprise
+                        tables.templates.quests["5c51aac186f77432ea65c552"].conditions.AvailableForFinish.push({
+                            _parent: "HandoverItem",
                             _props: {
-                                id: "51d33b2d4fad9e61441772c0",
-                                index: 1,
+                                dogtagLevel: 0,
+                                id: "639135534b15ca31f76bc319",
+                                index: 69,
+                                maxDurability: 100,
+                                minDurability: 0,
                                 parentId: "",
+                                isEncoded: false,
+                                onlyFoundInRaid: false,
                                 dynamicLocale: false,
-                                value: 20,
-                                compareMethod: ">=",
+                                target: ["5857a8bc2459772bad15db29"],
+                                value: "2",
                                 visibilityConditions: [],
                             },
                             dynamicLocale: false,
-                        },
-                    ];
+                        });
+                        tables.locales.global["ru"]["639135534b15ca31f76bc319"] = "Передать носитель"; // Тут нужен только фикс для русского, для всех остальных языков звучит как "Hand over the storage device"
+                        // Remove level req from finish
+                        tables.templates.quests["5c51aac186f77432ea65c552"].conditions.AvailableForFinish = tables.templates.quests["5c51aac186f77432ea65c552"].conditions.AvailableForFinish.filter((x) => x._parent != "Level");
+                        // Start condition
+                        tables.templates.quests["5c51aac186f77432ea65c552"].conditions.AvailableForStart = [
+                            {
+                                _parent: "Level",
+                                _props: {
+                                    id: "51d33b2d4fad9e61441772c0",
+                                    index: 1,
+                                    parentId: "",
+                                    dynamicLocale: false,
+                                    value: 20,
+                                    compareMethod: ">=",
+                                    visibilityConditions: [],
+                                },
+                                dynamicLocale: false,
+                            },
+                        ];
+                    }
+                }
+                catch (error) {
+                    logger.warning(`\nSecureContainersOptions.Progressive_Containers failed because of another mod. Send bug report. Continue safely.`);
+                    log(error);
                 }
             }
         }
-        if (config_json_1.default.ScavCaseOptions.enabled == true) {
-            if (config_json_1.default.ScavCaseOptions.BetterRewards.enabled == true) {
-                // buyableitems generator, to make sure rare unbuyable items always are in reward pool (eg anodised red gear)
-                let buyableitems = new Set();
-                for (const trader of traderlist) {
+        if (config_json_1.default.ScavCaseOptions.enabled) {
+            try {
+                if (config_json_1.default.ScavCaseOptions.BetterRewards.enabled) {
+                    // buyableitems generator, to make sure rare unbuyable items always are in reward pool (eg anodised red gear)
+                    let buyableitems = new Set();
+                    for (const trader of traderlist) {
+                        try {
+                            trader.assort.items.filter((x) => buyableitems.add(x._tpl));
+                        }
+                        catch (error) {
+                            logger.warning(`trader.assort.items.filter for buyableitems function failed bacause of the other mod. Ignore this error safely and continue. Send bug report.`);
+                            log(error);
+                        }
+                    }
+                    // Shitlist generator for scav case rewards. Filters A LOT of crap out, but very conservatevely. Blacklist included in ./docs folder check it out.
+                    // Always includes items in carefully curated whitelist. Always includes unbuyable and/or cheap items not included in whitelist (such as anodized red gear, but also some crap like scav only hats). Always includes items worth > 10000. Filters everything else out. Spent a lot of time thinking about this, really proud of myself. In the end, just makes sure you almost always get something of valuable or usable.
+                    let scavWhitelist = []; // [Debug] used for debug code below
+                    for (const i in items) {
+                        const item = items[i];
+                        if (item._type == "Item") {
+                            if (debug) {
+                                item._props.ExaminedByDefault = true; // For my sanity
+                            }
+                            const itemInHandbook = getItemInHandbook(item._id);
+                            if (item._parent == "543be5cb4bdc2deb348b4568") {
+                                try {
+                                    // Ammo boxes price patch/fix, their data in handbook is always 1k, this makes them valued as ammo*count they contain.
+                                    let count = item._props.StackSlots[0]._max_count;
+                                    let ammo = item._props.StackSlots[0]._props.filters[0].Filter[0];
+                                    let value = Math.round(getItemInHandbook(ammo).Price * count);
+                                    handbook.Items.find((x) => x.Id == item._id).Price = value;
+                                }
+                                catch (error) {
+                                    logger.warning(`handbook.Items.find((x) => x.Id == item._id).Price = value function failed bacause of the other mod. Ignore this error safely and continue. Send bug report.`);
+                                    log(error);
+                                }
+                            }
+                            if ((itemInHandbook?.Price >= 10000 || scavcaseLists_1.scavcaseWhitelist.includes(item._parent) || !buyableitems.has(item._id)) &&
+                                !scavcaseLists_1.scavcaseItemBlacklist.includes(item._id) &&
+                                item._props.QuestItem != true &&
+                                itemInHandbook?.Price != undefined
+                            // && !scavcaseConfig.rewardItemParentBlacklist.includes(item._parent) // [Debug] not actually needed, used only for reference when generating black/whitelists. Ignore(? TODO: look into it) ammo and money here, they are a special case in SPI-AKI logic.
+                            ) {
+                                // whitelist here, do nothing.
+                                if (debug) {
+                                    scavWhitelist.push(item._id); // [Debug] used for debug code below
+                                    // log(getItemName(item._parent) + "	" + itemInHandbook?.Price + "	" + getItemName(item._id) + "	" + item._id) // [Debug]
+                                }
+                            }
+                            else {
+                                scavcaseConfig.rewardItemBlacklist.push(item._id);
+                                // shitlist here.
+                                if (debug) {
+                                    // log(getItemName(item._parent) + "	" + itemInHandbook?.Price + "	" + getItemName(item._id) + "	" + item._id) // [Debug]
+                                }
+                            }
+                        }
+                    }
+                    // Object.values(scavcaseConfig.ammoRewards.ammoRewardBlacklist).forEach(x => x.push(scavcaseItemBlacklist))
+                    // log(scavcaseConfig)
+                }
+                if (config_json_1.default.ScavCaseOptions.Rebalance.enabled) {
+                    scavcaseConfig.rewardItemValueRangeRub = {
+                        common: {
+                            // AVG 7941
+                            min: 1,
+                            max: 20000,
+                        },
+                        rare: {
+                            // AVG 36415
+                            min: 20001,
+                            max: 60000,
+                        },
+                        superrare: {
+                            // AVG 157978
+                            min: 60001,
+                            max: 1200000,
+                        },
+                    };
+                    const scavCaseRedone = [
+                        {
+                            EndProducts: {
+                                Common: {
+                                    min: "2",
+                                    max: "3",
+                                },
+                                Rare: {
+                                    min: "0",
+                                    max: "0",
+                                },
+                                Superrare: {
+                                    min: "0",
+                                    max: "0",
+                                },
+                            },
+                            ProductionTime: 2500,
+                            Requirements: [
+                                {
+                                    count: 1,
+                                    isEncoded: false,
+                                    isFunctional: false,
+                                    templateId: "62a09f32621468534a797acb",
+                                    type: "Item",
+                                },
+                            ],
+                            _id: "62710974e71632321e5afd5f",
+                        },
+                        {
+                            EndProducts: {
+                                Common: {
+                                    min: "3",
+                                    max: "4",
+                                },
+                                Rare: {
+                                    min: "0",
+                                    max: "1",
+                                },
+                                Superrare: {
+                                    min: "0",
+                                    max: "0",
+                                },
+                            },
+                            ProductionTime: 7700,
+                            Requirements: [
+                                {
+                                    count: 1,
+                                    isEncoded: false,
+                                    isFunctional: false,
+                                    templateId: "5d40407c86f774318526545a",
+                                    type: "Item",
+                                },
+                            ],
+                            _id: "62710a8c403346379e3de9be",
+                        },
+                        {
+                            EndProducts: {
+                                Common: {
+                                    min: "4",
+                                    max: "5",
+                                },
+                                Rare: {
+                                    min: "1",
+                                    max: "2",
+                                },
+                                Superrare: {
+                                    min: "0",
+                                    max: "0",
+                                },
+                            },
+                            ProductionTime: 8100,
+                            Requirements: [
+                                {
+                                    count: 1,
+                                    isEncoded: false,
+                                    isFunctional: false,
+                                    templateId: "5d403f9186f7743cac3f229b",
+                                    type: "Item",
+                                },
+                            ],
+                            _id: "62710a69adfbd4354d79c58e",
+                        },
+                        {
+                            EndProducts: {
+                                Common: {
+                                    min: "2",
+                                    max: "3",
+                                },
+                                Rare: {
+                                    min: "0",
+                                    max: "3",
+                                },
+                                Superrare: {
+                                    min: "1",
+                                    max: "2",
+                                },
+                            },
+                            ProductionTime: 16800,
+                            Requirements: [
+                                {
+                                    count: 1,
+                                    isEncoded: false,
+                                    isFunctional: false,
+                                    templateId: "5d1b376e86f774252519444e",
+                                    type: "Item",
+                                },
+                            ],
+                            _id: "6271093e621b0a76055cd61e",
+                        },
+                        {
+                            EndProducts: {
+                                Common: {
+                                    min: "2",
+                                    max: "3",
+                                },
+                                Rare: {
+                                    min: "3",
+                                    max: "5",
+                                },
+                                Superrare: {
+                                    min: "0",
+                                    max: "1",
+                                },
+                            },
+                            ProductionTime: 19200,
+                            Requirements: [
+                                {
+                                    count: 1,
+                                    isEncoded: false,
+                                    isFunctional: false,
+                                    templateId: "5c12613b86f7743bbe2c3f76",
+                                    type: "Item",
+                                },
+                            ],
+                            _id: "62710a0e436dcc0b9c55f4ec",
+                        },
+                    ];
                     try {
-                        trader.assort.items.filter((x) => buyableitems.add(x._tpl));
+                        tables.hideout.scavcase = scavCaseRedone; // mi donta undestanda tem red wavy lines, tis bad? tis worka! tis gooda! donta cera wavy lines.
                     }
                     catch (error) {
-                        logger.warning(`trader.assort.items.filter for buyableitems function threw an error bacause of the other mod. Ignore this error safely and continue. Send bug report.`);
+                        log(error); // Akey, mi kinda scary red ~~~ lines. Mi try-ketchup it.
+                    }
+                }
+                if (config_json_1.default.ScavCaseOptions.FasterScavcase.enabled) {
+                    try {
+                        tables.hideout.scavcase.forEach((x) => {
+                            if (debug) {
+                                x.ProductionTime = 1;
+                                x.Requirements[0].templateId = "5449016a4bdc2d6f028b456f";
+                            }
+                            else {
+                                x.ProductionTime /= config_json_1.default.ScavCaseOptions.FasterScavcase.SpeedMultiplier;
+                            }
+                        });
+                    }
+                    catch (error) {
+                        logger.warning(`\nScavCaseOptions.FasterScavcase failed because of another mod. Send bug report. Continue safely.`);
                         log(error);
                     }
                 }
-                // Shitlist generator for scav case rewards. Filters A LOT of crap out, but very conservatevely. Blacklist included in ./docs folder check it out.
-                // Always includes items in carefully curated whitelist. Always includes unbuyable and/or cheap items not included in whitelist (such as anodized red gear, but also some crap like scav only hats). Always includes items worth > 10000. Filters everything else out. Spent a lot of time thinking about this, really proud of myself. In the end, just makes sure you almost always get something of valuable or usable.
-                let scavWhitelist = []; // [Debug] used for debug code below
-                for (const i in items) {
-                    const item = items[i];
-                    if (item._type == "Item") {
-                        if (debug) {
-                            item._props.ExaminedByDefault = true; // For my sanity
-                        }
-                        const itemInHandbook = getItemInHandbook(item._id);
-                        if (item._parent == "543be5cb4bdc2deb348b4568") {
-                            try {
-                                // Ammo boxes price patch/fix, their data in handbook is always 1k, this makes them valued as ammo*count they contain.
-                                let count = item._props.StackSlots[0]._max_count;
-                                let ammo = item._props.StackSlots[0]._props.filters[0].Filter[0];
-                                let value = Math.round(getItemInHandbook(ammo).Price * count);
-                                handbook.Items.find((x) => x.Id == item._id).Price = value;
-                            }
-                            catch (error) {
-                                logger.warning(`handbook.Items.find((x) => x.Id == item._id).Price = value function threw an error bacause of the other mod. Ignore this error safely and continue. Send bug report.`);
-                                log(error);
-                            }
-                        }
-                        if ((itemInHandbook?.Price >= 10000 || scavcaseLists_1.scavcaseWhitelist.includes(item._parent) || !buyableitems.has(item._id)) &&
-                            !scavcaseLists_1.scavcaseItemBlacklist.includes(item._id) &&
-                            item._props.QuestItem != true &&
-                            itemInHandbook?.Price != undefined
-                        // && !scavcaseConfig.rewardItemParentBlacklist.includes(item._parent) // [Debug] not actually needed, used only for reference when generating black/whitelists. Ignore(? TODO: look into it) ammo and money here, they are a special case in SPI-AKI logic.
-                        ) {
-                            // whitelist here, do nothing.
-                            if (debug) {
-                                scavWhitelist.push(item._id); // [Debug] used for debug code below
-                                // log(getItemName(item._parent) + "	" + itemInHandbook?.Price + "	" + getItemName(item._id) + "	" + item._id) // [Debug]
-                            }
-                        }
-                        else {
-                            scavcaseConfig.rewardItemBlacklist.push(item._id);
-                            // shitlist here.
-                            if (debug) {
-                                // log(getItemName(item._parent) + "	" + itemInHandbook?.Price + "	" + getItemName(item._id) + "	" + item._id) // [Debug]
-                            }
-                        }
-                    }
-                }
-                // Object.values(scavcaseConfig.ammoRewards.ammoRewardBlacklist).forEach(x => x.push(scavcaseItemBlacklist))
-                // log(scavcaseConfig)
-            }
-            if (config_json_1.default.ScavCaseOptions.Rebalance.enabled == true) {
-                scavcaseConfig.rewardItemValueRangeRub = {
-                    common: {
-                        // AVG 7941
-                        min: 1,
-                        max: 20000,
-                    },
-                    rare: {
-                        // AVG 36415
-                        min: 20001,
-                        max: 60000,
-                    },
-                    superrare: {
-                        // AVG 157978
-                        min: 60001,
-                        max: 1200000,
-                    },
-                };
-                const scavCaseRedone = [
-                    {
-                        EndProducts: {
-                            Common: {
-                                min: "2",
-                                max: "3",
-                            },
-                            Rare: {
-                                min: "0",
-                                max: "0",
-                            },
-                            Superrare: {
-                                min: "0",
-                                max: "0",
-                            },
-                        },
-                        ProductionTime: 2500,
-                        Requirements: [
-                            {
-                                count: 1,
-                                isEncoded: false,
-                                isFunctional: false,
-                                templateId: "62a09f32621468534a797acb",
-                                type: "Item",
-                            },
-                        ],
-                        _id: "62710974e71632321e5afd5f",
-                    },
-                    {
-                        EndProducts: {
-                            Common: {
-                                min: "3",
-                                max: "4",
-                            },
-                            Rare: {
-                                min: "0",
-                                max: "1",
-                            },
-                            Superrare: {
-                                min: "0",
-                                max: "0",
-                            },
-                        },
-                        ProductionTime: 7700,
-                        Requirements: [
-                            {
-                                count: 1,
-                                isEncoded: false,
-                                isFunctional: false,
-                                templateId: "5d40407c86f774318526545a",
-                                type: "Item",
-                            },
-                        ],
-                        _id: "62710a8c403346379e3de9be",
-                    },
-                    {
-                        EndProducts: {
-                            Common: {
-                                min: "4",
-                                max: "5",
-                            },
-                            Rare: {
-                                min: "1",
-                                max: "2",
-                            },
-                            Superrare: {
-                                min: "0",
-                                max: "0",
-                            },
-                        },
-                        ProductionTime: 8100,
-                        Requirements: [
-                            {
-                                count: 1,
-                                isEncoded: false,
-                                isFunctional: false,
-                                templateId: "5d403f9186f7743cac3f229b",
-                                type: "Item",
-                            },
-                        ],
-                        _id: "62710a69adfbd4354d79c58e",
-                    },
-                    {
-                        EndProducts: {
-                            Common: {
-                                min: "2",
-                                max: "3",
-                            },
-                            Rare: {
-                                min: "0",
-                                max: "3",
-                            },
-                            Superrare: {
-                                min: "1",
-                                max: "2",
-                            },
-                        },
-                        ProductionTime: 16800,
-                        Requirements: [
-                            {
-                                count: 1,
-                                isEncoded: false,
-                                isFunctional: false,
-                                templateId: "5d1b376e86f774252519444e",
-                                type: "Item",
-                            },
-                        ],
-                        _id: "6271093e621b0a76055cd61e",
-                    },
-                    {
-                        EndProducts: {
-                            Common: {
-                                min: "2",
-                                max: "3",
-                            },
-                            Rare: {
-                                min: "3",
-                                max: "5",
-                            },
-                            Superrare: {
-                                min: "0",
-                                max: "1",
-                            },
-                        },
-                        ProductionTime: 19200,
-                        Requirements: [
-                            {
-                                count: 1,
-                                isEncoded: false,
-                                isFunctional: false,
-                                templateId: "5c12613b86f7743bbe2c3f76",
-                                type: "Item",
-                            },
-                        ],
-                        _id: "62710a0e436dcc0b9c55f4ec",
-                    },
-                ];
-                try {
-                    tables.hideout.scavcase = scavCaseRedone; // mi donta undestanda tem red wavy lines, tis bad? tis worka! tis gooda! donta cera wavy lines.
-                }
-                catch (error) {
-                    log(error); // Akey, mi kinda scary red ~~~ lines. Mi try-ketchup it.
+                if (debug) {
+                    // Random WIP testing code here, I like it, I saved it, ignore it, or use it for debug or your mods.
+                    //
+                    // [Debug] Master item list logger OR, optionally filters based on parent class
+                    // Object.values(items)
+                    // 	// .filter((x) => x._parent == "543be6564bdc2df4348b4568")
+                    // 	.map((x) => {
+                    // 		const price = getItemInHandbook(x._id)?.Price
+                    // 		log(getItemName(x._parent) + ": " + getItemName(x._id) + ", " + price + " // " + x._id)
+                    // 	})
+                    //
+                    // [Debug] WIP item list logger with file saving, itterates all base classes and filters stuff. Strong stuff, can't remember what it actually does now, was using it to to balance tiers lists.
+                    // let gg = []
+                    // for (let i = 0; i < baseClasses.length; i++) {
+                    // 	const baseclass = baseClasses[i]
+                    // 	if (scavcaseBlacklist.includes(baseclass)) {
+                    // 		Object.values(items)
+                    // 			.filter((x) => x._parent == baseclass)
+                    // 			.map((x) => {
+                    // 				const price = getItemInHandbook(x._id)?.Price
+                    // 				if (price > 10000) {
+                    // 					gg.push(getItemName(x._parent) + "	" + getItemName(x._id) + "	" + price + "\n")
+                    // 				}
+                    // 			})
+                    // 	}
+                    // 	if (i == baseClasses.length - 1) {
+                    // 		const ggs = gg.toString()
+                    // 		fs.writeFile("./test_b.txt", ggs, (err) => {
+                    // 			if (err) {
+                    // 				console.error(err)
+                    // 			}
+                    // 			log("OK!")
+                    // 		})
+                    // 	}
+                    // }
+                    //
+                    // [Debug] Scavcase tier lists generators, enable scavWhitelist above.
+                    // const commonItems = scavWhitelist.filter(
+                    // 	(x) =>
+                    // 		getItemInHandbook(x).Price >= scavcaseConfig.rewardItemValueRangeRub.common.min &&
+                    // 		getItemInHandbook(x).Price <= scavcaseConfig.rewardItemValueRangeRub.common.max
+                    // )
+                    // const rareItems = scavWhitelist.filter(
+                    // 	(x) =>
+                    // 		getItemInHandbook(x).Price >= scavcaseConfig.rewardItemValueRangeRub.rare.min &&
+                    // 		getItemInHandbook(x).Price <= scavcaseConfig.rewardItemValueRangeRub.rare.max
+                    // )
+                    // const superrareItems = scavWhitelist.filter(
+                    // 	(x) =>
+                    // 		getItemInHandbook(x).Price >= scavcaseConfig.rewardItemValueRangeRub.superrare.min &&
+                    // 		getItemInHandbook(x).Price <= scavcaseConfig.rewardItemValueRangeRub.superrare.max
+                    // )
+                    // [Debug] Tier lists loggers
+                    // commonItems.map(x => log(getItemName(x) + " " + getItemInHandbook(x).Price + " " + x))
+                    // rareItems.map(x => log(getItemName(x) + " " + getItemInHandbook(x).Price + " " + x))
+                    // superrareItems.map(x => log(getItemName(x) + " " + getItemInHandbook(x).Price + " " + x))
+                    //
+                    // [Debug] AVG sum for tier calc
+                    //		let sum = 0
+                    //		for (let i = 0; i < superrareItems.length; i++) {
+                    //			const item = superrareItems[i]
+                    //
+                    //			sum += getItemInHandbook(item).Price
+                    //		}
+                    //		log(sum / superrareItems.length)
+                    //
+                    // [Debug] Comment generator with filter for ALL items, for white/black lists, shows item names
+                    // Object.values(items)
+                    // .filter((x) => x._props.CanSellOnRagfair == false && x._type == "Item")
+                    // .map((x) => log(`"${x._id}", // ${getItemName(x._id)}`));
+                    //
+                    // [Debug] Comment generator for white/black lists, shows item names, universally usefull for different arrays
+                    // itemWhitelist.map((x) => log(`"${x}", // ${getItemName(x)}`));
+                    //
+                    // [Debug] Stale code, filters and logs ALL items
+                    //	Object.values(items)
+                    //		.filter((x) => {
+                    //			const price = getItemInHandbook(x._id)?.Price
+                    //			return price >= 10000 && price <= 20000
+                    //		})
+                    //		.map((x) => {
+                    //			const price = getItemInHandbook(x._id)?.Price
+                    //			log(getItemName(x._id) + ": " + price)
+                    //		})
                 }
             }
-            if (config_json_1.default.ScavCaseOptions.FasterScavcase.enabled == true) {
-                tables.hideout.scavcase.forEach((x) => {
-                    if (debug) {
-                        x.ProductionTime = 1;
-                        x.Requirements[0].templateId = "5449016a4bdc2d6f028b456f";
-                    }
-                    else {
-                        x.ProductionTime /= config_json_1.default.ScavCaseOptions.FasterScavcase.SpeedMultiplier;
-                    }
-                });
-            }
-            if (debug) {
-                // Random WIP testing code here, I like it, I saved it, ignore it, or use it for debug or your mods.
-                //
-                // [Debug] Master item list logger OR, optionally filters based on parent class
-                // Object.values(items)
-                // 	// .filter((x) => x._parent == "543be6564bdc2df4348b4568")
-                // 	.map((x) => {
-                // 		const price = getItemInHandbook(x._id)?.Price
-                // 		log(getItemName(x._parent) + ": " + getItemName(x._id) + ", " + price + " // " + x._id)
-                // 	})
-                //
-                // [Debug] WIP item list logger with file saving, itterates all base classes and filters stuff. Strong stuff, can't remember what it actually does now, was using it to to balance tiers lists.
-                // let gg = []
-                // for (let i = 0; i < baseClasses.length; i++) {
-                // 	const baseclass = baseClasses[i]
-                // 	if (scavcaseBlacklist.includes(baseclass)) {
-                // 		Object.values(items)
-                // 			.filter((x) => x._parent == baseclass)
-                // 			.map((x) => {
-                // 				const price = getItemInHandbook(x._id)?.Price
-                // 				if (price > 10000) {
-                // 					gg.push(getItemName(x._parent) + "	" + getItemName(x._id) + "	" + price + "\n")
-                // 				}
-                // 			})
-                // 	}
-                // 	if (i == baseClasses.length - 1) {
-                // 		const ggs = gg.toString()
-                // 		fs.writeFile("./test_b.txt", ggs, (err) => {
-                // 			if (err) {
-                // 				console.error(err)
-                // 			}
-                // 			log("OK!")
-                // 		})
-                // 	}
-                // }
-                //
-                // [Debug] Scavcase tier lists generators, enable scavWhitelist above.
-                // const commonItems = scavWhitelist.filter(
-                // 	(x) =>
-                // 		getItemInHandbook(x).Price >= scavcaseConfig.rewardItemValueRangeRub.common.min &&
-                // 		getItemInHandbook(x).Price <= scavcaseConfig.rewardItemValueRangeRub.common.max
-                // )
-                // const rareItems = scavWhitelist.filter(
-                // 	(x) =>
-                // 		getItemInHandbook(x).Price >= scavcaseConfig.rewardItemValueRangeRub.rare.min &&
-                // 		getItemInHandbook(x).Price <= scavcaseConfig.rewardItemValueRangeRub.rare.max
-                // )
-                // const superrareItems = scavWhitelist.filter(
-                // 	(x) =>
-                // 		getItemInHandbook(x).Price >= scavcaseConfig.rewardItemValueRangeRub.superrare.min &&
-                // 		getItemInHandbook(x).Price <= scavcaseConfig.rewardItemValueRangeRub.superrare.max
-                // )
-                // [Debug] Tier lists loggers
-                // commonItems.map(x => log(getItemName(x) + " " + getItemInHandbook(x).Price + " " + x))
-                // rareItems.map(x => log(getItemName(x) + " " + getItemInHandbook(x).Price + " " + x))
-                // superrareItems.map(x => log(getItemName(x) + " " + getItemInHandbook(x).Price + " " + x))
-                //
-                // [Debug] AVG sum for tier calc
-                //		let sum = 0
-                //		for (let i = 0; i < superrareItems.length; i++) {
-                //			const item = superrareItems[i]
-                //
-                //			sum += getItemInHandbook(item).Price
-                //		}
-                //		log(sum / superrareItems.length)
-                //
-                // [Debug] Comment generator with filter for ALL items, for white/black lists, shows item names
-                // Object.values(items)
-                // .filter((x) => x._props.CanSellOnRagfair == false && x._type == "Item")
-                // .map((x) => log(`"${x._id}", // ${getItemName(x._id)}`));
-                //
-                // [Debug] Comment generator for white/black lists, shows item names, universally usefull for different arrays
-                // itemWhitelist.map((x) => log(`"${x}", // ${getItemName(x)}`));
-                //
-                // [Debug] Stale code, filters and logs ALL items
-                //	Object.values(items)
-                //		.filter((x) => {
-                //			const price = getItemInHandbook(x._id)?.Price
-                //			return price >= 10000 && price <= 20000
-                //		})
-                //		.map((x) => {
-                //			const price = getItemInHandbook(x._id)?.Price
-                //			log(getItemName(x._id) + ": " + price)
-                //		})
+            catch (error) {
+                logger.warning(`\nScavCaseOptions failed because of another mod. Send bug report. Continue safely.`);
+                log(error);
             }
         }
-        if (config_json_1.default.HideoutOptions.enabled == true) {
-            if (config_json_1.default.HideoutOptions.BiggerStash.enabled == true) {
+        if (config_json_1.default.HideoutOptions.enabled) {
+            if (config_json_1.default.HideoutOptions.StashOptions.enabled) {
                 // Fix for ADHD.
                 // stash area id 5d484fc0654e76006657e0ab
                 // "_id": "566abbc34bdc2d92178b4576",
@@ -635,36 +659,55 @@ class Mod {
                 // "_name": "Prepare for escape stash 10x48",
                 // "_id": "5811ce772459770e9e5f9532",
                 // "_name": "Edge of darkness stash 10x68",
-                items["566abbc34bdc2d92178b4576"]._props.Grids[0]._props.cellsV = 50;
-                items["5811ce572459770cba1a34ea"]._props.Grids[0]._props.cellsV = 100;
-                items["5811ce662459770f6f490f32"]._props.Grids[0]._props.cellsV = 150;
-                items["5811ce772459770e9e5f9532"]._props.Grids[0]._props.cellsV = 200;
-                const originalStages = tables.hideout.areas.find((x) => x._id == "5d484fc0654e76006657e0ab").stages;
-                for (const stage in originalStages) {
-                    if (config_json_1.default.HideoutOptions.BiggerStash.Easier_Loyalty.enabled == true) {
-                        originalStages[stage].requirements
-                            .filter((x) => x.loyaltyLevel != undefined)
-                            .forEach((x) => {
-                            x.loyaltyLevel -= 1;
-                        });
-                    }
-                    if (config_json_1.default.HideoutOptions.BiggerStash.Less_Currency_For_Construction.enabled == true) {
-                        originalStages[stage].requirements
-                            .filter((x) => x.templateId == "5449016a4bdc2d6f028b456f" || x.templateId == "569668774bdc2da2298b4568")
-                            .forEach((x) => {
-                            x.count /= 10;
-                        });
-                    }
-                    // log(JSON.stringify(originalStages))
+                if (config_json_1.default.HideoutOptions.StashOptions.BiggerStash.enabled) {
                     try {
-                        tables.hideout.areas.find((x) => x._id == "5d484fc0654e76006657e0ab").stages = originalStages;
+                        items["566abbc34bdc2d92178b4576"]._props.Grids[0]._props.cellsV = 50;
+                        items["5811ce572459770cba1a34ea"]._props.Grids[0]._props.cellsV = 100;
+                        items["5811ce662459770f6f490f32"]._props.Grids[0]._props.cellsV = 150;
+                        items["5811ce772459770e9e5f9532"]._props.Grids[0]._props.cellsV = 200;
                     }
                     catch (error) {
-                        logger.warning(`config.HideoutOptions.BiggerStash error`);
+                        logger.warning(`\nHideoutOptions.StashOptions.BiggerStash failed because of another mod. Send bug report. Continue safely.`);
                         log(error);
                     }
                 }
-                if (config_json_1.default.HideoutOptions.BiggerStash.Progressive_Stash.enabled == true) {
+                const originalStages = tables.hideout.areas.find((x) => x._id == "5d484fc0654e76006657e0ab").stages;
+                for (const stage in originalStages) {
+                    if (config_json_1.default.HideoutOptions.StashOptions.Easier_Loyalty.enabled == true) {
+                        try {
+                            originalStages[stage].requirements
+                                .filter((x) => x.loyaltyLevel != undefined)
+                                .forEach((x) => {
+                                x.loyaltyLevel -= 1;
+                            });
+                        }
+                        catch (error) {
+                            logger.warning(`\nHideoutOptions.StashOptions.Easier_Loyalty failed because of another mod. Send bug report. Continue safely.`);
+                            log(error);
+                        }
+                    }
+                    if (config_json_1.default.HideoutOptions.StashOptions.Less_Currency_For_Construction.enabled == true) {
+                        try {
+                            originalStages[stage].requirements
+                                .filter((x) => x.templateId == "5449016a4bdc2d6f028b456f" || x.templateId == "569668774bdc2da2298b4568")
+                                .forEach((x) => {
+                                x.count /= 10;
+                            });
+                        }
+                        catch (error) {
+                            logger.warning(`\nHideoutOptions.StashOptions.Less_Currency_For_Construction failed because of another mod. Send bug report. Continue safely.`);
+                            log(error);
+                        }
+                    }
+                }
+                try {
+                    tables.hideout.areas.find((x) => x._id == "5d484fc0654e76006657e0ab").stages = originalStages;
+                }
+                catch (error) {
+                    logger.warning(`\nHideoutOptions.StashOptions (Easier_Loyalty or Less_Currency_For_Construction) failed because of another mod. Send bug report. Continue safely.`);
+                    log(error);
+                }
+                if (config_json_1.default.HideoutOptions.StashOptions.Progressive_Stash.enabled == true) {
                     const basicStashBonuses = [
                         {
                             type: "StashSize",
@@ -689,7 +732,7 @@ class Mod {
                             tables.templates.profiles[profile].usec.character.Bonuses = basicStashBonuses;
                         }
                         catch (error) {
-                            logger.warning(`config.HideoutOptions.BiggerStash.Progressive_Stash error`);
+                            logger.warning(`\nconfig.HideoutOptions.BiggerStash.Progressive_Stash error`);
                             log(error);
                         }
                     }
@@ -758,15 +801,46 @@ class Mod {
                 tables.hideout.settings.generatorFuelFlowRate *= config_json_1.default.HideoutOptions.Increased_Fuel_Consumption.Fuel_Consumption_Multiplier;
             }
         }
-        if (config_json_1.default.OtherTweaks.enabled == true) {
+        if (config_json_1.default.OtherTweaks.enabled) {
             if (config_json_1.default.OtherTweaks.Skill_Exp_Buffs.enabled) {
-                // Buff Vitality, Sniper and Surgery skill leveling
-                globals.SkillsSettings.Vitality.DamageTakenAction *= 10;
-                globals.SkillsSettings.Sniper.WeaponShotAction *= 10;
-                globals.SkillsSettings.Surgery.SurgeryAction *= 10;
-                Object.values(globals.SkillsSettings.Immunity).forEach((x) => x * 10);
-                Object.values(globals.SkillsSettings.StressResistance).forEach((x) => x * 10);
-                Object.values(globals.SkillsSettings.MagDrills).forEach((x) => x * 5);
+                try {
+                    // Buff Vitality, Sniper and Surgery skill leveling
+                    globals.SkillsSettings.Vitality.DamageTakenAction *= 10;
+                    globals.SkillsSettings.Sniper.WeaponShotAction *= 10;
+                    globals.SkillsSettings.Surgery.SurgeryAction *= 10;
+                    Object.values(globals.SkillsSettings.Immunity).forEach((x) => x * 10);
+                    Object.values(globals.SkillsSettings.StressResistance).forEach((x) => x * 10);
+                    Object.values(globals.SkillsSettings.MagDrills).forEach((x) => x * 5);
+                }
+                catch (error) {
+                    logger.warning(`\nOtherTweaks.Skill_Exp_Buffs failed because of another mod. Send bug report. Continue safely.`);
+                    log(error);
+                }
+            }
+            if (config_json_1.default.OtherTweaks.Remove_Discard_Limit.enabled) {
+                try {
+                    for (const i in items) {
+                        const item = items[i];
+                        if (item._type == "Item") {
+                            if (item?._props?.DiscardLimit != undefined) {
+                                item._props.DiscardLimit = -1;
+                            }
+                        }
+                    }
+                }
+                catch (error) {
+                    logger.warning(`\nOtherTweaks.Remove_Discard_Limit failed because of another mod. Send bug report. Continue safely.`);
+                    log(error);
+                }
+            }
+            if (config_json_1.default.OtherTweaks.Signal_Pistol_In_Special_Slots.enabled) {
+                try {
+                    items["627a4e6b255f7527fb05a0f6"]._props.Slots.forEach((x) => x._props.filters[0].Filter.push("620109578d82e67e7911abf2"));
+                }
+                catch (error) {
+                    logger.warning(`OtherTweaks.Signal_Pistol_In_Special_Slots failed bacause of the other mod. Send bug report. Continue safely.`);
+                    log(error);
+                }
             }
             if (config_json_1.default.OtherTweaks.Faster_Examine_Time.enabled) {
                 // Faster ExamineTime
@@ -776,7 +850,7 @@ class Mod {
                         .forEach((x) => (x._props.ExamineTime /= 5));
                 }
                 catch (error) {
-                    logger.warning(`OtherTweaks.Faster_Examine_Time threw an error bacause of the other mod. Ignore this error safely and continue. Send bug report.`);
+                    logger.warning(`\nOtherTweaks.Faster_Examine_Time failed bacause of the other mod. Send bug report. Continue safely.`);
                     log(error);
                 }
             }
@@ -800,7 +874,7 @@ class Mod {
                                 }
                             }
                             catch (error) {
-                                logger.warning(`config.OtherTweaks.Remove_Backpack_Restrictions threw an error bacause of the other mod removed default item filter property (like Valens AIO). Ignore this error safely and continue.`);
+                                logger.warning(`\nOtherTweaks.Remove_Backpack_Restrictions failed bacause of the other mod removed default item filter property (like Valens AIO or SVM). Send bug report. Continue safely.`);
                                 // log(error)
                             }
                         }
@@ -826,7 +900,7 @@ class Mod {
                     tables.templates.items["5d235bb686f77443f4331278"]._props.Grids[0]._props.filters[0].Filter = mergeFilters;
                 }
                 catch (error) {
-                    logger.warning(`config.OtherTweaks.SICC_Case_Buff threw an error because of the other mod (most likely Valen's AIO, because it removed default item property. Because of that, now SICC case allows all items.) Ignore and continue.`);
+                    logger.warning(`\nOtherTweaks.SICC_Case_Buff failed bacause of the other mod removed default item filter property (like Valens AIO or SVM). Now SICC case allows all items. Send bug report. Continue safely.`);
                 } // log(mergeFilters.map((x) => getItemName(x)))
             }
             if (config_json_1.default.OtherTweaks.Reshala_Always_Has_GoldenTT.enabled) {
@@ -835,21 +909,210 @@ class Mod {
                 tables.bots.types.bossbully.inventory.equipment.Holster = { "5b3b713c5acfc4330140bd8d": 1 };
             }
         }
-        if (config_json_1.default.InsuranceChanges.enabled == true) {
+        if (config_json_1.default.InsuranceChanges.enabled) {
             // Redo insurance. Prapor in an instant return with 50% chance, costs 10% of item value, Therapist has 2 hour return with 80% chance, costs 20%.
-            prapor.base.insurance.min_return_hour = 0;
-            prapor.base.insurance.max_return_hour = 0;
-            prapor.base.insurance.max_storage_time = 720;
-            therapist.base.insurance.min_return_hour = 2;
-            therapist.base.insurance.max_return_hour = 2;
-            therapist.base.insurance.max_storage_time = 720;
-            insuranceConfig.insuranceMultiplier["54cb50c76803fa8b248b4571"] = 0.1;
-            insuranceConfig.insuranceMultiplier["54cb57776803fa99248b456e"] = 0.2;
-            insuranceConfig.returnChancePercent["54cb50c76803fa8b248b4571"] = 50;
-            insuranceConfig.returnChancePercent["54cb57776803fa99248b456e"] = 80;
+            try {
+                prapor.base.insurance.min_return_hour = 0;
+                prapor.base.insurance.max_return_hour = 0;
+                prapor.base.insurance.max_storage_time = 720;
+                therapist.base.insurance.min_return_hour = 2;
+                therapist.base.insurance.max_return_hour = 2;
+                therapist.base.insurance.max_storage_time = 720;
+                insuranceConfig.insuranceMultiplier["54cb50c76803fa8b248b4571"] = 0.1;
+                insuranceConfig.insuranceMultiplier["54cb57776803fa99248b456e"] = 0.2;
+                insuranceConfig.returnChancePercent["54cb50c76803fa8b248b4571"] = 50;
+                insuranceConfig.returnChancePercent["54cb57776803fa99248b456e"] = 80;
+            }
+            catch (error) {
+                logger.warning(`\nInsuranceChanges failed because of another mod. Send bug report. Continue safely.`);
+                log(error);
+            }
         }
         if (config_json_1.default.EconomyOptions.enabled) {
-            if (config_json_1.default.EconomyOptions.BetterSalesToTraders.enabled) {
+            // Ragfair changes:
+            if (config_json_1.default.EconomyOptions.Disable_Flea_Market_Completely.disable) {
+                try {
+                    globals.RagFair.minUserLevel = 99;
+                }
+                catch (error) {
+                    logger.warning(`\nEconomyOptions.Disable_Flea_Market_Completely failed because of another mod. Send bug report. Continue safely.`);
+                    log(error);
+                }
+            }
+            else {
+                try {
+                    globals.RagFair.minUserLevel = config_json_1.default.EconomyOptions.Fleamarket_Opened_at_Level.value;
+                }
+                catch (error) {
+                    logger.warning(`\nEconomyOptions.Fleamarket_Opened_at_Level failed because of another mod. Send bug report. Continue safely.`);
+                    log(error);
+                }
+                try {
+                    for (let handbookItem in tables.templates.handbook.Items) {
+                        const itemInHandbook = tables.templates.handbook.Items[handbookItem];
+                        const itemID = itemInHandbook.Id;
+                        if (prices[itemID] != undefined && config_json_1.default.EconomyOptions.Price_Rebalance.enabled) {
+                            // Change all Flea prices to handbook prices.
+                            prices[itemID] = itemInHandbook.Price;
+                        }
+                        if ((!fleaListingsWhitelist.includes(itemInHandbook.ParentId) && config_json_1.default.EconomyOptions.Pacifist_FleaMarket.enabled) ||
+                            items[itemID]._props.QuestItem) {
+                            // Ban everything on flea except whitelist handbook categories above.
+                            ragfairConfig.dynamic.blacklist.custom.push(itemID); // Better semantics then CanSellOnRagfair
+                            // items[itemID]._props.CanSellOnRagfair = false
+                        }
+                    }
+                }
+                catch (error) {
+                    logger.warning(`\nEconomyOptions.Price_Rebalance and Pacifist_FleaMarket failed because of another mod. Send bug report. Continue safely.`);
+                    log(error);
+                }
+                try {
+                    if (config_json_1.default.EconomyOptions.Price_Rebalance.enabled) {
+                        // Hardcode fix for important or unbalanced items. Too low prices can't convert to barters.
+                        prices["5aa2b923e5b5b000137b7589"] *= 5; // Round frame sunglasses
+                        prices["5656eb674bdc2d35148b457c"] *= 5; // 40mm VOG-25 grenade
+                        prices["59e770b986f7742cbd762754"] *= 2; // Anti-fragmentation glasses
+                        prices["5f5e45cc5021ce62144be7aa"] *= 2; // LolKek 3F Transfer tourist backpack
+                        prices["5751487e245977207e26a315"] = 1500; // Emelya
+                        prices["57347d3d245977448f7b7f61"] = 2000; // Croutons
+                    }
+                }
+                catch (error) {
+                    logger.warning(`\nEconomyOptions.Price_Rebalance failed because of another mod. Send bug report. Continue safely.`);
+                    log(error);
+                }
+                try {
+                    // Unban random spawn only quest keys from flea, make them 2x expensive
+                    if (config_json_1.default.EconomyOptions.Pacifist_FleaMarket.Enable_QuestKeys.enabled) {
+                        for (const questKey of fleaItemsWhiteList.questKeys) {
+                            prices[questKey] *= config_json_1.default.EconomyOptions.Pacifist_FleaMarket.Enable_QuestKeys.PriceMultiplier;
+                            ragfairConfig.dynamic.blacklist.custom = ragfairConfig.dynamic.blacklist.custom.filter((x) => x != items[questKey]._id); // Better semantics then CanSellOnRagfair
+                            // items[questKey]._props.CanSellOnRagfair = true
+                        }
+                    }
+                }
+                catch (error) {
+                    logger.warning(`\nEconomyOptions.Pacifist_FleaMarket.Enable_QuestKeys failed because of another mod. Send bug report. Continue safely.`);
+                    log(error);
+                }
+                try {
+                    if (config_json_1.default.EconomyOptions.Pacifist_FleaMarket.Enable_Whitelist.enabled) {
+                        // Unban whitelist
+                        for (const item of fleaItemsWhiteList.itemWhitelist) {
+                            ragfairConfig.dynamic.blacklist.custom = ragfairConfig.dynamic.blacklist.custom.filter((x) => x != items[item]._id); // Better semantics then CanSellOnRagfair
+                            // items[item]._props.CanSellOnRagfair = true
+                        }
+                    }
+                }
+                catch (error) {
+                    logger.warning(`\nEconomyOptions.Pacifist_FleaMarket.Enable_Whitelist failed because of another mod. Send bug report. Continue safely.`);
+                    log(error);
+                }
+                try {
+                    if (config_json_1.default.EconomyOptions.Pacifist_FleaMarket.Enable_Marked_Keys.enabled) {
+                        // Unban whitelist
+                        for (const markedKey of fleaItemsWhiteList.markedKeys) {
+                            prices[markedKey] *= config_json_1.default.EconomyOptions.Pacifist_FleaMarket.Enable_Marked_Keys.PriceMultiplier;
+                            ragfairConfig.dynamic.blacklist.custom = ragfairConfig.dynamic.blacklist.custom.filter((x) => x != items[markedKey]._id); // Better semantics then CanSellOnRagfair
+                            // items[item]._props.CanSellOnRagfair = true
+                        }
+                    }
+                }
+                catch (error) {
+                    logger.warning(`\nEconomyOptions.Pacifist_FleaMarket.Enable_Marked_Keys failed because of another mod. Send bug report. Continue safely.`);
+                    log(error);
+                }
+                try {
+                    if (config_json_1.default.EconomyOptions.Disable_Selling_on_Flea.sellingDisabled == true) {
+                        ragfairConfig.sell.chance.base = 0;
+                        ragfairConfig.sell.chance.overpriced = 0;
+                        ragfairConfig.sell.chance.underpriced = 0;
+                        // ragfairConfig.sell.time.base = 20
+                        // ragfairConfig.sell.time.min = 10
+                        // ragfairConfig.sell.time.max = 30
+                    }
+                    else {
+                        ragfairConfig.sell.reputation.gain *= 10;
+                        ragfairConfig.sell.reputation.loss *= 10;
+                    }
+                }
+                catch (error) {
+                    logger.warning(`\nEconomyOptions.Disable_Selling_on_Flea failed because of another mod. Send bug report. Continue safely.`);
+                    log(error);
+                }
+                try {
+                    // Sligtly increase flea prices, but with bigger variance, you still get a lot of great trades. Hustle.
+                    ragfairConfig.dynamic.price.min *= config_json_1.default.EconomyOptions.Flea_Prices_Increased.multiplier; // 0.8 -> 1.04
+                    ragfairConfig.dynamic.price.max *= config_json_1.default.EconomyOptions.Flea_Prices_Increased.multiplier; // 1.2 -> 1.56
+                }
+                catch (error) {
+                    logger.warning(`\nSetting ragfairConfig.dynamic.price.min/max failed because of another mod. Send bug report. Continue safely.`);
+                    log(error);
+                }
+                try {
+                    if (config_json_1.default.EconomyOptions.Flea_Pristine_Items.enabled == true) {
+                        // Only pristine items are offered on flea.
+                        Object.values(ragfairConfig.dynamic.condition).forEach((x) => (x.min = 1)); // ._.
+                    }
+                }
+                catch (error) {
+                    logger.warning(`\nEconomyOptions.Flea_Pristine_Items failed because of another mod (most likely SVM). Send bug report. Continue safely.`);
+                    log(error);
+                }
+                if (config_json_1.default.EconomyOptions.Only_Found_In_Raid_Items_Allowed_For_Barters.enabled == true) {
+                    //Allow FIR only items for barters. This is default, so just in case. To make a point.
+                    globals.RagFair.isOnlyFoundInRaidAllowed = true;
+                }
+                else {
+                    globals.RagFair.isOnlyFoundInRaidAllowed = false;
+                }
+                if (config_json_1.default.EconomyOptions.Barter_Economy.enabled == true) {
+                    try {
+                        // Can only barter from items not in the blacklist. Only allows base classes, and not itemIDs =(
+                        // To diable barter requests for individual item, its flea price should be set to 2, like in the code below.
+                        ragfairConfig.dynamic.barter.itemTypeBlacklist = fleaBarterRequestBlacklist;
+                        ragfairConfig.dynamic.barter.chancePercent = 100 - config_json_1.default.EconomyOptions.Barter_Economy.Cash_Offers_Percentage.value; // Allow 10% of listings for cash
+                        ragfairConfig.dynamic.barter.minRoubleCostToBecomeBarter = 100; // Barters only for items that cost > 100
+                        ragfairConfig.dynamic.barter.priceRangeVariancePercent = config_json_1.default.EconomyOptions.Barter_Economy.Barter_Price_Variance.value; // more variance for flea barters, seems actually fun!
+                        // Max 2 for 1 barters.
+                        ragfairConfig.dynamic.barter.itemCountMax = config_json_1.default.EconomyOptions.Barter_Economy.itemCountMax.value;
+                        BSGblacklist_1.BSGblacklist.filter((x) => {
+                            // dirty hack to block BSG blacklisted items (dogtags, bitcoins, ornaments and others) from barters, since you can't buy them on flea anyway, so it should not matter.
+                            if (x == "59faff1d86f7746c51718c9c" && config_json_1.default.EconomyOptions.Barter_Economy.Unban_Bitcoins_For_Barters.enabled == true) {
+                                // do nothing
+                            }
+                            else if (!fleaBarterRequestBlacklist.includes(items[x]._parent)) {
+                                // Only mod items in categories ALLOWED on flea request list
+                                // Actually, I could have just hardcoded this lol. By default it's just Cristmass ornaments, dogtags and bitcoins.
+                                // 2 is used to pass getFleaPriceForItem check and not trigger generateStaticPrices
+                                prices[x] = 2;
+                                // if (items[x]._props.CanSellOnRagfair == true) {
+                                // 	log(`Item ${getItemName(x)} can be bought on flea for free, you dirty cheater!`)
+                                // }
+                            }
+                        });
+                        // Proper fix for quest items appearing in barter requests
+                        Object.keys(prices)
+                            .filter((x) => items[x]?._props?.QuestItem == true)
+                            .forEach((x) => (prices[x] = 2));
+                        // Max 20 offers. Too low of a number breaks AKI server for some reason, with constant client errors on completed trades.
+                        // More random trades variance anyway, this is fun.
+                        ragfairConfig.dynamic.offerItemCount.min = config_json_1.default.EconomyOptions.Barter_Economy.offerItemCount.min;
+                        ragfairConfig.dynamic.offerItemCount.max = config_json_1.default.EconomyOptions.Barter_Economy.offerItemCount.max;
+                        // Max 2 items per offer. Feels nice. Loot more shit, it might come in handy.
+                        ragfairConfig.dynamic.nonStackableCount.min = config_json_1.default.EconomyOptions.Barter_Economy.nonStackableCount.min;
+                        ragfairConfig.dynamic.nonStackableCount.max = config_json_1.default.EconomyOptions.Barter_Economy.nonStackableCount.max;
+                    }
+                    catch (error) {
+                        logger.warning(`\nEconomyOptions.Barter_Economy failed because of another mod. Send bug report. Continue safely.`);
+                        log(error);
+                    }
+                }
+            }
+        }
+        if (config_json_1.default.TraderChanges.enabled) {
+            if (config_json_1.default.TraderChanges.BetterSalesToTraders.enabled) {
                 if (debug) {
                     for (const trader in traderlist) {
                         log(`${traderlist[trader].base.nickname}.base.items_buy = {`);
@@ -873,188 +1136,105 @@ class Mod {
                         log(`${traderlist[trader].base.nickname}: ${100 - traderlist[trader].base.loyaltyLevels[3].buy_price_coef}%`);
                     }
                 }
-                for (const trader in traderlist) {
-                    traderlist[trader].base.loyaltyLevels[0].buy_price_coef = 35;
-                    traderlist[trader].base.loyaltyLevels[1].buy_price_coef = 30;
-                    traderlist[trader].base.loyaltyLevels[2].buy_price_coef = 25;
-                    traderlist[trader].base.loyaltyLevels[3].buy_price_coef = 20;
-                }
-                peacekeeper.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 7));
-                skier.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 6));
-                prapor.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 5));
-                mechanic.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 4));
-                jaeger.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 3));
-                ragman.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 2));
-                therapist.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 1));
-                therapist.base.items_buy.category = [
-                    "543be5664bdc2dd4348b4569",
-                    "543be6674bdc2df1348b4569",
-                    "567849dd4bdc2d150f8b456e",
-                    "543be5e94bdc2df1348b4568",
-                    // "5448eb774bdc2d0a728b4567", // Barter item
-                    "5795f317245977243854e041",
-                    // new:
-                    "57864c8c245977548867e7f1",
-                    "57864c322459775490116fbf", // HouseholdGoods
-                ];
-                ragman.base.items_buy.category.push("57864a3d24597754843f8721"); // Ragman buys Jewelry and Valuables
-            }
-            if (config_json_1.default.EconomyOptions.SkierUsesEuros.enabled) {
-                // WIP
-                skier.base.currency = "EUR";
-                skier.base.balance_eur = 700000;
-                skier.base.loyaltyLevels.forEach((x) => (x.minSalesSum = Math.round(x.minSalesSum / euroPrice)));
-                for (const barter in skier.assort.barter_scheme) {
-                    if (skier.assort.barter_scheme[barter][0][0]._tpl == "5449016a4bdc2d6f028b456f" && barter != "63d385b6b3eba6c95d0eee0c") {
-                        skier.assort.barter_scheme[barter][0][0].count = roundWithPrecision(skier.assort.barter_scheme[barter][0][0].count / euroPrice, 2);
-                        skier.assort.barter_scheme[barter][0][0]._tpl = "569668774bdc2da2298b4568";
+                try {
+                    for (const trader in traderlist) {
+                        traderlist[trader].base.loyaltyLevels[0].buy_price_coef = 35;
+                        traderlist[trader].base.loyaltyLevels[1].buy_price_coef = 30;
+                        traderlist[trader].base.loyaltyLevels[2].buy_price_coef = 25;
+                        traderlist[trader].base.loyaltyLevels[3].buy_price_coef = 20;
                     }
+                    peacekeeper.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 7));
+                    skier.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 6));
+                    prapor.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 5));
+                    mechanic.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 4));
+                    jaeger.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 3));
+                    ragman.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 2));
+                    therapist.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 1));
+                }
+                catch (error) {
+                    logger.warning(`\nTraderChanges.BetterSalesToTraders failed because of another mod. Send bug report. Continue safely.`);
+                    log(error);
                 }
             }
-            // Ragfair changes:
-            if (config_json_1.default.EconomyOptions.Disable_Flea_Market_Completely.disable == true) {
-                globals.RagFair.minUserLevel = 99;
+            if (config_json_1.default.TraderChanges.AlternativeCategories.enabled) {
+                try {
+                    therapist.base.items_buy.category = [
+                        "543be5664bdc2dd4348b4569",
+                        "543be6674bdc2df1348b4569",
+                        "567849dd4bdc2d150f8b456e",
+                        "543be5e94bdc2df1348b4568",
+                        // "5448eb774bdc2d0a728b4567", // Barter item
+                        "5795f317245977243854e041",
+                        // new:
+                        "57864c8c245977548867e7f1",
+                        "57864c322459775490116fbf", // HouseholdGoods
+                    ];
+                    ragman.base.items_buy.category.push("57864a3d24597754843f8721"); // Ragman buys Jewelry and Valuables
+                }
+                catch (error) {
+                    logger.warning(`\nTraderChanges.AlternativeCategories failed because of another mod. Send bug report. Continue safely.`);
+                    log(error);
+                }
             }
-            else {
-                globals.RagFair.minUserLevel = config_json_1.default.EconomyOptions.Fleamarket_Opened_at_Level.value;
-                for (let handbookItem in tables.templates.handbook.Items) {
-                    const itemInHandbook = tables.templates.handbook.Items[handbookItem];
-                    const itemID = itemInHandbook.Id;
-                    if (prices[itemID] != undefined && config_json_1.default.EconomyOptions.Price_Rebalance.enabled == true) {
-                        // Change all Flea prices to handbook prices.
-                        prices[itemID] = itemInHandbook.Price;
-                    }
-                    if ((!fleaListingsWhitelist.includes(itemInHandbook.ParentId) && config_json_1.default.EconomyOptions.Pacifist_FleaMarket.enabled == true) ||
-                        items[itemID]._props.QuestItem == true) {
-                        // Ban everything on flea except whitelist handbook categories above.
-                        ragfairConfig.dynamic.blacklist.custom.push(itemID); // Better semantics then CanSellOnRagfair
-                        // items[itemID]._props.CanSellOnRagfair = false
-                    }
-                }
-                if (config_json_1.default.EconomyOptions.Price_Rebalance.enabled == true) {
-                    // Hardcode fix for important or unbalanced items. Too low prices can't convert to barters.
-                    prices["5aa2b923e5b5b000137b7589"] *= 5; // Round frame sunglasses
-                    prices["5656eb674bdc2d35148b457c"] *= 5; // 40mm VOG-25 grenade
-                    prices["59e770b986f7742cbd762754"] *= 2; // Anti-fragmentation glasses
-                    prices["5f5e45cc5021ce62144be7aa"] *= 2; // LolKek 3F Transfer tourist backpack
-                    prices["5751487e245977207e26a315"] = 1500; // Emelya
-                    prices["57347d3d245977448f7b7f61"] = 2000; // Croutons
-                }
-                // Unban random spawn only quest keys from flea, make them 2x expensive
-                if (config_json_1.default.EconomyOptions.Pacifist_FleaMarket.Enable_QuestKeys.enabled == true) {
-                    for (const questKey of fleaItemsWhiteList.questKeys) {
-                        prices[questKey] *= config_json_1.default.EconomyOptions.Pacifist_FleaMarket.Enable_QuestKeys.PriceMultiplier;
-                        ragfairConfig.dynamic.blacklist.custom = ragfairConfig.dynamic.blacklist.custom.filter((x) => x != items[questKey]._id); // Better semantics then CanSellOnRagfair
-                        // items[questKey]._props.CanSellOnRagfair = true
-                    }
-                }
-                if (config_json_1.default.EconomyOptions.Pacifist_FleaMarket.Enable_Whitelist.enabled) {
-                    // Unban whitelist
-                    for (const item of fleaItemsWhiteList.itemWhitelist) {
-                        ragfairConfig.dynamic.blacklist.custom = ragfairConfig.dynamic.blacklist.custom.filter((x) => x != items[item]._id); // Better semantics then CanSellOnRagfair
-                        // items[item]._props.CanSellOnRagfair = true
-                    }
-                }
-                if (config_json_1.default.EconomyOptions.Pacifist_FleaMarket.Enable_Marked_Keys.enabled) {
-                    // Unban whitelist
-                    for (const markedKey of fleaItemsWhiteList.markedKeys) {
-                        prices[markedKey] *= config_json_1.default.EconomyOptions.Pacifist_FleaMarket.Enable_Marked_Keys.PriceMultiplier;
-                        ragfairConfig.dynamic.blacklist.custom = ragfairConfig.dynamic.blacklist.custom.filter((x) => x != items[markedKey]._id); // Better semantics then CanSellOnRagfair
-                        // items[item]._props.CanSellOnRagfair = true
-                    }
-                }
-                if (config_json_1.default.EconomyOptions.Disable_Selling_on_Flea.sellingDisabled == true) {
-                    ragfairConfig.sell.chance.base = 0;
-                    ragfairConfig.sell.chance.overpriced = 0;
-                    ragfairConfig.sell.chance.underpriced = 0;
-                    // ragfairConfig.sell.time.base = 20
-                    // ragfairConfig.sell.time.min = 10
-                    // ragfairConfig.sell.time.max = 30
-                }
-                else {
-                    ragfairConfig.sell.reputation.gain *= 10;
-                    ragfairConfig.sell.reputation.loss *= 10;
-                }
-                // Sligtly increase flea prices, but with bigger variance, you still get a lot of great trades. Hustle.
-                ragfairConfig.dynamic.price.min *= config_json_1.default.EconomyOptions.Flea_Prices_Increased.multiplier; // 0.8 -> 1.04
-                ragfairConfig.dynamic.price.max *= config_json_1.default.EconomyOptions.Flea_Prices_Increased.multiplier; // 1.2 -> 1.56
-                if (config_json_1.default.EconomyOptions.Flea_Pristine_Items.enabled == true) {
-                    // Only pristine items are offered on flea.
-                    Object.values(ragfairConfig.dynamic.condition).forEach((x) => (x.min = 1)); // ._.
-                }
-                if (config_json_1.default.EconomyOptions.Only_Found_In_Raid_Items_Allowed_For_Barters.enabled == true) {
-                    //Allow FIR only items for barters. This is default, so just in case. To make a point.
-                    globals.RagFair.isOnlyFoundInRaidAllowed = true;
-                }
-                else {
-                    globals.RagFair.isOnlyFoundInRaidAllowed = false;
-                }
-                if (config_json_1.default.EconomyOptions.Barter_Economy.enabled == true) {
-                    // Can only barter from items not in the blacklist. Only allows base classes, and not itemIDs =(
-                    // To diable barter requests for individual item, its flea price should be set to 2, like in the code below.
-                    ragfairConfig.dynamic.barter.itemTypeBlacklist = fleaBarterRequestBlacklist;
-                    ragfairConfig.dynamic.barter.chancePercent = 100 - config_json_1.default.EconomyOptions.Barter_Economy.Cash_Offers_Percentage.value; // Allow 10% of listings for cash
-                    ragfairConfig.dynamic.barter.minRoubleCostToBecomeBarter = 100; // Barters only for items that cost > 100
-                    ragfairConfig.dynamic.barter.priceRangeVariancePercent = config_json_1.default.EconomyOptions.Barter_Economy.Barter_Price_Variance.value; // more variance for flea barters, seems actually fun!
-                    // Max 2 for 1 barters.
-                    ragfairConfig.dynamic.barter.itemCountMax = config_json_1.default.EconomyOptions.Barter_Economy.itemCountMax.value;
-                    BSGblacklist_1.BSGblacklist.filter((x) => {
-                        // dirty hack to block BSG blacklisted items (dogtags, bitcoins, ornaments and others) from barters, since you can't buy them on flea anyway, so it should not matter.
-                        if (x == "59faff1d86f7746c51718c9c" && config_json_1.default.EconomyOptions.Barter_Economy.Unban_Bitcoins_For_Barters.enabled == true) {
-                            // do nothing
+            if (config_json_1.default.TraderChanges.SkierUsesEuros.enabled) {
+                try {
+                    // WIP
+                    skier.base.currency = "EUR";
+                    skier.base.balance_eur = 700000;
+                    skier.base.loyaltyLevels.forEach((x) => (x.minSalesSum = Math.round(x.minSalesSum / euroPrice)));
+                    for (const barter in skier.assort.barter_scheme) {
+                        if (skier.assort.barter_scheme[barter][0][0]._tpl == "5449016a4bdc2d6f028b456f" && barter != "63d385b6b3eba6c95d0eee0c") {
+                            skier.assort.barter_scheme[barter][0][0].count = roundWithPrecision(skier.assort.barter_scheme[barter][0][0].count / euroPrice, 2);
+                            skier.assort.barter_scheme[barter][0][0]._tpl = "569668774bdc2da2298b4568";
                         }
-                        else if (!fleaBarterRequestBlacklist.includes(items[x]._parent)) {
-                            // Only mod items in categories ALLOWED on flea request list
-                            // Actually, I could have just hardcoded this lol. By default it's just Cristmass ornaments, dogtags and bitcoins.
-                            // 2 is used to pass getFleaPriceForItem check and not trigger generateStaticPrices
-                            prices[x] = 2;
-                            // if (items[x]._props.CanSellOnRagfair == true) {
-                            // 	log(`Item ${getItemName(x)} can be bought on flea for free, you dirty cheater!`)
-                            // }
-                        }
-                    });
-                    // Proper fix for quest items appearing in barter requests
-                    Object.keys(prices)
-                        .filter((x) => items[x]?._props?.QuestItem == true)
-                        .forEach((x) => (prices[x] = 2));
-                    // Max 20 offers. Too low of a number breaks AKI server for some reason, with constant client errors on completed trades.
-                    // More random trades variance anyway, this is fun.
-                    ragfairConfig.dynamic.offerItemCount.min = config_json_1.default.EconomyOptions.Barter_Economy.offerItemCount.min;
-                    ragfairConfig.dynamic.offerItemCount.max = config_json_1.default.EconomyOptions.Barter_Economy.offerItemCount.max;
-                    // Max 2 items per offer. Feels nice. Loot more shit, it might come in handy.
-                    ragfairConfig.dynamic.nonStackableCount.min = config_json_1.default.EconomyOptions.Barter_Economy.nonStackableCount.min;
-                    ragfairConfig.dynamic.nonStackableCount.max = config_json_1.default.EconomyOptions.Barter_Economy.nonStackableCount.max;
+                    }
+                }
+                catch (error) {
+                    logger.warning(`\nTraderChanges.SkierUsesEuros failed because of another mod. Send bug report. Continue safely.`);
+                    log(error);
                 }
             }
-            if (config_json_1.default.EconomyOptions.Pacifist_Fence.enabled == true) {
-                // Add BSGblacklist and mod custom blacklist to Fence blacklists
-                let fenceBlacklist = [];
-                // In addition to other blacklists, no medikits, medical items and drugs for Fence, because he sells them not in pristine condition.
-                fenceBlacklist.push(...BSGblacklist_1.BSGblacklist, ...fleaBarterRequestBlacklist, "5448f39d4bdc2d0a728b4568", "5448f3ac4bdc2dce718b4569", "5448f3a14bdc2d27728b4569");
-                // Instead, allow him to sell stims!
-                fenceBlacklist = fenceBlacklist.filter((x) => x != "5448f3a64bdc2d60728b456a");
-                // Fence sells only items that are not in the flea blacklist
-                traderConfig.fence.assortSize = config_json_1.default.EconomyOptions.Pacifist_Fence.Number_Of_Fence_Offers;
-                traderConfig.fence.blacklist = fenceBlacklist; //itemid or baseid
-                traderConfig.fence.maxPresetsPercent = 0;
-                traderConfig.fence.discountOptions.assortSize = config_json_1.default.EconomyOptions.Pacifist_Fence.Number_Of_Fence_Offers; // doesnt seem to work properly
-                traderConfig.fence.itemPriceMult = 0.81; // at 6 Fence karma you buy items almost at a price Therapist buys from you. Go grind.
-                traderConfig.fence.discountOptions.itemPriceMult = 1;
+            if (config_json_1.default.TraderChanges.Reasonably_Priced_Cases.enabled == true) {
+                try {
+                    therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0352"][0].forEach((x) => (x.count = 5)); // THICC case (LEDX)
+                    therapist.assort.barter_scheme["63d385d7b3eba6c95d0f036e"][0].forEach((x) => (x.count = 10)); // THICC case (Moonshine)
+                    therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0334"][0].forEach((x) => (x.count = 5941)); // Item case (Euro)
+                    therapist.assort.barter_scheme["63d385d7b3eba6c95d0f034a"][0].forEach((x) => (x.count = 8)); // Item case (OScope)
+                    therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0380"][0].forEach((x) => (x.count = 20)); // Item case (Dogtags)
+                    therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0382"][0].forEach((x) => (x.count = 15)); // Lucky Scav Junk box (Dogtags)
+                    therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0350"][0].forEach((x) => (x.count = 806138)); // Lucky Scav Junk box (Rubles)
+                    therapist.assort.barter_scheme["63d385d7b3eba6c95d0f033c"][0].forEach((x) => (x.count = 248610)); // Medcase (Rubles)
+                    therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0384"][0].forEach((x) => (x.count /= 10)); // LEDX (Dogtags) // Really BSG? 160 kills for a non-FIR item? REALLY?!
+                    peacekeeper.assort.barter_scheme["63d385cab3eba6c95d0eff5f"][0].forEach((x) => (x.count = x.count / 5 + 1)); // THICC case (SMT+Bluefolder)
+                    skier.assort.barter_scheme["63d385b7b3eba6c95d0eef5c"][0].forEach((x) => (x.count = 4)); // Weapon case (Moonshine)
+                    mechanic.assort.barter_scheme["63d385bfb3eba6c95d0ef4d1"][0].forEach((x) => (x.count = 5)); // Weapon case (Bitcoins)
+                    mechanic.assort.barter_scheme["63d385c0b3eba6c95d0ef5d8"][0].forEach((x) => (x.count = 10)); // THICC Weapon case (Bitcoins)
+                }
+                catch (error) {
+                    logger.warning(`\nTraderChanges.Reasonably_Priced_Cases failed because of another mod. Send bug report. Continue safely.`);
+                    log(error);
+                }
             }
-            if (config_json_1.default.EconomyOptions.Reasonably_Priced_Cases.enabled == true) {
-                therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0352"][0].forEach((x) => (x.count = 5)); // THICC case (LEDX)
-                therapist.assort.barter_scheme["63d385d7b3eba6c95d0f036e"][0].forEach((x) => (x.count = 10)); // THICC case (Moonshine)
-                therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0334"][0].forEach((x) => (x.count = 5941)); // Item case (Euro)
-                therapist.assort.barter_scheme["63d385d7b3eba6c95d0f034a"][0].forEach((x) => (x.count = 8)); // Item case (OScope)
-                therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0380"][0].forEach((x) => (x.count = 20)); // Item case (Dogtags)
-                therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0382"][0].forEach((x) => (x.count = 15)); // Lucky Scav Junk box (Dogtags)
-                therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0350"][0].forEach((x) => (x.count = 806138)); // Lucky Scav Junk box (Rubles)
-                therapist.assort.barter_scheme["63d385d7b3eba6c95d0f033c"][0].forEach((x) => (x.count = 248610)); // Medcase (Rubles)
-                therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0384"][0].forEach((x) => (x.count /= 10)); // LEDX (Dogtags) // Really BSG? 160 kills for a non-FIR item? REALLY?!
-                peacekeeper.assort.barter_scheme["63d385cab3eba6c95d0eff5f"][0].forEach((x) => (x.count = x.count / 5 + 1)); // THICC case (SMT+Bluefolder)
-                skier.assort.barter_scheme["63d385b7b3eba6c95d0eef5c"][0].forEach((x) => (x.count = 4)); // Weapon case (Moonshine)
-                mechanic.assort.barter_scheme["63d385bfb3eba6c95d0ef4d1"][0].forEach((x) => (x.count = 5)); // Weapon case (Bitcoins)
-                mechanic.assort.barter_scheme["63d385c0b3eba6c95d0ef5d8"][0].forEach((x) => (x.count = 10)); // THICC Weapon case (Bitcoins)
+            if (config_json_1.default.TraderChanges.Pacifist_Fence.enabled == true) {
+                try {
+                    // Add BSGblacklist and mod custom blacklist to Fence blacklists
+                    let fenceBlacklist = [];
+                    // In addition to other blacklists, no medikits, medical items and drugs for Fence, because he sells them not in pristine condition.
+                    fenceBlacklist.push(...BSGblacklist_1.BSGblacklist, ...fleaBarterRequestBlacklist, "5448f39d4bdc2d0a728b4568", "5448f3ac4bdc2dce718b4569", "5448f3a14bdc2d27728b4569");
+                    // Instead, allow him to sell stims!
+                    fenceBlacklist = fenceBlacklist.filter((x) => x != "5448f3a64bdc2d60728b456a");
+                    // Fence sells only items that are not in the flea blacklist
+                    traderConfig.fence.assortSize = config_json_1.default.TraderChanges.Pacifist_Fence.Number_Of_Fence_Offers;
+                    traderConfig.fence.blacklist = fenceBlacklist; //itemid or baseid
+                    traderConfig.fence.maxPresetsPercent = 0;
+                    traderConfig.fence.discountOptions.assortSize = 0; // doesnt seem to work properly
+                    traderConfig.fence.itemPriceMult = 1;
+                    traderConfig.fence.discountOptions.itemPriceMult = 0.82; // This Fence settings are weird. I still don't get how AKI calculates assorts, was getting very strange results in testing. But this should be close enough to best trader prices but not abusable.
+                }
+                catch (error) {
+                    logger.warning(`\nTraderChanges.Pacifist_Fence failed because of another mod. Send bug report. Continue safely.`);
+                    log(error);
+                }
             }
         }
         if (config_json_1.default.CraftingRebalance.enabled == true) {
@@ -1890,344 +2070,350 @@ class Mod {
                 // */
             }
             catch (error) {
-                logger.warning(`config.CraftingRebalance failed. Send bug report. Continue safely.`);
+                logger.warning(`\nCraftingRebalance failed because of another mod. Send bug report. Continue safely.`);
                 log(error);
             }
         }
         if (config_json_1.default.AdditionalCraftingRecipes.enabled == true) {
-            // 63da4dbee8fa73e225000001
-            // 63da4dbee8fa73e225000002
-            // 63da4dbee8fa73e225000003
-            // 63da4dbee8fa73e225000004
-            // 63da4dbee8fa73e225000005
-            // 63da4dbee8fa73e225000006
-            // 63da4dbee8fa73e225000007
-            // 63da4dbee8fa73e225000008
-            // 63da4dbee8fa73e225000009
-            // 63da4dbee8fa73e22500000a
-            const Ophthalmoscope = {
-                _id: "63da4dbee8fa73e225000001",
-                areaType: 7,
-                requirements: [
-                    { areaType: 7, requiredLevel: 3, type: "Area" },
-                    {
-                        templateId: "5e2aedd986f7746d404f3aa4",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                    {
-                        templateId: "619cc01e0a7c3a1a2731940c",
-                        count: 2,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                    {
-                        templateId: "57d17c5e2459775a5c57d17d",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                    {
-                        templateId: "5b4391a586f7745321235ab2",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                    {
-                        templateId: "57347c1124597737fb1379e3",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                ],
-                productionTime: 105,
-                boosters: null,
-                endProduct: "5af0534a86f7743b6f354284",
-                continuous: false,
-                count: 1,
-                productionLimitCount: 0,
-            };
-            const Zagustin = {
-                _id: "63da4dbee8fa73e225000002",
-                areaType: 7,
-                requirements: [
-                    { areaType: 7, requiredLevel: 3, type: "Area" },
-                    {
-                        templateId: "5c0e530286f7747fa1419862",
-                        count: 2,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                    {
-                        templateId: "5e8488fa988a8701445df1e4",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                    {
-                        templateId: "5ed515f6915ec335206e4152",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                ],
-                productionTime: 105,
-                boosters: null,
-                endProduct: "5c0e533786f7747fa23f4d47",
-                continuous: false,
-                count: 3,
-                productionLimitCount: 0,
-            };
-            const Obdolbos = {
-                // Did you always want to run your own meth lab in Tarkov? Now you can.
-                _id: "63da4dbee8fa73e225000003",
-                areaType: 7,
-                requirements: [
-                    { areaType: 7, requiredLevel: 3, type: "Area" },
-                    {
-                        templateId: "5c0e531286f7747fa54205c2",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                    {
-                        templateId: "5b43575a86f77424f443fe62",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                    {
-                        templateId: "5e2af00086f7746d3f3c33f7",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                    {
-                        templateId: "62a09f32621468534a797acb",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                    {
-                        templateId: "5d40407c86f774318526545a",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                    {
-                        templateId: "5d403f9186f7743cac3f229b",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                    {
-                        templateId: "5d1b376e86f774252519444e",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                    {
-                        templateId: "5d1b2f3f86f774252167a52c",
-                        type: "Tool",
-                    },
-                ],
-                productionTime: 564,
-                boosters: null,
-                endProduct: "5ed5166ad380ab312177c100",
-                continuous: false,
-                count: 8,
-                productionLimitCount: 0,
-            };
-            const CALOK = {
-                _id: "63da4dbee8fa73e225000004",
-                areaType: 7,
-                requirements: [
-                    { areaType: 7, requiredLevel: 2, type: "Area" },
-                    {
-                        templateId: "5751a25924597722c463c472",
-                        count: 2,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                    {
-                        templateId: "5755383e24597772cb798966",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                ],
-                productionTime: 48,
-                boosters: null,
-                endProduct: "5e8488fa988a8701445df1e4",
-                continuous: false,
-                count: 2,
-                productionLimitCount: 0,
-            };
-            const Adrenaline = {
-                _id: "63da4dbee8fa73e225000005",
-                areaType: 7,
-                requirements: [
-                    { areaType: 7, requiredLevel: 2, type: "Area" },
-                    {
-                        templateId: "5751496424597720a27126da",
-                        count: 3,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                    {
-                        templateId: "5755356824597772cb798962",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                ],
-                productionTime: 23,
-                boosters: null,
-                endProduct: "5c10c8fd86f7743d7d706df3",
-                continuous: false,
-                count: 1,
-                productionLimitCount: 0,
-            };
-            const ThreebTG = {
-                _id: "63da4dbee8fa73e225000006",
-                areaType: 7,
-                requirements: [
-                    { areaType: 7, requiredLevel: 3, type: "Area" },
-                    {
-                        templateId: "5c10c8fd86f7743d7d706df3",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                    {
-                        templateId: "59e361e886f774176c10a2a5",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                    {
-                        templateId: "57505f6224597709a92585a9",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                ],
-                productionTime: 31,
-                boosters: null,
-                endProduct: "5ed515c8d380ab312177c0fa",
-                continuous: false,
-                count: 2,
-                productionLimitCount: 0,
-            };
-            const AHF1 = {
-                _id: "63da4dbee8fa73e225000007",
-                areaType: 7,
-                requirements: [
-                    { areaType: 7, requiredLevel: 2, type: "Area" },
-                    {
-                        templateId: "590c695186f7741e566b64a2",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                    {
-                        templateId: "544fb3f34bdc2d03748b456a",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                ],
-                productionTime: 47,
-                boosters: null,
-                endProduct: "5ed515f6915ec335206e4152",
-                continuous: false,
-                count: 1,
-                productionLimitCount: 0,
-            };
-            const OLOLO = {
-                _id: "63da4dbee8fa73e225000008",
-                areaType: 8,
-                requirements: [
-                    { areaType: 8, requiredLevel: 3, type: "Area" },
-                    {
-                        templateId: "57513f9324597720a7128161",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                    {
-                        templateId: "57513fcc24597720a31c09a6",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                    {
-                        templateId: "57513f07245977207e26a311",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                    {
-                        templateId: "575062b524597720a31c09a1",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                    {
-                        templateId: "544fb62a4bdc2dfb738b4568",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                    {
-                        templateId: "544fb37f4bdc2dee738b4567",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                    {
-                        templateId: "5d1b385e86f774252167b98a",
-                        type: "Tool",
-                    },
-                    {
-                        templateId: "590de71386f774347051a052",
-                        type: "Tool",
-                    },
-                ],
-                productionTime: 71,
-                boosters: null,
-                endProduct: "62a0a043cf4a99369e2624a5",
-                continuous: false,
-                count: 3,
-                productionLimitCount: 0,
-            };
-            const L1 = {
-                _id: "63da4dbee8fa73e225000009",
-                areaType: 7,
-                requirements: [
-                    { areaType: 7, requiredLevel: 3, type: "Area" },
-                    {
-                        templateId: "5c10c8fd86f7743d7d706df3",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                    {
-                        templateId: "5c0e531d86f7747fa23f4d42",
-                        count: 1,
-                        isFunctional: false,
-                        type: "Item",
-                    },
-                ],
-                productionTime: 71,
-                boosters: null,
-                endProduct: "5ed515e03a40a50460332579",
-                continuous: false,
-                count: 1,
-                productionLimitCount: 0,
-            };
-            tables.hideout.production.push(ThreebTG, Adrenaline, L1, AHF1, CALOK, Ophthalmoscope, Zagustin, Obdolbos, OLOLO);
+            try {
+                // 63da4dbee8fa73e225000001
+                // 63da4dbee8fa73e225000002
+                // 63da4dbee8fa73e225000003
+                // 63da4dbee8fa73e225000004
+                // 63da4dbee8fa73e225000005
+                // 63da4dbee8fa73e225000006
+                // 63da4dbee8fa73e225000007
+                // 63da4dbee8fa73e225000008
+                // 63da4dbee8fa73e225000009
+                // 63da4dbee8fa73e22500000a
+                const Ophthalmoscope = {
+                    _id: "63da4dbee8fa73e225000001",
+                    areaType: 7,
+                    requirements: [
+                        { areaType: 7, requiredLevel: 3, type: "Area" },
+                        {
+                            templateId: "5e2aedd986f7746d404f3aa4",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                        {
+                            templateId: "619cc01e0a7c3a1a2731940c",
+                            count: 2,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                        {
+                            templateId: "57d17c5e2459775a5c57d17d",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                        {
+                            templateId: "5b4391a586f7745321235ab2",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                        {
+                            templateId: "57347c1124597737fb1379e3",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                    ],
+                    productionTime: 105,
+                    boosters: null,
+                    endProduct: "5af0534a86f7743b6f354284",
+                    continuous: false,
+                    count: 1,
+                    productionLimitCount: 0,
+                };
+                const Zagustin = {
+                    _id: "63da4dbee8fa73e225000002",
+                    areaType: 7,
+                    requirements: [
+                        { areaType: 7, requiredLevel: 3, type: "Area" },
+                        {
+                            templateId: "5c0e530286f7747fa1419862",
+                            count: 2,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                        {
+                            templateId: "5e8488fa988a8701445df1e4",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                        {
+                            templateId: "5ed515f6915ec335206e4152",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                    ],
+                    productionTime: 105,
+                    boosters: null,
+                    endProduct: "5c0e533786f7747fa23f4d47",
+                    continuous: false,
+                    count: 3,
+                    productionLimitCount: 0,
+                };
+                const Obdolbos = {
+                    // Did you always want to run your own meth lab in Tarkov? Now you can.
+                    _id: "63da4dbee8fa73e225000003",
+                    areaType: 7,
+                    requirements: [
+                        { areaType: 7, requiredLevel: 3, type: "Area" },
+                        {
+                            templateId: "5c0e531286f7747fa54205c2",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                        {
+                            templateId: "5b43575a86f77424f443fe62",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                        {
+                            templateId: "5e2af00086f7746d3f3c33f7",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                        {
+                            templateId: "62a09f32621468534a797acb",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                        {
+                            templateId: "5d40407c86f774318526545a",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                        {
+                            templateId: "5d403f9186f7743cac3f229b",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                        {
+                            templateId: "5d1b376e86f774252519444e",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                        {
+                            templateId: "5d1b2f3f86f774252167a52c",
+                            type: "Tool",
+                        },
+                    ],
+                    productionTime: 564,
+                    boosters: null,
+                    endProduct: "5ed5166ad380ab312177c100",
+                    continuous: false,
+                    count: 8,
+                    productionLimitCount: 0,
+                };
+                const CALOK = {
+                    _id: "63da4dbee8fa73e225000004",
+                    areaType: 7,
+                    requirements: [
+                        { areaType: 7, requiredLevel: 2, type: "Area" },
+                        {
+                            templateId: "5751a25924597722c463c472",
+                            count: 2,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                        {
+                            templateId: "5755383e24597772cb798966",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                    ],
+                    productionTime: 48,
+                    boosters: null,
+                    endProduct: "5e8488fa988a8701445df1e4",
+                    continuous: false,
+                    count: 2,
+                    productionLimitCount: 0,
+                };
+                const Adrenaline = {
+                    _id: "63da4dbee8fa73e225000005",
+                    areaType: 7,
+                    requirements: [
+                        { areaType: 7, requiredLevel: 2, type: "Area" },
+                        {
+                            templateId: "5751496424597720a27126da",
+                            count: 3,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                        {
+                            templateId: "5755356824597772cb798962",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                    ],
+                    productionTime: 23,
+                    boosters: null,
+                    endProduct: "5c10c8fd86f7743d7d706df3",
+                    continuous: false,
+                    count: 1,
+                    productionLimitCount: 0,
+                };
+                const ThreebTG = {
+                    _id: "63da4dbee8fa73e225000006",
+                    areaType: 7,
+                    requirements: [
+                        { areaType: 7, requiredLevel: 3, type: "Area" },
+                        {
+                            templateId: "5c10c8fd86f7743d7d706df3",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                        {
+                            templateId: "59e361e886f774176c10a2a5",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                        {
+                            templateId: "57505f6224597709a92585a9",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                    ],
+                    productionTime: 31,
+                    boosters: null,
+                    endProduct: "5ed515c8d380ab312177c0fa",
+                    continuous: false,
+                    count: 2,
+                    productionLimitCount: 0,
+                };
+                const AHF1 = {
+                    _id: "63da4dbee8fa73e225000007",
+                    areaType: 7,
+                    requirements: [
+                        { areaType: 7, requiredLevel: 2, type: "Area" },
+                        {
+                            templateId: "590c695186f7741e566b64a2",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                        {
+                            templateId: "544fb3f34bdc2d03748b456a",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                    ],
+                    productionTime: 47,
+                    boosters: null,
+                    endProduct: "5ed515f6915ec335206e4152",
+                    continuous: false,
+                    count: 1,
+                    productionLimitCount: 0,
+                };
+                const OLOLO = {
+                    _id: "63da4dbee8fa73e225000008",
+                    areaType: 8,
+                    requirements: [
+                        { areaType: 8, requiredLevel: 3, type: "Area" },
+                        {
+                            templateId: "57513f9324597720a7128161",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                        {
+                            templateId: "57513fcc24597720a31c09a6",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                        {
+                            templateId: "57513f07245977207e26a311",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                        {
+                            templateId: "575062b524597720a31c09a1",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                        {
+                            templateId: "544fb62a4bdc2dfb738b4568",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                        {
+                            templateId: "544fb37f4bdc2dee738b4567",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                        {
+                            templateId: "5d1b385e86f774252167b98a",
+                            type: "Tool",
+                        },
+                        {
+                            templateId: "590de71386f774347051a052",
+                            type: "Tool",
+                        },
+                    ],
+                    productionTime: 71,
+                    boosters: null,
+                    endProduct: "62a0a043cf4a99369e2624a5",
+                    continuous: false,
+                    count: 3,
+                    productionLimitCount: 0,
+                };
+                const L1 = {
+                    _id: "63da4dbee8fa73e225000009",
+                    areaType: 7,
+                    requirements: [
+                        { areaType: 7, requiredLevel: 3, type: "Area" },
+                        {
+                            templateId: "5c10c8fd86f7743d7d706df3",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                        {
+                            templateId: "5c0e531d86f7747fa23f4d42",
+                            count: 1,
+                            isFunctional: false,
+                            type: "Item",
+                        },
+                    ],
+                    productionTime: 71,
+                    boosters: null,
+                    endProduct: "5ed515e03a40a50460332579",
+                    continuous: false,
+                    count: 1,
+                    productionLimitCount: 0,
+                };
+                tables.hideout.production.push(ThreebTG, Adrenaline, L1, AHF1, CALOK, Ophthalmoscope, Zagustin, Obdolbos, OLOLO);
+            }
+            catch (error) {
+                logger.warning(`\nAdditionalCraftingRecipes failed because of another mod. Send bug report. Continue safely.`);
+                log(error);
+            }
         }
         // if (config.OtherTweaks.CollectorQuestEarlyStart.enabled == true) {
         // WIP, waiting for SPT to update
@@ -2256,7 +2442,7 @@ class Mod {
                 return tables.hideout.production.find((x) => x.endProduct == endProductID && x.areaType != 21);
             }
             catch (error) {
-                logger.warning(`getCraft function threw an error bacause of the other mod. Ignore this error safely and continue. Send bug report.`);
+                logger.warning(`\ngetCraft function failed bacause of the other mod. Ignore this error safely and continue. Send bug report.`);
                 log(endProductID);
                 log(error);
             }
@@ -2266,7 +2452,7 @@ class Mod {
                 return tables.hideout.production.find((x) => x._id == craftID && x.areaType != 21);
             }
             catch (error) {
-                logger.warning(`getCraft function threw an error bacause of the other mod. Ignore this error safely and continue. Send bug report.`);
+                logger.warning(`\ngetCraft function failed bacause of the other mod. Ignore this error safely and continue. Send bug report.`);
                 log(craftID);
                 log(error);
             }
@@ -2276,7 +2462,7 @@ class Mod {
                 return handbook.Items.find((i) => i.Id === itemID); // Outs: @Id, @ParentId, @Price
             }
             catch (error) {
-                logger.warning(`getItemInHandbook function threw an error bacause of the other mod. Ignore this error safely and continue. Send bug report.`);
+                logger.warning(`\ngetItemInHandbook function failed bacause of the other mod. Ignore this error safely and continue. Send bug report.`);
                 log(itemID);
                 log(error);
             }
