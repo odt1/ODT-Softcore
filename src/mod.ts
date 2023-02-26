@@ -1252,6 +1252,7 @@ class Mod implements IPostDBLoadMod {
 					]
 
 					ragman.base.items_buy.category.push("57864a3d24597754843f8721") // Ragman buys Jewelry and Valuables
+					skier.base.items_buy.category.push("5448ecbe4bdc2d60728b4568") // Skier buys info items
 				} catch (error) {
 					logger.warning(`\nTraderChanges.AlternativeCategories failed because of another mod. Send bug report. Continue safely.`)
 					log(error)

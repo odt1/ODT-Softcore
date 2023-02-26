@@ -159,7 +159,7 @@
 			"enabled": true
 		},
 		"AlternativeCategories": {
-			"_description": "Nerfs Therapist buying categories (instead of all barter items, she buys only meds and household goods, good for trader diversity) and allows Ragman to buy valuables.",
+			"_description": "Nerfs Therapist buying categories (instead of all barter items, she buys only meds and household goods, good for trader diversity), allows Ragman to buy valuables and Skier to buy info items.",
 			"enabled": true
 		},
 		"Pacifist_Fence": {
