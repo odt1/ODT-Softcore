@@ -13,7 +13,7 @@ const config_json_1 = __importDefault(require("../config/config.json"));
 const fleaListingsWhitelist = require("../config/fleaListingsWhitelist.ts"); // this Node.js module/require shit is bullshit.
 const fleaBarterRequestsWhitelist = require("../config/fleaBarterRequestsWhitelist.ts"); // why I can't use import in config directory? Anyway, is there any alternative to JSON data storage? THIS is the only way to save commented data?!
 const fleaItemsWhiteList = require("../config/fleaItemsWhitelist.ts");
-const debug = false; // [Debug] Debug!
+const debug = true; // [Debug] Debug!
 class Mod {
     postDBLoad(container) {
         const logger = container.resolve("WinstonLogger");
@@ -284,7 +284,7 @@ class Mod {
                                 onlyFoundInRaid: false,
                                 dynamicLocale: false,
                                 target: ["5857a8bc2459772bad15db29"],
-                                value: "2",
+                                value: 2,
                                 visibilityConditions: [],
                             },
                             dynamicLocale: false,
@@ -320,7 +320,7 @@ class Mod {
             try {
                 if (config_json_1.default.ScavCaseOptions.BetterRewards.enabled) {
                     // buyableitems generator, to make sure rare unbuyable items always are in reward pool (eg anodised red gear)
-                    let buyableitems = new Set();
+                    const buyableitems = new Set();
                     for (const trader of traderlist) {
                         try {
                             trader.assort.items.filter((x) => buyableitems.add(x._tpl));
@@ -332,7 +332,7 @@ class Mod {
                     }
                     // Shitlist generator for scav case rewards. Filters A LOT of crap out, but very conservatevely. Blacklist included in ./docs folder check it out.
                     // Always includes items in carefully curated whitelist. Always includes unbuyable and/or cheap items not included in whitelist (such as anodized red gear, but also some crap like scav only hats). Always includes items worth > 10000. Filters everything else out. Spent a lot of time thinking about this, really proud of myself. In the end, just makes sure you almost always get something of valuable or usable.
-                    let scavWhitelist = []; // [Debug] used for debug code below
+                    const scavWhitelist = []; // [Debug] used for debug code below
                     for (const i in items) {
                         const item = items[i];
                         if (item._type == "Item") {
@@ -343,9 +343,9 @@ class Mod {
                             if (item._parent == "543be5cb4bdc2deb348b4568") {
                                 try {
                                     // Ammo boxes price patch/fix, their data in handbook is always 1k, this makes them valued as ammo*count they contain.
-                                    let count = item._props.StackSlots[0]._max_count;
-                                    let ammo = item._props.StackSlots[0]._props.filters[0].Filter[0];
-                                    let value = Math.round(getItemInHandbook(ammo).Price * count);
+                                    const count = item._props.StackSlots[0]._max_count;
+                                    const ammo = item._props.StackSlots[0]._props.filters[0].Filter[0];
+                                    const value = Math.round(getItemInHandbook(ammo).Price * count);
                                     handbook.Items.find((x) => x.Id == item._id).Price = value;
                                 }
                                 catch (error) {
@@ -399,16 +399,16 @@ class Mod {
                         {
                             EndProducts: {
                                 Common: {
-                                    min: "2",
-                                    max: "3",
+                                    min: 2,
+                                    max: 3,
                                 },
                                 Rare: {
-                                    min: "0",
-                                    max: "0",
+                                    min: 0,
+                                    max: 0,
                                 },
                                 Superrare: {
-                                    min: "0",
-                                    max: "0",
+                                    min: 0,
+                                    max: 0,
                                 },
                             },
                             ProductionTime: 2500,
@@ -426,16 +426,16 @@ class Mod {
                         {
                             EndProducts: {
                                 Common: {
-                                    min: "3",
-                                    max: "4",
+                                    min: 3,
+                                    max: 4,
                                 },
                                 Rare: {
-                                    min: "0",
-                                    max: "1",
+                                    min: 0,
+                                    max: 1,
                                 },
                                 Superrare: {
-                                    min: "0",
-                                    max: "0",
+                                    min: 0,
+                                    max: 0,
                                 },
                             },
                             ProductionTime: 7700,
@@ -453,16 +453,16 @@ class Mod {
                         {
                             EndProducts: {
                                 Common: {
-                                    min: "4",
-                                    max: "5",
+                                    min: 4,
+                                    max: 5,
                                 },
                                 Rare: {
-                                    min: "1",
-                                    max: "2",
+                                    min: 1,
+                                    max: 2,
                                 },
                                 Superrare: {
-                                    min: "0",
-                                    max: "0",
+                                    min: 0,
+                                    max: 0,
                                 },
                             },
                             ProductionTime: 8100,
@@ -480,16 +480,16 @@ class Mod {
                         {
                             EndProducts: {
                                 Common: {
-                                    min: "2",
-                                    max: "3",
+                                    min: 2,
+                                    max: 3,
                                 },
                                 Rare: {
-                                    min: "0",
-                                    max: "3",
+                                    min: 0,
+                                    max: 3,
                                 },
                                 Superrare: {
-                                    min: "1",
-                                    max: "2",
+                                    min: 1,
+                                    max: 2,
                                 },
                             },
                             ProductionTime: 16800,
@@ -507,16 +507,16 @@ class Mod {
                         {
                             EndProducts: {
                                 Common: {
-                                    min: "2",
-                                    max: "3",
+                                    min: 2,
+                                    max: 3,
                                 },
                                 Rare: {
-                                    min: "3",
-                                    max: "5",
+                                    min: 3,
+                                    max: 5,
                                 },
                                 Superrare: {
-                                    min: "0",
-                                    max: "1",
+                                    min: 0,
+                                    max: 1,
                                 },
                             },
                             ProductionTime: 19200,
@@ -739,9 +739,9 @@ class Mod {
                 }
             }
             // 100x Faster hideout production, 10x superwater and moonshine production, bitcoins
-            for (let prod in tables.hideout.production) {
+            for (const prod in tables.hideout.production) {
                 const endProduct = tables.hideout.production[prod].endProduct;
-                let productionTime = tables.hideout.production[prod].productionTime;
+                const productionTime = tables.hideout.production[prod].productionTime;
                 if ((endProduct == "5d1b376e86f774252519444e" || endProduct == "5d1b33a686f7742523398398") &&
                     config_json_1.default.HideoutOptions.Faster_Moonshine_and_Purified_Water_Production.enabled) {
                     // superwater and moonshine
@@ -890,7 +890,7 @@ class Mod {
             if (config_json_1.default.OtherTweaks.SICC_Case_Buff.enabled) {
                 // Huge buff to SICC case to make it actually not shit and a direct upgrade to Docs. And while we are here, allow it to hold keytool. It's Softcore, who cares.
                 try {
-                    let mergeFilters = [
+                    const mergeFilters = [
                         ...new Set([
                             ...tables.templates.items["590c60fc86f77412b13fddcf"]._props.Grids[0]._props.filters[0].Filter,
                             ...tables.templates.items["5d235bb686f77443f4331278"]._props.Grids[0]._props.filters[0].Filter,
@@ -948,7 +948,7 @@ class Mod {
                     log(error);
                 }
                 try {
-                    for (let handbookItem in tables.templates.handbook.Items) {
+                    for (const handbookItem in tables.templates.handbook.Items) {
                         const itemInHandbook = tables.templates.handbook.Items[handbookItem];
                         const itemID = itemInHandbook.Id;
                         if (prices[itemID] != undefined && config_json_1.default.EconomyOptions.Price_Rebalance.enabled) {
@@ -2494,7 +2494,7 @@ class Mod {
             }
         }
         function roundWithPrecision(num, precision) {
-            var multiplier = Math.pow(10, precision);
+            const multiplier = Math.pow(10, precision);
             return Math.round(num * multiplier) / multiplier;
         }
         function sort(a, b) {

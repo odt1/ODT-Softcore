@@ -173,7 +173,7 @@
 		},
 		"SkierUsesEuros": {
 			"_description": "EXPERIMENTAL option, makes Skier use Euros for all trades, and quest rewards, mostly just for fun and diversity. Adjusts assorts and loyalty levels accordingly. Turned off by default, because needs adjusting existing profiles salesSum (you can do it manually, find TradersInfo in your %profileID%.json, and in 58330581ace78e27b8b10cee key divide salesSum by 115 without leaving the remainder).",
-			"enabled": true
+			"enabled": false
 		}
 	},
 	"CraftingRebalance": {
