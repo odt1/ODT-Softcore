@@ -1272,6 +1272,23 @@ class Mod implements IPostDBLoadMod {
 							skier.assort.barter_scheme[barter][0][0]._tpl = "569668774bdc2da2298b4568"
 						}
 					}
+
+					for (const i in tables.templates.quests) {
+						const quest = tables.templates.quests[i]
+						if (quest.traderId == "58330581ace78e27b8b10cee") {
+							for (const rewards of quest.rewards.Success) {
+								if (rewards.items) {
+									for (const item of rewards.items) {
+										if (item._tpl == "5449016a4bdc2d6f028b456f") {
+											rewards.value = Math.round(rewards.value / euroPrice)
+											item._tpl = "569668774bdc2da2298b4568"
+											item.upd.StackObjectsCount = Math.round(item.upd.StackObjectsCount / euroPrice)
+										}
+									}
+								}
+							}
+						}
+					}
 				} catch (error) {
 					logger.warning(`\nTraderChanges.SkierUsesEuros failed because of another mod. Send bug report. Continue safely.`)
 					log(error)

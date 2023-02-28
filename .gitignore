@@ -1,5 +1,5 @@
 node_modules/
-mod.code-workspace
+*.code-workspace
 dist/
 src/*.js
 types/
