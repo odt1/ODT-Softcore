@@ -1,24 +1,24 @@
 {
-    "name": "Softcore",
-    "version": "1.2.0",
-    "main": "src/mod.js",
-    "license": "MIT",
-    "author": "x-ODT",
-    "akiVersion": "3.5.0",
-    "scripts": {
-        "setup": "npm i",
-        "build": "node ./packageBuild.ts"
-    },
-    "devDependencies": {
-        "@types/node": "16.18.10",
-        "@typescript-eslint/eslint-plugin": "5.46.1",
-        "@typescript-eslint/parser": "5.46.1",
-        "bestzip": "2.2.1",
-        "eslint": "8.30.0",
-        "eslint-config-prettier": "^8.6.0",
-        "fs-extra": "11.1.0",
-        "glob": "8.0.3",
-        "tsyringe": "4.7.0",
-        "typescript": "4.9.4"
-    }
+	"name": "Softcore",
+	"version": "1.2.1",
+	"main": "src/mod.js",
+	"license": "MIT",
+	"author": "x-ODT",
+	"akiVersion": "3.5.0",
+	"scripts": {
+		"setup": "npm i",
+		"build": "node ./packageBuild.ts"
+	},
+	"devDependencies": {
+		"@types/node": "16.18.10",
+		"@typescript-eslint/eslint-plugin": "5.46.1",
+		"@typescript-eslint/parser": "5.46.1",
+		"bestzip": "2.2.1",
+		"eslint": "8.30.0",
+		"eslint-config-prettier": "^8.6.0",
+		"fs-extra": "11.1.0",
+		"glob": "8.0.3",
+		"tsyringe": "4.7.0",
+		"typescript": "4.9.4"
+	}
 }
