@@ -230,7 +230,7 @@
 		},
 		"Remove_Discard_Limit": {
 			"_description": "Remove discard limit for expensive items (anti-RTM measure by BSG).",
-			"enabled": false
+			"enabled": true
 		},
 		"Reshala_Always_Has_GoldenTT": {
 			"_description": "Reshala always has his Golden TT.",

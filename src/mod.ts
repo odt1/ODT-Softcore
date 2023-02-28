@@ -1282,12 +1282,12 @@ class Mod implements IPostDBLoadMod {
 				try {
 					therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0352"][0].forEach((x) => (x.count = 5)) // THICC case (LEDX)
 					therapist.assort.barter_scheme["63d385d7b3eba6c95d0f036e"][0].forEach((x) => (x.count = 10)) // THICC case (Moonshine)
-					therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0334"][0].forEach((x) => (x.count = 5941)) // Item case (Euro)
+					therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0334"][0].forEach((x) => (x.count = 7256)) // Item case (Euro)
 					therapist.assort.barter_scheme["63d385d7b3eba6c95d0f034a"][0].forEach((x) => (x.count = 8)) // Item case (OScope)
 					therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0380"][0].forEach((x) => (x.count = 20)) // Item case (Dogtags)
 					therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0382"][0].forEach((x) => (x.count = 15)) // Lucky Scav Junk box (Dogtags)
-					therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0350"][0].forEach((x) => (x.count = 806138)) // Lucky Scav Junk box (Rubles)
-					therapist.assort.barter_scheme["63d385d7b3eba6c95d0f033c"][0].forEach((x) => (x.count = 248610)) // Medcase (Rubles)
+					therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0350"][0].forEach((x) => (x.count = 961138)) // Lucky Scav Junk box (Rubles)
+					therapist.assort.barter_scheme["63d385d7b3eba6c95d0f033c"][0].forEach((x) => (x.count = 290610)) // Medcase (Rubles)
 					therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0384"][0].forEach((x) => (x.count /= 10)) // LEDX (Dogtags) // Really BSG? 160 kills for a non-FIR item? REALLY?!
 					peacekeeper.assort.barter_scheme["63d385cab3eba6c95d0eff5f"][0].forEach((x) => (x.count = x.count / 5 + 1)) // THICC case (SMT+Bluefolder)
 
