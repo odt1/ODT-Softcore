@@ -4,6 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const ConfigTypes_1 = require("C:/snapshot/project/obj/models/enums/ConfigTypes");
+// import { IHideoutProduction } from "C:/snapshot/project/obj/models/eft/hideout/IHideoutProduction"
+// import { LogTextColor } from "C:/snapshot/project/obj/models/spt/logging/LogTextColor"
+// import { LogBackgroundColor } from "C:/snapshot/project/obj/models/spt/logging/LogBackgroundColor"
 // import { ObjectId } from "C:/snapshot/project/obj/utils/ObjectId" // [Debug]
 // import * as fs from "fs" // [Debug] Used for file saving
 const itemBaseClasses_1 = require("./itemBaseClasses");
@@ -13,7 +16,7 @@ const config_json_1 = __importDefault(require("../config/config.json"));
 const fleaListingsWhitelist = require("../config/fleaListingsWhitelist.ts"); // this Node.js module/require shit is bullshit.
 const fleaBarterRequestsWhitelist = require("../config/fleaBarterRequestsWhitelist.ts"); // why I can't use import in config directory? Anyway, is there any alternative to JSON data storage? THIS is the only way to save commented data?!
 const fleaItemsWhiteList = require("../config/fleaItemsWhitelist.ts");
-const debug = true; // [Debug] Debug!
+const debug = false; // [Debug] Debug!
 class Mod {
     postDBLoad(container) {
         const logger = container.resolve("WinstonLogger");
@@ -300,6 +303,7 @@ class Mod {
                                     id: "51d33b2d4fad9e61441772c0",
                                     index: 1,
                                     parentId: "",
+                                    isEncoded: false,
                                     dynamicLocale: false,
                                     value: 20,
                                     compareMethod: ">=",
@@ -804,7 +808,6 @@ class Mod {
         if (config_json_1.default.OtherTweaks.enabled) {
             if (config_json_1.default.OtherTweaks.Skill_Exp_Buffs.enabled) {
                 try {
-                    // Buff Vitality, Sniper and Surgery skill leveling
                     globals.SkillsSettings.Vitality.DamageTakenAction *= 10;
                     globals.SkillsSettings.Sniper.WeaponShotAction *= 10;
                     globals.SkillsSettings.Surgery.SurgeryAction *= 10;
@@ -814,6 +817,33 @@ class Mod {
                 }
                 catch (error) {
                     logger.warning(`\nOtherTweaks.Skill_Exp_Buffs failed because of another mod. Send bug report. Continue safely.`);
+                    log(error);
+                }
+            }
+            if (config_json_1.default.OtherTweaks.Allow_Gym_Training_With_Muscle_Pain.enabled) {
+                try {
+                    globals.Health.Effects.SevereMusclePain.GymEffectivity = 0.75;
+                }
+                catch (error) {
+                    logger.warning(`\nOtherTweaks.Allow_Gym_Training_With_Muscle_Pain failed because of another mod. Send bug report. Continue safely.`);
+                    log(error);
+                }
+            }
+            if (config_json_1.default.OtherTweaks.Bigger_Hideout_Containers.enabled) {
+                try {
+                    tables.templates.items["5aafbcd986f7745e590fff23"]._props.Grids[0]._props.cellsH = 10; // Medicine case 7x7
+                    tables.templates.items["5aafbcd986f7745e590fff23"]._props.Grids[0]._props.cellsV = 10;
+                    tables.templates.items["5c093db286f7740a1b2617e3"]._props.Grids[0]._props.cellsH = 10; // Mr. Holodilnick thermal bag 8x8
+                    tables.templates.items["5c093db286f7740a1b2617e3"]._props.Grids[0]._props.cellsV = 10;
+                    tables.templates.items["5c127c4486f7745625356c13"]._props.Grids[0]._props.cellsH = 7; // Magazine case 7x7
+                    tables.templates.items["5c127c4486f7745625356c13"]._props.Grids[0]._props.cellsV = 10;
+                    tables.templates.items["59fb042886f7746c5005a7b2"]._props.Grids[0]._props.cellsH = 10; // Item case 8x8
+                    tables.templates.items["59fb042886f7746c5005a7b2"]._props.Grids[0]._props.cellsV = 10;
+                    tables.templates.items["59fb023c86f7746d0d4b423c"]._props.Grids[0]._props.cellsH = 6; // Weapon case 5x10
+                    tables.templates.items["59fb023c86f7746d0d4b423c"]._props.Grids[0]._props.cellsV = 10;
+                }
+                catch (error) {
+                    logger.warning(`\nOtherTweaks.Bigger_Hideout_Containers failed because of another mod. Send bug report. Continue safely.`);
                     log(error);
                 }
             }
@@ -1112,7 +1142,7 @@ class Mod {
             }
         }
         if (config_json_1.default.TraderChanges.enabled) {
-            if (config_json_1.default.TraderChanges.BetterSalesToTraders.enabled) {
+            if (config_json_1.default.TraderChanges.Better_Sales_To_Traders.enabled) {
                 if (debug) {
                     for (const trader in traderlist) {
                         log(`${traderlist[trader].base.nickname}.base.items_buy = {`);
@@ -1156,7 +1186,7 @@ class Mod {
                     log(error);
                 }
             }
-            if (config_json_1.default.TraderChanges.AlternativeCategories.enabled) {
+            if (config_json_1.default.TraderChanges.Alternative_Categories.enabled) {
                 try {
                     therapist.base.items_buy.category = [
                         "543be5664bdc2dd4348b4569",
@@ -1177,7 +1207,7 @@ class Mod {
                     log(error);
                 }
             }
-            if (config_json_1.default.TraderChanges.SkierUsesEuros.enabled) {
+            if (config_json_1.default.TraderChanges.Skier_Uses_Euros.enabled) {
                 try {
                     // WIP
                     skier.base.currency = "EUR";
@@ -2243,8 +2273,8 @@ class Mod {
                     requirements: [
                         { areaType: 7, requiredLevel: 2, type: "Area" },
                         {
-                            templateId: "5751a25924597722c463c472",
-                            count: 2,
+                            templateId: "59e35abd86f7741778269d82",
+                            count: 1,
                             isFunctional: false,
                             type: "Item",
                         },
@@ -2261,6 +2291,9 @@ class Mod {
                     continuous: false,
                     count: 2,
                     productionLimitCount: 0,
+                    // Granular nature? Check.
+                    // Stops blood with magical properties of pain-relieving Tarkov Vaseline? Check.
+                    // Fun and economically balanced recipe that includes underused items? Triple check.
                 };
                 const Adrenaline = {
                     _id: "63da4dbee8fa73e225000005",
