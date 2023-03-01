@@ -5,8 +5,15 @@ import { DatabaseServer } from "@spt-aki/servers/DatabaseServer"
 import { ConfigServer } from "@spt-aki/servers/ConfigServer"
 import { ConfigTypes } from "@spt-aki/models/enums/ConfigTypes"
 import { ILogger } from "@spt-aki/models/spt/utils/ILogger"
-import { LogTextColor } from "@spt-aki/models/spt/logging/LogTextColor"
-import { LogBackgroundColor } from "@spt-aki/models/spt/logging/LogBackgroundColor"
+import { ITraderConfig } from "@spt-aki/models/spt/config/ITraderConfig"
+import { IRagfairConfig } from "@spt-aki/models/spt/config/IRagfairConfig"
+import { IHideoutConfig } from "@spt-aki/models/spt/config/IHideoutConfig"
+import { IInsuranceConfig } from "@spt-aki/models/spt/config/IInsuranceConfig"
+import { IScavCaseConfig } from "@spt-aki/models/spt/config/IScavCaseConfig"
+// import { IHideoutProduction } from "@spt-aki/models/eft/hideout/IHideoutProduction"
+
+// import { LogTextColor } from "@spt-aki/models/spt/logging/LogTextColor"
+// import { LogBackgroundColor } from "@spt-aki/models/spt/logging/LogBackgroundColor"
 
 // import { ObjectId } from "@spt-aki/utils/ObjectId" // [Debug]
 
@@ -336,6 +343,7 @@ class Mod implements IPostDBLoadMod {
 									id: "51d33b2d4fad9e61441772c0",
 									index: 1,
 									parentId: "",
+									isEncoded: false,
 									dynamicLocale: false,
 									value: 20,
 									compareMethod: ">=",
@@ -2405,13 +2413,13 @@ class Mod implements IPostDBLoadMod {
 					requirements: [
 						{ areaType: 7, requiredLevel: 2, type: "Area" },
 						{
-							templateId: "5751a25924597722c463c472",
-							count: 2,
+							templateId: "59e35abd86f7741778269d82", // Pack of sodium bicarbonate
+							count: 1,
 							isFunctional: false,
 							type: "Item",
 						},
 						{
-							templateId: "5755383e24597772cb798966",
+							templateId: "5755383e24597772cb798966", // Vaseline balm
 							count: 1,
 							isFunctional: false,
 							type: "Item",
@@ -2423,6 +2431,9 @@ class Mod implements IPostDBLoadMod {
 					continuous: false,
 					count: 2,
 					productionLimitCount: 0,
+					// Granular nature? Check.
+					// Stops blood with magical properties of pain-relieving Tarkov Vaseline? Check.
+					// Fun and economically balanced recipe that includes underused items? Triple check.
 				}
 				const Adrenaline = {
 					_id: "63da4dbee8fa73e225000005",
