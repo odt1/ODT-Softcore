@@ -154,11 +154,11 @@
 	"TraderChanges": {
 		"_description": "Master toggle for all trader changes below",
 		"enabled": true,
-		"BetterSalesToTraders": {
+		"Better_Sales_To_Traders": {
 			"_description": "Adjusts trader evaluations for selling items (from Prapor 50%, Therapist 63%, Ragman 62%, Jaeger 60%, Mechanic 56%, Peacekeeper 45%, Skier 49% --> Prapor 60%, Therapist 64%, Ragman 63%, Jaeger 62%, Mechanic 61%, Peacekeeper 58%, Skier 59% at loyalty level 1). Also every loyalty level will give 5% better selling evaluation so e.g. at LL4 Propor will buy items for 75% of their value.",
 			"enabled": true
 		},
-		"AlternativeCategories": {
+		"Alternative_Categories": {
 			"_description": "Nerfs Therapist buying categories (instead of all barter items, she buys only meds and household goods, good for trader diversity), allows Ragman to buy valuables and Skier to buy info items.",
 			"enabled": true
 		},
@@ -171,7 +171,7 @@
 			"_description": "Rebalances costs of hideout cases to fair and resonable prices and barters. Also changes LEDX dogtag barter",
 			"enabled": true
 		},
-		"SkierUsesEuros": {
+		"Skier_Uses_Euros": {
 			"_description": "EXPERIMENTAL option, makes Skier use Euros for all trades, and quest rewards, mostly just for fun and diversity. Adjusts assorts and loyalty levels accordingly. Turned off by default, because needs adjusting existing profiles salesSum (you can do it manually, find TradersInfo in your %profileID%.json, and in 58330581ace78e27b8b10cee key divide salesSum by 115 without leaving the remainder).",
 			"enabled": false
 		}
@@ -205,7 +205,15 @@
 		"_description": "Master toggle for all other options below.",
 		"enabled": true,
 		"Skill_Exp_Buffs": {
-			"_description": "Buff Vitality, Sniper, Surgery, Immunity and Stress Resistance skill leveling (x10).",
+			"_description": "Buff Vitality, Sniper, Surgery, Immunity, Stress Resistance and MagDrills skills leveling (x10).",
+			"enabled": true
+		},
+		"Bigger_Hideout_Containers": {
+			"_description": "Slightly buffs basic hideout containers: Medicine case 7x7 -> 10x10, Holodilnick 8x8 -> 10x10, Magazine case 7x7 -> 7x10, Item case 8x8 -> 10x10, Weapon case 5x10 -> 6x10",
+			"enabled": true
+		},
+		"Allow_Gym_Training_With_Muscle_Pain": {
+			"_description": "Allows to continue gym training with severe muscle pain at 25% efficiency.",
 			"enabled": true
 		},
 		"Signal_Pistol_In_Special_Slots": {

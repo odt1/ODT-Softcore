@@ -878,7 +878,6 @@ class Mod implements IPostDBLoadMod {
 		if (config.OtherTweaks.enabled) {
 			if (config.OtherTweaks.Skill_Exp_Buffs.enabled) {
 				try {
-					// Buff Vitality, Sniper and Surgery skill leveling
 					globals.SkillsSettings.Vitality.DamageTakenAction *= 10
 					globals.SkillsSettings.Sniper.WeaponShotAction *= 10
 					globals.SkillsSettings.Surgery.SurgeryAction *= 10
@@ -887,6 +886,37 @@ class Mod implements IPostDBLoadMod {
 					Object.values(globals.SkillsSettings.MagDrills).forEach((x) => x * 5)
 				} catch (error) {
 					logger.warning(`\nOtherTweaks.Skill_Exp_Buffs failed because of another mod. Send bug report. Continue safely.`)
+					log(error)
+				}
+			}
+
+			if (config.OtherTweaks.Allow_Gym_Training_With_Muscle_Pain.enabled) {
+				try {
+					globals.Health.Effects.SevereMusclePain.GymEffectivity = 0.75
+				} catch (error) {
+					logger.warning(`\nOtherTweaks.Allow_Gym_Training_With_Muscle_Pain failed because of another mod. Send bug report. Continue safely.`)
+					log(error)
+				}
+			}
+
+			if (config.OtherTweaks.Bigger_Hideout_Containers.enabled) {
+				try {
+					tables.templates.items["5aafbcd986f7745e590fff23"]._props.Grids[0]._props.cellsH = 10 // Medicine case 7x7
+					tables.templates.items["5aafbcd986f7745e590fff23"]._props.Grids[0]._props.cellsV = 10
+
+					tables.templates.items["5c093db286f7740a1b2617e3"]._props.Grids[0]._props.cellsH = 10 // Mr. Holodilnick thermal bag 8x8
+					tables.templates.items["5c093db286f7740a1b2617e3"]._props.Grids[0]._props.cellsV = 10
+
+					tables.templates.items["5c127c4486f7745625356c13"]._props.Grids[0]._props.cellsH = 10 // Magazine case 7x7
+					tables.templates.items["5c127c4486f7745625356c13"]._props.Grids[0]._props.cellsV = 7
+
+					tables.templates.items["59fb042886f7746c5005a7b2"]._props.Grids[0]._props.cellsH = 10 // Item case 8x8
+					tables.templates.items["59fb042886f7746c5005a7b2"]._props.Grids[0]._props.cellsV = 10
+
+					tables.templates.items["59fb023c86f7746d0d4b423c"]._props.Grids[0]._props.cellsH = 6 // Weapon case 5x10
+					tables.templates.items["59fb023c86f7746d0d4b423c"]._props.Grids[0]._props.cellsV = 10
+				} catch (error) {
+					logger.warning(`\nOtherTweaks.Bigger_Hideout_Containers failed because of another mod. Send bug report. Continue safely.`)
 					log(error)
 				}
 			}
@@ -1199,7 +1229,7 @@ class Mod implements IPostDBLoadMod {
 		}
 
 		if (config.TraderChanges.enabled) {
-			if (config.TraderChanges.BetterSalesToTraders.enabled) {
+			if (config.TraderChanges.Better_Sales_To_Traders.enabled) {
 				if (debug) {
 					for (const trader in traderlist) {
 						log(`${traderlist[trader].base.nickname}.base.items_buy = {`)
@@ -1245,7 +1275,7 @@ class Mod implements IPostDBLoadMod {
 				}
 			}
 
-			if (config.TraderChanges.AlternativeCategories.enabled) {
+			if (config.TraderChanges.Alternative_Categories.enabled) {
 				try {
 					therapist.base.items_buy.category = [
 						"543be5664bdc2dd4348b4569", // Meds
@@ -1267,7 +1297,7 @@ class Mod implements IPostDBLoadMod {
 				}
 			}
 
-			if (config.TraderChanges.SkierUsesEuros.enabled) {
+			if (config.TraderChanges.Skier_Uses_Euros.enabled) {
 				try {
 					// WIP
 					skier.base.currency = "EUR"
