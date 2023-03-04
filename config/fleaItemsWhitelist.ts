@@ -46,8 +46,10 @@ const questKeys = [
 	// New 3.5.0 Streets keys
 	"63a39f08cd6db0635c197600", // Hotel room 215 key
 	"63a39c7964283b5e9c56b280", // Concordia security room key
-	// "63a39e1d234195315d4020bd", // Primorsky 46-48 skybridge key (should be guaranteed to spawn, needs testing in SPT)
-];
+	// "63a39e1d234195315d4020bd", // Primorsky 46-48 skybridge key (should be guaranteed to spawn, needs testing in SPT),
+	"63a397d3af870e651d58e65b", // Car dealership closed section key
+	"63a399193901f439517cafb6", // Car dealership director's office room key
+]
 
 const itemWhitelist = [
 	// Whitelist for items that can be bartered FOR on flea, outside of fleaWhitelist categories
@@ -78,7 +80,7 @@ const itemWhitelist = [
 	"5c010e350db83400232feec7", // SP-8 Survival Machete
 	"5656eb674bdc2d35148b457c", // 40mm VOG-25 grenade
 	"5783c43d2459774bbe137486", // Simple wallet
-];
+]
 
 const markedKeys = [
 	"62987dfc402c7f69bf010923", // Shared bedroom marked key
@@ -87,6 +89,6 @@ const markedKeys = [
 	"5d80c62a86f7744036212b3f", // RB-VO marked key
 	"5ede7a8229445733cb4c18e2", // RB-PKPM marked key
 	"63a3a93f8a56922e82001f5d", // Abandoned factory marked key
-];
+]
 
-module.exports = { questKeys, itemWhitelist, markedKeys };
+module.exports = { questKeys, itemWhitelist, markedKeys }
