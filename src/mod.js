@@ -16,7 +16,7 @@ const config_json_1 = __importDefault(require("../config/config.json"));
 const fleaListingsWhitelist = require("../config/fleaListingsWhitelist.ts"); // this Node.js module/require shit is bullshit.
 const fleaBarterRequestsWhitelist = require("../config/fleaBarterRequestsWhitelist.ts"); // why I can't use import in config directory? Anyway, is there any alternative to JSON data storage? THIS is the only way to save commented data?!
 const fleaItemsWhiteList = require("../config/fleaItemsWhitelist.ts");
-const debug = false; // [Debug] Debug!
+const debug = true; // [Debug] Debug!
 class Mod {
     postDBLoad(container) {
         const logger = container.resolve("WinstonLogger");
@@ -50,9 +50,9 @@ class Mod {
             // [Debug]
             for (const i in items) {
                 const item = items[i];
-                if (item._type == "Item") {
-                    // log(`"${x._id}", // ${locales["en"][`${x._id} Name`]}`)
-                    // log(`"${x._id}", // ${x._name}`)
+                if (item._type == "Item" && item._props.CanSellOnRagfair == false) {
+                    log(`"${item._id}", // ${getItemName(item._id)}`);
+                    // log(`"${item._id}", // ${item._name}`)
                 }
             }
         }
@@ -1274,7 +1274,7 @@ class Mod {
                     traderConfig.fence.assortSize = config_json_1.default.TraderChanges.Pacifist_Fence.Number_Of_Fence_Offers;
                     traderConfig.fence.blacklist = fenceBlacklist; //itemid or baseid
                     traderConfig.fence.maxPresetsPercent = 0;
-                    traderConfig.fence.discountOptions.assortSize = 0; // doesnt seem to work properly
+                    traderConfig.fence.discountOptions.assortSize = config_json_1.default.TraderChanges.Pacifist_Fence.Number_Of_Fence_Offers * 2;
                     traderConfig.fence.itemPriceMult = 1;
                     traderConfig.fence.discountOptions.itemPriceMult = 0.82; // This Fence settings are weird. I still don't get how AKI calculates assorts, was getting very strange results in testing. But this should be close enough to best trader prices but not abusable.
                 }

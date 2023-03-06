@@ -5,6 +5,7 @@ export const BSGblacklist = [
 	// DON'T TOUCH THIS
 	// DON'T TOUCH THIS
 	// DON'T TOUCH THIS
+	"5648b62b4bdc2d9d488b4585", // launcher_ak74_izhmash_gp34
 	"62e7e7bbe6da9612f743f1e0", // GP-25 "Kostyor" 40mm underbarrel grenade launcher
 	"6357c98711fb55120211f7e1", // M203 40mm underbarrel grenade launcher
 	"5cfe8010d7ad1a59283b14c6", // AK 7.62x39 X Products X-47 50-round drum magazine
@@ -21,6 +22,8 @@ export const BSGblacklist = [
 	"628a60ae6b1d481ff772e9c8", // Rifle Dynamics RD-704 7.62x39 assault rifle
 	"5e81ebcd8e146c7080625e15", // FN40GL Mk2 40mm grenade launcher
 	"620109578d82e67e7911abf2", // ZiD SP-81 26x75 signal pistol
+	"639af924d0446708ee62294e", // launcher_ak_toz_gp25_40_vog_settings
+	"639c3fbbd0446708ee622ee9", // launcher_ar15_colt_m203_40x46_settings
 	"62178c4d4ecf221597654e3d", // RSP-30 reactive signal cartridge (Red)
 	"6176aca650224f204c1da3fb", // HK G28 7.62x51 marksman rifle
 	"5df8ce05b11454561e39243b", // Knight's Armament Company SR-25 7.62x51 marksman rifle
@@ -30,17 +33,17 @@ export const BSGblacklist = [
 	"6275303a9f372d6ea97f9ec7", // Milkor M32A1 MSGL 40mm grenade launcher
 	"5e848cc2988a8701445df1e8", // TOZ KS-23M 23x75mm pump-action shotgun
 	"627e14b21713922ded6f2c15", // Accuracy International AXMC .338 LM bolt-action sniper rifle
+	"5f60c74e3b85f6263c145586", // Rys-T bulletproof helmet
+	"5ac8d6885acfc400180ae7b0", // Ops-Core FAST MT Super High Cut helmet (Tan)
 	"5c091a4e0db834001d5addc8", // Maska-1SCh bulletproof helmet (Olive Drab)
 	"5aa7e276e5b5b000171d0647", // Altyn bulletproof helmet
-	"5f60c74e3b85f6263c145586", // Rys-T bulletproof helmet
 	"5ca20ee186f774799474abc2", // Vulkan-5 (LShZ-5) bulletproof helmet
 	"5a154d5cfcdbcb001a3b00da", // Ops-Core FAST MT Super High Cut helmet (Black)
-	"5ac8d6885acfc400180ae7b0", // Ops-Core FAST MT Super High Cut helmet (Tan)
 	"5c17a7ed2e2216152142459c", // Crye Precision AirFrame helmet (Tan)
-	"5c0e874186f7745dc7616606", // Maska-1SCh bulletproof helmet (Killa)
-	"5f60b34a41e30a4ab12a6947", // Galvion Caiman Hybrid helmet
 	"5e00c1ad86f774747333222c", // Team Wendy EXFIL Ballistic Helmet (Black)
 	"5e01ef6886f77445f643baa4", // Team Wendy EXFIL Ballistic Helmet (Coyote Brown)
+	"5f60b34a41e30a4ab12a6947", // Galvion Caiman Hybrid helmet
+	"5c0e874186f7745dc7616606", // Maska-1SCh bulletproof helmet (Killa)
 	"5c0e625a86f7742d77340f62", // BNTI Zhuk-6a body armor
 	"545cdb794bdc2d3a198b456a", // 6B43 6A Zabralo-Sh body armor
 	"5c0e541586f7747fa54205c9", // 6B13 M modified assault armor (Tan)
@@ -74,15 +77,15 @@ export const BSGblacklist = [
 	"619bde3dc9546643a67df6f2", // Kiba Arms armband
 	"619bdeb986e01e16f839a99e", // RFARMY armband
 	"619bdf9cc9546643a67df6f8", // UNTAR armband
+	"628dc750b910320f4c27a732", // ECLiPSE RBAV-AF plate carrier (Ranger Green)
+	"61bc85697113f767765c7fe7", // Eagle Industries MMAC plate carrier (Ranger Green)
+	"5c0e746986f7741453628fe5", // WARTECH TV-110 plate carrier rig
+	"61bcc89aef0f505f0c6cd0fc", // FirstSpear Strandhogg plate carrier rig (Ranger Green)
 	"5e4ac41886f77406a511c9a8", // Ars Arma CPC MOD.2 plate carrier
 	"544a5caa4bdc2d1a388b4568", // Crye Precision AVS plate carrier
 	"609e860ebd219504d8507525", // Crye Precision AVS MBAV (Tagilla Edition)
 	"628d0618d1ba6e4fa07ce5a4", // NPP KlASS Bagariy armored rig
-	"61bc85697113f767765c7fe7", // Eagle Industries MMAC plate carrier (Ranger Green)
 	"5d5d87f786f77427997cfaef", // Ars Arma A18 Skanda plate carrier
-	"628dc750b910320f4c27a732", // ECLiPSE RBAV-AF plate carrier (Ranger Green)
-	"5c0e746986f7741453628fe5", // WARTECH TV-110 plate carrier rig
-	"61bcc89aef0f505f0c6cd0fc", // FirstSpear Strandhogg plate carrier rig (Ranger Green)
 	"628b9784bcf6e2659e09b8a2", // S&S Precision PlateFrame plate carrier (Goons Edition)
 	"628b9c7d45122232a872358f", // Crye Precision CPC plate carrier (Goons Edition)
 	"60a3c70cde5f453f634816a3", // CQC Osprey MK4A plate carrier (Assault, MTP)
@@ -91,20 +94,26 @@ export const BSGblacklist = [
 	"5b44cad286f77402a54ae7e5", // 5.11 Tactical TacTec plate carrier
 	"628cd624459354321c4b7fa2", // Tasmanian Tiger SK plate carrier (Multicam Black)
 	"5c0e774286f77468413cc5b2", // Mystery Ranch Blackjack 50 backpack (Multicam)
-	"59e763f286f7742ee57895da", // Pilgrim tourist backpack
-	"5df8a4d786f77412672a1e3b", // 6Sh118 raid backpack
 	"6034d2d697633951dc245ea6", // Eberlestock G2 Gunslinger II backpack (Dry Earth)
-	"5ab8ebf186f7742d8b372e80", // SSO Attack 2 raid backpack
 	"639346cc1c8f182ad90c8972", // Tasmanian Tiger Trooper 35 backpack
 	"5f5e46b96bdad616ad46d613", // Eberlestock F4 Terminator load bearing backpack (Tiger Stripe)
 	"61b9e1aaef9a1b5d6a79899a", // Santa's bag
 	"5c0e805e86f774683f3dd637", // 3V Gear Paratus 3-Day Operator's Tactical backpack
+	"5df8a4d786f77412672a1e3b", // 6Sh118 raid backpack
+	"59e763f286f7742ee57895da", // Pilgrim tourist backpack
+	"5ab8ebf186f7742d8b372e80", // SSO Attack 2 raid backpack
+	"5c0a794586f77461c458f892", // Secure container Boss
+	"5c0a5a5986f77476aa30ae64", // Developer container
 	"5857a8bc2459772bad15db29", // Secure container Gamma
 	"5c093ca986f7740a1867ab12", // Secure container Kappa
 	"5857a8b324597729ab0a0e7d", // Secure container Beta
 	"59db794186f77448bc595262", // Secure container Epsilon
 	"544a11ac4bdc2d470e8b456a", // Secure container Alpha
 	"5732ee6a24597719ae0c0281", // Waist pouch
+	"627a4e6b255f7527fb05a0f6", // Карманы 1 на 4 со спец слотами
+	"557ffd194bdc2d28148b457f", // Pockets
+	"60c7272c204bc17802313365", // Pockets 1x3
+	"5af99e9186f7747c447120b8", // Pockets Large
 	"5c0a840b86f7742ffa4f2482", // T H I C C item case
 	"5b7c710788a4506dec015957", // Lucky Scav Junk box
 	"5b6d9ce188a4501afc1b2b25", // T H I C C Weapon case
@@ -113,6 +122,7 @@ export const BSGblacklist = [
 	"6389c92d52123d5dd17f8876", // Advanced Electronic Materials textbook
 	"593962ca86f774068014d9af", // Unknown key
 	"5937ee6486f77408994ba448", // Machinery key
+	"6398fd8ad3de3849057f5128", // Backup hideout key
 	"63a39e1d234195315d4020bd", // Primorsky 46-48 skybridge key
 	"5c94bbff86f7747ee735c08f", // TerraGroup Labs access keycard
 	"62e910aaf957f2915e0a5e36", // Digital secure DSP radio transmitter
@@ -161,16 +171,20 @@ export const BSGblacklist = [
 	"57a0e5022459774d1673f889", // 9x39mm SP-6 gs
 	"5c0d668f86f7747ccb7f13b2", // 9x39mm SPP gs
 	"635267f063651329f75a4ee8", // 26x75mm distress signal flare (poison green)
-	"57372b832459776701014e41", // 5.45x39mm BS gs ammo pack (120 pcs)
-	"5c1262a286f7743f8a69aab2", // 5.45x39mm PPBS gs "Igolnik" ammo pack (30 pcs)
 	"57372bd3245977670b7cd243", // 5.45x39mm BS gs ammo pack (30 pcs)
 	"57372c21245977670937c6c2", // 5.45x39mm BT gs ammo pack (120 pcs)
 	"57372c89245977685d4159b1", // 5.45x39mm BT gs ammo pack (30 pcs)
+	"57372b832459776701014e41", // 5.45x39mm BS gs ammo pack (120 pcs)
 	"5c1260dc86f7746b106e8748", // 9x39mm BP gs ammo pack (8 pcs)
+	"5c1262a286f7743f8a69aab2", // 5.45x39mm PPBS gs "Igolnik" ammo pack (30 pcs)
 	"57372bad245977670b7cd242", // 5.45x39mm BS gs ammo pack (120 pcs)
 	"57372c56245977685e584582", // 5.45x39mm BT gs ammo pack (120 pcs)
+	"5696686a4bdc2da3298b456a", // Dollars
+	"569668774bdc2da2298b4568", // Euros
+	"5449016a4bdc2d6f028b456f", // Roubles
 	"617fd91e5539a84ec44ce155", // RGN hand grenade
 	"618a431df1eb8e24b8741deb", // RGO hand grenade
+	"6389c88b33a719183c7f63b6", // Item_barter_electr_adv_ultralink
 	"6389c7f115805221fb410466", // Far-forward GPS Signal Amplifier Unit
 	"6389c7750ef44505c87f5996", // Microcontroller board
 	"6389c85357baa773a825b356", // Far-forward current converter

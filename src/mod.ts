@@ -67,9 +67,9 @@ class Mod implements IPostDBLoadMod {
 			// [Debug]
 			for (const i in items) {
 				const item = items[i]
-				if (item._type == "Item") {
-					// log(`"${x._id}", // ${locales["en"][`${x._id} Name`]}`)
-					// log(`"${x._id}", // ${x._name}`)
+				if (item._type == "Item" && item._props.CanSellOnRagfair == false) {
+					log(`"${item._id}", // ${getItemName(item._id)}`)
+					// log(`"${item._id}", // ${item._name}`)
 				}
 			}
 		}
@@ -1377,7 +1377,7 @@ class Mod implements IPostDBLoadMod {
 					traderConfig.fence.assortSize = config.TraderChanges.Pacifist_Fence.Number_Of_Fence_Offers
 					traderConfig.fence.blacklist = fenceBlacklist //itemid or baseid
 					traderConfig.fence.maxPresetsPercent = 0
-					traderConfig.fence.discountOptions.assortSize = 0 // doesnt seem to work properly
+					traderConfig.fence.discountOptions.assortSize = config.TraderChanges.Pacifist_Fence.Number_Of_Fence_Offers * 2
 					traderConfig.fence.itemPriceMult = 1
 					traderConfig.fence.discountOptions.itemPriceMult = 0.82 // This Fence settings are weird. I still don't get how AKI calculates assorts, was getting very strange results in testing. But this should be close enough to best trader prices but not abusable.
 				} catch (error) {

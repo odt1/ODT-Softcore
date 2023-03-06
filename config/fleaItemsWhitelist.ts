@@ -46,11 +46,10 @@ const questKeys = [
 	// New 3.5.0 Streets keys
 	"63a39f08cd6db0635c197600", // Hotel room 215 key
 	"63a39c7964283b5e9c56b280", // Concordia security room key
-	"63a39e1d234195315d4020bd", // Primorsky 46-48 skybridge key (should be guaranteed to spawn, needs testing in SPT),
+	// "63a39e1d234195315d4020bd", // Primorsky 46-48 skybridge key (should be guaranteed to spawn, needs testing in SPT),
 	"63a397d3af870e651d58e65b", // Car dealership closed section key
 	"63a399193901f439517cafb6", // Car dealership director's office room key
 	"63a39f18c2d53c2c6839c1d3", // Hotel room 206 key
-	"63a39f08cd6db0635c197600", // Hotel room 215 key
 	"6398fd8ad3de3849057f5128", // Backup hideout key (should be guaranteed to spawn, needs testing in SPT),
 	"63a39f6e64283b5e9c56b289", // Iron gate key
 	"63a39fc0af870e651d58e6ae", // Chekannaya 15 apartment key
