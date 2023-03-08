@@ -220,8 +220,8 @@
 			"_description": "ZiD SP-81 26x75 signal pistol can be put in special slots and is not removed after death.",
 			"enabled": true
 		},
-		"Faster_Examine_Time": {
-			"_description": "Unknown item examine time buff (x5)",
+		"Unexamined_Items_Are_Back_and_Faster_Examine_Time": {
+			"_description": "Reverts BSG decision to make all items examined by default and makes examining faster.",
 			"enabled": true
 		},
 		"Remove_Backpack_Restrictions": {

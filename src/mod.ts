@@ -946,14 +946,19 @@ class Mod implements IPostDBLoadMod {
 				}
 			}
 
-			if (config.OtherTweaks.Faster_Examine_Time.enabled) {
-				// Faster ExamineTime
+			if (config.OtherTweaks.Unexamined_Items_Are_Back_and_Faster_Examine_Time.enabled) {
 				try {
-					Object.values(items)
-						.filter((x) => x?._props?.ExamineTime != undefined)
-						.forEach((x) => (x._props.ExamineTime /= 5))
+					for (const itemID in items) {
+						const item = items[itemID]
+						if (item?._props?.ExaminedByDefault == true) {
+							item._props.ExaminedByDefault = false
+						}
+						if (item?._props?.ExamineTime != undefined) {
+							item._props.ExamineTime = 0.2
+						}
+					}
 				} catch (error) {
-					logger.warning(`\nOtherTweaks.Faster_Examine_Time failed bacause of the other mod. Send bug report. Continue safely.`)
+					logger.warning(`\nOtherTweaks.Unexamined_Items_Are_Back_and_Faster_Examine_Time failed bacause of the other mod. Send bug report. Continue safely.`)
 					log(error)
 				}
 			}
