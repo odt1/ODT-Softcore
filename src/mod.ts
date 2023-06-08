@@ -1206,9 +1206,12 @@ class Mod implements IPostDBLoadMod {
 								// Actually, I could have just hardcoded this lol. By default it's just Cristmass ornaments, dogtags and bitcoins.
 								// 2 is used to pass getFleaPriceForItem check and not trigger generateStaticPrices
 								prices[x] = 2
-								// if (items[x]._props.CanSellOnRagfair == true) {
-								// 	log(`Item ${getItemName(x)} can be bought on flea for free, you dirty cheater!`)
-								// }
+								// log(`Item ${getItemName(x)}`)
+								if (items[x]._props.CanSellOnRagfair == true) {
+									logger.warning(
+										`\nItem ${getItemName(x)} can be bought on flea for free, don't use BSG blacklist removals with EconomyOptions.Barter_Economy.enabled!`
+									)
+								}
 							}
 						})
 
@@ -1397,20 +1400,51 @@ class Mod implements IPostDBLoadMod {
 			// This here, is some dumb stuff, I should've created some special class, controller, pushed the data out of the code or some other OOP bullcrap, but I'm not a programmer, so this will have to suffice. Sorry, not sorry.
 
 			try {
+				// ------
+				// Lavatory:
+				// ------
+				// Toilet paper production nerf lol. Who would have thought this craft would be OP, huh?
+				getCraft("5c13cef886f774072e618e82").count = 1
+
 				// 2x Clin production buff
 				getCraft("59e358a886f7741776641ac3").count = 2
 
 				// 2x Paracord production buff
 				getCraft("5c12688486f77426843c7d32").count = 2
 
+				// Corrugated hose buff // 59e35cbb86f7741778269d83
+				getCraft("59e35cbb86f7741778269d83").requirements.forEach((x) => {
+					if (x.count) {
+						x.count = 1
+					}
+				})
+				getCraft("59e35cbb86f7741778269d83").count = 1
+
 				// Water filter < 2 airfilter craft buff
 				getCraft("5d1b385e86f774252167b98a").requirements.find((x) => x.templateId == "590c595c86f7747884343ad7").count = 2
 
-				// Toilet paper production nerf lol. Who would have thought this craft would be OP, huh?
-				getCraft("5c13cef886f774072e618e82").count = 1
+				// MPPV buff (KEKTAPE duct tape 2 -> 1)
+				getCraft("5df8a42886f77412640e2e75").requirements.find((x) => x.templateId == "5e2af29386f7746d4159f077").count = 1
+
+				// ------
+				// Nutrition unit:
+				// ------
 
 				// EWR buff
 				getCraft("60098b1705871270cd5352a1").count = 3
+
+				// coffee buff (2 -> 3)
+				getCraft("5af0484c86f7740f02001f7f").count = 3
+
+				// bottled water buff water (8 -> 16)
+				getCraft("5448fee04bdc2dbc018b4567").count = 16
+
+				// Aquamari buff (3 -> 5)
+				getCraft("5c0fa877d174af02a012e1cf").count = 5
+
+				// ------
+				// Medstation:
+				// ------
 
 				// Buff MULE
 				getCraft("5ed51652f6c34d2cc26336a1").count = 2
@@ -1428,6 +1462,95 @@ class Mod implements IPostDBLoadMod {
 						x.count = 1
 					}
 				})
+
+				// CMS nerf (Medical tools 1 -> 2)
+				getCraft("5d02778e86f774203e7dedbe").requirements.find((x) => x.templateId == "619cc01e0a7c3a1a2731940c").count = 2
+
+				// GRIzZLY nerf (1 -> 2)
+				getCraft("590c657e86f77412b013051d").count = 1
+
+				// SJ6 buff (2 -> 3)
+				getCraft("5c0e531d86f7747fa23f4d42").count = 3
+
+				// ------
+				// Intel Center:
+				// ------
+
+				// Topographic survey maps buff (1 -> 2)
+				getCraft("62a0a124de7ac81993580542").count = 2
+
+				// Military flash drive lore-based change (2 Secure Flash drive -> 1 VPX, and Topographic survey maps 2 -> 1).
+				// Not "profitable", but will change Intel folder craft to compensate, and allow it to be crafted on level 2.
+				getCraft("62a0a16d0b9d3c46de5b6e97").requirements.forEach((x) => {
+					if (x.count) {
+						x.count = 1
+					}
+				})
+				getCraft("62a0a16d0b9d3c46de5b6e97").requirements.find((x) => x.type == "Area").requiredLevel = 2
+				getCraft("62a0a16d0b9d3c46de5b6e97").requirements.find((x) => x.templateId == "590c621186f774138d11ea29").templateId = "5c05300686f7746dce784e5d"
+
+				// Intelligence folder buff (Military flash drive 2 -> 1)
+				getCraft("5c12613b86f7743bbe2c3f76").requirements.find((x) => x.templateId == "62a0a16d0b9d3c46de5b6e97").count = 1
+
+				// VPX buff (RAM and Broken GPhone smartphone 3 -> 2)
+				getCraft("5c05300686f7746dce784e5d").requirements.forEach((x) => {
+					if (x.count) {
+						x.count = 2
+					}
+				})
+
+				// Virtex buff (Military circuit board 2 -> 1)
+				getCraft("5c05308086f7746b2101e90b").requirements.find((x) => x.templateId == "5d0376a486f7747d8050965c").count = 1
+
+				// ------
+				// Workbench:
+				// ------
+
+				// Military circuit board buff (1 -> 2)
+				getCraft("5d0376a486f7747d8050965c").count = 2
+
+				// FLIR huge buff (everything is 1, plus change SAS drive (wtf?!) to Armasight Vulcan MG 3.5x Bravo night vision scope)
+				getCraft("5d1b5e94d7ad1a2b865a96b0").requirements.forEach((x) => {
+					if (x.count) {
+						x.count = 1
+					}
+				})
+				getCraft("5d1b5e94d7ad1a2b865a96b0").requirements.find((x) => x.templateId == "590c37d286f77443be3d7827").templateId = "5b3b6e495acfc4330140bd88"
+
+				// GPU buff (3 VPX -> 1 Virtex, 10 PCB -> 1, 10 CPU -> 1)
+				getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "5c05300686f7746dce784e5d").count = 1
+				getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "5c05300686f7746dce784e5d").templateId = "5c05308086f7746b2101e90b"
+				getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "573477e124597737dd42e191").count = 1
+				getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "590a3b0486f7743954552bdb").count = 1
+
+				// UHF RFID Reader huge buff (only Broken GPhone X smartphone + Signal Jammer)
+				getCraft("5c052fb986f7746b2101e909").requirements = [
+					{
+						areaType: 11,
+						requiredLevel: 2,
+						type: "Area",
+					},
+					{
+						templateId: "5c1265fc86f7743f896a21c2",
+						count: 1,
+						isFunctional: false,
+						type: "Item",
+					},
+					{
+						templateId: "5ac78a9b86f7741cca0bbd8d",
+						count: 1,
+						isFunctional: false,
+						type: "Item",
+					},
+					{
+						templateId: "5d4042a986f7743185265463",
+						type: "Tool",
+					},
+					{
+						templateId: "5d63d33b86f7746ea9275524",
+						type: "Tool",
+					},
+				]
 
 				// Gasan buff
 				getCraft("590a3efd86f77437d351a25b").requirements.forEach((x) => {
@@ -1534,9 +1657,6 @@ class Mod implements IPostDBLoadMod {
 					},
 				]
 
-				// Virtex buff (Military circuit board 2 -> 1)
-				getCraft("5c05308086f7746b2101e90b").requirements.find((x) => x.templateId == "5d0376a486f7747d8050965c").count = 1
-
 				// Rechargeable battery buff, Portable Powerbank -> Electric drill
 				getCraft("590a358486f77429692b2790").requirements.find((x) => x.templateId == "5af0561e86f7745f5f3ad6ac").templateId = "59e35de086f7741778269d84"
 
@@ -1628,7 +1748,7 @@ class Mod implements IPostDBLoadMod {
 					},
 					{
 						templateId: "5cc80f8fe4a949033b0224a2",
-						count: 100,
+						count: 180,
 						isFunctional: false,
 						isEncoded: false,
 						type: "Item",
@@ -1642,7 +1762,7 @@ class Mod implements IPostDBLoadMod {
 					},
 					{
 						templateId: "590c31c586f774245e3141b2",
-						count: 1,
+						count: 2,
 						isFunctional: false,
 						isEncoded: false,
 						type: "Item",
@@ -1826,7 +1946,7 @@ class Mod implements IPostDBLoadMod {
 				]
 
 				// "5cadf6eeae921500134b2799", // 12.7x55mm PS12B
-				getCraft("5cadf6eeae921500134b2799").count = 80
+				getCraft("5cadf6eeae921500134b2799").count = 120
 
 				// "59e690b686f7746c9f75e848", // 5.56x45mm M995
 				getCraft("59e690b686f7746c9f75e848").count = 180
@@ -1895,27 +2015,27 @@ class Mod implements IPostDBLoadMod {
 				]
 
 				// "5c0d688c86f77413ae3407b2", // 9x39mm BP gs
-				getCraft("5c0d688c86f77413ae3407b2").requirements = [
-					{
-						templateId: "57a0e5022459774d1673f889",
-						count: 160,
-						isFunctional: false,
-						isEncoded: false,
-						type: "Item",
-					},
-					{
-						templateId: "5d6fc87386f77449db3db94e",
-						count: 1,
-						isFunctional: false,
-						isEncoded: false,
-						type: "Item",
-					},
-					{
-						areaType: 10,
-						requiredLevel: 3,
-						type: "Area",
-					},
-				]
+				//				getCraft("5c0d688c86f77413ae3407b2").requirements = [
+				//					{
+				//						templateId: "57a0e5022459774d1673f889",
+				//						count: 160,
+				//						isFunctional: false,
+				//						isEncoded: false,
+				//						type: "Item",
+				//					},
+				//					{
+				//						templateId: "5d6fc87386f77449db3db94e",
+				//						count: 1,
+				//						isFunctional: false,
+				//						isEncoded: false,
+				//						type: "Item",
+				//					},
+				//					{
+				//						areaType: 10,
+				//						requiredLevel: 3,
+				//						type: "Area",
+				//					},
+				//				]
 
 				// "5c0d668f86f7747ccb7f13b2", // 9x39mm SPP gs
 				getCraft("5c0d668f86f7747ccb7f13b2").requirements = [
@@ -1945,18 +2065,12 @@ class Mod implements IPostDBLoadMod {
 				]
 
 				// 7.62x54mm R SNB gzh nerf lol
-				getCraft("560d61e84bdc2da74d8b4571").requirements.push({
-					templateId: "5e023d34e8a400319a28ed44",
-					count: 80,
-					isFunctional: false,
-					isEncoded: false,
-					type: "Item",
-				})
+				getCraft("560d61e84bdc2da74d8b4571").requirements.find((x) => x.templateId == "5887431f2459777e1612938f").templateId = "5e023d34e8a400319a28ed44"
 				getCraft("560d61e84bdc2da74d8b4571").requirements.find((x) => x.type == "Area").requiredLevel = 3
 
 				// 9x21mm BT gzh buff
 				getCraft("5a26ac0ec4a28200741e1e18")
-					.requirements.filter((x) => x.templateId != "5a26abfac4a28232980eabff" && x.areaType == undefined)
+					.requirements.filter((x) => x.templateId != "5a269f97c4a282000b151807" && x.areaType == undefined)
 					.forEach((x) => (x.count = 1))
 
 				// "57371aab2459775a77142f22", // 9x18mm PMM PstM gzh
@@ -2168,6 +2282,7 @@ class Mod implements IPostDBLoadMod {
 						type: "Tool",
 					},
 				]
+				getCraft("5a6086ea4f39f99cd479502f").count = 80
 
 				// 5.45x39mm PP gs nerf
 				getCraft("56dff2ced2720bb4668b4567").count = 200
@@ -2195,95 +2310,6 @@ class Mod implements IPostDBLoadMod {
 					}
 				})
 
-				// Military circuit board buff (1 -> 2)
-				getCraft("5d0376a486f7747d8050965c").count = 2
-
-				// Military flash drive lore-based change (2 Secure Flash drive -> 1 VPX, and Topographic survey maps 2 -> 1).
-				// Not "profitable", but will change Intel folder craft to compensate, and allow it to be crafted on level 2.
-				getCraft("62a0a16d0b9d3c46de5b6e97").requirements.forEach((x) => {
-					if (x.count) {
-						x.count = 1
-					}
-				})
-				getCraft("62a0a16d0b9d3c46de5b6e97").requirements.find((x) => x.type == "Area").requiredLevel = 2
-				getCraft("62a0a16d0b9d3c46de5b6e97").requirements.find((x) => x.templateId == "590c621186f774138d11ea29").templateId = "5c05300686f7746dce784e5d"
-
-				// Intelligence folder buff (Military flash drive 2 -> 1)
-				getCraft("5c12613b86f7743bbe2c3f76").requirements.find((x) => x.templateId == "62a0a16d0b9d3c46de5b6e97").count = 1
-
-				// VPX buff (RAM and Broken GPhone smartphone 3 -> 2)
-				getCraft("5c05300686f7746dce784e5d").requirements.forEach((x) => {
-					if (x.count) {
-						x.count = 2
-					}
-				})
-
-				// FLIR huge buff (everything is 1, plus change SAS drive (wtf?!) to Armasight Vulcan MG 3.5x Bravo night vision scope)
-				getCraft("5d1b5e94d7ad1a2b865a96b0").requirements.forEach((x) => {
-					if (x.count) {
-						x.count = 1
-					}
-				})
-				getCraft("5d1b5e94d7ad1a2b865a96b0").requirements.find((x) => x.templateId == "590c37d286f77443be3d7827").templateId = "5b3b6e495acfc4330140bd88"
-
-				// CMS nerf (Medical tools 1 -> 2)
-				getCraft("5d02778e86f774203e7dedbe").requirements.find((x) => x.templateId == "619cc01e0a7c3a1a2731940c").count = 2
-
-				// GRIzZLY nerf (1 -> 2)
-				getCraft("590c657e86f77412b013051d").count = 1
-
-				// coffee buff (2 -> 3)
-				getCraft("5af0484c86f7740f02001f7f").count = 3
-
-				// MPPV buff (KEKTAPE duct tape 2 -> 1)
-				getCraft("5df8a42886f77412640e2e75").requirements.find((x) => x.templateId == "5e2af29386f7746d4159f077").count = 1
-
-				// bottled water buff water (8 -> 16)
-				getCraft("5448fee04bdc2dbc018b4567").count = 16
-
-				// Topographic survey maps buff (1 -> 2)
-				getCraft("62a0a124de7ac81993580542").count = 2
-
-				// Aquamari buff (3 -> 5)
-				getCraft("5c0fa877d174af02a012e1cf").count = 5
-
-				// SJ6 buff (2 -> 3)
-				getCraft("5c0e531d86f7747fa23f4d42").count = 3
-
-				// GPU buff (3 VPX -> 1 Virtex, 10 PCB -> 1, 10 CPU -> 1)
-				getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "5c05300686f7746dce784e5d").count = 1
-				getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "5c05300686f7746dce784e5d").templateId = "5c05308086f7746b2101e90b"
-				getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "573477e124597737dd42e191").count = 1
-				getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "590a3b0486f7743954552bdb").count = 1
-
-				// UHF RFID Reader huge buff (only Broken GPhone X smartphone + Signal Jammer)
-				getCraft("5c052fb986f7746b2101e909").requirements = [
-					{
-						areaType: 11,
-						requiredLevel: 2,
-						type: "Area",
-					},
-					{
-						templateId: "5c1265fc86f7743f896a21c2",
-						count: 1,
-						isFunctional: false,
-						type: "Item",
-					},
-					{
-						templateId: "5ac78a9b86f7741cca0bbd8d",
-						count: 1,
-						isFunctional: false,
-						type: "Item",
-					},
-					{
-						templateId: "5d4042a986f7743185265463",
-						type: "Tool",
-					},
-					{
-						templateId: "5d63d33b86f7746ea9275524",
-						type: "Tool",
-					},
-				]
 				// */
 			} catch (error) {
 				logger.warning(`\nCraftingRebalance failed because of another mod. Send bug report. Continue safely.`)
