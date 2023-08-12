@@ -1,10 +1,10 @@
 {
 	"name": "Softcore",
-	"version": "1.4.0",
+	"version": "1.4.1",
 	"main": "src/mod.js",
 	"license": "MIT",
 	"author": "x-ODT",
-	"akiVersion": "3.5.7",
+	"akiVersion": ">=3.6.0",
 	"scripts": {
 		"setup": "npm i",
 		"build": "node ./packageBuild.ts"
