@@ -2,4 +2,5 @@ node_modules/
 *.code-workspace
 dist/
 src/*.js
+src/*.map
 types/

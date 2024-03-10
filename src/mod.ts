@@ -115,13 +115,13 @@ class Mod implements IPostDBLoadMod {
 					try {
 						items["5732ee6a24597719ae0c0281"]._props.CantRemoveFromSlotsDuringRaid[0] = "SecuredContainer"
 					} catch (error) {
-						logger.warning(`\nAdjusting Waist Pouch CantRemoveFromSlotsDuringRaid failed because of another mod. Send bug report. Continue safely.`)
+						logger.warning("\nAdjusting Waist Pouch CantRemoveFromSlotsDuringRaid failed because of another mod. Send bug report. Continue safely.")
 						log(error)
 					}
 					try {
 						items["5732ee6a24597719ae0c0281"]._props.Grids[0]._props.filters = items["5857a8bc2459772bad15db29"]._props.Grids[0]._props.filters
 					} catch (error) {
-						logger.warning(`\nAdjusting Waist Pouch Grids[0]._props.filters failed because of another mod. Send bug report. Continue safely.`)
+						logger.warning("\nAdjusting Waist Pouch Grids[0]._props.filters failed because of another mod. Send bug report. Continue safely.")
 						log(error)
 					}
 
@@ -131,7 +131,8 @@ class Mod implements IPostDBLoadMod {
 					}
 
 					// Beta container from PK "removal"
-					peacekeeper.assort.barter_scheme["63d385c6b3eba6c95d0efa0a"][0].forEach((x) => (x.count = 10))
+
+					peacekeeper.assort.barter_scheme["6507ff2a644a656aee0f8073"][0].forEach((x) => (x.count = 10))
 
 					const Alpha = {
 						_id: "63da4dbee8fa73e22500001a",
@@ -354,7 +355,7 @@ class Mod implements IPostDBLoadMod {
 						]
 					}
 				} catch (error) {
-					logger.warning(`\nSecureContainersOptions.Progressive_Containers failed because of another mod. Send bug report. Continue safely.`)
+					logger.warning("\nSecureContainersOptions.Progressive_Containers failed because of another mod. Send bug report. Continue safely.")
 					log(error)
 				}
 			}
@@ -370,7 +371,7 @@ class Mod implements IPostDBLoadMod {
 							trader.assort.items.filter((x) => buyableitems.add(x._tpl))
 						} catch (error) {
 							logger.warning(
-								`trader.assort.items.filter for buyableitems function failed bacause of the other mod. Ignore this error safely and continue. Send bug report.`
+								"trader.assort.items.filter for buyableitems function failed bacause of the other mod. Ignore this error safely and continue. Send bug report."
 							)
 							log(error)
 						}
@@ -398,7 +399,7 @@ class Mod implements IPostDBLoadMod {
 									handbook.Items.find((x) => x.Id == item._id).Price = value
 								} catch (error) {
 									logger.warning(
-										`handbook.Items.find((x) => x.Id == item._id).Price = value function failed bacause of the other mod. Ignore this error safely and continue. Send bug report.`
+										"handbook.Items.find((x) => x.Id == item._id).Price = value function failed bacause of the other mod. Ignore this error safely and continue. Send bug report."
 									)
 									log(error)
 								}
@@ -605,7 +606,7 @@ class Mod implements IPostDBLoadMod {
 							}
 						})
 					} catch (error) {
-						logger.warning(`\nScavCaseOptions.FasterScavcase failed because of another mod. Send bug report. Continue safely.`)
+						logger.warning("\nScavCaseOptions.FasterScavcase failed because of another mod. Send bug report. Continue safely.")
 						log(error)
 					}
 				}
@@ -695,7 +696,7 @@ class Mod implements IPostDBLoadMod {
 					//		})
 				}
 			} catch (error) {
-				logger.warning(`\nScavCaseOptions failed because of another mod. Send bug report. Continue safely.`)
+				logger.warning("\nScavCaseOptions failed because of another mod. Send bug report. Continue safely.")
 				log(error)
 			}
 		}
@@ -721,7 +722,7 @@ class Mod implements IPostDBLoadMod {
 						items["5811ce662459770f6f490f32"]._props.Grids[0]._props.cellsV = 150
 						items["5811ce772459770e9e5f9532"]._props.Grids[0]._props.cellsV = 200
 					} catch (error) {
-						logger.warning(`\nHideoutOptions.StashOptions.BiggerStash failed because of another mod. Send bug report. Continue safely.`)
+						logger.warning("\nHideoutOptions.StashOptions.BiggerStash failed because of another mod. Send bug report. Continue safely.")
 						log(error)
 					}
 				}
@@ -737,7 +738,7 @@ class Mod implements IPostDBLoadMod {
 									x.loyaltyLevel -= 1
 								})
 						} catch (error) {
-							logger.warning(`\nHideoutOptions.StashOptions.Easier_Loyalty failed because of another mod. Send bug report. Continue safely.`)
+							logger.warning("\nHideoutOptions.StashOptions.Easier_Loyalty failed because of another mod. Send bug report. Continue safely.")
 							log(error)
 						}
 					}
@@ -750,7 +751,7 @@ class Mod implements IPostDBLoadMod {
 									x.count /= 10
 								})
 						} catch (error) {
-							logger.warning(`\nHideoutOptions.StashOptions.Less_Currency_For_Construction failed because of another mod. Send bug report. Continue safely.`)
+							logger.warning("\nHideoutOptions.StashOptions.Less_Currency_For_Construction failed because of another mod. Send bug report. Continue safely.")
 							log(error)
 						}
 					}
@@ -760,7 +761,7 @@ class Mod implements IPostDBLoadMod {
 					tables.hideout.areas.find((x) => x._id == "5d484fc0654e76006657e0ab").stages = originalStages
 				} catch (error) {
 					logger.warning(
-						`\nHideoutOptions.StashOptions (Easier_Loyalty or Less_Currency_For_Construction) failed because of another mod. Send bug report. Continue safely.`
+						"\nHideoutOptions.StashOptions (Easier_Loyalty or Less_Currency_For_Construction) failed because of another mod. Send bug report. Continue safely."
 					)
 					log(error)
 				}
@@ -790,7 +791,7 @@ class Mod implements IPostDBLoadMod {
 							tables.templates.profiles[profile].bear.character.Bonuses = basicStashBonuses
 							tables.templates.profiles[profile].usec.character.Bonuses = basicStashBonuses
 						} catch (error) {
-							logger.warning(`\nconfig.HideoutOptions.BiggerStash.Progressive_Stash error`)
+							logger.warning("\nconfig.HideoutOptions.BiggerStash.Progressive_Stash error")
 							log(error)
 						}
 					}
@@ -885,7 +886,7 @@ class Mod implements IPostDBLoadMod {
 					Object.values(globals.SkillsSettings.StressResistance).forEach((x) => x * 10)
 					Object.values(globals.SkillsSettings.MagDrills).forEach((x) => x * 5)
 				} catch (error) {
-					logger.warning(`\nOtherTweaks.Skill_Exp_Buffs failed because of another mod. Send bug report. Continue safely.`)
+					logger.warning("\nOtherTweaks.Skill_Exp_Buffs failed because of another mod. Send bug report. Continue safely.")
 					log(error)
 				}
 			}
@@ -894,7 +895,7 @@ class Mod implements IPostDBLoadMod {
 				try {
 					globals.Health.Effects.SevereMusclePain.GymEffectivity = 0.75
 				} catch (error) {
-					logger.warning(`\nOtherTweaks.Allow_Gym_Training_With_Muscle_Pain failed because of another mod. Send bug report. Continue safely.`)
+					logger.warning("\nOtherTweaks.Allow_Gym_Training_With_Muscle_Pain failed because of another mod. Send bug report. Continue safely.")
 					log(error)
 				}
 			}
@@ -916,7 +917,7 @@ class Mod implements IPostDBLoadMod {
 					tables.templates.items["59fb023c86f7746d0d4b423c"]._props.Grids[0]._props.cellsH = 6 // Weapon case 5x10
 					tables.templates.items["59fb023c86f7746d0d4b423c"]._props.Grids[0]._props.cellsV = 10
 				} catch (error) {
-					logger.warning(`\nOtherTweaks.Bigger_Hideout_Containers failed because of another mod. Send bug report. Continue safely.`)
+					logger.warning("\nOtherTweaks.Bigger_Hideout_Containers failed because of another mod. Send bug report. Continue safely.")
 					log(error)
 				}
 			}
@@ -932,7 +933,7 @@ class Mod implements IPostDBLoadMod {
 						}
 					}
 				} catch (error) {
-					logger.warning(`\nOtherTweaks.Remove_Discard_Limit failed because of another mod. Send bug report. Continue safely.`)
+					logger.warning("\nOtherTweaks.Remove_Discard_Limit failed because of another mod. Send bug report. Continue safely.")
 					log(error)
 				}
 			}
@@ -941,7 +942,7 @@ class Mod implements IPostDBLoadMod {
 				try {
 					items["627a4e6b255f7527fb05a0f6"]._props.Slots.forEach((x) => x._props.filters[0].Filter.push("620109578d82e67e7911abf2"))
 				} catch (error) {
-					logger.warning(`OtherTweaks.Signal_Pistol_In_Special_Slots failed bacause of the other mod. Send bug report. Continue safely.`)
+					logger.warning("OtherTweaks.Signal_Pistol_In_Special_Slots failed bacause of the other mod. Send bug report. Continue safely.")
 					log(error)
 				}
 			}
@@ -958,7 +959,21 @@ class Mod implements IPostDBLoadMod {
 						}
 					}
 				} catch (error) {
-					logger.warning(`\nOtherTweaks.Unexamined_Items_Are_Back_and_Faster_Examine_Time failed bacause of the other mod. Send bug report. Continue safely.`)
+					logger.warning("\nOtherTweaks.Unexamined_Items_Are_Back_and_Faster_Examine_Time failed bacause of the other mod. Send bug report. Continue safely.")
+					log(error)
+				}
+			}
+
+			if (config.OtherTweaks.Bigger_Ammo_Stacks.enabled) {
+				try {
+					for (const itemID in items) {
+						const item = items[itemID]
+						if (item?._parent == "5485a8684bdc2da71d8b4567" && item?._props?.StackMaxSize != undefined) {
+							item._props.StackMaxSize *= 10
+						}
+					}
+				} catch (error) {
+					logger.warning("\nOtherTweaks.Bigger_Ammo_Stacks failed bacause of the other mod. Send bug report. Continue safely.")
 					log(error)
 				}
 			}
@@ -982,9 +997,8 @@ class Mod implements IPostDBLoadMod {
 									item._props.Grids[0]._props.filters[0].ExcludedFilter = []
 								}
 							} catch (error) {
-								logger.warning(
-									`\nOtherTweaks.Remove_Backpack_Restrictions failed bacause of the other mod removed default item filter property (like Valens AIO or SVM). Send bug report. Continue safely.`
-								)
+								logger.warning("\nOtherTweaks.Remove_Backpack_Restrictions failed bacause of the other mod. Send bug report. Continue safely.")
+								logger.warning(itemID)
 								// log(error)
 							}
 						}
@@ -1013,7 +1027,7 @@ class Mod implements IPostDBLoadMod {
 					tables.templates.items["5d235bb686f77443f4331278"]._props.Grids[0]._props.filters[0].Filter = mergeFilters
 				} catch (error) {
 					logger.warning(
-						`\nOtherTweaks.SICC_Case_Buff failed bacause of the other mod removed default item filter property (like Valens AIO or SVM). Now SICC case allows all items. Send bug report. Continue safely.`
+						"\nOtherTweaks.SICC_Case_Buff failed bacause of the other mod removed default item filter property (like Valens AIO or SVM). Now SICC case allows all items. Send bug report. Continue safely."
 					)
 				} // log(mergeFilters.map((x) => getItemName(x)))
 			}
@@ -1031,15 +1045,15 @@ class Mod implements IPostDBLoadMod {
 				prapor.base.insurance.min_return_hour = 0
 				prapor.base.insurance.max_return_hour = 0
 				prapor.base.insurance.max_storage_time = 720
-				therapist.base.insurance.min_return_hour = 2
-				therapist.base.insurance.max_return_hour = 2
+				therapist.base.insurance.min_return_hour = 0
+				therapist.base.insurance.max_return_hour = 0
 				therapist.base.insurance.max_storage_time = 720
 				insuranceConfig.insuranceMultiplier["54cb50c76803fa8b248b4571"] = 0.1
-				insuranceConfig.insuranceMultiplier["54cb57776803fa99248b456e"] = 0.2
+				insuranceConfig.insuranceMultiplier["54cb57776803fa99248b456e"] = 0.3
 				insuranceConfig.returnChancePercent["54cb50c76803fa8b248b4571"] = 50
 				insuranceConfig.returnChancePercent["54cb57776803fa99248b456e"] = 80
 			} catch (error) {
-				logger.warning(`\nInsuranceChanges failed because of another mod. Send bug report. Continue safely.`)
+				logger.warning("\nInsuranceChanges failed because of another mod. Send bug report. Continue safely.")
 				log(error)
 			}
 		}
@@ -1050,14 +1064,14 @@ class Mod implements IPostDBLoadMod {
 				try {
 					globals.RagFair.minUserLevel = 99
 				} catch (error) {
-					logger.warning(`\nEconomyOptions.Disable_Flea_Market_Completely failed because of another mod. Send bug report. Continue safely.`)
+					logger.warning("\nEconomyOptions.Disable_Flea_Market_Completely failed because of another mod. Send bug report. Continue safely.")
 					log(error)
 				}
 			} else {
 				try {
 					globals.RagFair.minUserLevel = config.EconomyOptions.Fleamarket_Opened_at_Level.value
 				} catch (error) {
-					logger.warning(`\nEconomyOptions.Fleamarket_Opened_at_Level failed because of another mod. Send bug report. Continue safely.`)
+					logger.warning("\nEconomyOptions.Fleamarket_Opened_at_Level failed because of another mod. Send bug report. Continue safely.")
 					log(error)
 				}
 
@@ -1081,7 +1095,7 @@ class Mod implements IPostDBLoadMod {
 						}
 					}
 				} catch (error) {
-					logger.warning(`\nEconomyOptions.Price_Rebalance and Pacifist_FleaMarket failed because of another mod. Send bug report. Continue safely.`)
+					logger.warning("\nEconomyOptions.Price_Rebalance and Pacifist_FleaMarket failed because of another mod. Send bug report. Continue safely.")
 					log(error)
 				}
 
@@ -1096,7 +1110,7 @@ class Mod implements IPostDBLoadMod {
 						prices["57347d3d245977448f7b7f61"] = 2000 // Croutons
 					}
 				} catch (error) {
-					logger.warning(`\nEconomyOptions.Price_Rebalance failed because of another mod. Send bug report. Continue safely.`)
+					logger.warning("\nEconomyOptions.Price_Rebalance failed because of another mod. Send bug report. Continue safely.")
 					log(error)
 				}
 
@@ -1110,7 +1124,7 @@ class Mod implements IPostDBLoadMod {
 						}
 					}
 				} catch (error) {
-					logger.warning(`\nEconomyOptions.Pacifist_FleaMarket.Enable_QuestKeys failed because of another mod. Send bug report. Continue safely.`)
+					logger.warning("\nEconomyOptions.Pacifist_FleaMarket.Enable_QuestKeys failed because of another mod. Send bug report. Continue safely.")
 					log(error)
 				}
 
@@ -1123,7 +1137,7 @@ class Mod implements IPostDBLoadMod {
 						}
 					}
 				} catch (error) {
-					logger.warning(`\nEconomyOptions.Pacifist_FleaMarket.Enable_Whitelist failed because of another mod. Send bug report. Continue safely.`)
+					logger.warning("\nEconomyOptions.Pacifist_FleaMarket.Enable_Whitelist failed because of another mod. Send bug report. Continue safely.")
 					log(error)
 				}
 
@@ -1137,15 +1151,13 @@ class Mod implements IPostDBLoadMod {
 						}
 					}
 				} catch (error) {
-					logger.warning(`\nEconomyOptions.Pacifist_FleaMarket.Enable_Marked_Keys failed because of another mod. Send bug report. Continue safely.`)
+					logger.warning("\nEconomyOptions.Pacifist_FleaMarket.Enable_Marked_Keys failed because of another mod. Send bug report. Continue safely.")
 					log(error)
 				}
 
 				try {
 					if (config.EconomyOptions.Disable_Selling_on_Flea.sellingDisabled == true) {
 						ragfairConfig.sell.chance.base = 0
-						ragfairConfig.sell.chance.overpriced = 0
-						ragfairConfig.sell.chance.underpriced = 0
 						// ragfairConfig.sell.time.base = 20
 						// ragfairConfig.sell.time.min = 10
 						// ragfairConfig.sell.time.max = 30
@@ -1154,16 +1166,16 @@ class Mod implements IPostDBLoadMod {
 						ragfairConfig.sell.reputation.loss *= 10
 					}
 				} catch (error) {
-					logger.warning(`\nEconomyOptions.Disable_Selling_on_Flea failed because of another mod. Send bug report. Continue safely.`)
+					logger.warning("\nEconomyOptions.Disable_Selling_on_Flea failed because of another mod. Send bug report. Continue safely.")
 					log(error)
 				}
 
 				try {
 					// Sligtly increase flea prices, but with bigger variance, you still get a lot of great trades. Hustle.
-					ragfairConfig.dynamic.price.min *= config.EconomyOptions.Flea_Prices_Increased.multiplier // 0.8 -> 1.04
-					ragfairConfig.dynamic.price.max *= config.EconomyOptions.Flea_Prices_Increased.multiplier // 1.2 -> 1.56
+					ragfairConfig.dynamic.priceRanges.default.min *= config.EconomyOptions.Flea_Prices_Increased.multiplier // 0.8 -> 1.04
+					ragfairConfig.dynamic.priceRanges.default.max *= config.EconomyOptions.Flea_Prices_Increased.multiplier // 1.2 -> 1.56
 				} catch (error) {
-					logger.warning(`\nSetting ragfairConfig.dynamic.price.min/max failed because of another mod. Send bug report. Continue safely.`)
+					logger.warning("\nSetting ragfairConfig.dynamic.price.min/max failed because of another mod. Send bug report. Continue safely.")
 					log(error)
 				}
 
@@ -1173,7 +1185,7 @@ class Mod implements IPostDBLoadMod {
 						Object.values(ragfairConfig.dynamic.condition).forEach((x) => (x.min = 1)) // ._.
 					}
 				} catch (error) {
-					logger.warning(`\nEconomyOptions.Flea_Pristine_Items failed because of another mod (most likely SVM). Send bug report. Continue safely.`)
+					logger.warning("\nEconomyOptions.Flea_Pristine_Items failed because of another mod (most likely SVM). Send bug report. Continue safely.")
 					log(error)
 				}
 
@@ -1229,7 +1241,7 @@ class Mod implements IPostDBLoadMod {
 						ragfairConfig.dynamic.nonStackableCount.min = config.EconomyOptions.Barter_Economy.nonStackableCount.min
 						ragfairConfig.dynamic.nonStackableCount.max = config.EconomyOptions.Barter_Economy.nonStackableCount.max
 					} catch (error) {
-						logger.warning(`\nEconomyOptions.Barter_Economy failed because of another mod. Send bug report. Continue safely.`)
+						logger.warning("\nEconomyOptions.Barter_Economy failed because of another mod. Send bug report. Continue safely.")
 						log(error)
 					}
 				}
@@ -1241,12 +1253,12 @@ class Mod implements IPostDBLoadMod {
 				if (debug) {
 					for (const trader in traderlist) {
 						log(`${traderlist[trader].base.nickname}.base.items_buy = {`)
-						log(`"category": [`)
+						log('"category": [')
 						traderlist[trader].base.items_buy.category.forEach((x) => log(`"${x}", // ${getItemName(x)}`))
-						log(`],`)
-						log(`"id_list": [`)
+						log("],")
+						log('"id_list": [')
 						traderlist[trader].base.items_buy.id_list.forEach((x) => log(`"${x}", // ${getItemName(x)}`))
-						log(`]}`)
+						log("]}")
 					}
 				}
 				if (debug) {
@@ -1254,7 +1266,7 @@ class Mod implements IPostDBLoadMod {
 						log(`${traderlist[trader].base.nickname}.base.sell_category = [`)
 						traderlist[trader].base.sell_category.forEach((x) => log(`"${x}", // ${locales["en"][x]}`))
 						// traderlist[trader].base.sell_category.forEach((x) => log(locales["en"][`${x}`]))
-						log(`]`)
+						log("]")
 					}
 					//
 					for (const trader in traderlist) {
@@ -1278,7 +1290,7 @@ class Mod implements IPostDBLoadMod {
 					ragman.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 2))
 					therapist.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 1))
 				} catch (error) {
-					logger.warning(`\nTraderChanges.BetterSalesToTraders failed because of another mod. Send bug report. Continue safely.`)
+					logger.warning("\nTraderChanges.BetterSalesToTraders failed because of another mod. Send bug report. Continue safely.")
 					log(error)
 				}
 			}
@@ -1300,7 +1312,7 @@ class Mod implements IPostDBLoadMod {
 					ragman.base.items_buy.category.push("57864a3d24597754843f8721") // Ragman buys Jewelry and Valuables
 					skier.base.items_buy.category.push("5448ecbe4bdc2d60728b4568") // Skier buys info items
 				} catch (error) {
-					logger.warning(`\nTraderChanges.AlternativeCategories failed because of another mod. Send bug report. Continue safely.`)
+					logger.warning("\nTraderChanges.AlternativeCategories failed because of another mod. Send bug report. Continue safely.")
 					log(error)
 				}
 			}
@@ -1336,30 +1348,30 @@ class Mod implements IPostDBLoadMod {
 						}
 					}
 				} catch (error) {
-					logger.warning(`\nTraderChanges.SkierUsesEuros failed because of another mod. Send bug report. Continue safely.`)
+					logger.warning("\nTraderChanges.SkierUsesEuros failed because of another mod. Send bug report. Continue safely.")
 					log(error)
 				}
 			}
 
 			if (config.TraderChanges.Reasonably_Priced_Cases.enabled == true) {
 				try {
-					therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0352"][0].forEach((x) => (x.count = 5)) // THICC case (LEDX)
-					therapist.assort.barter_scheme["63d385d7b3eba6c95d0f036e"][0].forEach((x) => (x.count = 10)) // THICC case (Moonshine)
-					therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0334"][0].forEach((x) => (x.count = 7256)) // Item case (Euro)
-					therapist.assort.barter_scheme["63d385d7b3eba6c95d0f034a"][0].forEach((x) => (x.count = 8)) // Item case (OScope)
-					therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0380"][0].forEach((x) => (x.count = 20)) // Item case (Dogtags)
-					therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0382"][0].forEach((x) => (x.count = 15)) // Lucky Scav Junk box (Dogtags)
-					therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0350"][0].forEach((x) => (x.count = 961138)) // Lucky Scav Junk box (Rubles)
-					therapist.assort.barter_scheme["63d385d7b3eba6c95d0f033c"][0].forEach((x) => (x.count = 290610)) // Medcase (Rubles)
-					therapist.assort.barter_scheme["63d385d7b3eba6c95d0f0384"][0].forEach((x) => (x.count /= 10)) // LEDX (Dogtags) // Really BSG? 160 kills for a non-FIR item? REALLY?!
-					peacekeeper.assort.barter_scheme["63d385cab3eba6c95d0eff5f"][0].forEach((x) => (x.count = x.count / 5 + 1)) // THICC case (SMT+Bluefolder)
+					therapist.assort.barter_scheme["6507ff33644a656aee0f8a51"][0].forEach((x) => (x.count = 5)) // THICC case (LEDX)
+					therapist.assort.barter_scheme["6507ff33644a656aee0f8a73"][0].forEach((x) => (x.count = 10)) // THICC case (Moonshine)
+					therapist.assort.barter_scheme["6507ff32644a656aee0f8a25"][0].forEach((x) => (x.count = 7256)) // Item case (Euro) 13839
+					therapist.assort.barter_scheme["6507ff33644a656aee0f8a55"][0].forEach((x) => (x.count = 8)) // Item case (OScope)
+					therapist.assort.barter_scheme["6507ff33644a656aee0f8a93"][0].forEach((x) => (x.count = 20)) // Item case (Dogtags)
+					therapist.assort.barter_scheme["6507ff33644a656aee0f8a85"][0].forEach((x) => (x.count = 15)) // Lucky Scav Junk box (Dogtags)
+					therapist.assort.barter_scheme["6507ff33644a656aee0f8a43"][0].forEach((x) => (x.count = 961138)) // Lucky Scav Junk box (Rubles) 1106138
+					therapist.assort.barter_scheme["6507ff33644a656aee0f8a53"][0].forEach((x) => (x.count = 290610)) // Medcase (Rubles)
+					therapist.assort.barter_scheme["6507ff33644a656aee0f8aa1"][0].forEach((x) => (x.count /= 10)) // LEDX (Dogtags) // Really BSG? 160 kills for a non-FIR item? REALLY?!
+					peacekeeper.assort.barter_scheme["6492e44bf4287b13040fca51"][0].forEach((x) => (x.count = Math.round(x.count / 5 + 1))) // THICC case (SMT+Bluefolder)
 
-					skier.assort.barter_scheme["63d385b7b3eba6c95d0eef5c"][0].forEach((x) => (x.count = 4)) // Weapon case (Moonshine)
+					skier.assort.barter_scheme["6507ff21644a656aee0f7524"][0].forEach((x) => (x.count = 4)) // Weapon case (Moonshine)
 
-					mechanic.assort.barter_scheme["63d385bfb3eba6c95d0ef4d1"][0].forEach((x) => (x.count = 5)) // Weapon case (Bitcoins)
-					mechanic.assort.barter_scheme["63d385c0b3eba6c95d0ef5d8"][0].forEach((x) => (x.count = 10)) // THICC Weapon case (Bitcoins)
+					mechanic.assort.barter_scheme["6507ff26644a656aee0f7b10"][0].forEach((x) => (x.count = 5)) // Weapon case (59fb023c86f7746d0d4b423c) (Bitcoins)
+					mechanic.assort.barter_scheme["6507ff27644a656aee0f7bf1"][0].forEach((x) => (x.count = 10)) // THICC Weapon case (Bitcoins)
 				} catch (error) {
-					logger.warning(`\nTraderChanges.Reasonably_Priced_Cases failed because of another mod. Send bug report. Continue safely.`)
+					logger.warning("\nTraderChanges.Reasonably_Priced_Cases failed because of another mod. Send bug report. Continue safely.")
 					log(error)
 				}
 			}
@@ -1389,7 +1401,7 @@ class Mod implements IPostDBLoadMod {
 					traderConfig.fence.itemPriceMult = 1
 					traderConfig.fence.discountOptions.itemPriceMult = 0.82 // This Fence settings are weird. I still don't get how AKI calculates assorts, was getting very strange results in testing. But this should be close enough to best trader prices but not abusable.
 				} catch (error) {
-					logger.warning(`\nTraderChanges.Pacifist_Fence failed because of another mod. Send bug report. Continue safely.`)
+					logger.warning("\nTraderChanges.Pacifist_Fence failed because of another mod. Send bug report. Continue safely.")
 					log(error)
 				}
 			}
@@ -1420,7 +1432,7 @@ class Mod implements IPostDBLoadMod {
 				})
 				getCraft("59e35cbb86f7741778269d83").count = 1
 
-				// Water filter < 2 airfilter craft buff
+				// Water filter 4 -> 2 airfilter craft buff
 				getCraft("5d1b385e86f774252167b98a").requirements.find((x) => x.templateId == "590c595c86f7747884343ad7").count = 2
 
 				// MPPV buff (KEKTAPE duct tape 2 -> 1)
@@ -1440,7 +1452,7 @@ class Mod implements IPostDBLoadMod {
 				getCraft("5448fee04bdc2dbc018b4567").count = 16
 
 				// Aquamari buff (3 -> 5)
-				getCraft("5c0fa877d174af02a012e1cf").count = 5
+				// getCraft("5c0fa877d174af02a012e1cf").count = 5
 
 				// ------
 				// Medstation:
@@ -1448,6 +1460,10 @@ class Mod implements IPostDBLoadMod {
 
 				// Buff MULE
 				getCraft("5ed51652f6c34d2cc26336a1").count = 2
+
+				// Buff eTG
+				getCraft("5c0e534186f7747fa1419867").count = 2
+				getCraft("5c0e534186f7747fa1419867").requirements.find((x) => x.templateId == "5c0e530286f7747fa1419862").count = 2
 
 				// AFAK buff
 				getCraft("60098ad7c2240c0fe85c570a").requirements.find((x) => x.templateId == "590c678286f77426c9660122").count = 1
@@ -1466,7 +1482,7 @@ class Mod implements IPostDBLoadMod {
 				// CMS nerf (Medical tools 1 -> 2)
 				getCraft("5d02778e86f774203e7dedbe").requirements.find((x) => x.templateId == "619cc01e0a7c3a1a2731940c").count = 2
 
-				// GRIzZLY nerf (1 -> 2)
+				// GRIzZLY nerf (2 -> 1)
 				getCraft("590c657e86f77412b013051d").count = 1
 
 				// SJ6 buff (2 -> 3)
@@ -1502,6 +1518,12 @@ class Mod implements IPostDBLoadMod {
 				// Virtex buff (Military circuit board 2 -> 1)
 				getCraft("5c05308086f7746b2101e90b").requirements.find((x) => x.templateId == "5d0376a486f7747d8050965c").count = 1
 
+				// GPU buff (3 VPX -> 1 Virtex, 10 PCB -> 1, 10 CPU -> 1)
+				getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "5c05300686f7746dce784e5d").count = 1
+				getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "5c05300686f7746dce784e5d").templateId = "5c05308086f7746b2101e90b"
+				getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "573477e124597737dd42e191").count = 1
+				getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "590a3b0486f7743954552bdb").count = 1
+
 				// ------
 				// Workbench:
 				// ------
@@ -1516,12 +1538,6 @@ class Mod implements IPostDBLoadMod {
 					}
 				})
 				getCraft("5d1b5e94d7ad1a2b865a96b0").requirements.find((x) => x.templateId == "590c37d286f77443be3d7827").templateId = "5b3b6e495acfc4330140bd88"
-
-				// GPU buff (3 VPX -> 1 Virtex, 10 PCB -> 1, 10 CPU -> 1)
-				getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "5c05300686f7746dce784e5d").count = 1
-				getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "5c05300686f7746dce784e5d").templateId = "5c05308086f7746b2101e90b"
-				getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "573477e124597737dd42e191").count = 1
-				getCraft("57347ca924597744596b4e71").requirements.find((x) => x.templateId == "590a3b0486f7743954552bdb").count = 1
 
 				// UHF RFID Reader huge buff (only Broken GPhone X smartphone + Signal Jammer)
 				getCraft("5c052fb986f7746b2101e909").requirements = [
@@ -1828,38 +1844,38 @@ class Mod implements IPostDBLoadMod {
 				]
 
 				// "59e0d99486f7744a32234762", // 7.62x39mm BP gzh
-				getCraft("59e0d99486f7744a32234762").requirements = [
-					{
-						areaType: 10,
-						requiredLevel: 3,
-						type: "Area",
-					},
-					{
-						templateId: "5656d7c34bdc2d9d198b4587",
-						count: 120,
-						isFunctional: false,
-						isEncoded: false,
-						type: "Item",
-					},
-					{
-						templateId: "59e4d24686f7741776641ac7",
-						count: 120,
-						isFunctional: false,
-						isEncoded: false,
-						type: "Item",
-					},
-					{
-						templateId: "5d6fc87386f77449db3db94e",
-						count: 1,
-						isFunctional: false,
-						isEncoded: false,
-						type: "Item",
-					},
-					{
-						templateId: "544fb5454bdc2df8738b456a",
-						type: "Tool",
-					},
-				]
+				// getCraft("59e0d99486f7744a32234762").requirements = [
+				// 	{
+				// 		areaType: 10,
+				// 		requiredLevel: 3,
+				// 		type: "Area"
+				// 	},
+				// 	{
+				// 		templateId: "5656d7c34bdc2d9d198b4587",
+				// 		count: 120,
+				// 		isFunctional: false,
+				// 		isEncoded: false,
+				// 		type: "Item"
+				// 	},
+				// 	{
+				// 		templateId: "59e4d24686f7741776641ac7",
+				// 		count: 120,
+				// 		isFunctional: false,
+				// 		isEncoded: false,
+				// 		type: "Item"
+				// 	},
+				// 	{
+				// 		templateId: "5d6fc87386f77449db3db94e",
+				// 		count: 1,
+				// 		isFunctional: false,
+				// 		isEncoded: false,
+				// 		type: "Item"
+				// 	},
+				// 	{
+				// 		templateId: "544fb5454bdc2df8738b456a",
+				// 		type: "Tool"
+				// 	},
+				// ]
 
 				// "5c0d56a986f774449d5de529", // 9x19mm RIP
 				getCraft("5c0d56a986f774449d5de529").requirements = [
@@ -1981,38 +1997,38 @@ class Mod implements IPostDBLoadMod {
 				]
 
 				// 9x39mm SP-6 gs
-				getCraft("57a0e5022459774d1673f889").requirements = [
-					{
-						templateId: "59e4d24686f7741776641ac7",
-						count: 300,
-						isFunctional: false,
-						isEncoded: false,
-						type: "Item",
-					},
-					{
-						templateId: "56d59d3ad2720bdb418b4577",
-						count: 300,
-						isFunctional: false,
-						isEncoded: false,
-						type: "Item",
-					},
-					{
-						templateId: "5d6fc87386f77449db3db94e",
-						count: 3,
-						isFunctional: false,
-						isEncoded: false,
-						type: "Item",
-					},
-					{
-						areaType: 10,
-						requiredLevel: 2,
-						type: "Area",
-					},
-					{
-						templateId: "590c2e1186f77425357b6124",
-						type: "Tool",
-					},
-				]
+				// getCraft("57a0e5022459774d1673f889").requirements = [
+				// 	{
+				// 		templateId: "59e4d24686f7741776641ac7",
+				// 		count: 300,
+				// 		isFunctional: false,
+				// 		isEncoded: false,
+				// 		type: "Item"
+				// 	},
+				// 	{
+				// 		templateId: "56d59d3ad2720bdb418b4577",
+				// 		count: 300,
+				// 		isFunctional: false,
+				// 		isEncoded: false,
+				// 		type: "Item"
+				// 	},
+				// 	{
+				// 		templateId: "5d6fc87386f77449db3db94e",
+				// 		count: 3,
+				// 		isFunctional: false,
+				// 		isEncoded: false,
+				// 		type: "Item"
+				// 	},
+				// 	{
+				// 		areaType: 10,
+				// 		requiredLevel: 2,
+				// 		type: "Area"
+				// 	},
+				// 	{
+				// 		templateId: "590c2e1186f77425357b6124",
+				// 		type: "Tool"
+				// 	},
+				// ]
 
 				// "5c0d688c86f77413ae3407b2", // 9x39mm BP gs
 				//				getCraft("5c0d688c86f77413ae3407b2").requirements = [
@@ -2105,42 +2121,42 @@ class Mod implements IPostDBLoadMod {
 					},
 				]
 				// "5d6e6911a4b9361bd5780d52", // 12/70 flechette
-				getCraft("5d6e6911a4b9361bd5780d52").requirements = [
-					{
-						areaType: 10,
-						requiredLevel: 1,
-						type: "Area",
-					},
-					{
-						templateId: "5d1b36a186f7742523398433",
-						count: 1,
-						isFunctional: false,
-						isEncoded: false,
-						type: "Item",
-					},
-					{
-						templateId: "590c5a7286f7747884343aea",
-						count: 1,
-						isFunctional: false,
-						isEncoded: false,
-						type: "Item",
-					},
-					{
-						templateId: "5d6e6869a4b9361c140bcfde",
-						count: 60,
-						isFunctional: false,
-						isEncoded: false,
-						type: "Item",
-					},
-					{
-						templateId: "5d40419286f774318526545f",
-						type: "Tool",
-					},
-					{
-						templateId: "544fb5454bdc2df8738b456a",
-						type: "Tool",
-					},
-				]
+				// getCraft("5d6e6911a4b9361bd5780d52").requirements = [
+				// 	{
+				// 		areaType: 10,
+				// 		requiredLevel: 1,
+				// 		type: "Area"
+				// 	},
+				// 	{
+				// 		templateId: "5d1b36a186f7742523398433",
+				// 		count: 1,
+				// 		isFunctional: false,
+				// 		isEncoded: false,
+				// 		type: "Item"
+				// 	},
+				// 	{
+				// 		templateId: "590c5a7286f7747884343aea",
+				// 		count: 1,
+				// 		isFunctional: false,
+				// 		isEncoded: false,
+				// 		type: "Item"
+				// 	},
+				// 	{
+				// 		templateId: "5d6e6869a4b9361c140bcfde",
+				// 		count: 60,
+				// 		isFunctional: false,
+				// 		isEncoded: false,
+				// 		type: "Item"
+				// 	},
+				// 	{
+				// 		templateId: "5d40419286f774318526545f",
+				// 		type: "Tool"
+				// 	},
+				// 	{
+				// 		templateId: "544fb5454bdc2df8738b456a",
+				// 		type: "Tool"
+				// 	},
+				// ]
 
 				//"5c0d591486f7744c505b416f", // 12/70 RIP
 				getCraft("5c0d591486f7744c505b416f").requirements.push({
@@ -2193,35 +2209,35 @@ class Mod implements IPostDBLoadMod {
 				})
 
 				// "5fd20ff893a8961fc660a954", // .300 Blackout AP
-				getCraft("5fd20ff893a8961fc660a954").requirements = [
-					{
-						areaType: 10,
-						requiredLevel: 3,
-						type: "Area",
-					},
-					{
-						templateId: "62a0a0bb621468534a797ad5",
-						type: "Tool",
-					},
-					{
-						templateId: "5d40425986f7743185265461",
-						type: "Tool",
-					},
-					{
-						templateId: "6196365d58ef8c428c287da1",
-						count: 120,
-						isFunctional: false,
-						isEncoded: false,
-						type: "Item",
-					},
-					{
-						templateId: "5a6086ea4f39f99cd479502f",
-						count: 120,
-						isFunctional: false,
-						isEncoded: false,
-						type: "Item",
-					},
-				]
+				// getCraft("5fd20ff893a8961fc660a954").requirements = [
+				// 	{
+				// 		areaType: 10,
+				// 		requiredLevel: 3,
+				// 		type: "Area"
+				// 	},
+				// 	{
+				// 		templateId: "62a0a0bb621468534a797ad5",
+				// 		type: "Tool"
+				// 	},
+				// 	{
+				// 		templateId: "5d40425986f7743185265461",
+				// 		type: "Tool"
+				// 	},
+				// 	{
+				// 		templateId: "6196365d58ef8c428c287da1",
+				// 		count: 120,
+				// 		isFunctional: false,
+				// 		isEncoded: false,
+				// 		type: "Item"
+				// 	},
+				// 	{
+				// 		templateId: "5a6086ea4f39f99cd479502f",
+				// 		count: 120,
+				// 		isFunctional: false,
+				// 		isEncoded: false,
+				// 		type: "Item"
+				// 	},
+				// ]
 
 				// .366 TKM AP-M change
 				getCraft("5f0596629e22f464da6bbdd9").requirements = [
@@ -2312,7 +2328,7 @@ class Mod implements IPostDBLoadMod {
 
 				// */
 			} catch (error) {
-				logger.warning(`\nCraftingRebalance failed because of another mod. Send bug report. Continue safely.`)
+				logger.warning("\nCraftingRebalance failed because of another mod. Send bug report. Continue safely.")
 				log(error)
 			}
 		}
@@ -2667,7 +2683,7 @@ class Mod implements IPostDBLoadMod {
 
 				tables.hideout.production.push(ThreebTG, Adrenaline, L1, AHF1, CALOK, Ophthalmoscope, Zagustin, Obdolbos, OLOLO)
 			} catch (error) {
-				logger.warning(`\nAdditionalCraftingRecipes failed because of another mod. Send bug report. Continue safely.`)
+				logger.warning("\nAdditionalCraftingRecipes failed because of another mod. Send bug report. Continue safely.")
 				log(error)
 			}
 		}
@@ -2699,7 +2715,7 @@ class Mod implements IPostDBLoadMod {
 			try {
 				return tables.hideout.production.find((x) => x.endProduct == endProductID && x.areaType != 21)
 			} catch (error) {
-				logger.warning(`\ngetCraft function failed bacause of the other mod. Ignore this error safely and continue. Send bug report.`)
+				logger.warning("\ngetCraft function failed bacause of the other mod. Ignore this error safely and continue. Send bug report.")
 				log(endProductID)
 				log(error)
 			}
@@ -2709,7 +2725,7 @@ class Mod implements IPostDBLoadMod {
 			try {
 				return tables.hideout.production.find((x) => x._id == craftID && x.areaType != 21)
 			} catch (error) {
-				logger.warning(`\ngetCraft function failed bacause of the other mod. Ignore this error safely and continue. Send bug report.`)
+				logger.warning("\ngetCraft function failed bacause of the other mod. Ignore this error safely and continue. Send bug report.")
 				log(craftID)
 				log(error)
 			}
@@ -2719,7 +2735,7 @@ class Mod implements IPostDBLoadMod {
 			try {
 				return handbook.Items.find((i) => i.Id === itemID) // Outs: @Id, @ParentId, @Price
 			} catch (error) {
-				logger.warning(`\ngetItemInHandbook function failed bacause of the other mod. Ignore this error safely and continue. Send bug report.`)
+				logger.warning("\ngetItemInHandbook function failed bacause of the other mod. Ignore this error safely and continue. Send bug report.")
 				log(itemID)
 				log(error)
 			}
