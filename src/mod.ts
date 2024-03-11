@@ -1048,10 +1048,10 @@ class Mod implements IPostDBLoadMod {
 				therapist.base.insurance.min_return_hour = 0
 				therapist.base.insurance.max_return_hour = 0
 				therapist.base.insurance.max_storage_time = 720
-				insuranceConfig.insuranceMultiplier["54cb50c76803fa8b248b4571"] = 0.1
-				insuranceConfig.insuranceMultiplier["54cb57776803fa99248b456e"] = 0.3
-				insuranceConfig.returnChancePercent["54cb50c76803fa8b248b4571"] = 50
-				insuranceConfig.returnChancePercent["54cb57776803fa99248b456e"] = 80
+				insuranceConfig.insuranceMultiplier["54cb50c76803fa8b248b4571"] = 0.3
+				insuranceConfig.insuranceMultiplier["54cb57776803fa99248b456e"] = 0.05
+				insuranceConfig.returnChancePercent["54cb50c76803fa8b248b4571"] = 80
+				insuranceConfig.returnChancePercent["54cb57776803fa99248b456e"] = 60
 			} catch (error) {
 				logger.warning("\nInsuranceChanges failed because of another mod. Send bug report. Continue safely.")
 				log(error)
@@ -1463,7 +1463,11 @@ class Mod implements IPostDBLoadMod {
 
 				// Buff eTG
 				getCraft("5c0e534186f7747fa1419867").count = 2
-				getCraft("5c0e534186f7747fa1419867").requirements.find((x) => x.templateId == "5c0e530286f7747fa1419862").count = 2
+				getCraft("5c0e534186f7747fa1419867").requirements.find((x) => x.templateId == "5c0e530286f7747fa1419862").count = 2				
+        
+        // Buff CALOK 
+				getCraft("5e8488fa988a8701445df1e4").count = 2
+				getCraft("5e8488fa988a8701445df1e4").requirements.find((x) => x.templateId == "5e8488fa988a8701445df1e4").count = 2
 
 				// AFAK buff
 				getCraft("60098ad7c2240c0fe85c570a").requirements.find((x) => x.templateId == "590c678286f77426c9660122").count = 1

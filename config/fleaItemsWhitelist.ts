@@ -84,6 +84,7 @@ const itemWhitelist = [
 	"5c010e350db83400232feec7", // SP-8 Survival Machete
 	"5656eb674bdc2d35148b457c", // 40mm VOG-25 grenade
 	"5783c43d2459774bbe137486", // Simple wallet
+	"54491bb74bdc2d09088b4567" // ER FULCRUM BAYONET
 ]
 
 const markedKeys = [
@@ -92,7 +93,7 @@ const markedKeys = [
 	"5d80c60f86f77440373c4ece", // RB-BK marked key
 	"5d80c62a86f7744036212b3f", // RB-VO marked key
 	"5ede7a8229445733cb4c18e2", // RB-PKPM marked key
-	"63a3a93f8a56922e82001f5d", // Abandoned factory marked key
+	"63a3a93f8a56922e82001f5d" // Abandoned factory marked key
 ]
 
 module.exports = { questKeys, itemWhitelist, markedKeys }
