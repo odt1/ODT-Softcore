@@ -346,7 +346,7 @@ class Mod implements IPostDBLoadMod {
 									parentId: "",
 									isEncoded: false,
 									dynamicLocale: false,
-									value: 20,
+									value: 10,
 									compareMethod: ">=",
 									visibilityConditions: [],
 								},
@@ -992,7 +992,7 @@ class Mod implements IPostDBLoadMod {
 							try {
 								// Safety level 2
 								filtered = item._props?.Grids[0]?._props?.filters[0]?.ExcludedFilter
-								if (filtered.includes("5aafbcd986f7745e590fff23")) {
+								if (filtered && filtered.includes("5aafbcd986f7745e590fff23")) {
 									// log(getItemName(item._id))
 									item._props.Grids[0]._props.filters[0].ExcludedFilter = []
 								}
@@ -1400,6 +1400,7 @@ class Mod implements IPostDBLoadMod {
 					traderConfig.fence.discountOptions.assortSize = config.TraderChanges.Pacifist_Fence.Number_Of_Fence_Offers * 2
 					traderConfig.fence.itemPriceMult = 1
 					traderConfig.fence.discountOptions.itemPriceMult = 0.82 // This Fence settings are weird. I still don't get how AKI calculates assorts, was getting very strange results in testing. But this should be close enough to best trader prices but not abusable.
+					ragfairConfig.traders["579dc571d53a0658a154fbec"] = true // test
 				} catch (error) {
 					logger.warning("\nTraderChanges.Pacifist_Fence failed because of another mod. Send bug report. Continue safely.")
 					log(error)
@@ -1463,9 +1464,9 @@ class Mod implements IPostDBLoadMod {
 
 				// Buff eTG
 				getCraft("5c0e534186f7747fa1419867").count = 2
-				getCraft("5c0e534186f7747fa1419867").requirements.find((x) => x.templateId == "5c0e530286f7747fa1419862").count = 2				
-        
-        // Buff CALOK 
+				getCraft("5c0e534186f7747fa1419867").requirements.find((x) => x.templateId == "5c0e530286f7747fa1419862").count = 2
+
+				// Buff CALOK
 				getCraft("5e8488fa988a8701445df1e4").count = 2
 				getCraft("5e8488fa988a8701445df1e4").requirements.find((x) => x.templateId == "5e8488fa988a8701445df1e4").count = 2
 
