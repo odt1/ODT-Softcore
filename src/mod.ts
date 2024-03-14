@@ -1681,6 +1681,9 @@ class Mod implements IPostDBLoadMod {
 				// Rechargeable battery buff, Portable Powerbank -> Electric drill
 				getCraft("590a358486f77429692b2790").requirements.find((x) => x.templateId == "5af0561e86f7745f5f3ad6ac").templateId = "59e35de086f7741778269d84"
 
+				// Thermite buff
+				getCraft("60391a8b3364dc22b04d0ce5").requirements.find((x) => x.templateId == "5780cf722459777a5108b9a1").templateId = "57e26ea924597715ca604a09"
+
 				//// AMMO ////
 				// 9x19mm AP 6.3
 				getCraft("5c925fa22e221601da359b7b").requirements.find((x) => x.templateId == "5d6fc87386f77449db3db94e").count = 1
