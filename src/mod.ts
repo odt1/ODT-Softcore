@@ -23,7 +23,11 @@ import { itemBaseClasses } from "./itemBaseClasses"
 import { BSGblacklist } from "./BSGblacklist"
 import { scavcaseWhitelist, scavcaseItemBlacklist } from "./scavcaseLists"
 
-import config from "../config/config.json"
+import { VFS } from "@spt-aki/utils/VFS";
+import path from "path";
+import { jsonc } from "jsonc"
+
+// import config from "../config/config.jsonc"
 
 const fleaListingsWhitelist = require("../config/fleaListingsWhitelist.ts") // this Node.js module/require shit is bullshit.
 const fleaBarterRequestsWhitelist = require("../config/fleaBarterRequestsWhitelist.ts") // why I can't use import in config directory? Anyway, is there any alternative to JSON data storage? THIS is the only way to save commented data?!
@@ -33,6 +37,8 @@ const debug = false // [Debug] Debug!
 
 class Mod implements IPostDBLoadMod {
 	public postDBLoad(container: DependencyContainer): void {
+		const vfs = container.resolve<VFS>("VFS")
+		const config = jsonc.parse(vfs.readFile(path.resolve(__dirname, "../config/config.jsonc")))
 		const logger = container.resolve<ILogger>("WinstonLogger")
 		const databaseServer = container.resolve<DatabaseServer>("DatabaseServer")
 		const configServer = container.resolve<ConfigServer>("ConfigServer")
@@ -884,7 +890,7 @@ class Mod implements IPostDBLoadMod {
 					globals.SkillsSettings.Surgery.SurgeryAction *= 10
 					Object.values(globals.SkillsSettings.Immunity).forEach((x) => x * 10)
 					Object.values(globals.SkillsSettings.StressResistance).forEach((x) => x * 10)
-					Object.values(globals.SkillsSettings.MagDrills).forEach((x) => x * 5)
+					Object.values(globals.SkillsSettings.MagDrills).forEach((x) => x * 10)
 				} catch (error) {
 					logger.warning("\nOtherTweaks.Skill_Exp_Buffs failed because of another mod. Send bug report. Continue safely.")
 					log(error)
