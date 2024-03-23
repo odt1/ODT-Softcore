@@ -775,9 +775,10 @@ class Mod implements IPostDBLoadMod {
 				if (config.HideoutOptions.StashOptions.Progressive_Stash.enabled == true) {
 					const basicStashBonuses = [
 						{
-							type: "StashSize",
+							id: "64f5b9e5fa34f11b380756c0",
 							templateId: "566abbc34bdc2d92178b4576",
-						},
+							type: "StashSize"
+						}
 					]
 					for (const profile of profileList) {
 						try {
