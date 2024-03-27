@@ -75,10 +75,10 @@ const itemWhitelist = [
 	"57e26ea924597715ca604a09", // Bars A-2607 Damascus knife
 	"61c18db6dfd64163ea78fbb4", // Leather cap
 	"56e33634d2720bd8058b456b", // Duffle bag
-	// "5f60cd6cf2bcbb675b00dac6", // Walker's XCEL 500BT Digital headset
-	// "5c165d832e2216398b5a7e36", // Peltor Tactical Sport headset
-	// "5e4d34ca86f774264f758330", // Walker's Razor Digital headset
-	// "628e4e576d783146b124c64d", // Peltor ComTac 4 Hybrid
+	"5f60cd6cf2bcbb675b00dac6", // Walker's XCEL 500BT Digital headset
+	"5c165d832e2216398b5a7e36", // Peltor Tactical Sport headset
+	"5e4d34ca86f774264f758330", // Walker's Razor Digital headset
+	"628e4e576d783146b124c64d", // Peltor ComTac 4 Hybrid
 	"5aa2b9ede5b5b000137b758b", // Kinda cowboy hat
 	// "5c0e655586f774045612eeb2", // HighCom Trooper TFO body armor (Multicam)
 	"579204f224597773d619e051", // Makarov PM (t) 9x18PM pistol
@@ -86,6 +86,9 @@ const itemWhitelist = [
 	"5656eb674bdc2d35148b457c", // 40mm VOG-25 grenade
 	"5783c43d2459774bbe137486", // Simple wallet
 	"54491bb74bdc2d09088b4567", // ER FULCRUM BAYONET
+	"5aa2b9aee5b5b00015693121", // RayBench Hipster Reserve sunglasses
+	"5ab8f85d86f7745cd93a1cf5", // Арафатка (Зеленая)",
+	"5ab8f4ff86f77431c60d91ba", // Балаклава Призрак
 ];
 
 const markedKeys = [

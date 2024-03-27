@@ -23,8 +23,8 @@ import { itemBaseClasses } from "./itemBaseClasses"
 import { BSGblacklist } from "./BSGblacklist"
 import { scavcaseWhitelist, scavcaseItemBlacklist } from "./scavcaseLists"
 
-import { VFS } from "@spt-aki/utils/VFS";
-import path from "path";
+import { VFS } from "@spt-aki/utils/VFS"
+import path from "path"
 import { jsonc } from "jsonc"
 
 // import config from "../config/config.jsonc"
@@ -121,13 +121,13 @@ class Mod implements IPostDBLoadMod {
 					try {
 						items["5732ee6a24597719ae0c0281"]._props.CantRemoveFromSlotsDuringRaid[0] = "SecuredContainer"
 					} catch (error) {
-						logger.warning("\nAdjusting Waist Pouch CantRemoveFromSlotsDuringRaid failed because of another mod. Send bug report. Continue safely.")
+						logger.warning("\nAdjusting Waist Pouch CantRemoveFromSlotsDuringRaid failed. Send bug report. Continue safely.")
 						log(error)
 					}
 					try {
 						items["5732ee6a24597719ae0c0281"]._props.Grids[0]._props.filters = items["5857a8bc2459772bad15db29"]._props.Grids[0]._props.filters
 					} catch (error) {
-						logger.warning("\nAdjusting Waist Pouch Grids[0]._props.filters failed because of another mod. Send bug report. Continue safely.")
+						logger.warning("\nAdjusting Waist Pouch Grids[0]._props.filters failed. Send bug report. Continue safely.")
 						log(error)
 					}
 
@@ -139,6 +139,10 @@ class Mod implements IPostDBLoadMod {
 					// Beta container from PK "removal"
 
 					peacekeeper.assort.barter_scheme["6507ff2a644a656aee0f8073"][0].forEach((x) => (x.count = 10))
+
+					// Proper removal below:
+					// peacekeeper.assort.items = peacekeeper.assort.items.filter((x) => x._id != "6507ff2a644a656aee0f8073")
+					// peacekeeper.assort.barter_scheme["6507ff2a644a656aee0f8073"] = []
 
 					const Alpha = {
 						_id: "63da4dbee8fa73e22500001a",
@@ -361,7 +365,7 @@ class Mod implements IPostDBLoadMod {
 						]
 					}
 				} catch (error) {
-					logger.warning("\nSecureContainersOptions.Progressive_Containers failed because of another mod. Send bug report. Continue safely.")
+					logger.warning("\nSecureContainersOptions.Progressive_Containers failed. Send bug report. Continue safely.")
 					log(error)
 				}
 			}
@@ -612,7 +616,7 @@ class Mod implements IPostDBLoadMod {
 							}
 						})
 					} catch (error) {
-						logger.warning("\nScavCaseOptions.FasterScavcase failed because of another mod. Send bug report. Continue safely.")
+						logger.warning("\nScavCaseOptions.FasterScavcase failed. Send bug report. Continue safely.")
 						log(error)
 					}
 				}
@@ -702,7 +706,573 @@ class Mod implements IPostDBLoadMod {
 					//		})
 				}
 			} catch (error) {
-				logger.warning("\nScavCaseOptions failed because of another mod. Send bug report. Continue safely.")
+				logger.warning("\nScavCaseOptions failed. Send bug report. Continue safely.")
+				log(error)
+			}
+		}
+
+		if (config.AdditionalCraftingRecipes.enabled == true) {
+			try {
+				// 63da4dbee8fa73e225000001
+				// 63da4dbee8fa73e225000002
+				// 63da4dbee8fa73e225000003
+				// 63da4dbee8fa73e225000004
+				// 63da4dbee8fa73e225000005
+				// 63da4dbee8fa73e225000006
+				// 63da4dbee8fa73e225000007
+				// 63da4dbee8fa73e225000008
+				// 63da4dbee8fa73e225000009
+				// 63da4dbee8fa73e22500000a
+
+				const Ophthalmoscope = {
+					_id: "63da4dbee8fa73e225000001",
+
+					areaType: 7,
+					requirements: [
+						{ areaType: 7, requiredLevel: 3, type: "Area" },
+						{
+							templateId: "5e2aedd986f7746d404f3aa4",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "619cc01e0a7c3a1a2731940c",
+							count: 2,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "57d17c5e2459775a5c57d17d",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "5b4391a586f7745321235ab2",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "57347c1124597737fb1379e3",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+					],
+					productionTime: 105,
+					boosters: null,
+					endProduct: "5af0534a86f7743b6f354284",
+					continuous: false,
+					count: 1,
+					productionLimitCount: 0,
+				}
+				const Zagustin = {
+					_id: "63da4dbee8fa73e225000002",
+
+					areaType: 7,
+					requirements: [
+						{ areaType: 7, requiredLevel: 3, type: "Area" },
+						{
+							templateId: "5c0e530286f7747fa1419862",
+							count: 2,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "5e8488fa988a8701445df1e4",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "5ed515f6915ec335206e4152",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+					],
+					productionTime: 105,
+					boosters: null,
+					endProduct: "5c0e533786f7747fa23f4d47",
+					continuous: false,
+					count: 3,
+					productionLimitCount: 0,
+				}
+				const Obdolbos = {
+					// Did you always want to run your own meth lab in Tarkov? Now you can.
+					_id: "63da4dbee8fa73e225000003",
+
+					areaType: 7,
+					requirements: [
+						{ areaType: 7, requiredLevel: 3, type: "Area" },
+						{
+							templateId: "5c0e531286f7747fa54205c2",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "5b43575a86f77424f443fe62",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "5e2af00086f7746d3f3c33f7",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "62a09f32621468534a797acb",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "5d40407c86f774318526545a",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "5d403f9186f7743cac3f229b",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "5d1b376e86f774252519444e",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "5d1b2f3f86f774252167a52c",
+							type: "Tool",
+						},
+					],
+					productionTime: 564,
+					boosters: null,
+					endProduct: "5ed5166ad380ab312177c100",
+					continuous: false,
+					count: 8,
+					productionLimitCount: 0,
+				}
+				const CALOK = {
+					_id: "63da4dbee8fa73e225000004",
+
+					areaType: 7,
+					requirements: [
+						{ areaType: 7, requiredLevel: 2, type: "Area" },
+						{
+							templateId: "59e35abd86f7741778269d82", // Pack of sodium bicarbonate
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "5755383e24597772cb798966", // Vaseline balm
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+					],
+					productionTime: 48,
+					boosters: null,
+					endProduct: "5e8488fa988a8701445df1e4",
+					continuous: false,
+					count: 2,
+					productionLimitCount: 0,
+					// Granular nature? Check.
+					// Stops blood with magical properties of pain-relieving Tarkov Vaseline? Check.
+					// Fun and economically balanced recipe that includes underused items? Triple check.
+				}
+				const Adrenaline = {
+					_id: "63da4dbee8fa73e225000005",
+
+					areaType: 7,
+					requirements: [
+						{ areaType: 7, requiredLevel: 2, type: "Area" },
+						{
+							templateId: "5751496424597720a27126da",
+							count: 3,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "5755356824597772cb798962",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+					],
+					productionTime: 23,
+					boosters: null,
+					endProduct: "5c10c8fd86f7743d7d706df3",
+					continuous: false,
+					count: 1,
+					productionLimitCount: 0,
+				}
+				const ThreebTG = {
+					_id: "63da4dbee8fa73e225000006",
+
+					areaType: 7,
+					requirements: [
+						{ areaType: 7, requiredLevel: 3, type: "Area" },
+						{
+							templateId: "5c10c8fd86f7743d7d706df3",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "59e361e886f774176c10a2a5",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "57505f6224597709a92585a9",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+					],
+					productionTime: 31,
+					boosters: null,
+					endProduct: "5ed515c8d380ab312177c0fa",
+					continuous: false,
+					count: 2,
+					productionLimitCount: 0,
+				}
+				const AHF1 = {
+					_id: "63da4dbee8fa73e225000007",
+
+					areaType: 7,
+					requirements: [
+						{ areaType: 7, requiredLevel: 2, type: "Area" },
+						{
+							templateId: "590c695186f7741e566b64a2",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "544fb3f34bdc2d03748b456a",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+					],
+					productionTime: 47,
+					boosters: null,
+					endProduct: "5ed515f6915ec335206e4152",
+					continuous: false,
+					count: 1,
+					productionLimitCount: 0,
+				}
+				const OLOLO = {
+					_id: "63da4dbee8fa73e225000008",
+
+					areaType: 8,
+					requirements: [
+						{ areaType: 8, requiredLevel: 3, type: "Area" },
+						{
+							templateId: "57513f9324597720a7128161",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "57513fcc24597720a31c09a6",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "57513f07245977207e26a311",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "575062b524597720a31c09a1",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "544fb62a4bdc2dfb738b4568",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "544fb37f4bdc2dee738b4567",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "5d1b385e86f774252167b98a",
+							type: "Tool",
+						},
+						{
+							templateId: "590de71386f774347051a052",
+							type: "Tool",
+						},
+					],
+					productionTime: 71,
+					boosters: null,
+					endProduct: "62a0a043cf4a99369e2624a5",
+					continuous: false,
+					count: 3,
+					productionLimitCount: 0,
+				}
+				const L1 = {
+					_id: "63da4dbee8fa73e225000009",
+
+					areaType: 7,
+					requirements: [
+						{ areaType: 7, requiredLevel: 3, type: "Area" },
+						{
+							templateId: "5c10c8fd86f7743d7d706df3",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "5c0e531d86f7747fa23f4d42",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+					],
+					productionTime: 71,
+					boosters: null,
+					endProduct: "5ed515e03a40a50460332579",
+					continuous: false,
+					count: 1,
+					productionLimitCount: 0,
+				}
+				const P22 = {
+					_id: "63da4dbee8fa73e225000010",
+
+					areaType: 7,
+					requirements: [
+						{ areaType: 7, requiredLevel: 3, type: "Area" },
+						{
+							templateId: "5c10c8fd86f7743d7d706df3",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "59e361e886f774176c10a2a5",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "57505f6224597709a92585a9",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+					],
+					productionTime: 31,
+					boosters: null,
+					endProduct: "5ed515c8d380ab312177c0fa",
+					continuous: false,
+					count: 2,
+					productionLimitCount: 0,
+				}
+				const Trimadol = {
+					_id: "63da4dbee8fa73e225000011",
+
+					areaType: 7,
+					requirements: [
+						{ areaType: 7, requiredLevel: 3, type: "Area" },
+						{
+							templateId: "5ed515c8d380ab312177c0fa",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "5ed515e03a40a50460332579",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+					],
+					productionTime: 52,
+					boosters: null,
+					endProduct: "637b620db7afa97bfc3d7009",
+					continuous: false,
+					count: 2,
+					productionLimitCount: 0,
+				}
+				const Meldonin = {
+					_id: "63da4dbee8fa73e225000012",
+
+					areaType: 7,
+					requirements: [
+						{ areaType: 7, requiredLevel: 3, type: "Area" },
+						{
+							templateId: "5ed515e03a40a50460332579",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "5ed51652f6c34d2cc26336a1",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+					],
+					productionTime: 39,
+					boosters: null,
+					endProduct: "5ed5160a87bb8443d10680b5",
+					continuous: false,
+					count: 2,
+					productionLimitCount: 0,
+				}
+				const PNB = {
+					_id: "63da4dbee8fa73e225000013",
+
+					areaType: 7,
+					requirements: [
+						{ areaType: 7, requiredLevel: 3, type: "Area" },
+						{
+							templateId: "5c10c8fd86f7743d7d706df3",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "59e361e886f774176c10a2a5",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "57505f6224597709a92585a9",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+					],
+					productionTime: 31,
+					boosters: null,
+					endProduct: "5ed515c8d380ab312177c0fa",
+					continuous: false,
+					count: 2,
+					productionLimitCount: 0,
+				}
+				const Perfotran = {
+					_id: "63da4dbee8fa73e225000014",
+
+					areaType: 7,
+					requirements: [
+						{ areaType: 7, requiredLevel: 3, type: "Area" },
+						{
+							templateId: "5c0e533786f7747fa23f4d47",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "5fca138c2a7b221b2852a5c6",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "5c0e530286f7747fa1419862",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+					],
+					productionTime: 45,
+					boosters: null,
+					endProduct: "637b6251104668754b72f8f9",
+					continuous: false,
+					count: 2,
+					productionLimitCount: 0,
+				}
+				const SJ9 = {
+					_id: "63da4dbee8fa73e225000015",
+
+					areaType: 7,
+					requirements: [
+						{ areaType: 7, requiredLevel: 3, type: "Area" },
+						{
+							templateId: "5c10c8fd86f7743d7d706df3",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "59e361e886f774176c10a2a5",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "57505f6224597709a92585a9",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+					],
+					productionTime: 31,
+					boosters: null,
+					endProduct: "5ed515c8d380ab312177c0fa",
+					continuous: false,
+					count: 2,
+					productionLimitCount: 0,
+				}
+				const SJ12 = {
+					_id: "63da4dbee8fa73e225000016",
+
+					areaType: 7,
+					requirements: [
+						{ areaType: 7, requiredLevel: 3, type: "Area" },
+						{
+							templateId: "5c10c8fd86f7743d7d706df3",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "59e361e886f774176c10a2a5",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+						{
+							templateId: "57505f6224597709a92585a9",
+							count: 1,
+							isFunctional: false,
+							type: "Item",
+						},
+					],
+					productionTime: 31,
+					boosters: null,
+					endProduct: "5ed515c8d380ab312177c0fa",
+					continuous: false,
+					count: 2,
+					productionLimitCount: 0,
+				}
+				tables.hideout.production.push(ThreebTG, Adrenaline, L1, AHF1, CALOK, Ophthalmoscope, Zagustin, Obdolbos, OLOLO, Perfotran, Trimadol, Meldonin)
+			} catch (error) {
+				logger.warning("\nAdditionalCraftingRecipes failed. Send bug report. Continue safely.")
 				log(error)
 			}
 		}
@@ -728,7 +1298,7 @@ class Mod implements IPostDBLoadMod {
 						items["5811ce662459770f6f490f32"]._props.Grids[0]._props.cellsV = 150
 						items["5811ce772459770e9e5f9532"]._props.Grids[0]._props.cellsV = 200
 					} catch (error) {
-						logger.warning("\nHideoutOptions.StashOptions.BiggerStash failed because of another mod. Send bug report. Continue safely.")
+						logger.warning("\nHideoutOptions.StashOptions.BiggerStash failed. Send bug report. Continue safely.")
 						log(error)
 					}
 				}
@@ -744,7 +1314,7 @@ class Mod implements IPostDBLoadMod {
 									x.loyaltyLevel -= 1
 								})
 						} catch (error) {
-							logger.warning("\nHideoutOptions.StashOptions.Easier_Loyalty failed because of another mod. Send bug report. Continue safely.")
+							logger.warning("\nHideoutOptions.StashOptions.Easier_Loyalty failed. Send bug report. Continue safely.")
 							log(error)
 						}
 					}
@@ -757,7 +1327,7 @@ class Mod implements IPostDBLoadMod {
 									x.count /= 10
 								})
 						} catch (error) {
-							logger.warning("\nHideoutOptions.StashOptions.Less_Currency_For_Construction failed because of another mod. Send bug report. Continue safely.")
+							logger.warning("\nHideoutOptions.StashOptions.Less_Currency_For_Construction failed. Send bug report. Continue safely.")
 							log(error)
 						}
 					}
@@ -766,9 +1336,7 @@ class Mod implements IPostDBLoadMod {
 				try {
 					tables.hideout.areas.find((x) => x._id == "5d484fc0654e76006657e0ab").stages = originalStages
 				} catch (error) {
-					logger.warning(
-						"\nHideoutOptions.StashOptions (Easier_Loyalty or Less_Currency_For_Construction) failed because of another mod. Send bug report. Continue safely."
-					)
+					logger.warning("\nHideoutOptions.StashOptions (Easier_Loyalty or Less_Currency_For_Construction) failed. Send bug report. Continue safely.")
 					log(error)
 				}
 
@@ -777,8 +1345,8 @@ class Mod implements IPostDBLoadMod {
 						{
 							id: "64f5b9e5fa34f11b380756c0",
 							templateId: "566abbc34bdc2d92178b4576",
-							type: "StashSize"
-						}
+							type: "StashSize",
+						},
 					]
 					for (const profile of profileList) {
 						try {
@@ -826,7 +1394,8 @@ class Mod implements IPostDBLoadMod {
 					}
 				} else if (config.HideoutOptions.Faster_Crafting_Time.enabled) {
 					// all other crafts
-					tables.hideout.production[prod].productionTime = Math.round(productionTime / config.HideoutOptions.Faster_Crafting_Time.Base_Crafting_Time_Multiplier)
+					tables.hideout.production[prod].productionTime =
+						Math.round(productionTime / config.HideoutOptions.Faster_Crafting_Time.Base_Crafting_Time_Multiplier) + 1
 				}
 			}
 
@@ -884,6 +1453,15 @@ class Mod implements IPostDBLoadMod {
 		}
 
 		if (config.OtherTweaks.enabled) {
+			if (config.OtherTweaks.Quest_Changes.enabled) {
+				try {
+					tables.templates.quests["60e71c48c1bfa3050473b8e5"].conditions.AvailableForStart[1]._props.value = 30
+				} catch (error) {
+					logger.warning("\nOtherTweaks.Quest_Changes failed. Send bug report. Continue safely.")
+					log(error)
+				}
+			}
+
 			if (config.OtherTweaks.Skill_Exp_Buffs.enabled) {
 				try {
 					globals.SkillsSettings.Vitality.DamageTakenAction *= 10
@@ -892,8 +1470,9 @@ class Mod implements IPostDBLoadMod {
 					Object.values(globals.SkillsSettings.Immunity).forEach((x) => x * 10)
 					Object.values(globals.SkillsSettings.StressResistance).forEach((x) => x * 10)
 					Object.values(globals.SkillsSettings.MagDrills).forEach((x) => x * 10)
+					globals.SkillsSettings.WeaponTreatment.SkillPointsPerRepair *= 10
 				} catch (error) {
-					logger.warning("\nOtherTweaks.Skill_Exp_Buffs failed because of another mod. Send bug report. Continue safely.")
+					logger.warning("\nOtherTweaks.Skill_Exp_Buffs failed. Send bug report. Continue safely.")
 					log(error)
 				}
 			}
@@ -902,7 +1481,7 @@ class Mod implements IPostDBLoadMod {
 				try {
 					globals.Health.Effects.SevereMusclePain.GymEffectivity = 0.75
 				} catch (error) {
-					logger.warning("\nOtherTweaks.Allow_Gym_Training_With_Muscle_Pain failed because of another mod. Send bug report. Continue safely.")
+					logger.warning("\nOtherTweaks.Allow_Gym_Training_With_Muscle_Pain failed. Send bug report. Continue safely.")
 					log(error)
 				}
 			}
@@ -924,7 +1503,7 @@ class Mod implements IPostDBLoadMod {
 					tables.templates.items["59fb023c86f7746d0d4b423c"]._props.Grids[0]._props.cellsH = 6 // Weapon case 5x10
 					tables.templates.items["59fb023c86f7746d0d4b423c"]._props.Grids[0]._props.cellsV = 10
 				} catch (error) {
-					logger.warning("\nOtherTweaks.Bigger_Hideout_Containers failed because of another mod. Send bug report. Continue safely.")
+					logger.warning("\nOtherTweaks.Bigger_Hideout_Containers failed. Send bug report. Continue safely.")
 					log(error)
 				}
 			}
@@ -940,7 +1519,7 @@ class Mod implements IPostDBLoadMod {
 						}
 					}
 				} catch (error) {
-					logger.warning("\nOtherTweaks.Remove_Discard_Limit failed because of another mod. Send bug report. Continue safely.")
+					logger.warning("\nOtherTweaks.Remove_Discard_Limit failed. Send bug report. Continue safely.")
 					log(error)
 				}
 			}
@@ -1060,7 +1639,7 @@ class Mod implements IPostDBLoadMod {
 				insuranceConfig.returnChancePercent["54cb50c76803fa8b248b4571"] = 80
 				insuranceConfig.returnChancePercent["54cb57776803fa99248b456e"] = 60
 			} catch (error) {
-				logger.warning("\nInsuranceChanges failed because of another mod. Send bug report. Continue safely.")
+				logger.warning("\nInsuranceChanges failed. Send bug report. Continue safely.")
 				log(error)
 			}
 		}
@@ -1071,14 +1650,14 @@ class Mod implements IPostDBLoadMod {
 				try {
 					globals.RagFair.minUserLevel = 99
 				} catch (error) {
-					logger.warning("\nEconomyOptions.Disable_Flea_Market_Completely failed because of another mod. Send bug report. Continue safely.")
+					logger.warning("\nEconomyOptions.Disable_Flea_Market_Completely failed. Send bug report. Continue safely.")
 					log(error)
 				}
 			} else {
 				try {
 					globals.RagFair.minUserLevel = config.EconomyOptions.Fleamarket_Opened_at_Level.value
 				} catch (error) {
-					logger.warning("\nEconomyOptions.Fleamarket_Opened_at_Level failed because of another mod. Send bug report. Continue safely.")
+					logger.warning("\nEconomyOptions.Fleamarket_Opened_at_Level failed. Send bug report. Continue safely.")
 					log(error)
 				}
 
@@ -1088,6 +1667,23 @@ class Mod implements IPostDBLoadMod {
 						const itemID = itemInHandbook.Id
 
 						if (prices[itemID] != undefined && config.EconomyOptions.Price_Rebalance.enabled) {
+							try {
+								if (config.EconomyOptions.Price_Rebalance.Item_Fixes) {
+									// Hardcode fix for important or unbalanced items. Too low prices can't convert to barters.
+									prices["5aa2b923e5b5b000137b7589"] *= 5 // Round frame sunglasses
+									prices["5656eb674bdc2d35148b457c"] *= 5 // 40mm VOG-25 grenade
+									prices["59e770b986f7742cbd762754"] *= 2 // Anti-fragmentation glasses
+									prices["5f5e45cc5021ce62144be7aa"] *= 2 // LolKek 3F Transfer tourist backpack
+									prices["5751487e245977207e26a315"] = 1500 // Emelya
+									prices["57347d3d245977448f7b7f61"] = 2000 // Croutons
+									tables.templates.handbook.Items.find((x) => x.Id == "5c12613b86f7743bbe2c3f76").Price = 588000
+									tables.templates.handbook.Items.find((x) => x.Id == "62a0a16d0b9d3c46de5b6e97").Price = 224400
+								}
+							} catch (error) {
+								logger.warning("\nEconomyOptions.Price_Rebalance.Item_Fixes failed. Send bug report. Continue safely.")
+								log(error)
+							}
+
 							// Change all Flea prices to handbook prices.
 							prices[itemID] = itemInHandbook.Price
 						}
@@ -1102,22 +1698,7 @@ class Mod implements IPostDBLoadMod {
 						}
 					}
 				} catch (error) {
-					logger.warning("\nEconomyOptions.Price_Rebalance and Pacifist_FleaMarket failed because of another mod. Send bug report. Continue safely.")
-					log(error)
-				}
-
-				try {
-					if (config.EconomyOptions.Price_Rebalance.enabled) {
-						// Hardcode fix for important or unbalanced items. Too low prices can't convert to barters.
-						prices["5aa2b923e5b5b000137b7589"] *= 5 // Round frame sunglasses
-						prices["5656eb674bdc2d35148b457c"] *= 5 // 40mm VOG-25 grenade
-						prices["59e770b986f7742cbd762754"] *= 2 // Anti-fragmentation glasses
-						prices["5f5e45cc5021ce62144be7aa"] *= 2 // LolKek 3F Transfer tourist backpack
-						prices["5751487e245977207e26a315"] = 1500 // Emelya
-						prices["57347d3d245977448f7b7f61"] = 2000 // Croutons
-					}
-				} catch (error) {
-					logger.warning("\nEconomyOptions.Price_Rebalance failed because of another mod. Send bug report. Continue safely.")
+					logger.warning("\nEconomyOptions.Price_Rebalance and Pacifist_FleaMarket failed. Send bug report. Continue safely.")
 					log(error)
 				}
 
@@ -1131,7 +1712,7 @@ class Mod implements IPostDBLoadMod {
 						}
 					}
 				} catch (error) {
-					logger.warning("\nEconomyOptions.Pacifist_FleaMarket.Enable_QuestKeys failed because of another mod. Send bug report. Continue safely.")
+					logger.warning("\nEconomyOptions.Pacifist_FleaMarket.Enable_QuestKeys failed. Send bug report. Continue safely.")
 					log(error)
 				}
 
@@ -1144,7 +1725,7 @@ class Mod implements IPostDBLoadMod {
 						}
 					}
 				} catch (error) {
-					logger.warning("\nEconomyOptions.Pacifist_FleaMarket.Enable_Whitelist failed because of another mod. Send bug report. Continue safely.")
+					logger.warning("\nEconomyOptions.Pacifist_FleaMarket.Enable_Whitelist failed. Send bug report. Continue safely.")
 					log(error)
 				}
 
@@ -1158,7 +1739,7 @@ class Mod implements IPostDBLoadMod {
 						}
 					}
 				} catch (error) {
-					logger.warning("\nEconomyOptions.Pacifist_FleaMarket.Enable_Marked_Keys failed because of another mod. Send bug report. Continue safely.")
+					logger.warning("\nEconomyOptions.Pacifist_FleaMarket.Enable_Marked_Keys failed. Send bug report. Continue safely.")
 					log(error)
 				}
 
@@ -1173,7 +1754,7 @@ class Mod implements IPostDBLoadMod {
 						ragfairConfig.sell.reputation.loss *= 10
 					}
 				} catch (error) {
-					logger.warning("\nEconomyOptions.Disable_Selling_on_Flea failed because of another mod. Send bug report. Continue safely.")
+					logger.warning("\nEconomyOptions.Disable_Selling_on_Flea failed. Send bug report. Continue safely.")
 					log(error)
 				}
 
@@ -1182,7 +1763,7 @@ class Mod implements IPostDBLoadMod {
 					ragfairConfig.dynamic.priceRanges.default.min *= config.EconomyOptions.Flea_Prices_Increased.multiplier // 0.8 -> 1.04
 					ragfairConfig.dynamic.priceRanges.default.max *= config.EconomyOptions.Flea_Prices_Increased.multiplier // 1.2 -> 1.56
 				} catch (error) {
-					logger.warning("\nSetting ragfairConfig.dynamic.price.min/max failed because of another mod. Send bug report. Continue safely.")
+					logger.warning("\nSetting ragfairConfig.dynamic.price.min/max failed. Send bug report. Continue safely.")
 					log(error)
 				}
 
@@ -1192,7 +1773,7 @@ class Mod implements IPostDBLoadMod {
 						Object.values(ragfairConfig.dynamic.condition).forEach((x) => (x.min = 1)) // ._.
 					}
 				} catch (error) {
-					logger.warning("\nEconomyOptions.Flea_Pristine_Items failed because of another mod (most likely SVM). Send bug report. Continue safely.")
+					logger.warning("\nEconomyOptions.Flea_Pristine_Items failed (most likely SVM). Send bug report. Continue safely.")
 					log(error)
 				}
 
@@ -1248,7 +1829,7 @@ class Mod implements IPostDBLoadMod {
 						ragfairConfig.dynamic.nonStackableCount.min = config.EconomyOptions.Barter_Economy.nonStackableCount.min
 						ragfairConfig.dynamic.nonStackableCount.max = config.EconomyOptions.Barter_Economy.nonStackableCount.max
 					} catch (error) {
-						logger.warning("\nEconomyOptions.Barter_Economy failed because of another mod. Send bug report. Continue safely.")
+						logger.warning("\nEconomyOptions.Barter_Economy failed. Send bug report. Continue safely.")
 						log(error)
 					}
 				}
@@ -1297,7 +1878,7 @@ class Mod implements IPostDBLoadMod {
 					ragman.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 2))
 					therapist.base.loyaltyLevels.forEach((x) => (x.buy_price_coef += 1))
 				} catch (error) {
-					logger.warning("\nTraderChanges.BetterSalesToTraders failed because of another mod. Send bug report. Continue safely.")
+					logger.warning("\nTraderChanges.BetterSalesToTraders failed. Send bug report. Continue safely.")
 					log(error)
 				}
 			}
@@ -1319,7 +1900,7 @@ class Mod implements IPostDBLoadMod {
 					ragman.base.items_buy.category.push("57864a3d24597754843f8721") // Ragman buys Jewelry and Valuables
 					skier.base.items_buy.category.push("5448ecbe4bdc2d60728b4568") // Skier buys info items
 				} catch (error) {
-					logger.warning("\nTraderChanges.AlternativeCategories failed because of another mod. Send bug report. Continue safely.")
+					logger.warning("\nTraderChanges.AlternativeCategories failed. Send bug report. Continue safely.")
 					log(error)
 				}
 			}
@@ -1355,7 +1936,7 @@ class Mod implements IPostDBLoadMod {
 						}
 					}
 				} catch (error) {
-					logger.warning("\nTraderChanges.SkierUsesEuros failed because of another mod. Send bug report. Continue safely.")
+					logger.warning("\nTraderChanges.SkierUsesEuros failed. Send bug report. Continue safely.")
 					log(error)
 				}
 			}
@@ -1378,7 +1959,7 @@ class Mod implements IPostDBLoadMod {
 					mechanic.assort.barter_scheme["6507ff26644a656aee0f7b10"][0].forEach((x) => (x.count = 5)) // Weapon case (59fb023c86f7746d0d4b423c) (Bitcoins)
 					mechanic.assort.barter_scheme["6507ff27644a656aee0f7bf1"][0].forEach((x) => (x.count = 10)) // THICC Weapon case (Bitcoins)
 				} catch (error) {
-					logger.warning("\nTraderChanges.Reasonably_Priced_Cases failed because of another mod. Send bug report. Continue safely.")
+					logger.warning("\nTraderChanges.Reasonably_Priced_Cases failed. Send bug report. Continue safely.")
 					log(error)
 				}
 			}
@@ -1409,7 +1990,7 @@ class Mod implements IPostDBLoadMod {
 					traderConfig.fence.discountOptions.itemPriceMult = 0.82 // This Fence settings are weird. I still don't get how AKI calculates assorts, was getting very strange results in testing. But this should be close enough to best trader prices but not abusable.
 					ragfairConfig.traders["579dc571d53a0658a154fbec"] = true // test
 				} catch (error) {
-					logger.warning("\nTraderChanges.Pacifist_Fence failed because of another mod. Send bug report. Continue safely.")
+					logger.warning("\nTraderChanges.Pacifist_Fence failed. Send bug report. Continue safely.")
 					log(error)
 				}
 			}
@@ -2320,6 +2901,10 @@ class Mod implements IPostDBLoadMod {
 				getCraft("56dff2ced2720bb4668b4567").requirements.find((x) => x.templateId == "57347c5b245977448d35f6e1").count = 200
 				getCraft("56dff2ced2720bb4668b4567").requirements.find((x) => x.templateId == "57347c5b245977448d35f6e1").templateId = "56dff4ecd2720b5f5a8b4568"
 
+				// 7.62x39mm PP gzh buff
+				getCraft("64b7af434b75259c590fa893").count = 300
+				getCraft("64b7af434b75259c590fa893").requirements.find((x) => x.templateId == "5656d7c34bdc2d9d198b4587").count = 300
+
 				// "5d0379a886f77420407aa271", // OFZ 30x160mm shell
 				getCraft("5d0379a886f77420407aa271").requirements.forEach((x) => {
 					if (x.count) {
@@ -2343,362 +2928,7 @@ class Mod implements IPostDBLoadMod {
 
 				// */
 			} catch (error) {
-				logger.warning("\nCraftingRebalance failed because of another mod. Send bug report. Continue safely.")
-				log(error)
-			}
-		}
-
-		if (config.AdditionalCraftingRecipes.enabled == true) {
-			try {
-				// 63da4dbee8fa73e225000001
-				// 63da4dbee8fa73e225000002
-				// 63da4dbee8fa73e225000003
-				// 63da4dbee8fa73e225000004
-				// 63da4dbee8fa73e225000005
-				// 63da4dbee8fa73e225000006
-				// 63da4dbee8fa73e225000007
-				// 63da4dbee8fa73e225000008
-				// 63da4dbee8fa73e225000009
-				// 63da4dbee8fa73e22500000a
-
-				const Ophthalmoscope = {
-					_id: "63da4dbee8fa73e225000001",
-
-					areaType: 7,
-					requirements: [
-						{ areaType: 7, requiredLevel: 3, type: "Area" },
-						{
-							templateId: "5e2aedd986f7746d404f3aa4",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-						{
-							templateId: "619cc01e0a7c3a1a2731940c",
-							count: 2,
-							isFunctional: false,
-							type: "Item",
-						},
-						{
-							templateId: "57d17c5e2459775a5c57d17d",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-						{
-							templateId: "5b4391a586f7745321235ab2",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-						{
-							templateId: "57347c1124597737fb1379e3",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-					],
-					productionTime: 105,
-					boosters: null,
-					endProduct: "5af0534a86f7743b6f354284",
-					continuous: false,
-					count: 1,
-					productionLimitCount: 0,
-				}
-				const Zagustin = {
-					_id: "63da4dbee8fa73e225000002",
-
-					areaType: 7,
-					requirements: [
-						{ areaType: 7, requiredLevel: 3, type: "Area" },
-						{
-							templateId: "5c0e530286f7747fa1419862",
-							count: 2,
-							isFunctional: false,
-							type: "Item",
-						},
-						{
-							templateId: "5e8488fa988a8701445df1e4",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-						{
-							templateId: "5ed515f6915ec335206e4152",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-					],
-					productionTime: 105,
-					boosters: null,
-					endProduct: "5c0e533786f7747fa23f4d47",
-					continuous: false,
-					count: 3,
-					productionLimitCount: 0,
-				}
-				const Obdolbos = {
-					// Did you always want to run your own meth lab in Tarkov? Now you can.
-					_id: "63da4dbee8fa73e225000003",
-
-					areaType: 7,
-					requirements: [
-						{ areaType: 7, requiredLevel: 3, type: "Area" },
-						{
-							templateId: "5c0e531286f7747fa54205c2",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-						{
-							templateId: "5b43575a86f77424f443fe62",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-						{
-							templateId: "5e2af00086f7746d3f3c33f7",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-						{
-							templateId: "62a09f32621468534a797acb",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-						{
-							templateId: "5d40407c86f774318526545a",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-						{
-							templateId: "5d403f9186f7743cac3f229b",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-						{
-							templateId: "5d1b376e86f774252519444e",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-						{
-							templateId: "5d1b2f3f86f774252167a52c",
-							type: "Tool",
-						},
-					],
-					productionTime: 564,
-					boosters: null,
-					endProduct: "5ed5166ad380ab312177c100",
-					continuous: false,
-					count: 8,
-					productionLimitCount: 0,
-				}
-				const CALOK = {
-					_id: "63da4dbee8fa73e225000004",
-
-					areaType: 7,
-					requirements: [
-						{ areaType: 7, requiredLevel: 2, type: "Area" },
-						{
-							templateId: "59e35abd86f7741778269d82", // Pack of sodium bicarbonate
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-						{
-							templateId: "5755383e24597772cb798966", // Vaseline balm
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-					],
-					productionTime: 48,
-					boosters: null,
-					endProduct: "5e8488fa988a8701445df1e4",
-					continuous: false,
-					count: 2,
-					productionLimitCount: 0,
-					// Granular nature? Check.
-					// Stops blood with magical properties of pain-relieving Tarkov Vaseline? Check.
-					// Fun and economically balanced recipe that includes underused items? Triple check.
-				}
-				const Adrenaline = {
-					_id: "63da4dbee8fa73e225000005",
-
-					areaType: 7,
-					requirements: [
-						{ areaType: 7, requiredLevel: 2, type: "Area" },
-						{
-							templateId: "5751496424597720a27126da",
-							count: 3,
-							isFunctional: false,
-							type: "Item",
-						},
-						{
-							templateId: "5755356824597772cb798962",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-					],
-					productionTime: 23,
-					boosters: null,
-					endProduct: "5c10c8fd86f7743d7d706df3",
-					continuous: false,
-					count: 1,
-					productionLimitCount: 0,
-				}
-				const ThreebTG = {
-					_id: "63da4dbee8fa73e225000006",
-
-					areaType: 7,
-					requirements: [
-						{ areaType: 7, requiredLevel: 3, type: "Area" },
-						{
-							templateId: "5c10c8fd86f7743d7d706df3",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-						{
-							templateId: "59e361e886f774176c10a2a5",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-						{
-							templateId: "57505f6224597709a92585a9",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-					],
-					productionTime: 31,
-					boosters: null,
-					endProduct: "5ed515c8d380ab312177c0fa",
-					continuous: false,
-					count: 2,
-					productionLimitCount: 0,
-				}
-				const AHF1 = {
-					_id: "63da4dbee8fa73e225000007",
-
-					areaType: 7,
-					requirements: [
-						{ areaType: 7, requiredLevel: 2, type: "Area" },
-						{
-							templateId: "590c695186f7741e566b64a2",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-						{
-							templateId: "544fb3f34bdc2d03748b456a",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-					],
-					productionTime: 47,
-					boosters: null,
-					endProduct: "5ed515f6915ec335206e4152",
-					continuous: false,
-					count: 1,
-					productionLimitCount: 0,
-				}
-				const OLOLO = {
-					_id: "63da4dbee8fa73e225000008",
-
-					areaType: 8,
-					requirements: [
-						{ areaType: 8, requiredLevel: 3, type: "Area" },
-						{
-							templateId: "57513f9324597720a7128161",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-						{
-							templateId: "57513fcc24597720a31c09a6",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-						{
-							templateId: "57513f07245977207e26a311",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-						{
-							templateId: "575062b524597720a31c09a1",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-						{
-							templateId: "544fb62a4bdc2dfb738b4568",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-						{
-							templateId: "544fb37f4bdc2dee738b4567",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-						{
-							templateId: "5d1b385e86f774252167b98a",
-							type: "Tool",
-						},
-						{
-							templateId: "590de71386f774347051a052",
-							type: "Tool",
-						},
-					],
-					productionTime: 71,
-					boosters: null,
-					endProduct: "62a0a043cf4a99369e2624a5",
-					continuous: false,
-					count: 3,
-					productionLimitCount: 0,
-				}
-				const L1 = {
-					_id: "63da4dbee8fa73e225000009",
-
-					areaType: 7,
-					requirements: [
-						{ areaType: 7, requiredLevel: 3, type: "Area" },
-						{
-							templateId: "5c10c8fd86f7743d7d706df3",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-						{
-							templateId: "5c0e531d86f7747fa23f4d42",
-							count: 1,
-							isFunctional: false,
-							type: "Item",
-						},
-					],
-					productionTime: 71,
-					boosters: null,
-					endProduct: "5ed515e03a40a50460332579",
-					continuous: false,
-					count: 1,
-					productionLimitCount: 0,
-				}
-
-				tables.hideout.production.push(ThreebTG, Adrenaline, L1, AHF1, CALOK, Ophthalmoscope, Zagustin, Obdolbos, OLOLO)
-			} catch (error) {
-				logger.warning("\nAdditionalCraftingRecipes failed because of another mod. Send bug report. Continue safely.")
+				logger.warning("\nCraftingRebalance failed. Send bug report. Continue safely.")
 				log(error)
 			}
 		}

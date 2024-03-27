@@ -80,7 +80,9 @@
 		},
 		"Price_Rebalance": {
 			// CORE feature of this mod. Completly removes SPT-AKI flea prices snapshot from LIVE, and matches them to internal handbook/traders prices. Everything else is balanced around this. NOT recommended to disable. Obviously not compatible with mods like Lua's Flea Market Price Updater.
-			"enabled": true
+			"enabled": true,
+			// Fix for importantt items like intel folder and military flash drive
+			"Item_Fixes": true
 		},
 		"Pacifist_FleaMarket": {
 			// CORE feature of this mod. Only meds, barter items, food and info items can be bought on flea market. Uses hardcoded fleaWhitelist array as filter. NOT recommended to disable.
@@ -247,7 +249,11 @@
 		"Bigger_Ammo_Stacks": {
 			// Bigger Ammo Stacks x10
 			"enabled": true
-		}
+		},
+		"Quest_Changes": {
+			// Better start for quests (Crisis)
+			"enabled": true
+		}		
 	},
 	"InsuranceChanges": {
 		// Redo insurance. Make the two traders serve different purposes. Prapor in an instant return with 50% chance, costs 10% of item value, eg usefull for fast return of cheap quest loadouts or plain gambling. Therapist has 2 hour return with 80% chance (SPT-AKI default is 90%), costs 20% (SPT-AKI - 25%). Also buff insurance storage time to a whole month.
