@@ -137,8 +137,7 @@ class Mod implements IPostDBLoadMod {
 					}
 
 					// Beta container from PK "removal"
-
-					peacekeeper.assort.barter_scheme["6507ff2a644a656aee0f8073"][0].forEach((x) => (x.count = 10))
+					peacekeeper.assort.barter_scheme["65cb82377e8e8aec5b087ef4"][0].forEach((x) => (x.count = 5))
 
 					// Proper removal below:
 					// peacekeeper.assort.items = peacekeeper.assort.items.filter((x) => x._id != "6507ff2a644a656aee0f8073")
@@ -321,22 +320,19 @@ class Mod implements IPostDBLoadMod {
 					if (config.SecureContainersOptions.Progressive_Containers.Collector_Quest_Redone.enabled == true) {
 						// Add the surprise
 						tables.templates.quests["5c51aac186f77432ea65c552"].conditions.AvailableForFinish.push({
-							_parent: "HandoverItem",
-							_props: {
-								dogtagLevel: 0,
-								id: "639135534b15ca31f76bc319",
-								index: 69, // nice
-								maxDurability: 100,
-								minDurability: 0,
-								parentId: "",
-								isEncoded: false,
-								onlyFoundInRaid: false,
-								dynamicLocale: false,
-								target: ["5857a8bc2459772bad15db29"],
-								value: 2,
-								visibilityConditions: [],
-							},
+							conditionType: "HandoverItem",
+							dogtagLevel: 0,
+							id: "639135534b15ca31f76bc319",
+							index: 69, // nice
+							maxDurability: 100,
+							minDurability: 0,
+							parentId: "",
+							isEncoded: false,
+							onlyFoundInRaid: false,
 							dynamicLocale: false,
+							target: ["5857a8bc2459772bad15db29"],
+							value: 2,
+							visibilityConditions: [],
 						})
 
 						tables.locales.global["ru"]["639135534b15ca31f76bc319"] = "Передать носитель" // Тут нужен только фикс для русского, для всех остальных языков звучит как "Hand over the storage device"
@@ -344,23 +340,20 @@ class Mod implements IPostDBLoadMod {
 						// Remove level req from finish
 						tables.templates.quests["5c51aac186f77432ea65c552"].conditions.AvailableForFinish = tables.templates.quests[
 							"5c51aac186f77432ea65c552"
-						].conditions.AvailableForFinish.filter((x) => x._parent != "Level")
+						].conditions.AvailableForFinish.filter((x) => x.conditionType != "Level")
 
 						// Start condition
 						tables.templates.quests["5c51aac186f77432ea65c552"].conditions.AvailableForStart = [
 							{
-								_parent: "Level",
-								_props: {
-									id: "51d33b2d4fad9e61441772c0",
-									index: 1,
-									parentId: "",
-									isEncoded: false,
-									dynamicLocale: false,
-									value: 10,
-									compareMethod: ">=",
-									visibilityConditions: [],
-								},
+								compareMethod: ">=",
+								conditionType: "Level",
 								dynamicLocale: false,
+								globalQuestCounterId: "",
+								id: "51d33b2d4fad9e61441772c0",
+								index: 1,
+								parentId: "",
+								value: 10,
+								visibilityConditions: [],
 							},
 						]
 					}
@@ -1455,7 +1448,7 @@ class Mod implements IPostDBLoadMod {
 		if (config.OtherTweaks.enabled) {
 			if (config.OtherTweaks.Quest_Changes.enabled) {
 				try {
-					tables.templates.quests["60e71c48c1bfa3050473b8e5"].conditions.AvailableForStart[1]._props.value = 30
+					tables.templates.quests["60e71c48c1bfa3050473b8e5"].conditions.AvailableForStart[1].value = 30
 				} catch (error) {
 					logger.warning("\nOtherTweaks.Quest_Changes failed. Send bug report. Continue safely.")
 					log(error)
@@ -1623,16 +1616,16 @@ class Mod implements IPostDBLoadMod {
 				tables.bots.types.bossbully.chances.equipment.Holster = 100
 				tables.bots.types.bossbully.inventory.equipment.Holster = { "5b3b713c5acfc4330140bd8d": 1 }
 			}
-			
-			if (config.OtherTweaks.Bosses_Have_Labs_Keycard.enabled) {
-				tables.bots.types.bossboar.inventory.items.SpecialLoot.push("5c94bbff86f7747ee735c08f")
-				tables.bots.types.bossbully.inventory.items.SpecialLoot.push("5c94bbff86f7747ee735c08f")
-				tables.bots.types.bosskilla.inventory.items.SpecialLoot.push("5c94bbff86f7747ee735c08f")
-				tables.bots.types.bossknight.inventory.items.SpecialLoot.push("5c94bbff86f7747ee735c08f")
-				tables.bots.types.bosssanitar.inventory.items.SpecialLoot.push("5c94bbff86f7747ee735c08f")
-				tables.bots.types.bosstagilla.inventory.items.SpecialLoot.push("5c94bbff86f7747ee735c08f")
-				tables.bots.types.bosszryachiy.inventory.items.SpecialLoot.push("5c94bbff86f7747ee735c08f")
-			}
+
+			// if (config.OtherTweaks.Bosses_Have_Labs_Keycard.enabled) {
+			// 	tables.bots.types.bossboar.inventory.items.SpecialLoot["5c94bbff86f7747ee735c08f"] = 1
+			// 	tables.bots.types.bossbully.inventory.items.SpecialLoot["5c94bbff86f7747ee735c08f"] = 1
+			// 	tables.bots.types.bosskilla.inventory.items.SpecialLoot["5c94bbff86f7747ee735c08f"] = 1
+			// 	tables.bots.types.bossknight.inventory.items.SpecialLoot["5c94bbff86f7747ee735c08f"] = 1
+			// 	tables.bots.types.bosssanitar.inventory.items.SpecialLoot["5c94bbff86f7747ee735c08f"] = 1
+			// 	tables.bots.types.bosstagilla.inventory.items.SpecialLoot["5c94bbff86f7747ee735c08f"] = 1
+			// 	tables.bots.types.bosszryachiy.inventory.items.SpecialLoot["5c94bbff86f7747ee735c08f"] = 1
+			// }
 		}
 
 		if (config.InsuranceChanges.enabled) {
@@ -1686,6 +1679,8 @@ class Mod implements IPostDBLoadMod {
 									prices["5f5e45cc5021ce62144be7aa"] *= 2 // LolKek 3F Transfer tourist backpack
 									prices["5751487e245977207e26a315"] = 1500 // Emelya
 									prices["57347d3d245977448f7b7f61"] = 2000 // Croutons
+									// prices["5c12613b86f7743bbe2c3f76"] = 588000 // Intel
+									// prices["62a0a16d0b9d3c46de5b6e97"] = 224400 // Mil flash
 									tables.templates.handbook.Items.find((x) => x.Id == "5c12613b86f7743bbe2c3f76").Price = 588000
 									tables.templates.handbook.Items.find((x) => x.Id == "62a0a16d0b9d3c46de5b6e97").Price = 224400
 								}
@@ -1760,8 +1755,8 @@ class Mod implements IPostDBLoadMod {
 						// ragfairConfig.sell.time.min = 10
 						// ragfairConfig.sell.time.max = 30
 					} else {
-						ragfairConfig.sell.reputation.gain *= 10
-						ragfairConfig.sell.reputation.loss *= 10
+						// ragfairConfig.sell.reputation.gain *= 10
+						// ragfairConfig.sell.reputation.loss *= 10
 					}
 				} catch (error) {
 					logger.warning("\nEconomyOptions.Disable_Selling_on_Flea failed. Send bug report. Continue safely.")
@@ -1953,21 +1948,22 @@ class Mod implements IPostDBLoadMod {
 
 			if (config.TraderChanges.Reasonably_Priced_Cases.enabled == true) {
 				try {
-					therapist.assort.barter_scheme["6507ff33644a656aee0f8a51"][0].forEach((x) => (x.count = 5)) // THICC case (LEDX)
-					therapist.assort.barter_scheme["6507ff33644a656aee0f8a73"][0].forEach((x) => (x.count = 10)) // THICC case (Moonshine)
-					therapist.assort.barter_scheme["6507ff32644a656aee0f8a25"][0].forEach((x) => (x.count = 7256)) // Item case (Euro) 13839
-					therapist.assort.barter_scheme["6507ff33644a656aee0f8a55"][0].forEach((x) => (x.count = 8)) // Item case (OScope)
-					therapist.assort.barter_scheme["6507ff33644a656aee0f8a93"][0].forEach((x) => (x.count = 20)) // Item case (Dogtags)
-					therapist.assort.barter_scheme["6507ff33644a656aee0f8a85"][0].forEach((x) => (x.count = 15)) // Lucky Scav Junk box (Dogtags)
-					therapist.assort.barter_scheme["6507ff33644a656aee0f8a43"][0].forEach((x) => (x.count = 961138)) // Lucky Scav Junk box (Rubles) 1106138
-					therapist.assort.barter_scheme["6507ff33644a656aee0f8a53"][0].forEach((x) => (x.count = 290610)) // Medcase (Rubles)
-					therapist.assort.barter_scheme["6507ff33644a656aee0f8aa1"][0].forEach((x) => (x.count /= 10)) // LEDX (Dogtags) // Really BSG? 160 kills for a non-FIR item? REALLY?!
-					peacekeeper.assort.barter_scheme["6492e44bf4287b13040fca51"][0].forEach((x) => (x.count = Math.round(x.count / 5 + 1))) // THICC case (SMT+Bluefolder)
+					therapist.assort.barter_scheme["65cb82567e8e8aec5b088dc7"][0].forEach((x) => (x.count = 5)) // T H I C C item case (LEDX) 5c0a840b86f7742ffa4f2482
+					therapist.assort.barter_scheme["65cb82577e8e8aec5b088e06"][0].forEach((x) => (x.count = 10)) // T H I C C item case (Moonshine)5c0a840b86f7742ffa4f2482
+					therapist.assort.barter_scheme["65cb82567e8e8aec5b088d88"][0].forEach((x) => (x.count = 7256)) // Item case (Euro) 13839 59fb042886f7746c5005a7b2
+					therapist.assort.barter_scheme["65cb82567e8e8aec5b088db2"][0].forEach((x) => (x.count = 8)) // Item case (OScope) 59fb042886f7746c5005a7b2
+					therapist.assort.barter_scheme["65cb82577e8e8aec5b088e00"][0].forEach((x) => (x.count = 20)) // Item case (Dogtags) 59fb042886f7746c5005a7b2
+					therapist.assort.barter_scheme["65cb82577e8e8aec5b088e03"][0].forEach((x) => (x.count = 15)) // Lucky Scav Junk box (Dogtags) 5b7c710788a4506dec015957
+					therapist.assort.barter_scheme["65cb82567e8e8aec5b088dc1"][0].forEach((x) => (x.count = 961138)) // Lucky Scav Junk box (Rubles) 1106138 5b7c710788a4506dec015957
+					therapist.assort.barter_scheme["65cb82567e8e8aec5b088dca"][0].forEach((x) => (x.count = 290610)) // Medcase (Rubles) 5aafbcd986f7745e590fff23
+					therapist.assort.barter_scheme["65cb82577e8e8aec5b088e18"][0].forEach((x) => (x.count /= 10)) // LEDX (Dogtags) // Really BSG? 160 kills for a non-FIR item? REALLY?! 5c0530ee86f774697952d952
 
-					skier.assort.barter_scheme["6507ff21644a656aee0f7524"][0].forEach((x) => (x.count = 4)) // Weapon case (Moonshine)
+					peacekeeper.assort.barter_scheme["6492e44bf4287b13040fca51"][0].forEach((x) => (x.count = Math.round(x.count / 5 + 1))) // THICC case (SMT+Bluefolder) 5c0a840b86f7742ffa4f2482
 
-					mechanic.assort.barter_scheme["6507ff26644a656aee0f7b10"][0].forEach((x) => (x.count = 5)) // Weapon case (59fb023c86f7746d0d4b423c) (Bitcoins)
-					mechanic.assort.barter_scheme["6507ff27644a656aee0f7bf1"][0].forEach((x) => (x.count = 10)) // THICC Weapon case (Bitcoins)
+					skier.assort.barter_scheme["65cb81e7321bfcd99d00fbdd"][0].forEach((x) => (x.count = 4)) // Weapon case (Moonshine) 59fb023c86f7746d0d4b423c
+
+					mechanic.assort.barter_scheme["65cb82277e8e8aec5b08778c"][0].forEach((x) => (x.count = 5)) // Weapon case (Bitcoins) 59fb023c86f7746d0d4b423c
+					mechanic.assort.barter_scheme["65cb82277e8e8aec5b087734"][0].forEach((x) => (x.count = 10)) // THICC Weapon case (Bitcoins) 5b6d9ce188a4501afc1b2b25
 				} catch (error) {
 					logger.warning("\nTraderChanges.Reasonably_Priced_Cases failed. Send bug report. Continue safely.")
 					log(error)
@@ -1998,25 +1994,44 @@ class Mod implements IPostDBLoadMod {
 					let fenceBlacklist = []
 
 					// In addition to other blacklists, no medikits, medical items and drugs for Fence, because he sells them not in pristine condition.
+
 					fenceBlacklist.push(
 						...BSGblacklist,
 						...fleaBarterRequestBlacklist,
 						"5448f39d4bdc2d0a728b4568",
-						"5448f3ac4bdc2dce718b4569",
-						"5448f3a14bdc2d27728b4569"
+						// "5448f3ac4bdc2dce718b4569", // W T F, dupes mb?
+						"5448f3a14bdc2d27728b4569",
+						"544fb25a4bdc2dfb738b4567", // manual delistings
+						"60098af40accd37ef2175f27",
+						"5e8488fa988a8701445df1e4",
+						"544fb3364bdc2d34748b456a",
+						// "5af0454c86f7746bf20992e8",
+						"5751a25924597722c463c472",
+						"5e831507ea0a7c419c2f9bd9",
+						"5d02797c86f774203f38e30a"
 					)
 
 					// Instead, allow him to sell stims!
 					fenceBlacklist = fenceBlacklist.filter((x) => x != "5448f3a64bdc2d60728b456a")
 
+					// fenceBlacklist = fenceBlacklist.filter(onlyUnique)
+					// fenceBlacklist = fenceBlacklist.filter((x) => x == "5af0454c86f7746bf20992e8")
+					// log(fenceBlacklist)
 					// Fence sells only items that are not in the flea blacklist
 					traderConfig.fence.assortSize = config.TraderChanges.Pacifist_Fence.Number_Of_Fence_Offers
 					traderConfig.fence.blacklist = fenceBlacklist //itemid or baseid
-					traderConfig.fence.maxPresetsPercent = 0
+					traderConfig.fence.equipmentPresetMinMax.min = 0
+					traderConfig.fence.equipmentPresetMinMax.max = 0
+					traderConfig.fence.weaponPresetMinMax.min = 0
+					traderConfig.fence.weaponPresetMinMax.max = 0
 					traderConfig.fence.discountOptions.assortSize = config.TraderChanges.Pacifist_Fence.Number_Of_Fence_Offers * 2
 					traderConfig.fence.itemPriceMult = 1
 					traderConfig.fence.discountOptions.itemPriceMult = 0.82 // This Fence settings are weird. I still don't get how AKI calculates assorts, was getting very strange results in testing. But this should be close enough to best trader prices but not abusable.
-					ragfairConfig.traders["579dc571d53a0658a154fbec"] = true // test
+					traderConfig.fence.discountOptions.weaponPresetMinMax.min = 0
+					traderConfig.fence.discountOptions.weaponPresetMinMax.max = 0
+					traderConfig.fence.discountOptions.equipmentPresetMinMax.min = 0
+					traderConfig.fence.discountOptions.equipmentPresetMinMax.max = 0
+					// ragfairConfig.traders["579dc571d53a0658a154fbec"] = true // test
 				} catch (error) {
 					logger.warning("\nTraderChanges.Pacifist_Fence failed. Send bug report. Continue safely.")
 					log(error)
@@ -2053,7 +2068,7 @@ class Mod implements IPostDBLoadMod {
 				getCraft("5d1b385e86f774252167b98a").requirements.find((x) => x.templateId == "590c595c86f7747884343ad7").count = 2
 
 				// MPPV buff (KEKTAPE duct tape 2 -> 1)
-				getCraft("5df8a42886f77412640e2e75").requirements.find((x) => x.templateId == "5e2af29386f7746d4159f077").count = 1
+				// 380 // getCraft("5df8a42886f77412640e2e75").requirements.find((x) => x.templateId == "5e2af29386f7746d4159f077").count = 1
 
 				// ------
 				// Nutrition unit:
@@ -2302,8 +2317,8 @@ class Mod implements IPostDBLoadMod {
 
 				//// AMMO ////
 				// 9x19mm AP 6.3
-				getCraft("5c925fa22e221601da359b7b").requirements.find((x) => x.templateId == "5d6fc87386f77449db3db94e").count = 1
-				getCraft("5c925fa22e221601da359b7b").requirements.find((x) => x.templateId == "5d6fc87386f77449db3db94e").templateId = "5d6fc78386f77449d825f9dc"
+				// 380 // getCraft("5c925fa22e221601da359b7b").requirements.find((x) => x.templateId == "5d6fc87386f77449db3db94e").count = 1
+				// 380 // getCraft("5c925fa22e221601da359b7b").requirements.find((x) => x.templateId == "5d6fc87386f77449db3db94e").templateId = "5d6fc78386f77449d825f9dc"
 
 				// "5efb0da7a29a85116f6ea05f", // 9x19mm PBP gzh
 				getCraft("5efb0da7a29a85116f6ea05f").requirements = [
@@ -2410,6 +2425,7 @@ class Mod implements IPostDBLoadMod {
 				]
 
 				// 7.62x51mm M80 buff
+				/* // 380 
 				getCraft("58dd3ad986f77403051cba8f").requirements = [
 					{
 						areaType: 10,
@@ -2439,6 +2455,7 @@ class Mod implements IPostDBLoadMod {
 						type: "Item",
 					},
 				]
+				*/
 
 				// 5.56x45mm MK 318 Mod 0 (SOST)
 				getCraft("60194943740c5d77f6705eea").requirements = [
@@ -2533,6 +2550,8 @@ class Mod implements IPostDBLoadMod {
 				]
 
 				// "5c0d5e4486f77478390952fe", // 5.45x39mm PPBS gs "Igolnik"
+
+				/* // 380
 				getCraft("5c0d5e4486f77478390952fe").count = 120
 				getCraft("5c0d5e4486f77478390952fe").requirements = [
 					{
@@ -2619,7 +2638,7 @@ class Mod implements IPostDBLoadMod {
 						type: "Tool",
 					},
 				]
-
+*/
 				// 9x39mm SP-6 gs
 				// getCraft("57a0e5022459774d1673f889").requirements = [
 				// 	{
@@ -2677,6 +2696,7 @@ class Mod implements IPostDBLoadMod {
 				//					},
 				//				]
 
+				/*
 				// "5c0d668f86f7747ccb7f13b2", // 9x39mm SPP gs
 				getCraft("5c0d668f86f7747ccb7f13b2").requirements = [
 					{
@@ -2703,15 +2723,15 @@ class Mod implements IPostDBLoadMod {
 						type: "Tool",
 					},
 				]
-
+*/
 				// 7.62x54mm R SNB gzh nerf lol
-				getCraft("560d61e84bdc2da74d8b4571").requirements.find((x) => x.templateId == "5887431f2459777e1612938f").templateId = "5e023d34e8a400319a28ed44"
+				// getCraft("560d61e84bdc2da74d8b4571").requirements.find((x) => x.templateId == "5887431f2459777e1612938f").templateId = "5e023d34e8a400319a28ed44"
 				getCraft("560d61e84bdc2da74d8b4571").requirements.find((x) => x.type == "Area").requiredLevel = 3
 
 				// 9x21mm BT gzh buff
-				getCraft("5a26ac0ec4a28200741e1e18")
-					.requirements.filter((x) => x.templateId != "5a269f97c4a282000b151807" && x.areaType == undefined)
-					.forEach((x) => (x.count = 1))
+				// getCraft("5a26ac0ec4a28200741e1e18")
+				// 	.requirements.filter((x) => x.templateId != "5a269f97c4a282000b151807" && x.areaType == undefined)
+				// 	.forEach((x) => (x.count = 1))
 
 				// "57371aab2459775a77142f22", // 9x18mm PMM PstM gzh
 				getCraft("57371aab2459775a77142f22").requirements.push({
@@ -2723,27 +2743,27 @@ class Mod implements IPostDBLoadMod {
 				})
 
 				// "5d6e6806a4b936088465b17e", // 12/70 8.5mm Magnum buckshot
-				getCraft("5d6e6806a4b936088465b17e").requirements = [
-					{
-						areaType: 10,
-						requiredLevel: 1,
-						type: "Area",
-					},
-					{
-						templateId: "560d5e524bdc2d25448b4571",
-						count: 120,
-						isFunctional: false,
-						isEncoded: false,
-						type: "Item",
-					},
-					{
-						templateId: "590c5a7286f7747884343aea",
-						count: 1,
-						isFunctional: false,
-						isEncoded: false,
-						type: "Item",
-					},
-				]
+				// getCraft("5d6e6806a4b936088465b17e").requirements = [
+				// 	{
+				// 		areaType: 10,
+				// 		requiredLevel: 1,
+				// 		type: "Area",
+				// 	},
+				// 	{
+				// 		templateId: "560d5e524bdc2d25448b4571",
+				// 		count: 120,
+				// 		isFunctional: false,
+				// 		isEncoded: false,
+				// 		type: "Item",
+				// 	},
+				// 	{
+				// 		templateId: "590c5a7286f7747884343aea",
+				// 		count: 1,
+				// 		isFunctional: false,
+				// 		isEncoded: false,
+				// 		type: "Item",
+				// 	},
+				// ]
 				// "5d6e6911a4b9361bd5780d52", // 12/70 flechette
 				// getCraft("5d6e6911a4b9361bd5780d52").requirements = [
 				// 	{
@@ -2783,13 +2803,13 @@ class Mod implements IPostDBLoadMod {
 				// ]
 
 				//"5c0d591486f7744c505b416f", // 12/70 RIP
-				getCraft("5c0d591486f7744c505b416f").requirements.push({
-					templateId: "5d6e68dea4b9361bcc29e659",
-					count: 60,
-					isFunctional: false,
-					isEncoded: false,
-					type: "Item",
-				})
+				// getCraft("5c0d591486f7744c505b416f").requirements.push({
+				// 	templateId: "5d6e68dea4b9361bcc29e659",
+				// 	count: 60,
+				// 	isFunctional: false,
+				// 	isEncoded: false,
+				// 	type: "Item",
+				// })
 
 				// "5d6e68a8a4b9360b6c0d54e2", // 12/70 AP-20 armor-piercing slug
 				getCraft("5d6e68a8a4b9360b6c0d54e2").requirements = [
@@ -2823,7 +2843,7 @@ class Mod implements IPostDBLoadMod {
 				]
 
 				// 5.56x45mm M856A1 buff
-				getCraft("59e6906286f7746c9f75e847").requirements.find((x) => x.templateId == "5d6fc87386f77449db3db94e").count = 1
+				// getCraft("59e6906286f7746c9f75e847").requirements.find((x) => x.templateId == "5d6fc87386f77449db3db94e").count = 1
 
 				// "5ba26835d4351e0035628ff5", // 4.6x30mm AP SX
 				getCraft("5ba26835d4351e0035628ff5").requirements.forEach((x) => {
@@ -2925,13 +2945,13 @@ class Mod implements IPostDBLoadMod {
 				getCraft("5a6086ea4f39f99cd479502f").count = 80
 
 				// 5.45x39mm PP gs nerf
-				getCraft("56dff2ced2720bb4668b4567").count = 200
-				getCraft("56dff2ced2720bb4668b4567").requirements.find((x) => x.templateId == "57347c5b245977448d35f6e1").count = 200
-				getCraft("56dff2ced2720bb4668b4567").requirements.find((x) => x.templateId == "57347c5b245977448d35f6e1").templateId = "56dff4ecd2720b5f5a8b4568"
+				// getCraft("56dff2ced2720bb4668b4567").count = 200
+				// getCraft("56dff2ced2720bb4668b4567").requirements.find((x) => x.templateId == "57347c5b245977448d35f6e1").count = 200
+				// getCraft("56dff2ced2720bb4668b4567").requirements.find((x) => x.templateId == "57347c5b245977448d35f6e1").templateId = "56dff4ecd2720b5f5a8b4568"
 
 				// 7.62x39mm PP gzh buff
-				getCraft("64b7af434b75259c590fa893").count = 300
-				getCraft("64b7af434b75259c590fa893").requirements.find((x) => x.templateId == "5656d7c34bdc2d9d198b4587").count = 300
+				// getCraft("64b7af434b75259c590fa893").count = 300
+				// getCraft("64b7af434b75259c590fa893").requirements.find((x) => x.templateId == "5656d7c34bdc2d9d198b4587").count = 300
 
 				// "5d0379a886f77420407aa271", // OFZ 30x160mm shell
 				getCraft("5d0379a886f77420407aa271").requirements.forEach((x) => {

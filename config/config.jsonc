@@ -48,7 +48,7 @@
 		"Faster_Crafting_Time": {
 			// Make all recipes except bitcoin, moonshine and purified water much faster.
 			"enabled": true,
-			"Base_Crafting_Time_Multiplier": 1000,
+			"Base_Crafting_Time_Multiplier": 100,
 			"Hideout_Skill_Exp_Fix": {
 				// Experimental experience per crafting time fix for Hideout Management skill, needs further investigation into SPT-AKI code for proper adjustments. Works fine otherwise.
 				"enabled": true,
@@ -104,7 +104,7 @@
 		},
 		"Barter_Economy": {
 			// CORE feature of this mod. Only allows to buy items on flea using other random FiR or crafted items. Uses hardcoded fleaBarterBlacklist array as filter for allowed items (meds, barter items, food and info items are enabled, exceptions are stimulants and fuel). NOT recommended to disable.
-			"enabled": true,
+			"enabled": false,
 			"Cash_Offers_Percentage": {
 				// Allow small, random percentage of listings to be buyable for cash. 0 is true barter-only ecomnomy (except the cheapest items like AA battery, but this is a SPT-AKI limitation), I'd say this is a preferred way to play with this mod, but it might be a little too hard sometimes. 5% seems like a fine number that makes life just a little bit easier to avoid item deadlocks. Recommendation: 0 to 15.
 				"value": 8
@@ -258,10 +258,6 @@
 		"Quest_Changes": {
 			// Better start for quests (Crisis)
 			"enabled": true
-		},
-		"Bosses_Have_Labs_Keycard": {
-			// ALL Bosses always have Labs Keycard
-			"enabled": false
 		}
 	},
 	"InsuranceChanges": {
