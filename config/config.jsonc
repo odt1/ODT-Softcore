@@ -48,7 +48,7 @@
 		"Faster_Crafting_Time": {
 			// Make all recipes except bitcoin, moonshine and purified water much faster.
 			"enabled": true,
-			"Base_Crafting_Time_Multiplier": 100,
+			"Base_Crafting_Time_Multiplier": 1000,
 			"Hideout_Skill_Exp_Fix": {
 				// Experimental experience per crafting time fix for Hideout Management skill, needs further investigation into SPT-AKI code for proper adjustments. Works fine otherwise.
 				"enabled": true,
@@ -176,6 +176,11 @@
 		"Skier_Uses_Euros": {
 			// EXPERIMENTAL option, makes Skier use Euros for all trades, and quest rewards, mostly just for fun and diversity. Adjusts assorts and loyalty levels accordingly. Turned off by default, because needs adjusting existing profiles salesSum (you can do it manually, find TradersInfo in your %profileID%.json, and in 58330581ace78e27b8b10cee key divide salesSum by 115 without leaving the remainder).
 			"enabled": false
+		},
+		"Bigger_Limits": {
+			// Bigger limits for buying from traders
+			"enabled": true,
+			"Limit_Multiplier": 2
 		}
 	},
 	"CraftingRebalance": {
@@ -253,7 +258,11 @@
 		"Quest_Changes": {
 			// Better start for quests (Crisis)
 			"enabled": true
-		}		
+		},
+		"Bosses_Have_Labs_Keycard": {
+			// ALL Bosses always have Labs Keycard
+			"enabled": false
+		}
 	},
 	"InsuranceChanges": {
 		// Redo insurance. Make the two traders serve different purposes. Prapor in an instant return with 50% chance, costs 10% of item value, eg usefull for fast return of cheap quest loadouts or plain gambling. Therapist has 2 hour return with 80% chance (SPT-AKI default is 90%), costs 20% (SPT-AKI - 25%). Also buff insurance storage time to a whole month.

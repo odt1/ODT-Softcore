@@ -1470,7 +1470,7 @@ class Mod implements IPostDBLoadMod {
 					Object.values(globals.SkillsSettings.Immunity).forEach((x) => x * 10)
 					Object.values(globals.SkillsSettings.StressResistance).forEach((x) => x * 10)
 					Object.values(globals.SkillsSettings.MagDrills).forEach((x) => x * 10)
-					globals.SkillsSettings.WeaponTreatment.SkillPointsPerRepair *= 10
+					globals.SkillsSettings.WeaponTreatment.SkillPointsPerRepair *= 100
 				} catch (error) {
 					logger.warning("\nOtherTweaks.Skill_Exp_Buffs failed. Send bug report. Continue safely.")
 					log(error)
@@ -1622,6 +1622,16 @@ class Mod implements IPostDBLoadMod {
 				// Reshala always has his Golden TT
 				tables.bots.types.bossbully.chances.equipment.Holster = 100
 				tables.bots.types.bossbully.inventory.equipment.Holster = { "5b3b713c5acfc4330140bd8d": 1 }
+			}
+			
+			if (config.OtherTweaks.Bosses_Have_Labs_Keycard.enabled) {
+				tables.bots.types.bossboar.inventory.items.SpecialLoot.push("5c94bbff86f7747ee735c08f")
+				tables.bots.types.bossbully.inventory.items.SpecialLoot.push("5c94bbff86f7747ee735c08f")
+				tables.bots.types.bosskilla.inventory.items.SpecialLoot.push("5c94bbff86f7747ee735c08f")
+				tables.bots.types.bossknight.inventory.items.SpecialLoot.push("5c94bbff86f7747ee735c08f")
+				tables.bots.types.bosssanitar.inventory.items.SpecialLoot.push("5c94bbff86f7747ee735c08f")
+				tables.bots.types.bosstagilla.inventory.items.SpecialLoot.push("5c94bbff86f7747ee735c08f")
+				tables.bots.types.bosszryachiy.inventory.items.SpecialLoot.push("5c94bbff86f7747ee735c08f")
 			}
 		}
 
@@ -1960,6 +1970,24 @@ class Mod implements IPostDBLoadMod {
 					mechanic.assort.barter_scheme["6507ff27644a656aee0f7bf1"][0].forEach((x) => (x.count = 10)) // THICC Weapon case (Bitcoins)
 				} catch (error) {
 					logger.warning("\nTraderChanges.Reasonably_Priced_Cases failed. Send bug report. Continue safely.")
+					log(error)
+				}
+			}
+
+			if (config.TraderChanges.Bigger_Limits.enabled == true) {
+				try {
+					// mark
+
+					for (const trader in traderlist) {
+						for (const item in traderlist[trader].assort.items) {
+							// log(traderlist[trader].assort.items[item])
+							if (traderlist[trader].assort.items[item]?.upd?.BuyRestrictionMax) {
+								traderlist[trader].assort.items[item].upd.BuyRestrictionMax *= config.TraderChanges.Bigger_Limits.Limit_Multiplier
+							}
+						}
+					}
+				} catch (error) {
+					logger.warning("\nTraderChanges.Bigger_Limits failed. Send bug report. Continue safely.")
 					log(error)
 				}
 			}

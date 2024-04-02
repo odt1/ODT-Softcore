@@ -88,7 +88,8 @@ const itemWhitelist = [
 	"54491bb74bdc2d09088b4567", // ER FULCRUM BAYONET
 	"5aa2b9aee5b5b00015693121", // RayBench Hipster Reserve sunglasses
 	"5ab8f85d86f7745cd93a1cf5", // Арафатка (Зеленая)",
-	"5ab8f4ff86f77431c60d91ba", // Балаклава Призрак
+	"5ab8f4ff86f77431c60d91ba", // Балаклава Призрак,
+	"55d614004bdc2d86028b4568", // SureFire SOCOM556-MONSTER 5.56x45 sound suppressor
 ];
 
 const markedKeys = [
