@@ -1664,47 +1664,46 @@ class Mod implements IPostDBLoadMod {
 					log(error)
 				}
 
-				try {
-					for (const handbookItem in tables.templates.handbook.Items) {
-						const itemInHandbook = tables.templates.handbook.Items[handbookItem]
-						const itemID = itemInHandbook.Id
-
-						if (prices[itemID] != undefined && config.EconomyOptions.Price_Rebalance.enabled) {
-							try {
-								if (config.EconomyOptions.Price_Rebalance.Item_Fixes) {
-									// Hardcode fix for important or unbalanced items. Too low prices can't convert to barters.
-									prices["5aa2b923e5b5b000137b7589"] *= 5 // Round frame sunglasses
-									prices["5656eb674bdc2d35148b457c"] *= 5 // 40mm VOG-25 grenade
-									prices["59e770b986f7742cbd762754"] *= 2 // Anti-fragmentation glasses
-									prices["5f5e45cc5021ce62144be7aa"] *= 2 // LolKek 3F Transfer tourist backpack
-									prices["5751487e245977207e26a315"] = 1500 // Emelya
-									prices["57347d3d245977448f7b7f61"] = 2000 // Croutons
-									// prices["5c12613b86f7743bbe2c3f76"] = 588000 // Intel
-									// prices["62a0a16d0b9d3c46de5b6e97"] = 224400 // Mil flash
-									tables.templates.handbook.Items.find((x) => x.Id == "5c12613b86f7743bbe2c3f76").Price = 588000
-									tables.templates.handbook.Items.find((x) => x.Id == "62a0a16d0b9d3c46de5b6e97").Price = 224400
-								}
-							} catch (error) {
-								logger.warning("\nEconomyOptions.Price_Rebalance.Item_Fixes failed. Send bug report. Continue safely.")
-								log(error)
-							}
-
-							// Change all Flea prices to handbook prices.
-							prices[itemID] = itemInHandbook.Price
-						}
-
-						if (
-							(!fleaListingsWhitelist.includes(itemInHandbook.ParentId) && config.EconomyOptions.Pacifist_FleaMarket.enabled) ||
-							items[itemID]._props.QuestItem
-						) {
-							// Ban everything on flea except whitelist handbook categories above.
-							ragfairConfig.dynamic.blacklist.custom.push(itemID) // Better semantics then CanSellOnRagfair
-							// items[itemID]._props.CanSellOnRagfair = false
-						}
+				if (config.EconomyOptions.Price_Rebalance.Item_Fixes) {
+					try {
+						// Hardcode fix for important or unbalanced items. Too low prices can't convert to barters.
+						tables.templates.handbook.Items.find((x) => x.Id == "5aa2b923e5b5b000137b7589").Price *= 5 // Round frame sunglasses
+						tables.templates.handbook.Items.find((x) => x.Id == "5656eb674bdc2d35148b457c").Price *= 5 // 40mm VOG-25 grenade
+						tables.templates.handbook.Items.find((x) => x.Id == "59e770b986f7742cbd762754").Price *= 2 // Anti-fragmentation glasses
+						tables.templates.handbook.Items.find((x) => x.Id == "5f5e45cc5021ce62144be7aa").Price *= 2 // LolKek 3F Transfer tourist backpack
+						tables.templates.handbook.Items.find((x) => x.Id == "5751487e245977207e26a315").Price = 1500 // Emelya
+						tables.templates.handbook.Items.find((x) => x.Id == "57347d3d245977448f7b7f61").Price = 2000 // Croutons
+						tables.templates.handbook.Items.find((x) => x.Id == "5c12613b86f7743bbe2c3f76").Price = 588000
+						tables.templates.handbook.Items.find((x) => x.Id == "62a0a16d0b9d3c46de5b6e97").Price = 224400
+					} catch (error) {
+						logger.warning("\nEconomyOptions.Price_Rebalance.Item_Fixes failed. Send bug report. Continue safely.")
+						log(error)
 					}
-				} catch (error) {
-					logger.warning("\nEconomyOptions.Price_Rebalance and Pacifist_FleaMarket failed. Send bug report. Continue safely.")
-					log(error)
+				}
+
+				// Change all Flea prices to handbook prices.
+
+				if (config.EconomyOptions.Price_Rebalance.enabled) {
+					try {
+						for (const handbookItem in tables.templates.handbook.Items) {
+							const itemInHandbook = tables.templates.handbook.Items[handbookItem]
+							const itemID = itemInHandbook.Id
+
+							prices[itemID] = itemInHandbook.Price
+
+							if (
+								(!fleaListingsWhitelist.includes(itemInHandbook.ParentId) && config.EconomyOptions.Pacifist_FleaMarket.enabled) ||
+								items[itemID]._props.QuestItem
+							) {
+								// Ban everything on flea except whitelist handbook categories above.
+								ragfairConfig.dynamic.blacklist.custom.push(itemID) // Better semantics then CanSellOnRagfair
+								// items[itemID]._props.CanSellOnRagfair = false
+							}
+						}
+					} catch (error) {
+						logger.warning("\nEconomyOptions.Price_Rebalance and Pacifist_FleaMarket failed. Send bug report. Continue safely.")
+						log(error)
+					}
 				}
 
 				try {
@@ -1991,28 +1990,20 @@ class Mod implements IPostDBLoadMod {
 			if (config.TraderChanges.Pacifist_Fence.enabled == true) {
 				try {
 					// Add BSGblacklist and mod custom blacklist to Fence blacklists
-					let fenceBlacklist = []
+					let fenceBlacklist = traderConfig.fence.blacklist
 
 					// In addition to other blacklists, no medikits, medical items and drugs for Fence, because he sells them not in pristine condition.
 
 					fenceBlacklist.push(
 						...BSGblacklist,
 						...fleaBarterRequestBlacklist,
-						"5448f39d4bdc2d0a728b4568",
+						// "5448f39d4bdc2d0a728b4568",
 						// "5448f3ac4bdc2dce718b4569", // W T F, dupes mb?
-						"5448f3a14bdc2d27728b4569",
-						"544fb25a4bdc2dfb738b4567", // manual delistings
-						"60098af40accd37ef2175f27",
-						"5e8488fa988a8701445df1e4",
-						"544fb3364bdc2d34748b456a",
-						// "5af0454c86f7746bf20992e8",
-						"5751a25924597722c463c472",
-						"5e831507ea0a7c419c2f9bd9",
-						"5d02797c86f774203f38e30a"
+						// "5448f3a14bdc2d27728b4569",
 					)
-
+					// log(fenceBlacklist)
 					// Instead, allow him to sell stims!
-					fenceBlacklist = fenceBlacklist.filter((x) => x != "5448f3a64bdc2d60728b456a")
+					// fenceBlacklist = fenceBlacklist.filter((x) => x != "5448f3a64bdc2d60728b456a")
 
 					// fenceBlacklist = fenceBlacklist.filter(onlyUnique)
 					// fenceBlacklist = fenceBlacklist.filter((x) => x == "5af0454c86f7746bf20992e8")
