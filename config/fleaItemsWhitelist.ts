@@ -54,6 +54,7 @@ const questKeys = [
 	"63a39f6e64283b5e9c56b289", // Iron gate key
 	"63a39fc0af870e651d58e6ae", // Chekannaya 15 apartment key
 	"5938504186f7740991483f30", // Dorm room 203 key
+	"5913877a86f774432f15d444", // Gas station storage room key
 ];
 
 const itemWhitelist = [

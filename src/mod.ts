@@ -96,13 +96,11 @@ class Mod implements IPostDBLoadMod {
 			for (const i of handbook.Categories) {
 				// log(i.Id)
 				// if (item._type == "Item") {
-					// handbookCategoryList.add(item._parent)
-					log(`"${i.Id}", // ${locales["en"][i.Id]}`)
+				// handbookCategoryList.add(item._parent)
+				log(`"${i.Id}", // ${locales["en"][i.Id]}`)
 				// }
 			}
 		}
-
-
 
 		if (config.SecureContainersOptions.enabled) {
 			if (config.SecureContainersOptions.Bigger_Containers.enabled) {
