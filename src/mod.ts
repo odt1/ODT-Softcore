@@ -80,6 +80,30 @@ class Mod implements IPostDBLoadMod {
 			}
 		}
 
+		if (false) {
+			let baseClassList = new Set()
+			for (const i in items) {
+				const item = items[i]
+				if (item._type == "Item") {
+					baseClassList.add(item._parent)
+					// log(`"${item._id}", // ${item._name}`)
+				}
+			}
+			baseClassList.forEach((i) => log(`"${i}", // ${getItemName(i)}`))
+		}
+
+		if (false) {
+			for (const i of handbook.Categories) {
+				// log(i.Id)
+				// if (item._type == "Item") {
+					// handbookCategoryList.add(item._parent)
+					log(`"${i.Id}", // ${locales["en"][i.Id]}`)
+				// }
+			}
+		}
+
+
+
 		if (config.SecureContainersOptions.enabled) {
 			if (config.SecureContainersOptions.Bigger_Containers.enabled) {
 				// Waist Pouch
@@ -1530,7 +1554,13 @@ class Mod implements IPostDBLoadMod {
 				try {
 					for (const itemID in items) {
 						const item = items[itemID]
-						if (item?._props?.ExaminedByDefault == true) {
+						// no armor plates and mags
+						if (
+							item?._props?.ExaminedByDefault == true &&
+							item?._parent != "65649eb40bf0ed77b8044453" &&
+							item?._parent != "5448bc234bdc2d3c308b4569" &&
+							item?._parent != "610720f290b75a49ff2e5e25"
+						) {
 							item._props.ExaminedByDefault = false
 						}
 						if (item?._props?.ExamineTime != undefined) {
@@ -1809,8 +1839,24 @@ class Mod implements IPostDBLoadMod {
 								// Only mod items in categories ALLOWED on flea request list
 								// Actually, I could have just hardcoded this lol. By default it's just Cristmass ornaments, dogtags and bitcoins.
 								// 2 is used to pass getFleaPriceForItem check and not trigger generateStaticPrices
-								prices[x] = 2
-								// log(`Item ${getItemName(x)}`)
+
+								// prices[x] *= 100
+
+								// log(`ItemItem ${getItemName(x)}, ${prices[x]}`)
+								// log(`prices["${x}"] = 2 // ${getItemName(x)}, ${prices[x]}`)
+								prices["614451b71e5874611e2c7ae5"] = 2 // Bottle of Tarkovskaya vodka, 25000
+								// prices["6389c92d52123d5dd17f8876"] = 2 // Advanced Electronic Materials textbook, 490000
+								// prices["6389c8fb46b54c634724d847"] = 2 // Silicon Optoelectronic Integrated Circuits textbook, 500000
+								// prices["64d0b40fbe2eed70e254e2d4"] = 2 // Sacred Amulet, 100000
+								prices["6389c7f115805221fb410466"] = 2680970 // Far-forward GPS Signal Amplifier Unit, 120000
+								prices["6389c85357baa773a825b356"] = 6648292 // Advanced current converter, 300000
+								prices["5df8a77486f77412672a1e3f"] = 2 // Christmas tree ornament (Violet), 20000
+								prices["59f32c3b86f77472a31742f0"] = 2 // Dogtag USEC, 600
+								prices["6389c7750ef44505c87f5996"] = 1566360 // Microcontroller board, 100000
+								prices["5df8a72c86f77412640e2e83"] = 2 // Christmas tree ornament (Silver), 10000
+								prices["5df8a6a186f77412640e2e80"] = 2 // Christmas tree ornament (Red), 7000
+								prices["59f32bb586f774757e1e8442"] = 2 // Dogtag BEAR, 600
+
 								if (items[x]._props.CanSellOnRagfair == true) {
 									logger.warning(
 										`\nItem ${getItemName(x)} can be bought on flea for free, don't use BSG blacklist removals with EconomyOptions.Barter_Economy.enabled!`
@@ -1996,7 +2042,7 @@ class Mod implements IPostDBLoadMod {
 
 					fenceBlacklist.push(
 						...BSGblacklist,
-						...fleaBarterRequestBlacklist,
+						...fleaBarterRequestBlacklist
 						// "5448f39d4bdc2d0a728b4568",
 						// "5448f3ac4bdc2dce718b4569", // W T F, dupes mb?
 						// "5448f3a14bdc2d27728b4569",
