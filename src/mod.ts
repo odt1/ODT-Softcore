@@ -32,6 +32,7 @@ const fleaListingsWhitelist = require("../config/fleaListingsWhitelist.ts")
 const fleaBarterRequestsWhitelist = require("../config/fleaBarterRequestsWhitelist.ts") // why I can't use import in config directory? Anyway, is there any alternative to JSON data storage? THIS is the only way to save commented data?!
 const fleaItemsWhiteList = require("../config/fleaItemsWhitelist.ts")
 import { IHideoutProduction } from "@spt/models/eft/hideout/IHideoutProduction"
+import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables"
 
 const debug = false // [Debug] Debug!
 
@@ -43,7 +44,7 @@ class Mod implements IPostDBLoadMod {
         const databaseServer = container.resolve<DatabaseServer>("DatabaseServer")
         const configServer = container.resolve<ConfigServer>("ConfigServer")
         // const ObjectId = container.resolve<ObjectId>("ObjectId") // [Debug]
-        const tables = databaseServer.getTables()
+        const tables : IDatabaseTables = databaseServer.getTables()
         const locales = tables.locales.global
         const items = tables.templates.items
         const handbook = tables.templates.handbook
@@ -161,7 +162,7 @@ class Mod implements IPostDBLoadMod {
                     }
 
                     // Beta container from PK "removal"
-                    peacekeeper.assort.barter_scheme["6639ee13387309934807a691"][0].forEach((x) => (x.count = 100))
+                    peacekeeper.assort.barter_scheme["666aa308e8e00edadd0d15f2"][0].forEach((x) => (x.count = 100))
 
                     // Proper removal below:
                     // peacekeeper.assort.items = peacekeeper.assort.items.filter((x) => x._id != "6507ff2a644a656aee0f8073")
@@ -2038,19 +2039,19 @@ class Mod implements IPostDBLoadMod {
 
             if (config.TraderChanges.Reasonably_Priced_Cases.enabled == true) {
                 try {
-                    therapist.assort.barter_scheme["6639ee2f387309934807b4d7"][0].forEach((x) => (x.count = 5)) // T H I C C item case (LEDX) 5c0a840b86f7742ffa4f2482
-                    therapist.assort.barter_scheme["6639ee2f387309934807b4f5"][0].forEach((x) => (x.count = 10)) // T H I C C item case (Moonshine)5c0a840b86f7742ffa4f2482
-                    therapist.assort.barter_scheme["6639ee2e387309934807b48f"][0].forEach((x) => (x.count = 7256)) // Item case (Euro) 13839 59fb042886f7746c5005a7b2
-                    therapist.assort.barter_scheme["6639ee2f387309934807b4c5"][0].forEach((x) => (x.count = 8)) // Item case (OScope) 59fb042886f7746c5005a7b2
-                    therapist.assort.barter_scheme["6639ee30387309934807b513"][0].forEach((x) => (x.count = 20)) // Item case (Dogtags) 59fb042886f7746c5005a7b2
-                    therapist.assort.barter_scheme["65cb82577e8e8aec5b088e03"][0].forEach((x) => (x.count = 15)) // Lucky Scav Junk box (Dogtags) 5b7c710788a4506dec015957
-                    therapist.assort.barter_scheme["6639ee2f387309934807b4c2"][0].forEach((x) => (x.count = 961138)) // Lucky Scav Junk box (Rubles) 1106138 5b7c710788a4506dec015957
-                    therapist.assort.barter_scheme["6639ee30387309934807b510"][0].forEach((x) => (x.count = 290610)) // Medcase (Rubles) 5aafbcd986f7745e590fff23
-                    therapist.assort.barter_scheme["6639ee30387309934807b522"][0].forEach((x) => (x.count /= 10)) // LEDX (Dogtags) // Really BSG? 160 kills for a non-FIR item? REALLY?! 5c0530ee86f774697952d952
+                    therapist.assort.barter_scheme["666aa327e8e00edadd0d2497"][0].forEach((x) => (x.count = 5)) // T H I C C item case (LEDX) 5c0a840b86f7742ffa4f2482
+                    therapist.assort.barter_scheme["666aa327e8e00edadd0d24d3"][0].forEach((x) => (x.count = 10)) // T H I C C item case (Moonshine)5c0a840b86f7742ffa4f2482
+                    therapist.assort.barter_scheme["666aa326e8e00edadd0d2473"][0].forEach((x) => (x.count = 7256)) // Item case (Euro) 13839 59fb042886f7746c5005a7b2
+                    therapist.assort.barter_scheme["666aa327e8e00edadd0d249d"][0].forEach((x) => (x.count = 8)) // Item case (OScope) 59fb042886f7746c5005a7b2
+                    therapist.assort.barter_scheme["666aa327e8e00edadd0d24b2"][0].forEach((x) => (x.count = 20)) // Item case (Dogtags) 59fb042886f7746c5005a7b2
+                    therapist.assort.barter_scheme["666aa327e8e00edadd0d24af"][0].forEach((x) => (x.count = 15)) // Lucky Scav Junk box (Dogtags) 5b7c710788a4506dec015957
+                    therapist.assort.barter_scheme["666aa327e8e00edadd0d2494"][0].forEach((x) => (x.count = 961138)) // Lucky Scav Junk box (Rubles) 1106138 5b7c710788a4506dec015957
+                    therapist.assort.barter_scheme["666aa327e8e00edadd0d249a"][0].forEach((x) => (x.count = 290610)) // Medcase (Rubles) 5aafbcd986f7745e590fff23
+                    therapist.assort.barter_scheme["666aa328e8e00edadd0d2518"][0].forEach((x) => (x.count /= 10)) // LEDX (Dogtags) // Really BSG? 160 kills for a non-FIR item? REALLY?! 5c0530ee86f774697952d952
 
-                    peacekeeper.assort.barter_scheme["6492e44bf4287b13040fca51"][0].forEach((x) => (x.count = Math.round(x.count / 5 + 1))) // THICC case (SMT+Bluefolder) 5c0a840b86f7742ffa4f2482
+                    peacekeeper.assort.barter_scheme["6492e44bf4287b13040fca51"][0].forEach((x) => (x.count = Math.round(x.count / 5 + 1))) // THICC case (SMT+Bluefolder+SecureFlashDrive) 5c0a840b86f7742ffa4f2482
 
-                    skier.assort.barter_scheme["6639eded3873099348079445"][0].forEach((x) => (x.count = 4)) // Weapon case (Moonshine) 59fb023c86f7746d0d4b423c
+                    skier.assort.barter_scheme["666aa2e0e8e00edadd0d03f6"][0].forEach((x) => (x.count = 4)) // Weapon case (Moonshine) 59fb023c86f7746d0d4b423c
 
                 } catch (error) {
                     logger.warning("\nTraderChanges.Reasonably_Priced_Cases failed. Send bug report. Continue safely.")
@@ -3152,4 +3153,4 @@ const log = (i: any) => {
     console.log(i)
 }
 
-module.exports = { mod: new Mod() }
+export const mod = new Mod();
