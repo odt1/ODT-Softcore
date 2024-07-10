@@ -28,9 +28,9 @@ import { VFS } from "@spt/utils/VFS"
 
 import { jsonc } from "jsonc"
 
-import fleaListingsWhitelist from "../config/fleaListingsWhitelist"
-import fleaBarterRequestsWhitelist from "../config/fleaBarterRequestsWhitelist" // why I can't use import in config directory? Anyway, is there any alternative to JSON data storage? THIS is the only way to save commented data?!
-import { questKeys, itemWhitelist, markedKeys } from "../config/fleaItemsWhitelist"
+const fleaListingsWhitelist = require("../config/fleaListingsWhitelist.ts")
+const fleaBarterRequestsWhitelist = require("../config/fleaBarterRequestsWhitelist.ts") // why I can't use import in config directory? Anyway, is there any alternative to JSON data storage? THIS is the only way to save commented data?!
+const fleaItemsWhiteList = require("../config/fleaItemsWhitelist.ts")
 import { IHideoutProduction } from "@spt/models/eft/hideout/IHideoutProduction"
 
 const debug = false // [Debug] Debug!
@@ -161,7 +161,7 @@ class Mod implements IPostDBLoadMod {
                     }
 
                     // Beta container from PK "removal"
-                    peacekeeper.assort.barter_scheme["65cb82377e8e8aec5b087ef4"][0].forEach((x) => (x.count = 5))
+                    peacekeeper.assort.barter_scheme["6639ee13387309934807a691"][0].forEach((x) => (x.count = 100))
 
                     // Proper removal below:
                     // peacekeeper.assort.items = peacekeeper.assort.items.filter((x) => x._id != "6507ff2a644a656aee0f8073")
@@ -1782,7 +1782,7 @@ class Mod implements IPostDBLoadMod {
                 try {
                     // Unban random spawn only quest keys from flea, make them 2x expensive
                     if (config.EconomyOptions.Pacifist_FleaMarket.Enable_QuestKeys.enabled) {
-                        for (const questKey of questKeys) {
+                        for (const questKey of fleaItemsWhiteList.questKeys) {
                             prices[questKey] *= config.EconomyOptions.Pacifist_FleaMarket.Enable_QuestKeys.PriceMultiplier
                             ragfairConfig.dynamic.blacklist.custom = ragfairConfig.dynamic.blacklist.custom.filter((x) => x != items[questKey]._id) // Better semantics then CanSellOnRagfair
                             // items[questKey]._props.CanSellOnRagfair = true
@@ -1796,7 +1796,7 @@ class Mod implements IPostDBLoadMod {
                 try {
                     if (config.EconomyOptions.Pacifist_FleaMarket.Enable_Whitelist.enabled) {
                         // Unban whitelist
-                        for (const item of itemWhitelist) {
+                        for (const item of fleaItemsWhiteList.itemWhitelist) {
                             ragfairConfig.dynamic.blacklist.custom = ragfairConfig.dynamic.blacklist.custom.filter((x) => x != items[item]._id) // Better semantics then CanSellOnRagfair
                             // items[item]._props.CanSellOnRagfair = true
                         }
@@ -1809,7 +1809,7 @@ class Mod implements IPostDBLoadMod {
                 try {
                     if (config.EconomyOptions.Pacifist_FleaMarket.Enable_Marked_Keys.enabled) {
                         // Unban whitelist
-                        for (const markedKey of markedKeys) {
+                        for (const markedKey of fleaItemsWhiteList.markedKeys) {
                             prices[markedKey] *= config.EconomyOptions.Pacifist_FleaMarket.Enable_Marked_Keys.PriceMultiplier
                             ragfairConfig.dynamic.blacklist.custom = ragfairConfig.dynamic.blacklist.custom.filter((x) => x != items[markedKey]._id) // Better semantics then CanSellOnRagfair
                             // items[item]._props.CanSellOnRagfair = true
@@ -2038,22 +2038,20 @@ class Mod implements IPostDBLoadMod {
 
             if (config.TraderChanges.Reasonably_Priced_Cases.enabled == true) {
                 try {
-                    therapist.assort.barter_scheme["65cb82567e8e8aec5b088dc7"][0].forEach((x) => (x.count = 5)) // T H I C C item case (LEDX) 5c0a840b86f7742ffa4f2482
-                    therapist.assort.barter_scheme["65cb82577e8e8aec5b088e06"][0].forEach((x) => (x.count = 10)) // T H I C C item case (Moonshine)5c0a840b86f7742ffa4f2482
-                    therapist.assort.barter_scheme["65cb82567e8e8aec5b088d88"][0].forEach((x) => (x.count = 7256)) // Item case (Euro) 13839 59fb042886f7746c5005a7b2
-                    therapist.assort.barter_scheme["65cb82567e8e8aec5b088db2"][0].forEach((x) => (x.count = 8)) // Item case (OScope) 59fb042886f7746c5005a7b2
-                    therapist.assort.barter_scheme["65cb82577e8e8aec5b088e00"][0].forEach((x) => (x.count = 20)) // Item case (Dogtags) 59fb042886f7746c5005a7b2
+                    therapist.assort.barter_scheme["6639ee2f387309934807b4d7"][0].forEach((x) => (x.count = 5)) // T H I C C item case (LEDX) 5c0a840b86f7742ffa4f2482
+                    therapist.assort.barter_scheme["6639ee2f387309934807b4f5"][0].forEach((x) => (x.count = 10)) // T H I C C item case (Moonshine)5c0a840b86f7742ffa4f2482
+                    therapist.assort.barter_scheme["6639ee2e387309934807b48f"][0].forEach((x) => (x.count = 7256)) // Item case (Euro) 13839 59fb042886f7746c5005a7b2
+                    therapist.assort.barter_scheme["6639ee2f387309934807b4c5"][0].forEach((x) => (x.count = 8)) // Item case (OScope) 59fb042886f7746c5005a7b2
+                    therapist.assort.barter_scheme["6639ee30387309934807b513"][0].forEach((x) => (x.count = 20)) // Item case (Dogtags) 59fb042886f7746c5005a7b2
                     therapist.assort.barter_scheme["65cb82577e8e8aec5b088e03"][0].forEach((x) => (x.count = 15)) // Lucky Scav Junk box (Dogtags) 5b7c710788a4506dec015957
-                    therapist.assort.barter_scheme["65cb82567e8e8aec5b088dc1"][0].forEach((x) => (x.count = 961138)) // Lucky Scav Junk box (Rubles) 1106138 5b7c710788a4506dec015957
-                    therapist.assort.barter_scheme["65cb82567e8e8aec5b088dca"][0].forEach((x) => (x.count = 290610)) // Medcase (Rubles) 5aafbcd986f7745e590fff23
-                    therapist.assort.barter_scheme["65cb82577e8e8aec5b088e18"][0].forEach((x) => (x.count /= 10)) // LEDX (Dogtags) // Really BSG? 160 kills for a non-FIR item? REALLY?! 5c0530ee86f774697952d952
+                    therapist.assort.barter_scheme["6639ee2f387309934807b4c2"][0].forEach((x) => (x.count = 961138)) // Lucky Scav Junk box (Rubles) 1106138 5b7c710788a4506dec015957
+                    therapist.assort.barter_scheme["6639ee30387309934807b510"][0].forEach((x) => (x.count = 290610)) // Medcase (Rubles) 5aafbcd986f7745e590fff23
+                    therapist.assort.barter_scheme["6639ee30387309934807b522"][0].forEach((x) => (x.count /= 10)) // LEDX (Dogtags) // Really BSG? 160 kills for a non-FIR item? REALLY?! 5c0530ee86f774697952d952
 
                     peacekeeper.assort.barter_scheme["6492e44bf4287b13040fca51"][0].forEach((x) => (x.count = Math.round(x.count / 5 + 1))) // THICC case (SMT+Bluefolder) 5c0a840b86f7742ffa4f2482
 
-                    skier.assort.barter_scheme["65cb81e7321bfcd99d00fbdd"][0].forEach((x) => (x.count = 4)) // Weapon case (Moonshine) 59fb023c86f7746d0d4b423c
+                    skier.assort.barter_scheme["6639eded3873099348079445"][0].forEach((x) => (x.count = 4)) // Weapon case (Moonshine) 59fb023c86f7746d0d4b423c
 
-                    mechanic.assort.barter_scheme["65cb82277e8e8aec5b08778c"][0].forEach((x) => (x.count = 5)) // Weapon case (Bitcoins) 59fb023c86f7746d0d4b423c
-                    mechanic.assort.barter_scheme["65cb82277e8e8aec5b087734"][0].forEach((x) => (x.count = 10)) // THICC Weapon case (Bitcoins) 5b6d9ce188a4501afc1b2b25
                 } catch (error) {
                     logger.warning("\nTraderChanges.Reasonably_Priced_Cases failed. Send bug report. Continue safely.")
                     log(error)

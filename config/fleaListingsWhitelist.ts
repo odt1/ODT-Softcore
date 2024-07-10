@@ -178,4 +178,4 @@ const fleaListingsWhitelist = [
 	// "5c518ec986f7743b68682ce2", // Mechanical keys
 ];
 
-export default fleaListingsWhitelist;
+module.exports = fleaListingsWhitelist;
