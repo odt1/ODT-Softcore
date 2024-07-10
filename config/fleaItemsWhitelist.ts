@@ -1,4 +1,4 @@
-const questKeys = [
+export const questKeys = [
 	// Whitelist for quest keys
 	"59387a4986f77401cc236e62", // Dorm room 114 key
 	// "5938603e86f77435642354f4", // Dorm room 206 key
@@ -57,7 +57,7 @@ const questKeys = [
 	"5913877a86f774432f15d444", // Gas station storage room key
 ];
 
-const itemWhitelist = [
+export const itemWhitelist = [
 	// Whitelist for items that can be bartered FOR on flea, outside of fleaWhitelist categories
 	"60363c0c92ec1c31037959f5", // GP-7 gas mask
 	"5fd4c5477a8d854fa0105061", // Security vest
@@ -93,7 +93,7 @@ const itemWhitelist = [
 	"55d614004bdc2d86028b4568", // SureFire SOCOM556-MONSTER 5.56x45 sound suppressor
 ];
 
-const markedKeys = [
+export const markedKeys = [
 	"62987dfc402c7f69bf010923", // Shared bedroom marked key
 	"5780cf7f2459777de4559322", // Dorm room 314 marked key
 	"5d80c60f86f77440373c4ece", // RB-BK marked key
@@ -102,5 +102,3 @@ const markedKeys = [
 	"63a3a93f8a56922e82001f5d", // Abandoned factory marked key
 	"64ccc25f95763a1ae376e447", // Mysterious room marked key"
 ];
-
-module.exports = { questKeys, itemWhitelist, markedKeys };
