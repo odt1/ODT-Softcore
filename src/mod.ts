@@ -11,7 +11,6 @@ import { IRagfairConfig } from "@spt/models/spt/config/IRagfairConfig"
 import { IHideoutConfig } from "@spt/models/spt/config/IHideoutConfig"
 import { IInsuranceConfig } from "@spt/models/spt/config/IInsuranceConfig"
 import { IScavCaseConfig } from "@spt/models/spt/config/IScavCaseConfig"
-import { IHideoutProduction } from "@spt/models/eft/hideout/IHideoutProduction"
 import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables"
 
 import { itemBaseClasses } from "./itemBaseClasses"
@@ -25,7 +24,7 @@ import { jsonc } from "jsonc"
 const fleaListingsWhitelist = require("../config/fleaListingsWhitelist.ts")
 const fleaBarterRequestsWhitelist = require("../config/fleaBarterRequestsWhitelist.ts") // why I can't use import in config directory? Anyway, is there any alternative to JSON data storage? THIS is the only way to save commented data?!
 const fleaItemsWhiteList = require("../config/fleaItemsWhitelist.ts")
-import { containerRecipes,additionalCraftingRecipes } from "./recipes"
+import { containerRecipes, additionalCraftingRecipes } from "./recipes"
 const debug = false // [Debug] Debug!
 
 class Mod implements IPostDBLoadMod {
@@ -36,7 +35,7 @@ class Mod implements IPostDBLoadMod {
         const databaseServer = container.resolve<DatabaseServer>("DatabaseServer")
         const configServer = container.resolve<ConfigServer>("ConfigServer")
         // const ObjectId = container.resolve<ObjectId>("ObjectId") // [Debug]
-        const tables : IDatabaseTables = databaseServer.getTables()
+        const tables: IDatabaseTables = databaseServer.getTables()
         const locales = tables.locales.global
         const items = tables.templates.items
         const handbook = tables.templates.handbook
@@ -200,7 +199,7 @@ class Mod implements IPostDBLoadMod {
                                 parentId: "",
                                 value: 10,
                                 visibilityConditions: [],
-                                target: [""]
+                                target: [""],
                             },
                         ]
                     }
@@ -1258,7 +1257,7 @@ class Mod implements IPostDBLoadMod {
                             for (const rewards of quest.rewards.Success) {
                                 if (rewards.items) {
                                     for (const item of rewards.items) {
-                                        if (item._tpl == "5449016a4bdc2d6f028b456f" && typeof rewards.value === 'number') {
+                                        if (item._tpl == "5449016a4bdc2d6f028b456f" && typeof rewards.value === "number") {
                                             rewards.value = Math.round(rewards.value / euroPrice)
                                             item._tpl = "569668774bdc2da2298b4568"
                                             item.upd.StackObjectsCount = Math.round(item.upd.StackObjectsCount / euroPrice)
@@ -1289,7 +1288,6 @@ class Mod implements IPostDBLoadMod {
                     peacekeeper.assort.barter_scheme["6492e44bf4287b13040fca51"][0].forEach((x) => (x.count = Math.round(x.count / 5 + 1))) // THICC case (SMT+Bluefolder+SecureFlashDrive) 5c0a840b86f7742ffa4f2482
 
                     skier.assort.barter_scheme["666aa2e0e8e00edadd0d03f6"][0].forEach((x) => (x.count = 4)) // Weapon case (Moonshine) 59fb023c86f7746d0d4b423c
-
                 } catch (error) {
                     logger.warning("\nTraderChanges.Reasonably_Priced_Cases failed. Send bug report. Continue safely.")
                     log(error)
@@ -2390,4 +2388,4 @@ const log = (i: any) => {
     console.log(i)
 }
 
-export const mod = new Mod();
+export const mod = new Mod()
