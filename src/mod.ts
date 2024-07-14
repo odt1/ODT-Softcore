@@ -946,8 +946,8 @@ class Mod implements IPostDBLoadMod {
                 prapor.base.insurance.min_return_hour = 0
                 prapor.base.insurance.max_return_hour = 0
                 prapor.base.insurance.max_storage_time = 720
-                therapist.base.insurance.min_return_hour = 0
-                therapist.base.insurance.max_return_hour = 0
+                therapist.base.insurance.min_return_hour = 2
+                therapist.base.insurance.max_return_hour = 2
                 therapist.base.insurance.max_storage_time = 720
                 insuranceConfig.returnChancePercent["54cb50c76803fa8b248b4571"] = 80
                 insuranceConfig.returnChancePercent["54cb57776803fa99248b456e"] = 60
@@ -1245,7 +1245,7 @@ class Mod implements IPostDBLoadMod {
                     skier.base.loyaltyLevels.forEach((x) => (x.minSalesSum = Math.round(x.minSalesSum / euroPrice)))
 
                     for (const barter in skier.assort.barter_scheme) {
-                        if (skier.assort.barter_scheme[barter][0][0]._tpl == "5449016a4bdc2d6f028b456f" && barter != "63d385b6b3eba6c95d0eee0c") {
+                        if (skier.assort.barter_scheme[barter][0][0]._tpl == "5449016a4bdc2d6f028b456f" && barter != "666aa2dce8e00edadd0d024a") {
                             skier.assort.barter_scheme[barter][0][0].count = roundWithPrecision(skier.assort.barter_scheme[barter][0][0].count / euroPrice, 2)
                             skier.assort.barter_scheme[barter][0][0]._tpl = "569668774bdc2da2298b4568"
                         }
