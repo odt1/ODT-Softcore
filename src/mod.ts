@@ -951,6 +951,14 @@ class Mod implements IPostDBLoadMod {
                 therapist.base.insurance.max_storage_time = 720
                 insuranceConfig.returnChancePercent["54cb50c76803fa8b248b4571"] = 80
                 insuranceConfig.returnChancePercent["54cb57776803fa99248b456e"] = 60
+                for (const loyaltyLevelID in prapor.base.loyaltyLevels) {
+                    prapor.base.loyaltyLevels[loyaltyLevelID].insurance_price_coef = .1
+                }
+
+                for (const loyaltyLevelID in therapist.base.loyaltyLevels) {
+                    therapist.base.loyaltyLevels[loyaltyLevelID].insurance_price_coef = .2
+                }
+
             } catch (error) {
                 logger.warning("\nInsuranceChanges failed. Send bug report. Continue safely.")
                 log(error)
