@@ -93,5 +93,4 @@ const fleaBarterRequestWhitelist = [
 	"5d650c3e815116009f6201d2", // Fuel
 
 ]
-
 module.exports = fleaBarterRequestWhitelist

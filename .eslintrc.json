@@ -18,7 +18,7 @@
         "@typescript-eslint/func-call-spacing": 2,
         "@typescript-eslint/quotes": 1,
         "@typescript-eslint/brace-style": [
-            "off",
+            "warn",
             "allman"
         ],
         "@typescript-eslint/naming-convention": [
@@ -61,7 +61,7 @@
         ],
         "@typescript-eslint/indent": [
             "warn",
-            "tab"
+            4
         ],
         "@typescript-eslint/no-unused-expressions": [
             "warn",
