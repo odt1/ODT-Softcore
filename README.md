@@ -1,6 +1,6 @@
-# Highly experimental single player Tarkov "survival RPG vibes" rebalance focused on economy and crafting with a sprinkle of random extra features. 
+# Experimental single player Tarkov "survival RPG vibes" rebalance focused on economy and crafting with a sprinkle of random extra features. 
 
-ALPHA VERSION. WORK IN PROGRESS. To be properly playtested and tweaked. Looking for community feedback. Use at your own risk. New profile highly recommended. 
+BETA VERSION. WORK IN PROGRESS. Looking for community feedback. Use at your own risk. New profile highly recommended. 
 
 ## Flea market rebalance features: 
 - "Pacifist" flea market (and Fence), only meds, barter items, food and info items can be bought.
@@ -46,9 +46,10 @@ Leveling traders and crafting is your only hope of survival.
 - Random-only QUEST keys are availiable on flea
 - Small list of items used in crafts is availiable on flea (and headsets. Because it's mostly preference, cmon.)
 - Custom config for HIGLY recommended mod - [TRAP'S PROGRESSIVE STASH](https://hub.sp-tarkov.com/files/file/917-trap-s-progressive-stash-3-4-0-temp). You will need the space.
+- Bigger Ammo Stacks x10
 
 ## Configuration:
-None. Deal with it. For now. 
+Extencive configuration for EVERY option in config.json
 
 ## Notes:
 - No, you cannot use your new fastly mined bitcoins for barters. Because of well, reasons. Like inflation, man. It hits all of us. No one cares about crypto anymore, except you and your nerd friend Mechanic. 
