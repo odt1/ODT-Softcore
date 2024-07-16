@@ -839,7 +839,8 @@ class Mod implements IPostDBLoadMod {
 							item?._props?.ExaminedByDefault == true &&
 							item?._parent != "65649eb40bf0ed77b8044453" &&
 							item?._parent != "5448bc234bdc2d3c308b4569" &&
-							item?._parent != "610720f290b75a49ff2e5e25"
+							item?._parent != "610720f290b75a49ff2e5e25" &&
+							item?._parent != "644120aa86ffbe10ee032b6f"
 						) {
 							item._props.ExaminedByDefault = false
 						}
