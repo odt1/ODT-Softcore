@@ -60,8 +60,7 @@
             }
         ],
         "@typescript-eslint/indent": [
-            "warn",
-            "tab"
+            "warn", "tab"
         ],
         "@typescript-eslint/no-unused-expressions": [
             "warn",

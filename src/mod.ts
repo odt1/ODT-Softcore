@@ -61,7 +61,7 @@ class Mod implements IPostDBLoadMod {
 		// Noice.
 		const fleaBarterRequestBlacklist = itemBaseClasses.filter((x) => !fleaBarterRequestsWhitelist.includes(x))
 
-		if (debug) {
+		if (false) {
 			// [Debug]
 			for (const i in items) {
 				const item = items[i]
@@ -952,11 +952,11 @@ class Mod implements IPostDBLoadMod {
 				insuranceConfig.returnChancePercent["54cb50c76803fa8b248b4571"] = 80
 				insuranceConfig.returnChancePercent["54cb57776803fa99248b456e"] = 60
 				for (const loyaltyLevelID in prapor.base.loyaltyLevels) {
-					prapor.base.loyaltyLevels[loyaltyLevelID].insurance_price_coef = 0.1
+					prapor.base.loyaltyLevels[loyaltyLevelID].insurance_price_coef = 0.3
 				}
 
 				for (const loyaltyLevelID in therapist.base.loyaltyLevels) {
-					therapist.base.loyaltyLevels[loyaltyLevelID].insurance_price_coef = 0.2
+					therapist.base.loyaltyLevels[loyaltyLevelID].insurance_price_coef = 0.05
 				}
 			} catch (error) {
 				logger.warning("\nInsuranceChanges failed. Send bug report. Continue safely.")
