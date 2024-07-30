@@ -54,7 +54,7 @@ class Mod implements IPostDBLoadMod {
 		const peacekeeper = tables.traders["5935c25fb3acc3127c3d8cd9"]
 		const skier = tables.traders["58330581ace78e27b8b10cee"]
 		const traderlist = [prapor, therapist, ragman, jaeger, mechanic, peacekeeper, skier]
-		const profileList = ["Standard", "Left Behind", "Prepare To Escape", "Edge Of Darkness", "SPT Zero to hero"]
+		const profileList = ["Standard", "Left Behind", "Prepare To Escape", "Edge Of Darkness", "Unheard", "SPT Zero to hero"]
 
 		const euroPrice = handbook.Items.find((x) => x.Id == "569668774bdc2da2298b4568").Price
 

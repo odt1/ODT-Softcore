@@ -1,6 +1,6 @@
 {
 	"name": "Softcore",
-	"version": "2.2.1",
+	"version": "2.2.2",
 	"main": "src/mod.js",
 	"license": "MIT",
 	"author": "ODT",
