@@ -38,6 +38,7 @@ export const alpha: IHideoutProduction = {
     continuous: false,
     count: 1,
     productionLimitCount: 0,
+    isCodeProduction: false,
 }
 export const beta: IHideoutProduction = {
     _id: "63da4dbee8fa73e22500001b",
@@ -77,6 +78,7 @@ export const beta: IHideoutProduction = {
     continuous: false,
     count: 1,
     productionLimitCount: 0,
+    isCodeProduction: false,
 }
 export const epsilon = {
     _id: "63da4dbee8fa73e22500001c",
@@ -123,10 +125,10 @@ export const epsilon = {
     continuous: false,
     count: 1,
     productionLimitCount: 0,
+    isCodeProduction: false,
 }
 export const gamma: IHideoutProduction = {
     _id: "63da4dbee8fa73e22500001d",
-
     areaType: 10,
     requirements: [
         { areaType: 10, requiredLevel: 3, type: "Area" },
@@ -176,6 +178,7 @@ export const gamma: IHideoutProduction = {
     continuous: false,
     count: 1,
     productionLimitCount: 0,
+    isCodeProduction: false,
 }
 
 export const containerRecipes: IHideoutProduction[] = [alpha, beta, epsilon, gamma]
@@ -224,6 +227,7 @@ export const Ophthalmoscope: IHideoutProduction = {
     continuous: false,
     count: 1,
     productionLimitCount: 0,
+    isCodeProduction: false,
 }
 export const Zagustin: IHideoutProduction = {
     _id: "63da4dbee8fa73e225000002",
@@ -258,6 +262,7 @@ export const Zagustin: IHideoutProduction = {
     continuous: false,
     count: 3,
     productionLimitCount: 0,
+    isCodeProduction: false,
 }
 export const Obdolbos: IHideoutProduction = {
     // Did you always want to run your own meth lab in Tarkov? Now you can.
@@ -321,6 +326,7 @@ export const Obdolbos: IHideoutProduction = {
     continuous: false,
     count: 8,
     productionLimitCount: 0,
+    isCodeProduction: false,
 }
 export const CALOK: IHideoutProduction = {
     _id: "63da4dbee8fa73e225000004",
@@ -349,9 +355,7 @@ export const CALOK: IHideoutProduction = {
     continuous: false,
     count: 2,
     productionLimitCount: 0,
-    // Granular nature? Check.
-    // Stops blood with magical properties of pain-relieving Tarkov Vaseline? Check.
-    // Fun and economically balanced recipe that includes underused items? Triple check.
+    isCodeProduction: false,
 }
 export const Adrenaline: IHideoutProduction = {
     _id: "63da4dbee8fa73e225000005",
@@ -380,6 +384,7 @@ export const Adrenaline: IHideoutProduction = {
     continuous: false,
     count: 1,
     productionLimitCount: 0,
+    isCodeProduction: false,
 }
 export const ThreebTG: IHideoutProduction = {
     _id: "63da4dbee8fa73e225000006",
@@ -414,6 +419,7 @@ export const ThreebTG: IHideoutProduction = {
     continuous: false,
     count: 2,
     productionLimitCount: 0,
+    isCodeProduction: false,
 }
 export const AHF1: IHideoutProduction = {
     _id: "63da4dbee8fa73e225000007",
@@ -442,6 +448,7 @@ export const AHF1: IHideoutProduction = {
     continuous: false,
     count: 1,
     productionLimitCount: 0,
+    isCodeProduction: false,
 }
 export const OLOLO: IHideoutProduction = {
     _id: "63da4dbee8fa73e225000008",
@@ -502,6 +509,7 @@ export const OLOLO: IHideoutProduction = {
     continuous: false,
     count: 3,
     productionLimitCount: 0,
+    isCodeProduction: false,
 }
 export const L1: IHideoutProduction = {
     _id: "63da4dbee8fa73e225000009",
@@ -530,6 +538,7 @@ export const L1: IHideoutProduction = {
     continuous: false,
     count: 1,
     productionLimitCount: 0,
+    isCodeProduction: false,
 }
 export const P22: IHideoutProduction = {
     _id: "63da4dbee8fa73e225000010",
@@ -564,6 +573,7 @@ export const P22: IHideoutProduction = {
     continuous: false,
     count: 2,
     productionLimitCount: 0,
+    isCodeProduction: false,
 }
 export const Trimadol: IHideoutProduction = {
     _id: "63da4dbee8fa73e225000011",
@@ -592,6 +602,7 @@ export const Trimadol: IHideoutProduction = {
     continuous: false,
     count: 2,
     productionLimitCount: 0,
+    isCodeProduction: false,
 }
 export const Meldonin: IHideoutProduction = {
     _id: "63da4dbee8fa73e225000012",
@@ -620,6 +631,7 @@ export const Meldonin: IHideoutProduction = {
     continuous: false,
     count: 2,
     productionLimitCount: 0,
+    isCodeProduction: false,
 }
 export const PNB: IHideoutProduction = {
     _id: "63da4dbee8fa73e225000013",
@@ -654,6 +666,7 @@ export const PNB: IHideoutProduction = {
     continuous: false,
     count: 2,
     productionLimitCount: 0,
+    isCodeProduction: false,
 }
 export const Perfotran: IHideoutProduction = {
     _id: "63da4dbee8fa73e225000014",
@@ -688,6 +701,7 @@ export const Perfotran: IHideoutProduction = {
     needFuelForAllProductionTime: false,
     count: 2,
     productionLimitCount: 0,
+    isCodeProduction: false,
 }
 export const SJ9: IHideoutProduction = {
     _id: "63da4dbee8fa73e225000015",
@@ -722,6 +736,7 @@ export const SJ9: IHideoutProduction = {
     needFuelForAllProductionTime: false,
     count: 2,
     productionLimitCount: 0,
+    isCodeProduction: false,
 }
 export const SJ12: IHideoutProduction = {
     _id: "63da4dbee8fa73e225000016",
@@ -756,6 +771,7 @@ export const SJ12: IHideoutProduction = {
     continuous: false,
     count: 2,
     productionLimitCount: 0,
+    isCodeProduction: false
 }
 
 export const additionalCraftingRecipes : IHideoutProduction[] = [ThreebTG, Adrenaline, L1, AHF1, CALOK, Ophthalmoscope, Zagustin, Obdolbos, OLOLO, Perfotran, Trimadol, Meldonin]
