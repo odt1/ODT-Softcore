@@ -2,7 +2,6 @@ import { ILogger } from "@spt/models/spt/utils/ILogger";
 import { DependencyContainer } from "tsyringe";
 import type { SecureContainerOptions } from "../types";
 import { DatabaseServer } from "@spt/servers/DatabaseServer";
-import { SecuredContainers } from "@spt/models/enums/ContainerTypes";
 import { ItemTpl } from "@spt/models/enums/ItemTpl";
 import { ITemplateItem } from "@spt/models/eft/common/tables/ITemplateItem";
 import { Traders } from "@spt/models/enums/Traders";
@@ -98,7 +97,7 @@ export class SecureContainerOptionsChanger {
             isEncoded: false,
             onlyFoundInRaid: false,
             dynamicLocale: false,
-            target: [SecuredContainers.GAMMA],
+            target: [ItemTpl.SECURE_CONTAINER_GAMMA],
             value: 2,
             visibilityConditions: [],
         });
@@ -126,11 +125,11 @@ export class SecureContainerOptionsChanger {
 
     private doBiggerContainers() {
         this.modifyContainer(ItemTpl.SECURE_WAIST_POUCH, 2, 4);
-        this.modifyContainer(SecuredContainers.ALPHA, 3, 3);
-        this.modifyContainer(SecuredContainers.BETA, 3, 4);
-        this.modifyContainer(SecuredContainers.EPSILON, 3, 5);
-        this.modifyContainer(SecuredContainers.GAMMA, 4, 5);
-        this.modifyContainer(SecuredContainers.KAPPA, 5, 5);
+        this.modifyContainer(ItemTpl.SECURE_CONTAINER_ALPHA, 3, 3);
+        this.modifyContainer(ItemTpl.SECURE_CONTAINER_BETA, 3, 4);
+        this.modifyContainer(ItemTpl.SECURE_CONTAINER_EPSILON, 3, 5);
+        this.modifyContainer(ItemTpl.SECURE_CONTAINER_GAMMA, 4, 5);
+        this.modifyContainer(ItemTpl.SECURE_CONTAINER_KAPPA, 5, 5);
     }
 
     private modifyContainer(itemTpl: string, cellsV: number, cellsH: number) {
