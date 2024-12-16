@@ -21,6 +21,7 @@ import { containerRecipes, additionalCraftingRecipes } from "./recipes/recipes";
 import { Configuration } from "./types";
 import { ConfigServer } from "./servers/ConfigServer";
 import { SecureContainerOptionsChanger } from "./changers/SecureContainerOptionsChanger";
+import { HideoutOptionsChanger } from "./changers/HideoutOptionsChanger";
 
 class Softcore implements IPostDBLoadMod, IPreSptLoadMod {
     private fleaListingsWhitelist = require("../config/fleaListingsWhitelist.ts");
@@ -61,6 +62,7 @@ class Softcore implements IPostDBLoadMod, IPreSptLoadMod {
         }
         // Initialize all the changes and apply them according to the config
         new SecureContainerOptionsChanger(container).apply(this.config.secureContainersOptions);
+        new HideoutOptionsChanger(container).apply(this.config.hideoutOptions);
     }
 }
 
