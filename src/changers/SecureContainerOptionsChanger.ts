@@ -41,34 +41,32 @@ export class SecureContainerOptionsChanger {
 
     private doProgressiveContainers() {
         const profileTemplates = this.tables.templates?.profiles;
-        if (profileTemplates) {
-            for (const profileName of Object.keys(profileTemplates)) {
-                const profile = profileTemplates[profileName];
-                const bearContainer = profile.bear.character.Inventory.items.find(
-                    (x) => x.slotId === "SecuredContainer",
-                );
-                if (bearContainer) {
-                    bearContainer._tpl = ItemTpl.SECURE_WAIST_POUCH;
-                }
-                const usecContainer = profile.usec.character.Inventory.items.find(
-                    (x) => x.slotId === "SecuredContainer",
-                );
-                if (usecContainer) {
-                    usecContainer._tpl = ItemTpl.SECURE_WAIST_POUCH;
-                }
+        if (!profileTemplates) {
+            this.logger.warning("SecureContainerOptions: doProgressiveContainers: profileTemplates not found");
+            return;
+        }
+        for (const profileName of Object.keys(profileTemplates)) {
+            const profile = profileTemplates[profileName];
+            const bearContainer = profile.bear.character.Inventory.items.find((x) => x.slotId === "SecuredContainer");
+            if (bearContainer) {
+                bearContainer._tpl = ItemTpl.SECURE_WAIST_POUCH;
             }
+            const usecContainer = profile.usec.character.Inventory.items.find((x) => x.slotId === "SecuredContainer");
+            if (usecContainer) {
+                usecContainer._tpl = ItemTpl.SECURE_WAIST_POUCH;
+            }
+        }
 
-            const peacekeeper = this.tables.traders?.[Traders.PEACEKEEPER];
-            if (peacekeeper?.assort?.barter_scheme) {
-                // Remove Beta container from Peacekeeper
-                const assortHelper = this.container.resolve<AssortHelper>("AssortHelper");
-                assortHelper.removeItemFromAssort(peacekeeper.assort, ItemTpl.SECURE_CONTAINER_BETA);
-            }
+        const peacekeeper = this.tables.traders?.[Traders.PEACEKEEPER];
+        if (peacekeeper?.assort?.barter_scheme) {
+            // Remove Beta container from Peacekeeper
+            const assortHelper = this.container.resolve<AssortHelper>("AssortHelper");
+            assortHelper.removeItemFromAssort(peacekeeper.assort, ItemTpl.SECURE_CONTAINER_BETA);
+        }
 
-            // Custom Secure Container recipes
-            if (this.tables.hideout?.production) {
-                this.tables.hideout.production.recipes.push(...containerRecipes);
-            }
+        // Custom Secure Container recipes
+        if (this.tables.hideout?.production) {
+            this.tables.hideout.production.recipes.push(...containerRecipes);
         }
     }
 
@@ -118,8 +116,8 @@ export class SecureContainerOptionsChanger {
                 index: 0,
                 parentId: "",
                 value: 10,
-                visibilityConditions: []
-            }
+                visibilityConditions: [],
+            },
         ];
     }
 
