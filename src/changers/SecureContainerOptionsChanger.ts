@@ -8,17 +8,18 @@ import { Traders } from "@spt/models/enums/Traders";
 import { AssortHelper } from "@spt/helpers/AssortHelper";
 import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
 import { containerRecipes } from "src/recipes/recipes";
+import { PrefixLogger } from "src/util/PrefixLogger";
 
 export class SecureContainerOptionsChanger {
     private container: DependencyContainer;
-    private logger: ILogger;
+    private logger: PrefixLogger;
     private databaseServer: DatabaseServer;
     private tables: IDatabaseTables;
     private items: Record<string, ITemplateItem> | undefined;
 
     constructor(container: DependencyContainer) {
         this.container = container;
-        this.logger = container.resolve<ILogger>("WinstonLogger");
+        this.logger = PrefixLogger.getInstance();
         this.databaseServer = container.resolve<DatabaseServer>("DatabaseServer");
         this.tables = this.databaseServer.getTables();
         this.items = this.tables.templates?.items;

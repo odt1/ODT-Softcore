@@ -6,17 +6,17 @@ import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
 import { ITemplateItem } from "@spt/models/eft/common/tables/ITemplateItem";
 import { ItemTpl } from "@spt/models/enums/ItemTpl";
 import { StashOptionsChanger } from "./StashOptionsChanger";
-
+import { PrefixLogger } from "../util/PrefixLogger";
 export class HideoutOptionsChanger {
     private container: DependencyContainer;
-    private logger: ILogger;
+    private logger: PrefixLogger;
     private databaseServer: DatabaseServer;
     private tables: IDatabaseTables;
     private items: Record<string, ITemplateItem> | undefined;
 
     constructor(container: DependencyContainer) {
         this.container = container;
-        this.logger = container.resolve<ILogger>("WinstonLogger");
+        this.logger = PrefixLogger.getInstance();
         this.databaseServer = container.resolve<DatabaseServer>("DatabaseServer");
         this.tables = this.databaseServer.getTables();
         this.items = this.tables.templates?.items;

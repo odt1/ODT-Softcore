@@ -8,17 +8,18 @@ import { ItemTpl } from "@spt/models/enums/ItemTpl";
 import { HideoutAreas } from "@spt/models/enums/HideoutAreas";
 import { Money } from "@spt/models/enums/Money";
 import { IProfileSides } from "@spt/models/eft/common/tables/IProfileTemplate";
+import { PrefixLogger } from "src/util/PrefixLogger";
 
 export class StashOptionsChanger {
     private container: DependencyContainer;
-    private logger: ILogger;
+    private logger: PrefixLogger;
     private databaseServer: DatabaseServer;
     private tables: IDatabaseTables;
     private items: Record<string, ITemplateItem> | undefined;
 
     constructor(container: DependencyContainer) {
         this.container = container;
-        this.logger = container.resolve<ILogger>("WinstonLogger");
+        this.logger = PrefixLogger.getInstance();
         this.databaseServer = container.resolve<DatabaseServer>("DatabaseServer");
         this.tables = this.databaseServer.getTables();
         this.items = this.tables.templates?.items;
@@ -56,14 +57,18 @@ export class StashOptionsChanger {
             },
         ];
         const startingStashes = [ItemTpl.STASH_STANDARD_STASH_10X30, ItemTpl.STASH_LEFT_BEHIND_STASH_10X40, ItemTpl.STASH_PREPARE_FOR_ESCAPE_STASH_10X50, ItemTpl.STASH_EDGE_OF_DARKNESS_STASH_10X68, ItemTpl.STASH_THE_UNHEARD_EDITION_STASH_10X72];
+
         for (const [_, profile] of Object.entries(profileTemplates)) {
             for (const sidekey of Object.keys(profile) as (keyof IProfileSides)[]) {
                 const side = profile[sidekey];
+
                 side.character.Hideout.Areas.find((area) => area.type === HideoutAreas.STASH).level = 1;
+
                 const startingStashItems = side.character.Inventory.items.filter((item) => item._tpl in startingStashes);
                 for (const item of startingStashItems) {
                     item._tpl = ItemTpl.STASH_STANDARD_STASH_10X30;
                 };
+
                 side.character.Bonuses = basicStashBonuses;
             }
         }
