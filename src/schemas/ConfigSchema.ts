@@ -61,11 +61,11 @@ const ConfigurationSchema: JSONSchemaType<Configuration> = {
                     type: "object",
                     properties: {
                         enabled: { type: "boolean" },
-                        revertBitcoinPriceToV012: { type: "boolean" },
+                        setBitcoinPriceTo100k: { type: "boolean" },
                         baseBitcoinTimeMultiplier: { type: "number" },
                         gpuEfficiency: { type: "number" }
                     },
-                    required: ["enabled", "revertBitcoinPriceToV012", "baseBitcoinTimeMultiplier", "gpuEfficiency"],
+                    required: ["enabled", "setBitcoinPriceTo100k", "baseBitcoinTimeMultiplier", "gpuEfficiency"],
                     additionalProperties: false
                 },
                 fasterCraftingTime: {

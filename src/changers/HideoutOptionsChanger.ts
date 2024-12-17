@@ -3,9 +3,11 @@ import { DatabaseServer } from "@spt/servers/DatabaseServer";
 import { HideoutOptions } from "src/types";
 import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
 import { ITemplateItem } from "@spt/models/eft/common/tables/ITemplateItem";
+import { PrefixLogger } from "../util/PrefixLogger";
 import { StashOptionsChanger } from "./StashOptionsChanger";
 import { HideoutContainersChanger } from "./HideoutContainersChanger";
-import { PrefixLogger } from "../util/PrefixLogger";
+import { FasterBitcoinFarmingChanger } from "./FasterbitcoinFarmingChanger";
+
 export class HideoutOptionsChanger {
     private container: DependencyContainer;
     private logger: PrefixLogger;
@@ -32,7 +34,7 @@ export class HideoutOptionsChanger {
             new HideoutContainersChanger(this.container).apply(config.hideoutContainers);
         }
         if (config.fasterBitcoinFarming.enabled) {
-            new FasterbitcoinFarmingChanger(this.container).apply(config.fasterBitcoinFarming);
+            new FasterBitcoinFarmingChanger(this.container).apply(config.fasterBitcoinFarming);
         }
     }
 }

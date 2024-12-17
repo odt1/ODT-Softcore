@@ -29,7 +29,7 @@ export interface HideoutOptions {
     enabled: boolean;
     stashOptions: StashOptions;
     hideoutContainers: HideoutContainers;
-    fasterBitcoinFarming: FasterbitcoinFarming;
+    fasterBitcoinFarming: FasterBitcoinFarming;
     fasterCraftingTime: FasterCraftingTime;
     fasterHideoutConstruction: FasterHideoutConstruction;
     fuelConsumption: FuelConsumption;
@@ -51,9 +51,9 @@ export interface HideoutContainers{
     siccCaseBuff: boolean;
 }   
 
-export interface FasterbitcoinFarming {
+export interface FasterBitcoinFarming {
     enabled: boolean;
-    revertBitcoinPriceToV012: boolean;
+    setBitcoinPriceTo100k: boolean;
     baseBitcoinTimeMultiplier: number;
     gpuEfficiency: number;
 }
