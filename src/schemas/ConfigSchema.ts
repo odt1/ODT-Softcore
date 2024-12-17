@@ -52,10 +52,9 @@ const ConfigurationSchema: JSONSchemaType<Configuration> = {
                     properties: {
                         enabled: { type: "boolean" },
                         biggerHideoutContainers: { type: "boolean" },
-                        keytoolBuff: { type: "boolean" },
                         siccCaseBuff: { type: "boolean" }
                     },
-                    required: ["enabled", "biggerHideoutContainers", "keytoolBuff", "siccCaseBuff"],
+                    required: ["enabled", "biggerHideoutContainers", "siccCaseBuff"],
                     additionalProperties: false
                 },
                 fasterBitcoinFarming: {

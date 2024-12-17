@@ -1,4 +1,3 @@
-import { ILogger } from "@spt/models/spt/utils/ILogger";
 import { DependencyContainer } from "tsyringe";
 import { DatabaseServer } from "@spt/servers/DatabaseServer";
 import { StashOptions } from "src/types";
@@ -11,14 +10,12 @@ import { IProfileSides } from "@spt/models/eft/common/tables/IProfileTemplate";
 import { PrefixLogger } from "src/util/PrefixLogger";
 
 export class StashOptionsChanger {
-    private container: DependencyContainer;
     private logger: PrefixLogger;
     private databaseServer: DatabaseServer;
     private tables: IDatabaseTables;
     private items: Record<string, ITemplateItem> | undefined;
 
     constructor(container: DependencyContainer) {
-        this.container = container;
         this.logger = PrefixLogger.getInstance();
         this.databaseServer = container.resolve<DatabaseServer>("DatabaseServer");
         this.tables = this.databaseServer.getTables();

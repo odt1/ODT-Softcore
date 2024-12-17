@@ -48,7 +48,6 @@ export interface StashOptions {
 export interface HideoutContainers{
     enabled: boolean;
     biggerHideoutContainers: boolean;
-    keytoolBuff: boolean;
     siccCaseBuff: boolean;
 }   
 
