@@ -9,6 +9,7 @@ import { HideoutContainersChanger } from "./HideoutContainersChanger";
 import { FasterBitcoinFarmingChanger } from "./FasterBitcoinFarmingChanger";
 import { FasterCraftingTimeChanger } from "./FasterCraftingTimeChanger";
 import { FasterHideoutConstructionChanger } from "./FasterHideoutConstructionChanger";
+import { FuelConsumptionChanger } from "./FuelConsumptionChanger";
 export class HideoutOptionsChanger {
     private container: DependencyContainer;
     private logger: PrefixLogger;
@@ -47,6 +48,10 @@ export class HideoutOptionsChanger {
 
         if (config.fasterHideoutConstruction.enabled) {
             new FasterHideoutConstructionChanger(this.container).apply(config.fasterHideoutConstruction);
+        }
+
+        if (config.fuelConsumption.enabled) {
+            new FuelConsumptionChanger(this.container).apply(config.fuelConsumption);
         }
     }
 }
