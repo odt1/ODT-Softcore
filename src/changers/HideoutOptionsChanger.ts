@@ -8,7 +8,7 @@ import { StashOptionsChanger } from "./StashOptionsChanger";
 import { HideoutContainersChanger } from "./HideoutContainersChanger";
 import { FasterBitcoinFarmingChanger } from "./FasterBitcoinFarmingChanger";
 import { FasterCraftingTimeChanger } from "./FasterCraftingTimeChanger";
-
+import { FasterHideoutConstructionChanger } from "./FasterHideoutConstructionChanger";
 export class HideoutOptionsChanger {
     private container: DependencyContainer;
     private logger: PrefixLogger;
@@ -43,6 +43,10 @@ export class HideoutOptionsChanger {
 
         if (config.fasterCraftingTime.enabled) {
             new FasterCraftingTimeChanger(this.container).apply(config.fasterCraftingTime);
+        }
+
+        if (config.fasterHideoutConstruction.enabled) {
+            new FasterHideoutConstructionChanger(this.container).apply(config.fasterHideoutConstruction);
         }
     }
 }
