@@ -3,7 +3,7 @@ import { DatabaseServer } from "@spt/servers/DatabaseServer";
 import { EconomyOptions} from "src/types";
 import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
 import { PrefixLogger } from "../util/PrefixLogger";
-
+import { PriceRebalanceChanger } from "./PriceRebalanceChanger";
 export class EconomyOptionsChanger {
     private container: DependencyContainer;
     private logger: PrefixLogger;
