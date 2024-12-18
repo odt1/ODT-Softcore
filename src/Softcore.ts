@@ -2,11 +2,12 @@ import { DependencyContainer } from "tsyringe";
 import { IPreSptLoadMod } from "@spt/models/external/IPreSptLoadMod";
 import { IPostDBLoadMod } from "@spt/models/external/IPostDBLoadMod";
 import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { PrefixLogger } from "./util/PrefixLogger";
 import { Configuration } from "./types";
 import { ConfigServer } from "./servers/ConfigServer";
 import { SecureContainerOptionsChanger } from "./changers/SecureContainerOptionsChanger";
 import { HideoutOptionsChanger } from "./changers/HideoutOptionsChanger";
-import { PrefixLogger } from "./util/PrefixLogger";
+import { EconomyOptionsChanger } from "./changers/EconomyOptionsChanger";
 
 class Softcore implements IPostDBLoadMod, IPreSptLoadMod {
     private fleaListingsWhitelist = require("../config/fleaListingsWhitelist.ts");
@@ -55,6 +56,7 @@ class Softcore implements IPostDBLoadMod, IPreSptLoadMod {
         // Initialize all the changes and apply them according to the config
         new SecureContainerOptionsChanger(container).apply(this.config.secureContainersOptions);
         new HideoutOptionsChanger(container).apply(this.config.hideoutOptions);
+        new EconomyOptionsChanger(container).apply(this.config.economyOptions);
     }
 }
 
