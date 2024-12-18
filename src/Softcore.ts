@@ -1,23 +1,7 @@
-import path from "node:path";
 import { DependencyContainer } from "tsyringe";
-
 import { IPreSptLoadMod } from "@spt/models/external/IPreSptLoadMod";
 import { IPostDBLoadMod } from "@spt/models/external/IPostDBLoadMod";
-import { DatabaseServer } from "@spt/servers/DatabaseServer";
-//import { ConfigServer } from "@spt/servers/ConfigServer";
-import { ConfigTypes } from "@spt/models/enums/ConfigTypes";
 import { ILogger } from "@spt/models/spt/utils/ILogger";
-import { ITraderConfig } from "@spt/models/spt/config/ITraderConfig";
-import { IRagfairConfig } from "@spt/models/spt/config/IRagfairConfig";
-import { IHideoutConfig } from "@spt/models/spt/config/IHideoutConfig";
-import { IInsuranceConfig } from "@spt/models/spt/config/IInsuranceConfig";
-import { IScavCaseConfig } from "@spt/models/spt/config/IScavCaseConfig";
-import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
-
-import { itemBaseClasses } from "./itemBaseClasses";
-import { BSGblacklist } from "./BSGblacklist";
-import { scavcaseWhitelist, scavcaseItemBlacklist } from "./scavcaseLists";
-import { containerRecipes, additionalCraftingRecipes } from "./recipes/recipes";
 import { Configuration } from "./types";
 import { ConfigServer } from "./servers/ConfigServer";
 import { SecureContainerOptionsChanger } from "./changers/SecureContainerOptionsChanger";

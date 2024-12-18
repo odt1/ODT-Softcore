@@ -61,7 +61,7 @@ export class StashOptionsChanger {
 
                 side.character.Hideout.Areas.find((area) => area.type === HideoutAreas.STASH).level = 1;
 
-                const startingStashItems = side.character.Inventory.items.filter((item) => item._tpl in startingStashes);
+                const startingStashItems = side.character.Inventory.items.filter((item) => startingStashes.includes(item._tpl));
                 for (const item of startingStashItems) {
                     item._tpl = ItemTpl.STASH_STANDARD_STASH_10X30;
                 };

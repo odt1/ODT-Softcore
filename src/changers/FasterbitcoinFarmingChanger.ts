@@ -48,7 +48,7 @@ export class FasterBitcoinFarmingChanger {
     }
 
     private setBitcoinPriceTo100k() {
-        const bitcoinHandbook = this.tables.templates?.handbook.Items.find((x) => x.Id === ItemTpl.BARTER_PHYSICAL_BITCOIN);
+        const bitcoinHandbook = this.tables.templates?.handbook.Items.find((item) => item.Id === ItemTpl.BARTER_PHYSICAL_BITCOIN);
         if (!bitcoinHandbook) {
             this.logger.warning("FasterbitcoinFarming: doRevertBitcoinPriceToV012: bitcoinHandbook not found");
             return;

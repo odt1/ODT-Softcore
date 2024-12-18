@@ -1,4 +1,3 @@
-import { ILogger } from "@spt/models/spt/utils/ILogger";
 import { DependencyContainer } from "tsyringe";
 import type { SecureContainerOptions } from "../types";
 import { DatabaseServer } from "@spt/servers/DatabaseServer";
@@ -7,7 +6,7 @@ import { ITemplateItem } from "@spt/models/eft/common/tables/ITemplateItem";
 import { Traders } from "@spt/models/enums/Traders";
 import { AssortHelper } from "@spt/helpers/AssortHelper";
 import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
-import { containerRecipes } from "src/recipes/recipes";
+import { containerRecipes } from "src/assets/recipes";
 import { PrefixLogger } from "src/util/PrefixLogger";
 
 export class SecureContainerOptionsChanger {
