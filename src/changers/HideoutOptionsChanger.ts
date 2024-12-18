@@ -6,7 +6,8 @@ import { ITemplateItem } from "@spt/models/eft/common/tables/ITemplateItem";
 import { PrefixLogger } from "../util/PrefixLogger";
 import { StashOptionsChanger } from "./StashOptionsChanger";
 import { HideoutContainersChanger } from "./HideoutContainersChanger";
-import { FasterBitcoinFarmingChanger } from "./FasterbitcoinFarmingChanger";
+import { FasterBitcoinFarmingChanger } from "./FasterBitcoinFarmingChanger";
+import { FasterCraftingTimeChanger } from "./FasterCraftingTimeChanger";
 
 export class HideoutOptionsChanger {
     private container: DependencyContainer;
@@ -27,14 +28,21 @@ export class HideoutOptionsChanger {
         if (!config.enabled) {
             return;
         }
+
         if (config.stashOptions.enabled) {
             new StashOptionsChanger(this.container).apply(config.stashOptions);
         }
+
         if (config.hideoutContainers.enabled) {
             new HideoutContainersChanger(this.container).apply(config.hideoutContainers);
         }
+
         if (config.fasterBitcoinFarming.enabled) {
             new FasterBitcoinFarmingChanger(this.container).apply(config.fasterBitcoinFarming);
+        }
+
+        if (config.fasterCraftingTime.enabled) {
+            new FasterCraftingTimeChanger(this.container).apply(config.fasterCraftingTime);
         }
     }
 }

@@ -62,12 +62,13 @@ export interface FasterCraftingTime {
     enabled: boolean;
     baseCraftingTimeMultiplier: number;
     hideoutSkillExpFix: HideoutSkillExpFix;
-    fasterMoonshineAndPurifiedWaterProduction: FasterMoonshineAndPurifiedWaterProduction;
+    fasterMoonshineProduction: FasterProduction;
+    fasterPurifiedWaterProduction: FasterProduction;
 }
 
-export interface FasterMoonshineAndPurifiedWaterProduction {
+export interface FasterProduction {
     enabled: boolean;
-    baseMoonshineAndWaterTimeMultiplier: number;
+    baseCraftingTimeMultiplier: number;
 }
 
 export interface HideoutSkillExpFix {

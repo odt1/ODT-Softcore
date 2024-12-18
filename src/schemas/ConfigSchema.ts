@@ -82,17 +82,26 @@ const ConfigurationSchema: JSONSchemaType<Configuration> = {
                             required: ["enabled", "hideoutSkillExpMultiplier"],
                             additionalProperties: false
                         },
-                        fasterMoonshineAndPurifiedWaterProduction: {
+                        fasterMoonshineProduction: {
                             type: "object",
                             properties: {
                                 enabled: { type: "boolean" },
-                                baseMoonshineAndWaterTimeMultiplier: { type: "number" }
+                                baseCraftingTimeMultiplier: { type: "number" }
                             },
-                            required: ["enabled", "baseMoonshineAndWaterTimeMultiplier"],
+                            required: ["enabled", "baseCraftingTimeMultiplier"],
+                            additionalProperties: false
+                        },
+                        fasterPurifiedWaterProduction: {
+                            type: "object",
+                            properties: {
+                                enabled: { type: "boolean" },
+                                baseCraftingTimeMultiplier: { type: "number" }
+                            },
+                            required: ["enabled", "baseCraftingTimeMultiplier"],
                             additionalProperties: false
                         }
                     },
-                    required: ["enabled", "baseCraftingTimeMultiplier", "hideoutSkillExpFix", "fasterMoonshineAndPurifiedWaterProduction"],
+                    required: ["enabled", "baseCraftingTimeMultiplier", "hideoutSkillExpFix", "fasterMoonshineProduction", "fasterPurifiedWaterProduction"],
                     additionalProperties: false
                 },
                 fasterHideoutConstruction: {
