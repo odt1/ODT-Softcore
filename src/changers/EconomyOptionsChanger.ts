@@ -4,6 +4,7 @@ import { EconomyOptions} from "src/types";
 import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
 import { PrefixLogger } from "../util/PrefixLogger";
 import { PriceRebalanceChanger } from "./PriceRebalanceChanger";
+import { PacifistFleaMarketChanger } from "./PacifistFleaMarketChanger";
 export class EconomyOptionsChanger {
     private container: DependencyContainer;
     private logger: PrefixLogger;
@@ -27,6 +28,10 @@ export class EconomyOptionsChanger {
 
         if (config.priceRebalance.enabled){
             new PriceRebalanceChanger(this.container).apply(config.priceRebalance);
+        }
+
+        if (config.pacifistFleaMarket.enabled) {
+            new PacifistFleaMarketChanger(this.container).apply(config.pacifistFleaMarket);
         }
     }
 

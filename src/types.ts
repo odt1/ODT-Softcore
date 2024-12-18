@@ -114,16 +114,11 @@ export interface PriceRebalance {
 export interface PacifistFleaMarket {
     enabled: boolean;
     whitelist: boolean;
-    questKeys: QuestKeys;
-    markedKeys: MarkedKeys;
+    questKeys: EconomyKeys;
+    markedKeys: EconomyKeys;
 }
 
-export interface QuestKeys {
-    enabled: boolean;
-    priceMultiplier: number;
-}
-
-export interface MarkedKeys {
+export interface EconomyKeys {
     enabled: boolean;
     priceMultiplier: number;
 }
