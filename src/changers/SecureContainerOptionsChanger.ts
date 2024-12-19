@@ -58,10 +58,14 @@ export class SecureContainerOptionsChanger {
         }
 
         const peacekeeper = this.tables.traders?.[Traders.PEACEKEEPER];
-        if (peacekeeper?.assort?.barter_scheme) {
-            // Remove Beta container from Peacekeeper
-            const assortHelper = this.container.resolve<AssortHelper>("AssortHelper");
-            assortHelper.removeItemFromAssort(peacekeeper.assort, ItemTpl.SECURE_CONTAINER_BETA);
+        if (peacekeeper?.assort?.items) {
+            // "Remove" Beta container from Peacekeeper. Never Delete items from Assorts. This can lead to issues.
+            const betaAssortUpd = peacekeeper.assort.items.find((item) => item._tpl === ItemTpl.SECURE_CONTAINER_BETA)?.upd;
+            if (betaAssortUpd) {
+                betaAssortUpd.StackObjectsCount = 0;
+                betaAssortUpd.BuyRestrictionMax = 0;
+        
+            }
         }
 
         // Custom Secure Container recipes
