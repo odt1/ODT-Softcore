@@ -1,25 +1,25 @@
 import { ItemTpl } from "@spt/models/enums/ItemTpl";
 export const questKeys = [
-    // Whitelist for quest keys updateed for 3.10 taken from the Wiki
+    // Whitelist for quest keys updated for 3.10 taken from the Wiki some are commented out for balancing
     //Factory
     ItemTpl.KEY_FACTORY_EMERGENCY_EXIT,
     ItemTpl.KEYCARD_TERRAGROUP_STORAGE_ROOM,
     //Customs
     ItemTpl.KEY_DORM_OVERSEER,
     ItemTpl.KEY_DORM_ROOM_114,
-    ItemTpl.KEY_DORM_ROOM_203,
-    ItemTpl.KEY_DORM_ROOM_206,
+    //ItemTpl.KEY_DORM_ROOM_203,
+    //ItemTpl.KEY_DORM_ROOM_206,
     ItemTpl.KEY_DORM_ROOM_214,
     ItemTpl.KEY_DORM_ROOM_220,
     ItemTpl.KEY_DORM_ROOM_303,
-    ItemTpl.KEY_DORM_ROOM_314_MARKED,
-    ItemTpl.KEY_MACHINERY,
+    //ItemTpl.KEY_DORM_ROOM_314_MARKED,
+    //ItemTpl.KEY_MACHINERY,
     ItemTpl.KEY_PORTABLE_BUNKHOUSE,
-    ItemTpl.KEY_TARCONE_DIRECTORS_OFFICE,
-    ItemTpl.KEY_TRAILER_PARK_PORTABLE_CABIN,
-    ItemTpl.KEY_UNKNOWN,
+    //ItemTpl.KEY_TARCONE_DIRECTORS_OFFICE,
+    //ItemTpl.KEY_TRAILER_PARK_PORTABLE_CABIN,
+    //ItemTpl.KEY_UNKNOWN,
     //Woods
-    ItemTpl.KEY_SHTURMANS_STASH,
+    //ItemTpl.KEY_SHTURMANS_STASH,
     ItemTpl.KEY_ZB014,
     //Shoreline
     ItemTpl.KEY_COTTAGE_BACK_DOOR,
@@ -42,7 +42,7 @@ export const questKeys = [
     ItemTpl.KEY_OLI_LOGISTICS_DEPARTMENT_OFFICE,
     //TheLab
     ItemTpl.KEYCARD_WITH_A_BLUE_MARKING,
-    ItemTpl.KEYCARD_TERRAGROUP_LABS_ACCESS,
+    //ItemTpl.KEYCARD_TERRAGROUP_LABS_ACCESS,
     ItemTpl.KEYCARD_TERRAGROUP_LABS_KEYCARD_BLACK,
     ItemTpl.KEY_TERRAGROUP_LABS_MANAGERS_OFFICE_ROOM,
     ItemTpl.KEY_TERRAGROUP_LABS_WEAPON_TESTING_AREA,
@@ -71,7 +71,7 @@ export const questKeys = [
     ItemTpl.KEY_NEGOTIATION_ROOM,
     ItemTpl.KEY_MYSTERIOUS_ROOM_MARKED,
     ItemTpl.KEY_PINEWOOD_HOTEL_ROOM_215,
-    ItemTpl.KEY_PRIMORSKY_4648_SKYBRIDGE,
+    //ItemTpl.KEY_PRIMORSKY_4648_SKYBRIDGE,
     ItemTpl.KEY_REAL_ESTATE_AGENCY_OFFICE_ROOM,
     ItemTpl.KEY_RELAXATION_ROOM,
     ItemTpl.KEY_RUSTED_BLOODY,
