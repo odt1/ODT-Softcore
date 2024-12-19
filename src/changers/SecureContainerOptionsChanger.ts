@@ -4,23 +4,19 @@ import { DatabaseServer } from "@spt/servers/DatabaseServer";
 import { ItemTpl } from "@spt/models/enums/ItemTpl";
 import { ITemplateItem } from "@spt/models/eft/common/tables/ITemplateItem";
 import { Traders } from "@spt/models/enums/Traders";
-import { AssortHelper } from "@spt/helpers/AssortHelper";
 import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
 import { containerRecipes } from "src/assets/recipes";
 import { PrefixLogger } from "src/util/PrefixLogger";
 
 export class SecureContainerOptionsChanger {
-    private container: DependencyContainer;
     private logger: PrefixLogger;
-    private databaseServer: DatabaseServer;
     private tables: IDatabaseTables;
     private items: Record<string, ITemplateItem> | undefined;
 
     constructor(container: DependencyContainer) {
-        this.container = container;
         this.logger = PrefixLogger.getInstance();
-        this.databaseServer = container.resolve<DatabaseServer>("DatabaseServer");
-        this.tables = this.databaseServer.getTables();
+        const databaseServer = container.resolve<DatabaseServer>("DatabaseServer");
+        this.tables = databaseServer.getTables();
         this.items = this.tables.templates?.items;
     }
 
