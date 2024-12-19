@@ -62,6 +62,7 @@ export class SecureContainerOptionsChanger {
             // "Remove" Beta container from Peacekeeper. Never Delete items from Assorts. This can lead to issues.
             const betaAssortUpd = peacekeeper.assort.items.find((item) => item._tpl === ItemTpl.SECURE_CONTAINER_BETA)?.upd;
             if (betaAssortUpd) {
+                betaAssortUpd.UnlimitedCount = false;
                 betaAssortUpd.StackObjectsCount = 0;
                 betaAssortUpd.BuyRestrictionMax = 0;
         
