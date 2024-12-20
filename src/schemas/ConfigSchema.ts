@@ -240,7 +240,7 @@ const ConfigurationSchema: JSONSchemaType<Configuration> = {
                     properties: {
                         enabled: { type: "boolean" },
                         sellingOnFlea: { type: "boolean" },
-                        fleaMarktOpenAtLevel: { type: "number" },
+                        fleaMarketOpenAtLevel: { type: "number" },
                         fleaPricesIncreased: { type: "number" },
                         fleaPristineItems: { type: "boolean" },
                         onlyFoundInRaidItemsAllowedForBarters: { type: "boolean" }
@@ -248,7 +248,7 @@ const ConfigurationSchema: JSONSchemaType<Configuration> = {
                     required: [
                         "enabled",
                         "sellingOnFlea",
-                        "fleaMarktOpenAtLevel",
+                        "fleaMarketOpenAtLevel",
                         "fleaPricesIncreased",
                         "fleaPristineItems",
                         "onlyFoundInRaidItemsAllowedForBarters"

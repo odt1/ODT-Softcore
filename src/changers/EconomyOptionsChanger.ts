@@ -6,6 +6,7 @@ import { PrefixLogger } from "../util/PrefixLogger";
 import { PriceRebalanceChanger } from "./PriceRebalanceChanger";
 import { PacifistFleaMarketChanger } from "./PacifistFleaMarketChanger";
 import { BarterEconomyChanger } from "./BarterEconomyChanger";
+import { OtherFleaMarketChangesChanger } from "./OtherFleaMarketChangesChanger";
 export class EconomyOptionsChanger {
     private container: DependencyContainer;
     private logger: PrefixLogger;
@@ -25,6 +26,7 @@ export class EconomyOptionsChanger {
 
         if (config.disableFleaMarketCompletely){
             this.doDisableFleaMarketCompletely();
+            return;
         }
 
         if (config.priceRebalance.enabled){
@@ -37,6 +39,11 @@ export class EconomyOptionsChanger {
 
         if (config.barterEconomy.enabled){
             new BarterEconomyChanger(this.container).apply(config.barterEconomy);
+        }
+
+        if (config.otherFleaMarketChanges.enabled){
+            new OtherFleaMarketChangesChanger(this.container).apply(config.otherFleaMarketChanges);
+            this.updateRagfairMinUserLevel(config.otherFleaMarketChanges.fleaMarketOpenAtLevel);
         }
     }
 

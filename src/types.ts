@@ -136,7 +136,7 @@ export interface BarterEconomy {
 export interface OtherFleaMarketChanges {
     enabled: boolean;
     sellingOnFlea: boolean;
-    fleaMarktOpenAtLevel: number;
+    fleaMarketOpenAtLevel: number;
     fleaPricesIncreased: number;
     fleaPristineItems: boolean;
     onlyFoundInRaidItemsAllowedForBarters: boolean;
