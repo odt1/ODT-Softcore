@@ -283,7 +283,15 @@ const ConfigurationSchema: JSONSchemaType<Configuration> = {
                 },
                 reasonablyPricedCases: { type: "boolean" },
                 skierUsesEuros: { type: "boolean" },
-                biggerLimits: { type: "boolean" }
+                biggerLimits: {
+                    type: "object",
+                    properties: {
+                        enabled: { type: "boolean" },
+                        multiplier: { type: "number" }
+                    },
+                    required: ["enabled", "multiplier"],
+                    additionalProperties: false
+                },
             },
             required: [
                 "enabled",

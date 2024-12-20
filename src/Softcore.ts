@@ -8,18 +8,12 @@ import { ConfigServer } from "./servers/ConfigServer";
 import { SecureContainerOptionsChanger } from "./changers/SecureContainerOptionsChanger";
 import { HideoutOptionsChanger } from "./changers/HideoutOptionsChanger";
 import { EconomyOptionsChanger } from "./changers/EconomyOptionsChanger";
-
+import { TraderChangesChanger } from "./changers/TraderChangesChanger";
 class Softcore implements IPostDBLoadMod, IPreSptLoadMod {
-    private fleaListingsWhitelist = require("../config/fleaListingsWhitelist.ts");
-    private fleaBarterRequestsWhitelist = require("../config/fleaBarterRequestsWhitelist.ts"); // why I can't use import in config directory? Anyway, is there any alternative to JSON data storage? THIS is the only way to save commented data?!
-    private fleaItemsWhiteList = require("../config/fleaItemsWhitelist.ts");
-
     private logger: PrefixLogger | null = null;
     private config: Configuration | null = null;
-    private container: DependencyContainer;
 
     public preSptLoad(container: DependencyContainer): void {
-        this.container = container;
         try{
             this.logger = PrefixLogger.getInstance(container);
         } catch (error) {
@@ -57,6 +51,7 @@ class Softcore implements IPostDBLoadMod, IPreSptLoadMod {
         new SecureContainerOptionsChanger(container).apply(this.config.secureContainersOptions);
         new HideoutOptionsChanger(container).apply(this.config.hideoutOptions);
         new EconomyOptionsChanger(container).apply(this.config.economyOptions);
+        new TraderChangesChanger(container).apply(this.config.traderChanges);
     }
 }
 

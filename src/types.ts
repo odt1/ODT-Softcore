@@ -149,7 +149,7 @@ export interface TraderChanges {
     pacifistFence: PacifistFence;
     reasonablyPricedCases: boolean;
     skierUsesEuros: boolean;
-    biggerLimits: boolean;
+    biggerLimits: {enabled: boolean; multiplier: number};
 }
 
 export interface PacifistFence {
