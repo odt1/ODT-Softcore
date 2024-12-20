@@ -52,6 +52,7 @@ class Softcore implements IPostDBLoadMod, IPreSptLoadMod {
         new HideoutOptionsChanger(container).apply(this.config.hideoutOptions);
         new EconomyOptionsChanger(container).apply(this.config.economyOptions);
         new TraderChangesChanger(container).apply(this.config.traderChanges);
+        new CraftingChangesChanger(container).apply(this.config.craftingChanges);
     }
 }
 
