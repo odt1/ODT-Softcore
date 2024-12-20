@@ -10,6 +10,7 @@ import { HideoutOptionsChanger } from "./changers/HideoutOptionsChanger";
 import { EconomyOptionsChanger } from "./changers/EconomyOptionsChanger";
 import { TraderChangesChanger } from "./changers/TraderChangesChanger";
 import { CraftingChangesChanger } from "./changers/CraftingChangesChanger";
+import { InsuranceChangesChanger } from "./changers/InsuranceChangesChanger";
 class Softcore implements IPostDBLoadMod, IPreSptLoadMod {
     private logger: PrefixLogger | null = null;
     private config: Configuration | null = null;
@@ -54,6 +55,7 @@ class Softcore implements IPostDBLoadMod, IPreSptLoadMod {
         new EconomyOptionsChanger(container).apply(this.config.economyOptions);
         new TraderChangesChanger(container).apply(this.config.traderChanges);
         new CraftingChangesChanger(container).apply(this.config.craftingChanges);
+        new InsuranceChangesChanger(container).apply(this.config.insuranceChanges);
     }
 }
 

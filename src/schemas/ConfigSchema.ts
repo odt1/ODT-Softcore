@@ -323,7 +323,15 @@ const ConfigurationSchema: JSONSchemaType<Configuration> = {
                     properties: {
                         enabled: { type: "boolean" },
                         returnChance: { type: "number" },
-                        returnTime: { type: "number" },
+                        returnTime: {
+                            type: "object",
+                            properties: {
+                                min: { type: "number" },
+                                max: { type: "number" }
+                            },
+                            required: ["min", "max"],
+                            additionalProperties: false
+                        },
                         insuranceCostMultiplier: { type: "number" }
                     },
                     required: ["enabled", "returnChance", "returnTime", "insuranceCostMultiplier"],
@@ -334,7 +342,15 @@ const ConfigurationSchema: JSONSchemaType<Configuration> = {
                     properties: {
                         enabled: { type: "boolean" },
                         returnChance: { type: "number" },
-                        returnTime: { type: "number" },
+                        returnTime: {
+                            type: "object",
+                            properties: {
+                                min: { type: "number" },
+                                max: { type: "number" }
+                            },
+                            required: ["min", "max"],
+                            additionalProperties: false
+                        },
                         insuranceCostMultiplier: { type: "number" }
                     },
                     required: ["enabled", "returnChance", "returnTime", "insuranceCostMultiplier"],
