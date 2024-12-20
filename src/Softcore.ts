@@ -9,6 +9,7 @@ import { SecureContainerOptionsChanger } from "./changers/SecureContainerOptions
 import { HideoutOptionsChanger } from "./changers/HideoutOptionsChanger";
 import { EconomyOptionsChanger } from "./changers/EconomyOptionsChanger";
 import { TraderChangesChanger } from "./changers/TraderChangesChanger";
+import { CraftingChangesChanger } from "./changers/CraftingChangesChanger";
 class Softcore implements IPostDBLoadMod, IPreSptLoadMod {
     private logger: PrefixLogger | null = null;
     private config: Configuration | null = null;
