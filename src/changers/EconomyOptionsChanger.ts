@@ -5,6 +5,7 @@ import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
 import { PrefixLogger } from "../util/PrefixLogger";
 import { PriceRebalanceChanger } from "./PriceRebalanceChanger";
 import { PacifistFleaMarketChanger } from "./PacifistFleaMarketChanger";
+import { BarterEconomyChanger } from "./BarterEconomyChanger";
 export class EconomyOptionsChanger {
     private container: DependencyContainer;
     private logger: PrefixLogger;
@@ -32,6 +33,10 @@ export class EconomyOptionsChanger {
 
         if (config.pacifistFleaMarket.enabled) {
             new PacifistFleaMarketChanger(this.container).apply(config.pacifistFleaMarket);
+        }
+
+        if (config.barterEconomy.enabled){
+            new BarterEconomyChanger(this.container).apply(config.barterEconomy);
         }
     }
 

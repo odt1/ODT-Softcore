@@ -1,4 +1,5 @@
 import { ItemTpl } from "@spt/models/enums/ItemTpl";
+import { BaseClasses } from "@spt/models/enums/BaseClasses";
 
 export const whitelist = [
     // Whitelist for items that can be bartered FOR on flea, outside of fleaWhitelist categories
@@ -33,4 +34,38 @@ export const whitelist = [
     ItemTpl.FACECOVER_SHEMAGH_GREEN,
     ItemTpl.FACECOVER_GHOST_BALACLAVA,
     ItemTpl.SILENCER_SUREFIRE_SOCOM556MINI_MONSTER_556X45_SOUND_SUPPRESSOR
+]
+
+export const fleaBarterRequestBlacklist = [
+    BaseClasses.DRINK,
+    BaseClasses.INFO,
+    BaseClasses.FOOD,
+    BaseClasses.DRUGS,
+    BaseClasses.MEDKIT,
+    BaseClasses.MEDICAL,
+    BaseClasses.BATTERY,
+    BaseClasses.ELECTRONICS,
+    BaseClasses.BUILDING_MATERIAL,
+    BaseClasses.MONEY,
+    BaseClasses.HOUSEHOLD_GOODS,
+    BaseClasses.JEWELRY,
+    BaseClasses.LUBRICANT,
+    BaseClasses.OTHER,
+    BaseClasses.TOOL,
+    BaseClasses.MEDICAL_SUPPLIES,
+    BaseClasses.FUEL
+]
+
+export const fleaBarterRequestBlacklistItems = [
+    ItemTpl.DRINK_BOTTLE_OF_TARKOVSKAYA_VODKA_BAD,
+    ItemTpl.BARTER_CHRISTMAS_TREE_ORNAMENT_VIOLET,
+    ItemTpl.BARTER_CHRISTMAS_TREE_ORNAMENT_SILVER,
+    ItemTpl.BARTER_CHRISTMAS_TREE_ORNAMENT_RED,
+    ItemTpl.BARTER_DOGTAGT,
+    ItemTpl.BARTER_DOGTAG_BEAR,
+    ItemTpl.BARTER_DOGTAG_BEAR_EOD,
+    ItemTpl.BARTER_DOGTAG_BEAR_TUE,
+    ItemTpl.BARTER_DOGTAG_USEC,
+    ItemTpl.BARTER_DOGTAG_USEC_EOD,
+    ItemTpl.BARTER_DOGTAG_USEC_TUE
 ]
