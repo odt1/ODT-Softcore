@@ -53,7 +53,12 @@ export const fleaBarterRequestWhitelist = [
     BaseClasses.OTHER,
     BaseClasses.TOOL,
     BaseClasses.MEDICAL_SUPPLIES,
-    BaseClasses.FUEL
+    BaseClasses.FUEL,
+    BaseClasses.BARTER_ITEM,
+    BaseClasses.MEDS,
+    BaseClasses.FOOD_DRINK,
+    BaseClasses.ITEM,
+    BaseClasses.STACKABLE_ITEM,
 ]
 
 export const fleaListingsWhitelist = [

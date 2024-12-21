@@ -45,25 +45,16 @@ export class BarterEconomyChanger {
     }
 
     private doBarterEconomy() {
-        const barterBlacklist = Object.values(BaseClasses).filter((baseClass) => !fleaBarterRequestWhitelist.includes(baseClass));
-
-        this.ragfairConfig.dynamic.barter.itemTypeBlacklist = barterBlacklist;
+        // Can't blacklist items directly :( so Dogtags will appear in barters if BaseClasses.Other is in the whitelist. However this enables cigarettes etc to be used.
+        const barterBlacklist = Object.values(BaseClasses).filter((baseClass) => !fleaBarterRequestWhitelist.includes(baseClass)) as string[];
+        this.ragfairConfig.dynamic.barter.itemTypeBlacklist = barterBlacklist
         this.ragfairConfig.dynamic.barter.minRoubleCostToBecomeBarter = 100;
-        // Add further unwanted barter items to itemconfig.blacklist as that is used by SPT when adding Barters to Flea.
-        // This makes it so, that we don't have to adjust the prices of items, so they can still be sold.
-        // No need to add QuestItems as those are already considered blacklisted by SPT.
-        let itemBlacklist = this.itemconfig.blacklist;
-        itemBlacklist = itemBlacklist.concat(fleaBarterRequestBlacklistItems);
-        this.itemconfig.blacklist = [...new Set(itemBlacklist)];
-
-        const handbookItems = this.tables.templates?.handbook.Items;
-        if (!handbookItems) {
+        
+        const items = this.tables.templates?.items;
+        if (!items) {
             this.logger.warning("BarterEconomyChanger: doBarterEconomy: Handbook not found, skipping price adjust");
             return;
         }
-        //handbookItems[ItemTpl.BARTER_FARFORWARD_GPS_SIGNAL_AMPLIFIER_UNIT].price = 2680970;
-        //handbookItems[ItemTpl.BARTER_ADVANCED_CURRENT_CONVERTER].price = 6648292;
-        //handbookItems[ItemTpl.BARTER_MICROCONTROLLER_BOARD].price = 1566360;
     }
 
     private adjustCashOffers(cashOffersPercentage: number) {
