@@ -258,7 +258,7 @@ export class TraderChangesChanger {
         }
         for (const barter of Object.values(skierAssorts.barter_scheme)) {
             if (barter[0][0]._tpl === ItemTpl.MONEY_ROUBLES) {
-                barter[0][0].count = Math.round(barter[0][0].count / euroPrice);
+                barter[0][0].count = Math.ceil(barter[0][0].count / euroPrice);
                 barter[0][0]._tpl = ItemTpl.MONEY_EUROS;
             }
         }
@@ -285,11 +285,18 @@ export class TraderChangesChanger {
                                 item._tpl = ItemTpl.MONEY_EUROS;
                                 if (!item.upd?.StackObjectsCount) {
                                     this.logger.warning(
-                                        "TraderChangesChanger: doSkierUsesEuros: Quest: ${quest._id} reward item: ${item._tpl} upd not found, skipping",
+                                        `TraderChangesChanger: doSkierUsesEuros: Quest: ${quest._id} reward item: ${item._tpl} upd not found, skipping`,
                                     );
                                     continue;
                                 }
-                                item.upd.StackObjectsCount = Math.round(item.upd.StackObjectsCount / euroPrice);
+                                item.upd.StackObjectsCount = Math.ceil(item.upd.StackObjectsCount / euroPrice);
+                                if(!reward.value){
+                                    this.logger.warning(
+                                        `TraderChangesChanger: doSkierUsesEuros: Quest: ${quest._id} reward value not found, skipping`,
+                                    );
+                                    continue;
+                                }
+                                reward.value = Math.ceil(reward.value as number / euroPrice);
                             }
                         }
                     }
