@@ -7,7 +7,7 @@ import { markedKeys, questKeys } from "../assets/keys";
 import { ConfigServer } from "@spt/servers/ConfigServer";
 import { ConfigTypes } from "@spt/models/enums/ConfigTypes";
 import { IRagfairConfig } from "@spt/models/spt/config/IRagfairConfig";
-import { whitelist } from "../assets/fleamarket";
+import { fleaBarterRequestBlacklistItems, whitelist } from "../assets/fleamarket";
 import { fleaListingsWhitelist } from "../assets/fleamarket";
 export class PacifistFleaMarketChanger {
     private logger: PrefixLogger;
@@ -48,8 +48,10 @@ export class PacifistFleaMarketChanger {
         }
        
         const fleaListingsWhitelistString = fleaListingsWhitelist as string[]
-        const whitelistItemsbyParentID = Object.values(items).filter((item) => fleaListingsWhitelistString.includes(item._parent)).map(item => item._id)
+        let whitelistItemsbyParentID = Object.values(items).filter((item) => fleaListingsWhitelistString.includes(item._parent)).map(item => item._id)
         const whitelistArray = whitelist as string[]
+        const fleaBarterRequestBlacklistItemsString = fleaBarterRequestBlacklistItems as string[]
+        whitelistItemsbyParentID = whitelistItemsbyParentID.filter(item => !fleaBarterRequestBlacklistItemsString.includes(item))
         this.adjustSellableOnRagfair([...new Set(whitelistArray.concat(whitelistItemsbyParentID))]);
     }
 
