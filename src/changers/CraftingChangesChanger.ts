@@ -1,13 +1,13 @@
 import { DependencyContainer } from "tsyringe";
 import { DatabaseServer } from "@spt/servers/DatabaseServer";
-import { CraftingChanges } from "src/types";
+import { CraftingChanges } from "../types";
 import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
 import { PrefixLogger } from "../util/PrefixLogger";
 import { HideoutAreas } from "@spt/models/enums/HideoutAreas";
 import { ItemTpl } from "@spt/models/enums/ItemTpl";
-import { craftingAdjustments } from "src/assets/productionAdjustments";
+import { craftingAdjustments } from "../assets/productionAdjustments";
 import { IHideoutProduction } from "@spt/models/eft/hideout/IHideoutProduction";
-import { additionalCraftingRecipes } from "src/assets/recipes";
+import { additionalCraftingRecipes } from "../assets/recipes";
 
 export class CraftingChangesChanger {
     private logger: PrefixLogger;

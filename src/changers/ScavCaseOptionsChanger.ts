@@ -1,29 +1,36 @@
 import { DependencyContainer } from "tsyringe";
 import { DatabaseServer } from "@spt/servers/DatabaseServer";
-import { ScavCaseOptions } from "src/types";
+import { ScavCaseOptions } from "../types";
 import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
-import { PrefixLogger } from "src/util/PrefixLogger";
+import { PrefixLogger } from "../util/PrefixLogger";
 import { ConfigServer } from "@spt/servers/ConfigServer";
 import { ConfigTypes } from "@spt/models/enums/ConfigTypes";
 import { IScavCaseConfig } from "@spt/models/spt/config/IScavCaseConfig";
 import { BaseClasses } from "@spt/models/enums/BaseClasses";
 import { HandbookHelper } from "@spt/helpers/HandbookHelper";
 import { ScavCaseRewardGenerator } from "@spt/generators/ScavCaseRewardGenerator";
-import { scavcaseRewardItemValueRangeRubReworked, scavCaseRecipesReworked } from "src/assets/scavcase";
-
+import { scavcaseRewardItemValueRangeRubReworked, scavCaseRecipesReworked } from "../assets/scavcase";
+import { Traders } from "@spt/models/enums/Traders";
+import { ItemFilterService } from "@spt/services/ItemFilterService";
+import { SeasonalEventService } from "@spt/services/SeasonalEventService";
+import { ItemHelper } from "@spt/helpers/ItemHelper";
 export class ScavCaseOptionsChanger {
     private logger: PrefixLogger;
     private tables: IDatabaseTables;
     private scavCaseConfig: IScavCaseConfig;
     private handbookHelper: HandbookHelper;
-    private scavCaseRewardGenerator: ScavCaseRewardGenerator;
+    private itemFilterService: ItemFilterService;
+    private seasonalEventService: SeasonalEventService;
+    private itemHelper: ItemHelper;
 
     constructor(container: DependencyContainer) {
         this.logger = PrefixLogger.getInstance();
         const databaseServer = container.resolve<DatabaseServer>("DatabaseServer");
         const configServer = container.resolve<ConfigServer>("ConfigServer");
         this.handbookHelper = container.resolve<HandbookHelper>("HandbookHelper");
-        this.scavCaseRewardGenerator = container.resolve<ScavCaseRewardGenerator>("ScavCaseRewardGenerator");
+        this.itemFilterService = container.resolve<ItemFilterService>("ItemFilterService");
+        this.seasonalEventService = container.resolve<SeasonalEventService>("SeasonalEventService");
+        this.itemHelper = container.resolve<ItemHelper>("ItemHelper");
         this.tables = databaseServer.getTables();
         this.scavCaseConfig = configServer.getConfig<IScavCaseConfig>(ConfigTypes.SCAVCASE);
     }
@@ -55,15 +62,20 @@ export class ScavCaseOptionsChanger {
             return;
         }
         for (const [_, trader] of Object.entries(traderlist)) {
+            if (_ === Traders.LIGHTHOUSEKEEPER) {
+                continue;
+            }
             const items = trader.assort?.items;
             if (!items) {
-                this.logger.warning("ScavCaseOptionsChanger: doBetterRewards: trader.assort.items not found");
+                this.logger.warning(
+                    `ScavCaseOptionsChanger: doBetterRewards: trader.assort.items for trader ${_} not found`,
+                );
                 return;
             }
             items.filter((x) => buyableitems.add(x._tpl));
         }
 
-        const potentialScavCaseRewards = this.ensureDBItemsCache();
+        const potentialScavCaseRewards = this.generatePotentialScavCaseRewards();
         if (!potentialScavCaseRewards) {
             this.logger.warning("ScavCaseOptionsChanger: doBetterRewards: potentialScavCaseRewards not found");
             return;
@@ -93,19 +105,56 @@ export class ScavCaseOptionsChanger {
         this.scavCaseConfig.rewardItemBlacklist = [...new Set(this.scavCaseConfig.rewardItemBlacklist)];
     }
 
-    private ensureDBItemsCache() {
-        // biome-ignore lint/complexity/useLiteralKeys: Trying to circumvent protected variable.
-        if (!this.scavCaseRewardGenerator["dbItemsCache"]) {
-            // biome-ignore lint/complexity/useLiteralKeys: Trying to circumvent protected method.
-            this.scavCaseRewardGenerator["cacheDBItems"]();
-        }
-        // biome-ignore lint/complexity/useLiteralKeys: Trying to circumvent protected variable.
-        const dbItemsCache = this.scavCaseRewardGenerator["dbItemsCache"];
-        if (!dbItemsCache) {
-            this.logger.warning("ScavCaseOptionsChanger: ensureDBItemsCache: dbItemsCache not found");
+    private generatePotentialScavCaseRewards() {
+        const items = this.tables.templates?.items;
+        if (!items) {
+            this.logger.warning("ScavCaseOptionsChanger: generatePotentialScavCaseRewards: items not found");
             return;
         }
-        return dbItemsCache;
+        const inactiveSeasonalItems = this.seasonalEventService.getInactiveSeasonalEventItems();
+        return Object.values(items).filter((item) => {
+            // Base "Item" item has no parent, ignore it
+            if (item._parent === "") {
+                return false;
+            }
+
+            if (item._type === "Node") {
+                return false;
+            }
+
+            if (item._props.QuestItem) {
+                return false;
+            }
+
+            // Skip item if item id is on blacklist
+            if (
+                item._type !== "Item" ||
+                this.scavCaseConfig.rewardItemBlacklist.includes(item._id) ||
+                this.itemFilterService.isItemBlacklisted(item._id)
+            ) {
+                return false;
+            }
+
+            // Globally reward-blacklisted
+            if (this.itemFilterService.isItemRewardBlacklisted(item._id)) {
+                return false;
+            }
+
+            if (!this.scavCaseConfig.allowBossItemsAsRewards && this.itemFilterService.isBossItem(item._id)) {
+                return false;
+            }
+
+            // Skip item if parent id is blacklisted
+            if (this.itemHelper.isOfBaseclasses(item._id, this.scavCaseConfig.rewardItemParentBlacklist)) {
+                return false;
+            }
+
+            if (inactiveSeasonalItems.includes(item._id)) {
+                return false;
+            }
+
+            return true;
+        });
     }
 
     private doFasterScavcase(multiplier: number) {

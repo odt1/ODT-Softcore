@@ -740,7 +740,6 @@ export const SJ9: IHideoutProduction = {
 }
 export const SJ12: IHideoutProduction = {
     _id: "63da4dbee8fa73e225000016",
-
     areaType: 7,
     requirements: [
         { areaType: 7, requiredLevel: 3, type: "Area" },

@@ -1,13 +1,13 @@
 import { DependencyContainer } from "tsyringe";
 import { DatabaseServer } from "@spt/servers/DatabaseServer";
-import { StashOptions } from "src/types";
+import { StashOptions } from "../types";
 import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
 import { ITemplateItem } from "@spt/models/eft/common/tables/ITemplateItem";
 import { ItemTpl } from "@spt/models/enums/ItemTpl";
 import { HideoutAreas } from "@spt/models/enums/HideoutAreas";
 import { Money } from "@spt/models/enums/Money";
 import { IProfileSides } from "@spt/models/eft/common/tables/IProfileTemplate";
-import { PrefixLogger } from "src/util/PrefixLogger";
+import { PrefixLogger } from "../util/PrefixLogger";
 
 export class StashOptionsChanger {
     private logger: PrefixLogger;
@@ -55,11 +55,18 @@ export class StashOptionsChanger {
         ];
         const startingStashes = [ItemTpl.STASH_STANDARD_STASH_10X30, ItemTpl.STASH_LEFT_BEHIND_STASH_10X40, ItemTpl.STASH_PREPARE_FOR_ESCAPE_STASH_10X50, ItemTpl.STASH_EDGE_OF_DARKNESS_STASH_10X68, ItemTpl.STASH_THE_UNHEARD_EDITION_STASH_10X72];
 
-        for (const [_, profile] of Object.entries(profileTemplates)) {
-            for (const sidekey of Object.keys(profile) as (keyof IProfileSides)[]) {
-                const side = profile[sidekey];
-
-                side.character.Hideout.Areas.find((area) => area.type === HideoutAreas.STASH).level = 1;
+        for (const [profile,_]of Object.entries(profileTemplates)) {
+            for (const sidekey of Object.keys(_) as (keyof IProfileSides)[]) {
+                if(sidekey === "descriptionLocaleKey"){
+                    continue;
+                }
+                const side = profileTemplates[profile][sidekey];
+                const hideoutArea = side.character.Hideout?.Areas.find((area) => area.type === HideoutAreas.STASH);
+                if (!hideoutArea) {
+                    this.logger.warning(`HideoutOptionsChanger: doProgressiveStash: hideoutArea for profile ${_} not found`);
+                    continue;
+                }
+                hideoutArea.level = 1;
 
                 const startingStashItems = side.character.Inventory.items.filter((item) => startingStashes.includes(item._tpl));
                 for (const item of startingStashItems) {

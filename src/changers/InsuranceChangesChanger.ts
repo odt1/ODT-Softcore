@@ -1,6 +1,6 @@
 import { DependencyContainer } from "tsyringe";
 import { DatabaseServer } from "@spt/servers/DatabaseServer";
-import { InsuranceChanges, TraderInsuranceChanges } from "src/types";
+import { InsuranceChanges, TraderInsuranceChanges } from "../types";
 import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
 import { PrefixLogger } from "../util/PrefixLogger";
 import { Traders } from "@spt/models/enums/Traders";

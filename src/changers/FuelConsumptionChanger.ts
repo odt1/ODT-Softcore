@@ -1,8 +1,8 @@
 import { DependencyContainer } from "tsyringe";
 import { DatabaseServer } from "@spt/servers/DatabaseServer";
-import { FuelConsumption } from "src/types";
+import { FuelConsumption } from "../types";
 import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
-import { PrefixLogger } from "src/util/PrefixLogger";
+import { PrefixLogger } from "../util/PrefixLogger";
 
 export class FuelConsumptionChanger {
     private logger: PrefixLogger;

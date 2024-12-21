@@ -1,12 +1,12 @@
 import { DependencyContainer } from "tsyringe";
 import { DatabaseServer } from "@spt/servers/DatabaseServer";
-import { FasterCraftingTime } from "src/types";
+import { FasterCraftingTime } from "../types";
 import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
 import { ItemTpl } from "@spt/models/enums/ItemTpl";
 import { ConfigServer } from "@spt/servers/ConfigServer";
 import { IHideoutConfig } from "@spt/models/spt/config/IHideoutConfig";
 import { ConfigTypes } from "@spt/models/enums/ConfigTypes";
-import { PrefixLogger } from "src/util/PrefixLogger";
+import { PrefixLogger } from "../util/PrefixLogger";
 
 export class FasterCraftingTimeChanger {
     private logger: PrefixLogger;

@@ -1,6 +1,6 @@
 import { DependencyContainer } from "tsyringe";
 import { DatabaseServer } from "@spt/servers/DatabaseServer";
-import { OtherTweaks } from "src/types";
+import { OtherTweaks } from "../types";
 import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
 import { PrefixLogger } from "../util/PrefixLogger";
 import { ItemTpl } from "@spt/models/enums/ItemTpl";

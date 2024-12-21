@@ -26,7 +26,7 @@ class Softcore implements IPostDBLoadMod, IPreSptLoadMod {
         }
         
         try {
-            this.config = new ConfigServer().loadConfig().validateConfig().getConfig();
+            this.config = new ConfigServer().loadConfig().getConfig();
         } catch (error) {
             this.config = null;
             this.logger.error("ConfigServer: ${error.message}");
@@ -58,6 +58,7 @@ class Softcore implements IPostDBLoadMod, IPreSptLoadMod {
         new CraftingChangesChanger(container).apply(this.config.craftingChanges);
         new InsuranceChangesChanger(container).apply(this.config.insuranceChanges);
         new OtherTweaksChanger(container).apply(this.config.otherTweaks);
+        this.logger.info("Loaded Changes successfully");
     }
 }
 

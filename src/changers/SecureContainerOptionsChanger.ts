@@ -5,8 +5,8 @@ import { ItemTpl } from "@spt/models/enums/ItemTpl";
 import { ITemplateItem } from "@spt/models/eft/common/tables/ITemplateItem";
 import { Traders } from "@spt/models/enums/Traders";
 import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
-import { containerRecipes } from "src/assets/recipes";
-import { PrefixLogger } from "src/util/PrefixLogger";
+import { containerRecipes } from "../assets/recipes";
+import { PrefixLogger } from "../util/PrefixLogger";
 
 export class SecureContainerOptionsChanger {
     private logger: PrefixLogger;

@@ -1,6 +1,6 @@
 import { DependencyContainer } from "tsyringe";
 import { DatabaseServer } from "@spt/servers/DatabaseServer";
-import { TraderChanges } from "src/types";
+import { TraderChanges } from "../types";
 import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
 import { PrefixLogger } from "../util/PrefixLogger";
 import { Traders } from "@spt/models/enums/Traders";
@@ -9,12 +9,15 @@ import { ItemTpl } from "@spt/models/enums/ItemTpl";
 import { ConfigServer } from "@spt/servers/ConfigServer";
 import { ITraderConfig } from "@spt/models/spt/config/ITraderConfig";
 import { ConfigTypes } from "@spt/models/enums/ConfigTypes";
-import { fleaBarterRequestBlacklist } from "src/assets/fleamarket";
-
+import { BSGblacklist, fleaBarterRequestWhitelist } from "../assets/fleamarket";
+import { FenceService } from "@spt/services/FenceService";
+import { FenceBaseAssortGenerator } from "@spt/generators/FenceBaseAssortGenerator";
 export class TraderChangesChanger {
     private logger: PrefixLogger;
     private tables: IDatabaseTables;
     private traderConfig: ITraderConfig;
+    private fenceService: FenceService;
+    private fenceBaseAssortGenerator: FenceBaseAssortGenerator;
 
     constructor(container: DependencyContainer) {
         this.logger = PrefixLogger.getInstance();
@@ -22,6 +25,8 @@ export class TraderChangesChanger {
         const configServer = container.resolve<ConfigServer>("ConfigServer");
         this.tables = databaseServer.getTables();
         this.traderConfig = configServer.getConfig<ITraderConfig>(ConfigTypes.TRADER);
+        this.fenceService = container.resolve<FenceService>("FenceService");
+        this.fenceBaseAssortGenerator = container.resolve<FenceBaseAssortGenerator>("FenceBaseAssortGenerator");
     }
 
     public apply(config: TraderChanges) {
@@ -72,13 +77,14 @@ export class TraderChangesChanger {
         };
 
         for (const [traderID, trader] of Object.entries(traderList)) {
-            trader.base.loyaltyLevels[0].buy_price_coef = 35;
-            trader.base.loyaltyLevels[1].buy_price_coef = 30;
-            trader.base.loyaltyLevels[2].buy_price_coef = 25;
-            trader.base.loyaltyLevels[3].buy_price_coef = 20;
-
+            let buyPriceCoef = 35;
+            if(!Object.keys(buyPriceAdjustment).includes(traderID)){
+                continue;
+            }
             for (const loyaltyLevel of trader.base.loyaltyLevels) {
+                loyaltyLevel.buy_price_coef = buyPriceCoef;
                 loyaltyLevel.buy_price_coef += buyPriceAdjustment[traderID];
+                buyPriceCoef -= 5
             }
         }
     }
@@ -101,23 +107,23 @@ export class TraderChangesChanger {
     }
 
     private doPacifistFence(numberOfFenceOffers: number) {
-        const fenceConfig = this.traderConfig.fence;
-        const fenceBlacklist = fenceConfig.blacklist;
-        fenceBlacklist.push(...fleaBarterRequestBlacklist);
+        // Fence uses multiple blacklists to generate items he can sell in SPT, these are: itemConfig.blacklist, itemconfig.rewardItemBlacklist, not a quest item, and the basetype is not blacklisted on traderconfig.fence.blacklist
+        const fenceBlacklist = Object.values(BaseClasses).filter((baseClass) => !fleaBarterRequestWhitelist.includes(baseClass));
 
-        fenceConfig.assortSize = numberOfFenceOffers;
-        fenceConfig.blacklist = fenceBlacklist; //itemid or baseid
-        fenceConfig.equipmentPresetMinMax.min = 0;
-        fenceConfig.equipmentPresetMinMax.max = 0;
-        fenceConfig.weaponPresetMinMax.min = 0;
-        fenceConfig.weaponPresetMinMax.max = 0;
-        fenceConfig.discountOptions.assortSize = numberOfFenceOffers * 2;
-        fenceConfig.itemPriceMult = 1;
-        fenceConfig.discountOptions.itemPriceMult = 0.82;
-        fenceConfig.discountOptions.weaponPresetMinMax.min = 0;
-        fenceConfig.discountOptions.weaponPresetMinMax.max = 0;
-        fenceConfig.discountOptions.equipmentPresetMinMax.min = 0;
-        fenceConfig.discountOptions.equipmentPresetMinMax.max = 0;
+        this.traderConfig.fence.assortSize = numberOfFenceOffers;
+        this.traderConfig.fence.blacklist = fenceBlacklist; //Only baseIDs
+        this.traderConfig.fence.equipmentPresetMinMax.min = 0;
+        this.traderConfig.fence.equipmentPresetMinMax.max = 0;
+        this.traderConfig.fence.weaponPresetMinMax.min = 0;
+        this.traderConfig.fence.weaponPresetMinMax.max = 0;
+        this.traderConfig.fence.discountOptions.assortSize = numberOfFenceOffers * 2;
+        this.traderConfig.fence.itemPriceMult = 1;
+        this.traderConfig.fence.discountOptions.itemPriceMult = 0.82;
+        this.traderConfig.fence.discountOptions.weaponPresetMinMax.min = 0;
+        this.traderConfig.fence.discountOptions.weaponPresetMinMax.max = 0;
+        this.traderConfig.fence.discountOptions.equipmentPresetMinMax.min = 0;
+        this.traderConfig.fence.discountOptions.equipmentPresetMinMax.max = 0;
+        this.fenceBaseAssortGenerator.generateFenceBaseAssorts();
     }
 
     private doReasonablyPricedCases() {
@@ -175,6 +181,15 @@ export class TraderChangesChanger {
                 requirement.count /= 10; // Scale down LEDX barter cost by 10
             },
         });
+
+        this.modifyTraderBarters(Traders.THERAPIST, ItemTpl.CONTAINER_THICC_ITEM_CASE, {
+            [ItemTpl.BARTER_LEDX_SKIN_TRANSILLUMINATOR]: (requirement) => {
+                requirement.count = 5; // Scale down LEDX barter cost by 10
+            },
+            [ItemTpl.DRINK_BOTTLE_OF_FIERCE_HATCHLING_MOONSHINE]: (requirement) => {
+                requirement.count = 10; // Scale down LEDX barter cost by 10
+            },
+        });
     }
 
     private modifyTraderBarters(
@@ -200,7 +215,7 @@ export class TraderChangesChanger {
         // Apply adjustments based on the requirement type
         for (const [adjustmentTpl, countAdjustment] of Object.entries(adjustments)) {
             for (const barterID of barterIDs) {
-                const hasTargetTpl = traderAssort.barter_scheme[barterID].some((requirementSet) =>
+                const hasTargetTpl = traderAssort.barter_scheme?.[barterID]?.some((requirementSet) =>
                     requirementSet.some((req) => req._tpl === adjustmentTpl),
                 );
                 if (hasTargetTpl) {
@@ -268,14 +283,13 @@ export class TraderChangesChanger {
                         for (const item of reward.items) {
                             if (item._tpl === ItemTpl.MONEY_ROUBLES) {
                                 item._tpl = ItemTpl.MONEY_EUROS;
-                                const upd = item.upd;
-                                if (!upd?.StackObjectsCount) {
+                                if (!item.upd?.StackObjectsCount) {
                                     this.logger.warning(
                                         "TraderChangesChanger: doSkierUsesEuros: Quest: ${quest._id} reward item: ${item._tpl} upd not found, skipping",
                                     );
                                     continue;
                                 }
-                                upd.StackObjectsCount = Math.round(upd.StackObjectsCount / euroPrice);
+                                item.upd.StackObjectsCount = Math.round(item.upd.StackObjectsCount / euroPrice);
                             }
                         }
                     }
@@ -286,9 +300,12 @@ export class TraderChangesChanger {
 
     private doBiggerLimits(multiplier: number) {
         for (const traderID of Object.values(Traders)) {
+            if(traderID === Traders.LIGHTHOUSEKEEPER){
+                continue;
+            }
             const traderItems = this.tables.traders?.[traderID].assort?.items;
             if (!traderItems) {
-                this.logger.warning("TraderChangesChanger: doBiggerLimits: traderItems not found, skipping");
+                this.logger.warning(`TraderChangesChanger: doBiggerLimits: traderItems for trader ${traderID} not found, skipping`);
                 continue;
             }
             for(const item of traderItems){

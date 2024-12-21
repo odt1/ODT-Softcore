@@ -125,7 +125,7 @@ export interface EconomyKeys {
 
 export interface BarterEconomy {
     enabled: boolean;
-    cashOffersPerentage: number;
+    cashOffersPercentage: number;
     barterPriceVariance: number;
     offerItemCount: { min: number; max: number };
     nonStackableCount: { min: number; max: number };

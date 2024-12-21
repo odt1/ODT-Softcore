@@ -1,9 +1,9 @@
 import { DependencyContainer } from "tsyringe";
 import { DatabaseServer } from "@spt/servers/DatabaseServer";
-import { FasterBitcoinFarming } from "src/types";
+import { FasterBitcoinFarming } from "../types";
 import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
 import { ItemTpl } from "@spt/models/enums/ItemTpl";
-import { PrefixLogger } from "src/util/PrefixLogger";
+import { PrefixLogger } from "../util/PrefixLogger";
 
 export class FasterBitcoinFarmingChanger {
     private logger: PrefixLogger;

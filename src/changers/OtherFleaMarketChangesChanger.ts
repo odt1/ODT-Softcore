@@ -1,8 +1,8 @@
 import { DependencyContainer } from "tsyringe";
 import { DatabaseServer } from "@spt/servers/DatabaseServer";
-import { OtherFleaMarketChanges} from "src/types";
+import { OtherFleaMarketChanges} from "../types";
 import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
-import { PrefixLogger } from "src/util/PrefixLogger";
+import { PrefixLogger } from "../util/PrefixLogger";
 import { ConfigServer } from "@spt/servers/ConfigServer";
 import { ConfigTypes } from "@spt/models/enums/ConfigTypes";
 import { Condition, IRagfairConfig } from "@spt/models/spt/config/IRagfairConfig";

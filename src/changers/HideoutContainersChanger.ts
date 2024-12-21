@@ -1,10 +1,10 @@
 import { DependencyContainer } from "tsyringe";
 import { DatabaseServer } from "@spt/servers/DatabaseServer";
-import { HideoutContainers } from "src/types";
+import { HideoutContainers } from "../types";
 import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
 import { ITemplateItem } from "@spt/models/eft/common/tables/ITemplateItem";
 import { ItemTpl } from "@spt/models/enums/ItemTpl";
-import { PrefixLogger } from "src/util/PrefixLogger";
+import { PrefixLogger } from "../util/PrefixLogger";
 
 export class HideoutContainersChanger {
     private logger: PrefixLogger;

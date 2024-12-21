@@ -448,36 +448,6 @@ export const craftingAdjustments = [
         },
     },
     {
-        id: ItemTpl.AMMO_9X19_PBP,
-        adjust: (craft: IHideoutProduction) => {
-            craft.requirements = [
-                {
-                    areaType: 10,
-                    requiredLevel: 3,
-                    type: "Area",
-                },
-                {
-                    templateId: ItemTpl.AMMO_9X19_AP_63,
-                    count: 200,
-                    isFunctional: false,
-                    isEncoded: false,
-                    type: "Item",
-                },
-                {
-                    templateId: ItemTpl.BARTER_GUNPOWDER_HAWK,
-                    count: 1,
-                    isFunctional: false,
-                    isEncoded: false,
-                    type: "Item",
-                },
-                {
-                    templateId: ItemTpl.BARTER_TOOLSET,
-                    type: "Tool",
-                },
-            ];
-        },
-    },
-    {
         id: ItemTpl.AMMO_45ACP_AP,
         adjust: (craft: IHideoutProduction) => {
             craft.count = 120;
@@ -591,50 +561,6 @@ export const craftingAdjustments = [
         },
     },
     {
-        id: ItemTpl.AMMO_9X19_RIP,
-        adjust: (craft: IHideoutProduction) => {
-            craft.requirements = [
-                {
-                    areaType: 10,
-                    requiredLevel: 2,
-                    type: "Area",
-                },
-                {
-                    templateId: ItemTpl.AMMO_9X19_PST,
-                    count: 180,
-                    isFunctional: false,
-                    isEncoded: false,
-                    type: "Item",
-                },
-                {
-                    templateId: ItemTpl.KNIFE_BARS_A2607_95KH18,
-                    count: 2,
-                    isFunctional: false,
-                    isEncoded: false,
-                    type: "Item",
-                },
-                {
-                    templateId: ItemTpl.BARTER_PLIERS_ELITE,
-                    type: "Tool",
-                },
-                {
-                    templateId: ItemTpl.BARTER_FIERCE_BLOW_SLEDGEHAMMER,
-                    type: "Tool",
-                },
-            ];
-        },
-    },
-    {
-        id: ItemTpl.AMMO_762X54R_SNB,
-        adjust: (craft: IHideoutProduction) => {
-            const requirement = craft.requirements.find((requirement) => requirement.type === "Area");
-            if (!requirement) {
-                return;
-            }
-            requirement.requiredLevel = 3;
-        },
-    },
-    {
         id: ItemTpl.AMMO_9X18PM_PSTM,
         adjust: (craft: IHideoutProduction) => {
             craft.requirements.push({
@@ -715,44 +641,6 @@ export const craftingAdjustments = [
                 },
                 {
                     templateId: ItemTpl.BARTER_PLIERS,
-                    type: "Tool",
-                },
-            ];
-        },
-    },
-    {
-        id: ItemTpl.AMMO_762X51_M61,
-        adjust: (craft: IHideoutProduction) => {
-            craft.count = 80;
-            craft.requirements = [
-                {
-                    areaType: 10,
-                    requiredLevel: 3,
-                    type: "Area",
-                },
-                {
-                    templateId: ItemTpl.BARTER_GUNPOWDER_HAWK,
-                    count: 2,
-                    isFunctional: false,
-                    isEncoded: false,
-                    type: "Item",
-                },
-                {
-                    templateId: ItemTpl.BARTER_RADIATOR_HELIX,
-                    count: 1,
-                    isFunctional: false,
-                    isEncoded: false,
-                    type: "Item",
-                },
-                {
-                    templateId: ItemTpl.AMMO_762X51_M62,
-                    count: 80,
-                    isFunctional: false,
-                    isEncoded: false,
-                    type: "Item",
-                },
-                {
-                    templateId: ItemTpl.MULTITOOLS_LEATHERMAN_MULTITOOL,
                     type: "Tool",
                 },
             ];
