@@ -189,7 +189,7 @@ export class TraderChangesChanger {
         });
 
         this.modifyTraderBarters(Traders.THERAPIST, ItemTpl.BARTER_LEDX_SKIN_TRANSILLUMINATOR, {
-            [ItemTpl.MONEY_ROUBLES]: (requirement) => {
+            [ItemTpl.BARTER_DOGTAG_USEC]: (requirement) => {
                 requirement.count /= 10; // Scale down LEDX barter cost by 10
             },
         });
