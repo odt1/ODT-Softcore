@@ -9,7 +9,7 @@ import { ItemTpl } from "@spt/models/enums/ItemTpl";
 import { ConfigServer } from "@spt/servers/ConfigServer";
 import { ITraderConfig } from "@spt/models/spt/config/ITraderConfig";
 import { ConfigTypes } from "@spt/models/enums/ConfigTypes";
-import { BSGblacklist, fleaBarterRequestWhitelist } from "../assets/fleamarket";
+import { BSGblacklist, fleaBarterRequestWhitelist, pacifistFenceItemBaseWhitelist } from "../assets/fleamarket";
 import { FenceService } from "@spt/services/FenceService";
 import { FenceBaseAssortGenerator } from "@spt/generators/FenceBaseAssortGenerator";
 export class TraderChangesChanger {
@@ -108,22 +108,34 @@ export class TraderChangesChanger {
 
     private doPacifistFence(numberOfFenceOffers: number) {
         // Fence uses multiple blacklists to generate items he can sell in SPT, these are: itemConfig.blacklist, itemconfig.rewardItemBlacklist, not a quest item, and the basetype is not blacklisted on traderconfig.fence.blacklist
-        const fenceBlacklist = Object.values(BaseClasses).filter((baseClass) => !fleaBarterRequestWhitelist.includes(baseClass));
-
+        const fenceWhitelist = pacifistFenceItemBaseWhitelist as string[];
+        this.traderConfig.fence.itemTypeLimits = Object.fromEntries(Object.values(BaseClasses).map((key) => [key, 0]));
+        // DO NOT set everything to 0 otherwise Server won't start correctly as Fence will be stuck in an infinite loop trying to gen items.
+        for(const [itemBaseID, value]of Object.entries(this.traderConfig.fence.itemTypeLimits)){
+            if(fenceWhitelist.includes(itemBaseID)){
+                this.traderConfig.fence.itemTypeLimits[itemBaseID] = numberOfFenceOffers;
+            } 
+        }
+        ItemTpl.INFO_ENCRYPTED_FLASH_DRIVE
+        const items = this.tables.templates?.items;
+        if (!items) {
+            this.logger.warning("PacifistFleaMarket: enableWhitelist: items table not found");
+            return;
+        }
+        const questItemIDs = Object.values(items).filter((item) => item._props.QuestItem).map((item) => item._id);
+        this.traderConfig.fence.blacklist = [...new Set(...BSGblacklist, ...questItemIDs)];
         this.traderConfig.fence.assortSize = numberOfFenceOffers;
-        this.traderConfig.fence.blacklist = fenceBlacklist; //Only baseIDs
         this.traderConfig.fence.equipmentPresetMinMax.min = 0;
         this.traderConfig.fence.equipmentPresetMinMax.max = 0;
         this.traderConfig.fence.weaponPresetMinMax.min = 0;
         this.traderConfig.fence.weaponPresetMinMax.max = 0;
-        this.traderConfig.fence.discountOptions.assortSize = numberOfFenceOffers * 2;
         this.traderConfig.fence.itemPriceMult = 1;
+        this.traderConfig.fence.discountOptions.assortSize = numberOfFenceOffers * 2;
         this.traderConfig.fence.discountOptions.itemPriceMult = 0.82;
         this.traderConfig.fence.discountOptions.weaponPresetMinMax.min = 0;
         this.traderConfig.fence.discountOptions.weaponPresetMinMax.max = 0;
         this.traderConfig.fence.discountOptions.equipmentPresetMinMax.min = 0;
         this.traderConfig.fence.discountOptions.equipmentPresetMinMax.max = 0;
-        this.fenceBaseAssortGenerator.generateFenceBaseAssorts();
     }
 
     private doReasonablyPricedCases() {

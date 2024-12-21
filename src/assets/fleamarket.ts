@@ -93,6 +93,25 @@ export const fleaBarterRequestBlacklistItems = [
     ItemTpl.BARTER_DOGTAG_USEC_TUE
 ]
 
+export const pacifistFenceItemBaseWhitelist = [
+    BaseClasses.DRINK,
+    BaseClasses.INFO,
+    BaseClasses.FOOD,
+    BaseClasses.DRUGS,
+    BaseClasses.MEDKIT,
+    BaseClasses.MEDICAL,
+    BaseClasses.BATTERY,
+    BaseClasses.ELECTRONICS,
+    BaseClasses.BUILDING_MATERIAL,
+    BaseClasses.HOUSEHOLD_GOODS,
+    BaseClasses.JEWELRY,
+    BaseClasses.LUBRICANT,
+    BaseClasses.OTHER,
+    BaseClasses.TOOL,
+    BaseClasses.MEDICAL_SUPPLIES,
+    BaseClasses.FUEL
+]
+
 export const BSGblacklist = [
 	// BSGblacklist from 3.5.0, hardcoded for safety, NEED TO UPDATE ON NEW PATCHES!!!!!!!
 	// DON'T TOUCH THIS
@@ -100,6 +119,8 @@ export const BSGblacklist = [
 	// DON'T TOUCH THIS
 	// DON'T TOUCH THIS
 	// DON'T TOUCH THIS
+    ItemTpl.INFO_ENCRYPTED_FLASH_DRIVE,
+    ItemTpl.INFO_DECRYPTED_FLASH_DRIVE,
 	"6357c98711fb55120211f7e1", // M203 40mm underbarrel grenade launcher
 	"62e7e7bbe6da9612f743f1e0", // GP-25 "Kostyor" 40mm underbarrel grenade launcher
 	"5648b62b4bdc2d9d488b4585", // GP-34 40mm underbarrel grenade launcher

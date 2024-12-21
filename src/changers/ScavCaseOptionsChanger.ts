@@ -81,7 +81,7 @@ export class ScavCaseOptionsChanger {
             return;
         }
 
-        // Add items to a blacklist that are worth < 10000 and are buyable from traders. This already uses SPT blacklists for rewards, no need to add them twice.
+        // Add items to a blacklist that are worth < 5000 and are buyable from traders. This already uses SPT blacklists for rewards, no need to add them twice.
         for (const item of potentialScavCaseRewards) {
             let value = this.handbookHelper.getTemplatePrice(item._id);
             if (item._parent === BaseClasses.AMMO_BOX) {
@@ -98,7 +98,7 @@ export class ScavCaseOptionsChanger {
                 value = Math.round(ammoPrice * count);
             }
 
-            if (value < 10000 || buyableitems.has(item._id)) {
+            if (value < 5000 || buyableitems.has(item._id)) {
                 this.scavCaseConfig.rewardItemBlacklist.push(item._id);
             }
         }
