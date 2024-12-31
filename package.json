@@ -4,7 +4,7 @@
 	"main": "src/Softcore.js",
 	"license": "MIT",
 	"author": "ODT",
-	"sptVersion": "3.10.3",
+	"sptVersion": "~3.10",
 	"loadBefore": [],
 	"loadAfter": [],
 	"incompatibilities": [],
