@@ -113,12 +113,12 @@ export interface PriceRebalance {
 
 export interface PacifistFleaMarket {
 	enabled: boolean
-	whitelist: boolean
-	questKeys: EconomyKeys
-	markedKeys: EconomyKeys
+	whitelist: EconomyToggles
+	questKeys: EconomyToggles
+	markedKeys: EconomyToggles
 }
 
-export interface EconomyKeys {
+export interface EconomyToggles {
 	enabled: boolean
 	priceMultiplier: number
 }

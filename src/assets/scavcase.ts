@@ -139,8 +139,8 @@ export const scavCaseRecipesReworked: IScavRecipe[] = [
 				max: 5,
 			},
 			Superrare: {
-				min: 0,
-				max: 1,
+				min: 1,
+				max: 2,
 			},
 		},
 		productionTime: 19200,
