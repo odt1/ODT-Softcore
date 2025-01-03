@@ -420,8 +420,8 @@ class Mod implements IPostDBLoadMod {
 									max: 5,
 								},
 								Superrare: {
-									min: 0,
-									max: 1,
+									min: 1,
+									max: 2,
 								},
 							},
 							ProductionTime: 19200,
@@ -570,6 +570,7 @@ class Mod implements IPostDBLoadMod {
 						items["5811ce572459770cba1a34ea"]._props.Grids[0]._props.cellsV = 100
 						items["5811ce662459770f6f490f32"]._props.Grids[0]._props.cellsV = 150
 						items["5811ce772459770e9e5f9532"]._props.Grids[0]._props.cellsV = 200
+						items["6602bcf19cc643f44a04274b"]._props.Grids[0]._props.cellsV = 200
 					} catch (error) {
 						logger.warning("\nHideoutOptions.StashOptions.BiggerStash failed. Send bug report. Continue safely.")
 						log(error)
@@ -950,15 +951,15 @@ class Mod implements IPostDBLoadMod {
 				therapist.base.insurance.min_return_hour = 2
 				therapist.base.insurance.max_return_hour = 2
 				therapist.base.insurance.max_storage_time = 720
-				insuranceConfig.returnChancePercent["54cb50c76803fa8b248b4571"] = 80
-				insuranceConfig.returnChancePercent["54cb57776803fa99248b456e"] = 60
-				for (const loyaltyLevelID in prapor.base.loyaltyLevels) {
-					prapor.base.loyaltyLevels[loyaltyLevelID].insurance_price_coef = 30
-				}
+				// insuranceConfig.returnChancePercent["54cb50c76803fa8b248b4571"] = 80
+				// insuranceConfig.returnChancePercent["54cb57776803fa99248b456e"] = 60
+				// for (const loyaltyLevelID in prapor.base.loyaltyLevels) {
+				// 	prapor.base.loyaltyLevels[loyaltyLevelID].insurance_price_coef = 30
+				// }
 
-				for (const loyaltyLevelID in therapist.base.loyaltyLevels) {
-					therapist.base.loyaltyLevels[loyaltyLevelID].insurance_price_coef = 5
-				}
+				// for (const loyaltyLevelID in therapist.base.loyaltyLevels) {
+				// 	therapist.base.loyaltyLevels[loyaltyLevelID].insurance_price_coef = 5
+				// }
 			} catch (error) {
 				logger.warning("\nInsuranceChanges failed. Send bug report. Continue safely.")
 				log(error)
@@ -1017,6 +1018,9 @@ class Mod implements IPostDBLoadMod {
 								ragfairConfig.dynamic.blacklist.custom.push(itemID) // Better semantics then CanSellOnRagfair
 								// items[itemID]._props.CanSellOnRagfair = false
 							}
+							// if (items[itemID]._parent == "5485a8684bdc2da71d8b4567") {
+							// 	log(`${itemID} | ${items[itemID]._name}, ${prices[itemID]}`)
+							// }
 						}
 					} catch (error) {
 						logger.warning("\nEconomyOptions.Price_Rebalance and Pacifist_FleaMarket failed. Send bug report. Continue safely.")
@@ -1148,6 +1152,9 @@ class Mod implements IPostDBLoadMod {
 								prices["59f32bb586f774757e1e8442"] = 2 // Dogtag BEAR, 600
 								prices["6662e9aca7e0b43baa3d5f74"] = 2 // Dogtag BEAR, 600
 								prices["6662e9cda7e0b43baa3d5f76"] = 2 // Dogtag BEAR, 600
+								prices["660bc341c38b837877075e4c"] = 2 // Encripted Documents
+								prices["660bbc47c38b837877075e47"] = 2 // Encrypted flash drive
+								prices["660bbc98c38b837877075e4a"] = 2 // Decrypted flash drive
 
 								if (items[x]._props.CanSellOnRagfair == true) {
 									logger.warning(
@@ -1508,7 +1515,8 @@ class Mod implements IPostDBLoadMod {
 					"5b3b6e495acfc4330140bd88"
 
 				// UHF RFID Reader huge buff (only Broken GPhone X smartphone + Signal Jammer)
-				getCraft("5c052fb986f7746b2101e909").requirements = [
+				/*
+ 				getCraft("5c052fb986f7746b2101e909").requirements = [
 					{
 						areaType: 11,
 						requiredLevel: 2,
@@ -1534,7 +1542,8 @@ class Mod implements IPostDBLoadMod {
 						templateId: "5d63d33b86f7746ea9275524",
 						type: "Tool",
 					},
-				]
+				] 
+				*/
 
 				// Gasan buff
 				getCraft("590a3efd86f77437d351a25b").requirements.forEach((x) => {
@@ -1680,6 +1689,10 @@ class Mod implements IPostDBLoadMod {
 					{
 						templateId: "590c2e1186f77425357b6124",
 						type: "Tool",
+					},
+					{
+						questId: "5c1128e386f7746565181106",
+						type: "QuestComplete",
 					},
 				]
 
@@ -1883,6 +1896,10 @@ class Mod implements IPostDBLoadMod {
 						templateId: "63a0b208f444d32d6f03ea1e",
 						type: "Tool",
 					},
+					{
+						questId: "5c1128e386f7746565181106",
+						type: "QuestComplete",
+					},
 				]
 
 				// "5c0d5e4486f77478390952fe", // 5.45x39mm PPBS gs "Igolnik"
@@ -2062,7 +2079,7 @@ class Mod implements IPostDBLoadMod {
 */
 				// 7.62x54mm R SNB gzh nerf lol
 				// getCraft("560d61e84bdc2da74d8b4571").requirements.find((x) => x.templateId == "5887431f2459777e1612938f").templateId = "5e023d34e8a400319a28ed44"
-				getCraft("560d61e84bdc2da74d8b4571").requirements.find((x) => x.type == "Area").requiredLevel = 3
+				// getCraft("560d61e84bdc2da74d8b4571").requirements.find((x) => x.type == "Area").requiredLevel = 3
 
 				// 9x21mm BT gzh buff
 				// getCraft("5a26ac0ec4a28200741e1e18")
@@ -2176,6 +2193,10 @@ class Mod implements IPostDBLoadMod {
 						templateId: "5d4042a986f7743185265463",
 						type: "Tool",
 					},
+					{
+						questId: "6179ad0a6e9dd54ac275e3f2",
+						type: "QuestComplete",
+					},
 				]
 
 				// 5.56x45mm M856A1 buff
@@ -2244,6 +2265,10 @@ class Mod implements IPostDBLoadMod {
 						templateId: "590c2b4386f77425357b6123",
 						type: "Tool",
 					},
+					{
+						questId: "5bc47dbf86f7741ee74e93b9",
+						type: "QuestComplete",
+					},
 				]
 				// 7.62x51mm M61 buff
 				getCraft("5a6086ea4f39f99cd479502f").requirements = [
@@ -2276,6 +2301,10 @@ class Mod implements IPostDBLoadMod {
 					{
 						templateId: "544fb5454bdc2df8738b456a",
 						type: "Tool",
+					},
+					{
+						questId: "60e71ccb5688f6424c7bfec4",
+						type: "QuestComplete",
 					},
 				]
 				getCraft("5a6086ea4f39f99cd479502f").count = 80

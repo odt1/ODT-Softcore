@@ -55,6 +55,7 @@ const questKeys = [
 	"63a39fc0af870e651d58e6ae", // Chekannaya 15 apartment key
 	"5938504186f7740991483f30", // Dorm room 203 key
 	"5913877a86f774432f15d444", // Gas station storage room key
+	"64ccc246ff54fb38131acf29", // "Ключ от кабинета лучевой диагностики",
 ];
 
 const itemWhitelist = [
@@ -91,6 +92,10 @@ const itemWhitelist = [
 	"5ab8f85d86f7745cd93a1cf5", // Арафатка (Зеленая)",
 	"5ab8f4ff86f77431c60d91ba", // Балаклава Призрак,
 	"55d614004bdc2d86028b4568", // SureFire SOCOM556-MONSTER 5.56x45 sound suppressor
+	"59f8a37386f7747af3328f06", // Fortis Shift tactical foregrip
+	"5d025cc1d7ad1a53845279ef", // AR-15 HK Ergo PSG-1 style pistol grip
+	"5e21ca18e4d47f0da15e77dd", // AK CNC Warrior 5.56x45 muzzle device adapter
+	"588226ef24597767af46e39c", // Magpul AFG tactical foregrip (Olive Drab)
 ];
 
 const markedKeys = [

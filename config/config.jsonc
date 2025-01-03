@@ -213,7 +213,7 @@
 		"enabled": true,
 		"Skill_Exp_Buffs": {
 			// Buff Vitality, Sniper, Surgery, Immunity, Stress Resistance and MagDrills skills leveling (x10).
-			"enabled": true
+			"enabled": false
 		},
 		"Bigger_Hideout_Containers": {
 			// Slightly buffs basic hideout containers: Medicine case 7x7 -> 10x10, Holodilnick 8x8 -> 10x10, Magazine case 7x7 -> 7x10, Item case 8x8 -> 10x10, Weapon case 5x10 -> 6x10
