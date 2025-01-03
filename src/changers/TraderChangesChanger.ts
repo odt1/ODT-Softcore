@@ -78,13 +78,13 @@ export class TraderChangesChanger {
 
         for (const [traderID, trader] of Object.entries(traderList)) {
             let buyPriceCoef = 35;
-            if(!Object.keys(buyPriceAdjustment).includes(traderID)){
+            if (!Object.keys(buyPriceAdjustment).includes(traderID)) {
                 continue;
             }
             for (const loyaltyLevel of trader.base.loyaltyLevels) {
                 loyaltyLevel.buy_price_coef = buyPriceCoef;
                 loyaltyLevel.buy_price_coef += buyPriceAdjustment[traderID];
-                buyPriceCoef -= 5
+                buyPriceCoef -= 5;
             }
         }
     }
@@ -111,18 +111,20 @@ export class TraderChangesChanger {
         const fenceWhitelist = pacifistFenceItemBaseWhitelist as string[];
         this.traderConfig.fence.itemTypeLimits = Object.fromEntries(Object.values(BaseClasses).map((key) => [key, 0]));
         // DO NOT set everything to 0 otherwise Server won't start correctly as Fence will be stuck in an infinite loop trying to gen items.
-        for(const [itemBaseID, value]of Object.entries(this.traderConfig.fence.itemTypeLimits)){
-            if(fenceWhitelist.includes(itemBaseID)){
+        for (const [itemBaseID, value] of Object.entries(this.traderConfig.fence.itemTypeLimits)) {
+            if (fenceWhitelist.includes(itemBaseID)) {
                 this.traderConfig.fence.itemTypeLimits[itemBaseID] = numberOfFenceOffers;
-            } 
+            }
         }
-        ItemTpl.INFO_ENCRYPTED_FLASH_DRIVE
+        ItemTpl.INFO_ENCRYPTED_FLASH_DRIVE;
         const items = this.tables.templates?.items;
         if (!items) {
             this.logger.warning("PacifistFleaMarket: enableWhitelist: items table not found");
             return;
         }
-        const questItemIDs = Object.values(items).filter((item) => item._props.QuestItem).map((item) => item._id);
+        const questItemIDs = Object.values(items)
+            .filter((item) => item._props.QuestItem)
+            .map((item) => item._id);
         this.traderConfig.fence.blacklist = [...new Set(...BSGblacklist, ...questItemIDs)];
         this.traderConfig.fence.assortSize = numberOfFenceOffers;
         this.traderConfig.fence.equipmentPresetMinMax.min = 0;
@@ -268,7 +270,14 @@ export class TraderChangesChanger {
             this.logger.warning("TraderChangesChanger: doSkierUsesEuros: Skier assort not found, skipping");
             return;
         }
-        for (const barter of Object.values(skierAssorts.barter_scheme)) {
+
+        const eurBarterID = skierAssorts.items.find((item) => item._tpl === ItemTpl.MONEY_EUROS)?._id;
+
+        for (const [ID, barter] of Object.entries(skierAssorts.barter_scheme)) {
+            if (ID === eurBarterID) {
+                continue;
+            }
+
             if (barter[0][0]._tpl === ItemTpl.MONEY_ROUBLES) {
                 barter[0][0].count = Math.ceil(barter[0][0].count / euroPrice);
                 barter[0][0]._tpl = ItemTpl.MONEY_EUROS;
@@ -302,13 +311,13 @@ export class TraderChangesChanger {
                                     continue;
                                 }
                                 item.upd.StackObjectsCount = Math.ceil(item.upd.StackObjectsCount / euroPrice);
-                                if(!reward.value){
+                                if (!reward.value) {
                                     this.logger.warning(
                                         `TraderChangesChanger: doSkierUsesEuros: Quest: ${quest._id} reward value not found, skipping`,
                                     );
                                     continue;
                                 }
-                                reward.value = Math.ceil(reward.value as number / euroPrice);
+                                reward.value = Math.ceil((reward.value as number) / euroPrice);
                             }
                         }
                     }
@@ -319,16 +328,18 @@ export class TraderChangesChanger {
 
     private doBiggerLimits(multiplier: number) {
         for (const traderID of Object.values(Traders)) {
-            if(traderID === Traders.LIGHTHOUSEKEEPER){
+            if (traderID === Traders.LIGHTHOUSEKEEPER) {
                 continue;
             }
             const traderItems = this.tables.traders?.[traderID].assort?.items;
             if (!traderItems) {
-                this.logger.warning(`TraderChangesChanger: doBiggerLimits: traderItems for trader ${traderID} not found, skipping`);
+                this.logger.warning(
+                    `TraderChangesChanger: doBiggerLimits: traderItems for trader ${traderID} not found, skipping`,
+                );
                 continue;
             }
-            for(const item of traderItems){
-                if(item.upd?.BuyRestrictionMax){
+            for (const item of traderItems) {
+                if (item.upd?.BuyRestrictionMax) {
                     item.upd.BuyRestrictionMax *= multiplier;
                 }
             }
