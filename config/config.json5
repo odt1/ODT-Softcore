@@ -121,7 +121,7 @@
             // CORE feature of this mod. Only allows to buy items on flea using other random FiR or crafted items. Uses hardcoded fleaBarterBlacklist array as filter for allowed items (meds, barter items, food and info items are enabled, exceptions are stimulants and fuel). NOT recommended to disable.
             enabled: true,
             // Allow small, random percentage of listings to be buyable for cash. 0 is true barter-only ecomnomy (except the cheapest items like AA battery, but this is a SPT-AKI limitation), I'd say this is a preferred way to play with this mod, but it might be a little too hard sometimes. 5% seems like a fine number that makes life just a little bit easier to avoid item deadlocks. Recommendation: 0 to 15.
-            cashOffersPerentage: 8,
+            cashOffersPercentage: 8,
             // ± percent of price variance between item listing and it's barter value. Bigger number - more wild and varied random trades, eg you can see a Defiblirator (that has 224k value) offered for a Lion (162k value) or a Tank Battery (330k value). This CORE feature makes the whole mod tick, that what makes it fun, random and engaging and stimulates hustling in a war broken society. You can get lucky, and get a great deal, or you might desperately need an item that is way overvalued but you only have the expensive item that it is asked for. Also more variance means it's easier to encounter an offer you have an item for and easier trades. Recomendation: 20-50
             barterPriceVariance: 40,
             offerItemCount: {
@@ -214,7 +214,7 @@
         // ZiD SP-81 26x75 signal pistol can be put in special slots and is not removed after death.
         signalPistolInSpecialSlots: true,
         // Reverts BSG decision to make all items examined by default
-        unexaminedItemsAreBack: true,
+        unexaminedItemsAreBack: false,
         // Make examining of items faster, good with unexaminedItemsAreBack.
         fasterExamineTime: true,
         // Removes backpack restrictions (for ammo, med, etc containers and other backpacks). Never again I'll see an unlootable medcase in 314...
