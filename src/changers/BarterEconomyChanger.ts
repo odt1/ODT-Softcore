@@ -85,7 +85,7 @@ export class BarterEconomyChanger {
 					}
 
 					// Log for whitelisted items for barter REQUESTS
-					// console.log(`"${item}": ${fleaPrices[item]} // ${locale[`${item} Name`]}`)
+					// console.log(`"${item}": ${fleaPrices[item]} // ${this.tables.locales?.global.en[`${item} Name`]}`)
 				}
 			}
 		}

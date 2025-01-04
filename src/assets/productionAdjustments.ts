@@ -10,7 +10,7 @@ export const craftingAdjustments = [
 	{
 		id: ItemTpl.BARTER_CLIN_WINDOW_CLEANER,
 		adjust: (craft: IHideoutProduction) => {
-			craft.count = 2
+			craft.count = 4
 		},
 	},
 	{
@@ -91,6 +91,17 @@ export const craftingAdjustments = [
 		},
 	},
 	{
+		id: ItemTpl.MEDICAL_SURV12_FIELD_SURGICAL_KIT,
+		adjust: (craft: IHideoutProduction) => {
+			let requirement = craft.requirements.find((requirement) => requirement.templateId === ItemTpl.MEDICAL_SURV12_FIELD_SURGICAL_KIT)
+			if (!requirement) {
+				return
+			}
+			requirement.count = 2
+			requirement.templateId = ItemTpl.MEDICAL_CMS_SURGICAL_KIT
+		},
+	},
+	{
 		id: ItemTpl.BARTER_PORTABLE_DEFIBRILLATOR,
 		adjust: (craft: IHideoutProduction) => {
 			const requirement = craft.requirements.find((requirement) => requirement.templateId === ItemTpl.BARTER_PORTABLE_POWERBANK)
@@ -152,6 +163,11 @@ export const craftingAdjustments = [
 				return
 			}
 			requirement.requiredLevel = 2
+			craft.requirements.forEach((x) => {
+				if (x.count) {
+					x.count = 1
+				}
+			})
 		},
 	},
 	{
@@ -253,6 +269,10 @@ export const craftingAdjustments = [
 					templateId: ItemTpl.BARTER_FLAT_SCREWDRIVER,
 					type: "Tool",
 				},
+				{
+					type: "QuestComplete",
+					questId: "63966fccac6f8f3c677b9d89",
+				},
 			]
 		},
 	},
@@ -288,6 +308,7 @@ export const craftingAdjustments = [
 		},
 	},
 	{
+		// this will break
 		id: ItemTpl.BARTER_PRINTED_CIRCUIT_BOARD,
 		adjust: (craft: IHideoutProduction) => {
 			craft.count = 3
@@ -573,17 +594,11 @@ export const craftingAdjustments = [
 					templateId: ItemTpl.BARTER_FLAT_SCREWDRIVER_LONG,
 					type: "Tool",
 				},
+				{
+					type: "QuestComplete",
+					questId: "6179ad0a6e9dd54ac275e3f2",
+				},
 			]
-		},
-	},
-	{
-		id: ItemTpl.AMMO_46X30_AP_SX,
-		adjust: (craft: IHideoutProduction) => {
-			for (const requirement of craft.requirements) {
-				if (requirement.count && requirement.count < 10) {
-					requirement.count = 1
-				}
-			}
 		},
 	},
 	{
@@ -596,7 +611,7 @@ export const craftingAdjustments = [
 					type: "Area",
 				},
 				{
-					templateId: ItemTpl.AMMO_9X39_SP6,
+					templateId: ItemTpl.AMMO_9X39_SPP,
 					count: 100,
 					isFunctional: false,
 					isEncoded: false,
@@ -612,6 +627,10 @@ export const craftingAdjustments = [
 				{
 					templateId: ItemTpl.BARTER_PLIERS,
 					type: "Tool",
+				},
+				{
+					type: "QuestComplete",
+					questId: "5bc47dbf86f7741ee74e93b9",
 				},
 			]
 		},
@@ -644,6 +663,24 @@ export const craftingAdjustments = [
 					requirement.count = 1
 				}
 			}
+		},
+	},
+	{
+		id: ItemTpl.AMMO_12G_PIRANHA,
+		adjust: (craft: IHideoutProduction) => {
+			craft.count = 150
+		},
+	},
+	{
+		id: ItemTpl.AMMO_545X39_BP,
+		adjust: (craft: IHideoutProduction) => {
+			craft.count = 180
+		},
+	},
+	{
+		id: ItemTpl.AMMO_556X45_M855A1,
+		adjust: (craft: IHideoutProduction) => {
+			craft.count = 180
 		},
 	},
 ]
