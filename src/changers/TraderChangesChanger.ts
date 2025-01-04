@@ -9,7 +9,8 @@ import { ItemTpl } from "@spt/models/enums/ItemTpl"
 import { ConfigServer } from "@spt/servers/ConfigServer"
 import { ITraderConfig } from "@spt/models/spt/config/ITraderConfig"
 import { ConfigTypes } from "@spt/models/enums/ConfigTypes"
-import { BSGblacklist, fleaBarterRequestWhitelist, pacifistFenceItemBaseWhitelist } from "../assets/fleamarket"
+import { BSGblacklist, pacifistFenceItemBaseWhitelist } from "../assets/fleamarket"
+import { itemBaseClasses } from "../assets/itemBaseClasses"
 import { FenceService } from "@spt/services/FenceService"
 import { FenceBaseAssortGenerator } from "@spt/generators/FenceBaseAssortGenerator"
 export class TraderChangesChanger {
@@ -107,23 +108,45 @@ export class TraderChangesChanger {
 	private doPacifistFence(numberOfFenceOffers: number) {
 		// Fence uses multiple blacklists to generate items he can sell in SPT, these are: itemConfig.blacklist, itemconfig.rewardItemBlacklist, not a quest item, and the basetype is not blacklisted on traderconfig.fence.blacklist
 		const fenceWhitelist = pacifistFenceItemBaseWhitelist as string[]
-		this.traderConfig.fence.itemTypeLimits = Object.fromEntries(Object.values(BaseClasses).map((key) => [key, 0]))
-		// DO NOT set everything to 0 otherwise Server won't start correctly as Fence will be stuck in an infinite loop trying to gen items.
-		for (const [itemBaseID, value] of Object.entries(this.traderConfig.fence.itemTypeLimits)) {
-			if (fenceWhitelist.includes(itemBaseID)) {
-				this.traderConfig.fence.itemTypeLimits[itemBaseID] = numberOfFenceOffers
-			}
-		}
-		ItemTpl.INFO_ENCRYPTED_FLASH_DRIVE
+		const fenceBlacklist = itemBaseClasses.filter((x) => !fenceWhitelist.includes(x))
+		this.traderConfig.fence.itemTypeLimits = Object.fromEntries(Object.values(itemBaseClasses).map((key) => [key.replaceAll(" ", ""), numberOfFenceOffers])) // replaceAll is for SPT typo in BaseClasses enums. But anyway, if all BaseClasses used intead of pure (excluding Notes) manual listed itemBaseClasses, Fence breaks.
+
+		// SPT GITM BUG PART 1 WITH MedicalSupplies, wasted 3 hours on this. MedicalSupplies in itemTypeLimits OR preventDuplicateOffersOfCategory break Fence, GG
+		delete this.traderConfig.fence.itemTypeLimits["57864c8c245977548867e7f1"]
+
 		const items = this.tables.templates?.items
 		if (!items) {
 			this.logger.warning("PacifistFleaMarket: enableWhitelist: items table not found")
 			return
 		}
+
+		if (false) {
+			// Pure base classes generator, excludes Nodes, Nodes break Fence and possibly other instances
+			let iii = []
+			for (const item in items) {
+				if (items[item]._type == "Item") {
+					iii.push(items[item]._parent)
+				}
+				if (items[item]._parent == "5448f3ac4bdc2dce718b4569" && !items[item]._props.QuestItem) {
+					// console.log(`"${item}", // ${items[item]._name}`) // MedicalSupplies in itemTypeLimits OR preventDuplicateOffersOfCategory break Fence, GG
+				}
+			}
+			iii = new Set(iii)
+			iii.forEach((x) => console.log(`"${x}", // ${items[x]._name}`))
+		}
+
 		const questItemIDs = Object.values(items)
 			.filter((item) => item._props.QuestItem)
 			.map((item) => item._id)
-		this.traderConfig.fence.blacklist = [...new Set(...BSGblacklist, ...questItemIDs)]
+
+		// this.traderConfig.fence.blacklist = [...new Set(...BSGblacklist, ...questItemIDs)] // I'll just leave it as a testament to stupidity. This, this what that code was producing: ['5', '4', 'a', '1','c', 'b', 'd', '2','7', '0', 'e', '8','6']
+		this.traderConfig.fence.blacklist = Array.from(
+			new Set([...this.traderConfig.fence.blacklist, ...questItemIDs, ...BSGblacklist, ...fenceBlacklist, ItemTpl.INFO_ENCRYPTED_FLASH_DRIVE])
+		)
+		// this.traderConfig.fence.blacklist.forEach((x) => console.log(`"${x}", // ${items[x]._name}`)) // debug
+
+		// SPT GITM BUG PART 2 WITH MedicalSupplies, wasted 3 hours on this. MedicalSupplies in itemTypeLimits OR preventDuplicateOffersOfCategory break Fence, GG
+		this.traderConfig.fence.preventDuplicateOffersOfCategory = fenceWhitelist.filter((x) => x != "57864c8c245977548867e7f1")
 		this.traderConfig.fence.assortSize = numberOfFenceOffers
 		this.traderConfig.fence.equipmentPresetMinMax.min = 0
 		this.traderConfig.fence.equipmentPresetMinMax.max = 0

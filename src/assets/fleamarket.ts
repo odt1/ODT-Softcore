@@ -286,7 +286,7 @@ export const pacifistFenceItemBaseWhitelist = [
 	BaseClasses.FOOD,
 	BaseClasses.DRUGS,
 	BaseClasses.MEDKIT,
-	BaseClasses.MEDICAL,
+	BaseClasses.MEDICAL, // this breaks Fence
 	BaseClasses.BATTERY,
 	BaseClasses.ELECTRONICS,
 	BaseClasses.BUILDING_MATERIAL,
@@ -297,6 +297,7 @@ export const pacifistFenceItemBaseWhitelist = [
 	BaseClasses.TOOL,
 	BaseClasses.MEDICAL_SUPPLIES,
 	BaseClasses.FUEL,
+	BaseClasses.STIMULATOR,
 ]
 
 export const BSGblacklist = [
