@@ -71,7 +71,7 @@ export class SecureContainerOptionsChanger {
 		}
 
 		// Block cultistCircle Kappa reward for SECURE_WAIST_POUCH
-		this.hideoutConfig.cultistCircle.directRewards.find((x) => x.requiredItems)
+		// this.hideoutConfig.cultistCircle.directRewards.find((x) => x.requiredItems)
 		const reward = this.hideoutConfig.cultistCircle.directRewards.find((reward) => reward.requiredItems.includes("5732ee6a24597719ae0c0281"))
 		if (reward) {
 			const index = reward.requiredItems.indexOf("5732ee6a24597719ae0c0281")
