@@ -46,13 +46,12 @@ export class StashOptionsChanger {
 			this.logger.warning("SecureContainerOptions: doProgressiveStash: profileTemplates not found")
 			return
 		}
-		const basicStashBonuses = [
-			{
-				id: "64f5b9e5fa34f11b380756c0",
-				templateId: ItemTpl.STASH_STANDARD_STASH_10X30,
-				type: "StashSize",
-			},
-		]
+		const basicStashBonuses = {
+			id: "64f5b9e5fa34f11b380756c0",
+			templateId: ItemTpl.STASH_STANDARD_STASH_10X30,
+			type: "StashSize",
+		}
+
 		const startingStashes = [
 			ItemTpl.STASH_STANDARD_STASH_10X30,
 			ItemTpl.STASH_LEFT_BEHIND_STASH_10X40,
@@ -79,7 +78,9 @@ export class StashOptionsChanger {
 					item._tpl = ItemTpl.STASH_STANDARD_STASH_10X30
 				}
 
-				side.character.Bonuses = basicStashBonuses
+				// Fix for Unheard profiles
+				side.character.Bonuses = side.character.Bonuses.filter((x) => x.type !== "StashSize")
+				side.character.Bonuses.push(basicStashBonuses)
 			}
 		}
 	}

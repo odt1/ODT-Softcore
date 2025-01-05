@@ -7,17 +7,23 @@ import { Traders } from "@spt/models/enums/Traders"
 import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables"
 import { containerRecipes } from "../assets/recipes"
 import { PrefixLogger } from "../util/PrefixLogger"
+import { ConfigServer } from "@spt/servers/ConfigServer"
+import { IHideoutConfig } from "@spt/models/spt/config/IHideoutConfig"
+import { ConfigTypes } from "@spt/models/enums/ConfigTypes"
 
 export class SecureContainerOptionsChanger {
 	private logger: PrefixLogger
 	private tables: IDatabaseTables
 	private items: Record<string, ITemplateItem> | undefined
+	private hideoutConfig: IHideoutConfig
 
 	constructor(container: DependencyContainer) {
 		this.logger = PrefixLogger.getInstance()
 		const databaseServer = container.resolve<DatabaseServer>("DatabaseServer")
 		this.tables = databaseServer.getTables()
 		this.items = this.tables.templates?.items
+		const configServer = container.resolve<ConfigServer>("ConfigServer")
+		this.hideoutConfig = configServer.getConfig<IHideoutConfig>(ConfigTypes.HIDEOUT)
 	}
 
 	public apply(config: SecureContainerOptions) {
@@ -61,6 +67,16 @@ export class SecureContainerOptionsChanger {
 				betaAssortUpd.UnlimitedCount = false
 				betaAssortUpd.StackObjectsCount = 0
 				betaAssortUpd.BuyRestrictionMax = 0
+			}
+		}
+
+		// Block cultistCircle Kappa reward for SECURE_WAIST_POUCH
+		this.hideoutConfig.cultistCircle.directRewards.find((x) => x.requiredItems)
+		const reward = this.hideoutConfig.cultistCircle.directRewards.find((reward) => reward.requiredItems.includes("5732ee6a24597719ae0c0281"))
+		if (reward) {
+			const index = reward.requiredItems.indexOf("5732ee6a24597719ae0c0281")
+			if (index !== -1) {
+				reward.requiredItems[index] = "664a55d84a90fc2c8a6305c9"
 			}
 		}
 
