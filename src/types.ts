@@ -187,6 +187,7 @@ export interface OtherTweaks {
 	reshalaAlwaysHasGoldenTT: boolean
 	biggerAmmoStacks: BiggerAmmoStacks
 	questChanges: boolean
+	removeRaidItemLimits: boolean
 }
 
 export interface BiggerAmmoStacks {

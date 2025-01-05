@@ -42,7 +42,7 @@
             enabled: true,
             setBitcoinPriceTo100k: true,
             baseBitcoinTimeMultiplier: 2.0,
-            gpuEfficiency: 1.5,
+            gpuEfficiency: 0.5,
         },
         fasterCraftingTime: {
             // Make all recipes except bitcoin, moonshine and purified water much faster.
