@@ -215,7 +215,7 @@
         // ZiD SP-81 26x75 signal pistol can be put in special slots and is not removed after death.
         signalPistolInSpecialSlots: true,
         // Reverts BSG decision to make all items examined by default
-        unexaminedItemsAreBack: false,
+        unexaminedItemsAreBack: true,
         // Make examining of items faster, good with unexaminedItemsAreBack.
         fasterExamineTime: true,
         // Removes backpack restrictions (for ammo, med, etc containers and other backpacks). Never again I'll see an unlootable medcase in 314...
