@@ -42,6 +42,7 @@ export class OtherFleaMarketChangesChanger {
 
 	private doSellingOnFlea() {
 		this.ragfairConfig.sell.chance.base = 0
+		this.ragfairConfig.sell.chance.maxSellChancePercent = 0
 	}
 
 	private adjustOnlyFIRforBarters() {

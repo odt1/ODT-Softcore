@@ -59,6 +59,9 @@ export class OtherTweaksChanger {
 		if (config.questChanges) {
 			this.doQuestChanges()
 		}
+		if (config.removeRaidItemLimits) {
+			this.doRemoveRaidItemLimits()
+		}
 	}
 	private doSkillExpBuffs() {
 		const globals = this.tables.globals
@@ -169,5 +172,14 @@ export class OtherTweaksChanger {
 			return
 		}
 		crisis.conditions.AvailableForStart[1].value = 30
+	}
+	doRemoveRaidItemLimits() {
+		const globals = this.tables.globals
+		if (!globals) {
+			this.logger.warning("OtherTweaksChanger: doRemoveRaidItemLimits: globals not found")
+			return
+		}
+		// globals.config.RestrictionsInRaid.forEach((x) => console.log(`${x.TemplateId}, // ${this.tables.locales?.global.en[`${x.TemplateId} Name`]}`))
+		globals.config.RestrictionsInRaid = []
 	}
 }

@@ -231,5 +231,7 @@
         },
         // Better start for quests (Crisis).
         questChanges: true,
+        // removeRaidItemLimits
+        removeRaidItemLimits: true,
     },
 }

@@ -28,6 +28,6 @@ export class FuelConsumptionChanger {
 			this.logger.warning("FuelConsumptionChanger: doChangeFuelConsumption: hideout not found")
 			return
 		}
-		hideout.settings.generatorFuelFlowRate *= multiplier
+		hideout.settings.generatorFuelFlowRate *= multiplier // сука. 33 строчки чтобы изменить одну переменную.
 	}
 }
