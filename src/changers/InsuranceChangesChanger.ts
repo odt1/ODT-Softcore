@@ -42,6 +42,7 @@ export class InsuranceChangesChanger {
 		trader.base.insurance.max_return_hour = insuranceChanges.returnTime.max
 		trader.base.insurance.max_storage_time = 720
 		this.insuranceConfig.returnChancePercent[traderID] = insuranceChanges.returnChance
+		this.insuranceConfig.chanceNoAttachmentsTakenPercent = 50
 		for (const loyaltyLevel of trader.base.loyaltyLevels) {
 			loyaltyLevel.insurance_price_coef = insuranceChanges.insuranceCostMultiplier
 		}

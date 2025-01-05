@@ -120,9 +120,10 @@ export class ScavCaseOptionsChanger {
 						const ammo = item._props?.StackSlots[0]?._props?.filters[0].Filter[0]
 
 						const value = Math.round(this.handbookHelper.getTemplatePrice(ammo) * count)
+						handbookPrice = value
 
-						const ammobox = handbook.Items.find((x) => x.Id == item._id)
-						ammobox.Price = value
+						const ammoboxHandbook = handbook.Items.find((x) => x.Id == item._id)
+						ammoboxHandbook.Price = value
 						// console.log(`${item._id}, // ${this.tables.locales?.global.en[`${item._id} Name`]}: ${handbook.Items.find((x) => x.Id == item._id)!.Price}`)
 					} catch (error) {
 						this.logger.warning(

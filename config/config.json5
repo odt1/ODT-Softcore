@@ -180,31 +180,31 @@
     craftingChanges: {
         // Master toggle for all crafting changes below.
         enabled: true,
-        // Major rebalance of crafting recipes balanced around components rarities, usefullness, trader prices and plain lore logic. Some nerfs, but a lot of huge buffs. Main idea was to make most of the crafts usefull and/or profitable. I'm pretty content with lavatory, medstation, nutrition and intel center crafts, but it's a constant WIP feature, looking for feedback!
+        // Major rebalance of crafting recipes balanced around components rarities, usefullness, trader prices and plain "lore" logic. Some nerfs, but a lot of huge buffs. Main idea was to make most of the crafts usefull and/or profitable.
         craftingRebalance: true,
-        // New custon lore-friendly and balanced crafting recipes added for 3-b-TG, Adrenaline, L1, AHF1, CALOK, Ophthalmoscope, Zagustin, Obdolbos, OLOLO. Looking for feedback on balance and more crafting ideas.
+        // New custon lore-friendly and balanced crafting recipes added for 3-b-TG, Adrenaline, L1, AHF1, CALOK, Ophthalmoscope, Zagustin, Obdolbos, OLOLO.
         additionalCraftingRecipes: true,
     },
     insuranceChanges: {
-        // Redo insurance. Make the two traders serve different purposes. Prapor in an instant return with 50% chance, costs 10% of item value, eg usefull for fast return of cheap quest loadouts or plain gambling. Therapist has 2 hour return with 80% chance (SPT default is 90%), costs 20% (SPT - 25%). Also buff insurance storage time to a whole month.
+        // Redo insurance. Make the two traders serve different purposes. Prapor in "reliable" with 80% chance, costs 25% of item value. Therapist has 60% chance, but costs only 5%, eg usefull for fast return of cheap quest loadouts or plain gambling. Also buff insurance storage time to a whole month. Also buffs the chance to keep weapon attachments to 50%.
         enabled: true,
         praporInsuranceChanges: {
             enabled: true,
-            returnChance: 50,
+            returnChance: 80,
             returnTime: {
                 min: 0,
                 max: 0,
             },
-            insuranceCostMultiplier: .1,
+            insuranceCostMultiplier: .25,
         },
         therapistInsuranceChanges: {
             enabled: true,
-            returnChance: 80,
+            returnChance: 60,
             returnTime: {
-                min: 2,
-                max: 2,
+                min: 0,
+                max: 0,
             },
-            insuranceCostMultiplier: .2,
+            insuranceCostMultiplier: .05,
         },
     },
     otherTweaks: {
