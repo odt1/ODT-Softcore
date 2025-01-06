@@ -1,6 +1,6 @@
 {
     "name": "softcore",
-    "version": "3.0.2",
+    "version": "3.0.3",
     "main": "src/Softcore.js",
     "license": "MIT",
     "author": "ODT",

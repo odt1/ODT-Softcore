@@ -56,7 +56,7 @@ export class InsuranceChangesChanger {
 		this.insuranceConfig.returnChancePercent[traderID] = insuranceChanges.returnChance
 		this.insuranceConfig.chanceNoAttachmentsTakenPercent = 50
 		for (const loyaltyLevel of trader.base.loyaltyLevels) {
-			loyaltyLevel.insurance_price_coef = insuranceChanges.insuranceCostMultiplier
+			loyaltyLevel.insurance_price_coef = insuranceChanges.insuranceCostPercentage
 		}
 	}
 }

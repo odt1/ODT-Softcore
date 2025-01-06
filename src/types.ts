@@ -173,7 +173,7 @@ export interface TraderInsuranceChanges {
 	enabled: boolean
 	returnChance: number
 	returnTime: { min: number; max: number }
-	insuranceCostMultiplier: number
+	insuranceCostPercentage: number
 }
 
 export interface OtherTweaks {

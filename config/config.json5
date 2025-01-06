@@ -195,7 +195,7 @@
                 min: 0,
                 max: 0,
             },
-            insuranceCostMultiplier: .25,
+            insuranceCostPercentage: 25,
         },
         therapistInsuranceChanges: {
             enabled: true,
@@ -204,7 +204,7 @@
                 min: 0,
                 max: 0,
             },
-            insuranceCostMultiplier: .05,
+            insuranceCostPercentage: 5,
         },
     },
     otherTweaks: {
