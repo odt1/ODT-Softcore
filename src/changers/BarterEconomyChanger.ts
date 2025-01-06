@@ -35,12 +35,47 @@ export class BarterEconomyChanger {
 			return
 		}
 
-		this.doBarterEconomy()
-		this.adjustCashOffers(config.cashOffersPercentage)
-		this.adjustBarterPriceVariance(config.barterPriceVariance)
-		this.adjustItemCountMax(config.itemCountMax)
-		this.adjustOfferItemCount(config.offerItemCount)
-		this.adjustNonStackableAmount(config.nonStackableCount)
+		try {
+			this.doBarterEconomy()
+		} catch (error) {
+			this.logger.warning("\n BarterEconomy: doBarterEconomy failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
+		}
+
+		try {
+			this.adjustCashOffers(config.cashOffersPercentage)
+		} catch (error) {
+			this.logger.warning("\n BarterEconomy: adjustCashOffers failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
+		}
+
+		try {
+			this.adjustBarterPriceVariance(config.barterPriceVariance)
+		} catch (error) {
+			this.logger.warning("\n BarterEconomy: adjustBarterPriceVariance failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
+		}
+
+		try {
+			this.adjustItemCountMax(config.itemCountMax)
+		} catch (error) {
+			this.logger.warning("\n BarterEconomy: adjustItemCountMax failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
+		}
+
+		try {
+			this.adjustOfferItemCount(config.offerItemCount)
+		} catch (error) {
+			this.logger.warning("\n BarterEconomy: adjustOfferItemCount failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
+		}
+
+		try {
+			this.adjustNonStackableAmount(config.nonStackableCount)
+		} catch (error) {
+			this.logger.warning("\n BarterEconomy: adjustNonStackableAmount failed gracefully. Send bug report. Continue safely.")
+			console.log(error)
+		}
 	}
 
 	private doBarterEconomy() {

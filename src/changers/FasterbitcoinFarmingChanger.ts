@@ -21,10 +21,20 @@ export class FasterBitcoinFarmingChanger {
 			return
 		}
 
-		this.doFasterBitcoinFarming(config.baseBitcoinTimeMultiplier, config.gpuEfficiency)
+		try {
+			this.doFasterBitcoinFarming(config.baseBitcoinTimeMultiplier, config.gpuEfficiency)
+		} catch (error) {
+			this.logger.warning("FasterBitcoinFarming: doFasterBitcoinFarming failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
+		}
 
-		if (config.setBitcoinPriceTo100k) {
-			this.setBitcoinPriceTo100k()
+		try {
+			if (config.setBitcoinPriceTo100k) {
+				this.setBitcoinPriceTo100k()
+			}
+		} catch (error) {
+			this.logger.warning("FasterBitcoinFarming: setBitcoinPriceTo100k failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 	}
 

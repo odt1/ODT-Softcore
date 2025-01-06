@@ -19,7 +19,12 @@ export class FasterHideoutConstructionChanger {
 		if (!config.enabled) {
 			return
 		}
-		this.doFasterHideoutConstruction(config.hideoutConstructionTimeMultiplier)
+		try {
+			this.doFasterHideoutConstruction(config.hideoutConstructionTimeMultiplier)
+		} catch (error) {
+			this.logger.warning("FasterHideoutConstruction: doFasterHideoutConstruction failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
+		}
 	}
 
 	private doFasterHideoutConstruction(multiplier: number) {

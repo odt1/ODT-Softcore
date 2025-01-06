@@ -26,17 +26,41 @@ export class StashOptionsChanger {
 		if (!config.enabled) {
 			return
 		}
-		if (config.progressiveStash) {
-			this.doProgressiveStash()
+
+		try {
+			if (config.progressiveStash) {
+				this.doProgressiveStash()
+			}
+		} catch (error) {
+			this.logger.warning("StashOptions: doProgressiveStash markedKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
-		if (config.biggerStash) {
-			this.doBiggerStash()
+
+		try {
+			if (config.biggerStash) {
+				this.doBiggerStash()
+			}
+		} catch (error) {
+			this.logger.warning("StashOptions: doBiggerStash markedKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
-		if (config.lessCurrencyForConstruction) {
-			this.doLessCurrencyForConstruction()
+
+		try {
+			if (config.lessCurrencyForConstruction) {
+				this.doLessCurrencyForConstruction()
+			}
+		} catch (error) {
+			this.logger.warning("StashOptions: doLessCurrencyForConstruction markedKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
-		if (config.easierLoyalty) {
-			this.doEasierLoyalty()
+
+		try {
+			if (config.easierLoyalty) {
+				this.doEasierLoyalty()
+			}
+		} catch (error) {
+			this.logger.warning("StashOptions: doEasierLoyalty markedKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 	}
 

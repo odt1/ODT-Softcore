@@ -25,11 +25,23 @@ export class InsuranceChangesChanger {
 		if (!config.enabled) {
 			return
 		}
-		if (config.praporInsuranceChanges.enabled) {
-			this.doTraderInsuranceChanges(Traders.PRAPOR, config.praporInsuranceChanges)
+
+		try {
+			if (config.praporInsuranceChanges.enabled) {
+				this.doTraderInsuranceChanges(Traders.PRAPOR, config.praporInsuranceChanges)
+			}
+		} catch (error) {
+			this.logger.warning("InsuranceChanges: doTraderInsuranceChanges Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
-		if (config.therapistInsuranceChanges.enabled) {
-			this.doTraderInsuranceChanges(Traders.THERAPIST, config.therapistInsuranceChanges)
+
+		try {
+			if (config.therapistInsuranceChanges.enabled) {
+				this.doTraderInsuranceChanges(Traders.THERAPIST, config.therapistInsuranceChanges)
+			}
+		} catch (error) {
+			this.logger.warning("InsuranceChanges: doTraderInsuranceChanges Traders.THERAPIST failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 	}
 	doTraderInsuranceChanges(traderID: Traders, insuranceChanges: TraderInsuranceChanges) {

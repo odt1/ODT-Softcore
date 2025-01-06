@@ -30,14 +30,31 @@ export class SecureContainerOptionsChanger {
 		if (!config.enabled) {
 			return
 		}
-		if (config.progressiveContainers.enabled) {
-			this.doProgressiveContainers()
-			if (config.progressiveContainers.collectorQuestRedone) {
-				this.doCollectorQuestRedone()
+
+		try {
+			if (config.progressiveContainers.enabled) {
+				this.doProgressiveContainers()
+				try {
+					if (config.progressiveContainers.collectorQuestRedone) {
+						this.doCollectorQuestRedone()
+					}
+				} catch (error) {
+					this.logger.warning("SecureContainerOptions: doCollectorQuestRedone markedKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+					console.warn(error)
+				}
 			}
+		} catch (error) {
+			this.logger.warning("SecureContainerOptions: doProgressiveContainers markedKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
-		if (config.biggerContainers) {
-			this.doBiggerContainers()
+
+		try {
+			if (config.biggerContainers) {
+				this.doBiggerContainers()
+			}
+		} catch (error) {
+			this.logger.warning("SecureContainerOptions: doBiggerContainers markedKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 	}
 

@@ -24,26 +24,51 @@ export class EconomyOptionsChanger {
 			return
 		}
 
-		if (config.disableFleaMarketCompletely) {
-			this.doDisableFleaMarketCompletely()
-			return
+		try {
+			if (config.disableFleaMarketCompletely) {
+				this.doDisableFleaMarketCompletely()
+				return
+			}
+		} catch (error) {
+			this.logger.warning("EconomyOptions: doDisableFleaMarketCompletely failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.priceRebalance.enabled) {
-			new PriceRebalanceChanger(this.container).apply(config.priceRebalance)
+		try {
+			if (config.priceRebalance.enabled) {
+				new PriceRebalanceChanger(this.container).apply(config.priceRebalance)
+			}
+		} catch (error) {
+			this.logger.warning("EconomyOptions: PriceRebalanceChanger failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.pacifistFleaMarket.enabled) {
-			new PacifistFleaMarketChanger(this.container).apply(config.pacifistFleaMarket)
+		try {
+			if (config.pacifistFleaMarket.enabled) {
+				new PacifistFleaMarketChanger(this.container).apply(config.pacifistFleaMarket)
+			}
+		} catch (error) {
+			this.logger.warning("EconomyOptions: PacifistFleaMarketChanger failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.barterEconomy.enabled) {
-			new BarterEconomyChanger(this.container).apply(config.barterEconomy)
+		try {
+			if (config.barterEconomy.enabled) {
+				new BarterEconomyChanger(this.container).apply(config.barterEconomy)
+			}
+		} catch (error) {
+			this.logger.warning("EconomyOptions: BarterEconomyChanger failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.otherFleaMarketChanges.enabled) {
-			new OtherFleaMarketChangesChanger(this.container).apply(config.otherFleaMarketChanges)
-			this.updateRagfairMinUserLevel(config.otherFleaMarketChanges.fleaMarketOpenAtLevel)
+		try {
+			if (config.otherFleaMarketChanges.enabled) {
+				new OtherFleaMarketChangesChanger(this.container).apply(config.otherFleaMarketChanges)
+				this.updateRagfairMinUserLevel(config.otherFleaMarketChanges.fleaMarketOpenAtLevel)
+			}
+		} catch (error) {
+			this.logger.warning("EconomyOptions: OtherFleaMarketChangesChanger failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 	}
 

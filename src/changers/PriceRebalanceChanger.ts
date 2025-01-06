@@ -20,11 +20,21 @@ export class PriceRebalanceChanger {
 			return
 		}
 
-		if (config.itemFixes) {
-			this.doItemFixes()
+		try {
+			if (config.itemFixes) {
+				this.doItemFixes()
+			}
+		} catch (error) {
+			this.logger.warning("PriceRebalance: doItemFixes markedKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		this.doPriceRebalance()
+		try {
+			this.doPriceRebalance()
+		} catch (error) {
+			this.logger.warning("PacifistFleaMarket: doPriceRebalance markedKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
+		}
 	}
 
 	private doItemFixes() {

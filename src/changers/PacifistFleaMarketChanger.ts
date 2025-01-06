@@ -25,17 +25,39 @@ export class PacifistFleaMarketChanger {
 		if (!config.enabled) {
 			return
 		} else {
-			this.pacifistFleaMarket()
-		}
-		if (config.whitelist.enabled) {
-			this.allowOnRagfair(whitelist, config.whitelist.priceMultiplier)
-		}
-		if (config.questKeys.enabled) {
-			this.allowOnRagfair(questKeys, config.questKeys.priceMultiplier)
+			try {
+				this.pacifistFleaMarket()
+			} catch (error) {
+				this.logger.warning("PacifistFleaMarket: pacifistFleaMarket Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+				console.warn(error)
+			}
 		}
 
-		if (config.markedKeys.enabled) {
-			this.allowOnRagfair(markedKeys, config.markedKeys.priceMultiplier)
+		try {
+			if (config.whitelist.enabled) {
+				this.allowOnRagfair(whitelist, config.whitelist.priceMultiplier)
+			}
+		} catch (error) {
+			this.logger.warning("PacifistFleaMarket: allowOnRagfair whitelist Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
+		}
+
+		try {
+			if (config.questKeys.enabled) {
+				this.allowOnRagfair(questKeys, config.questKeys.priceMultiplier)
+			}
+		} catch (error) {
+			this.logger.warning("PacifistFleaMarket: allowOnRagfair questKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
+		}
+
+		try {
+			if (config.markedKeys.enabled) {
+				this.allowOnRagfair(markedKeys, config.markedKeys.priceMultiplier)
+			}
+		} catch (error) {
+			this.logger.warning("PacifistFleaMarket: allowOnRagfair markedKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 	}
 

@@ -19,6 +19,7 @@ export class TraderChangesChanger {
 	private traderConfig: ITraderConfig
 	private fenceService: FenceService
 	private fenceBaseAssortGenerator: FenceBaseAssortGenerator
+	private stacticTraderList
 
 	constructor(container: DependencyContainer) {
 		this.logger = PrefixLogger.getInstance()
@@ -28,6 +29,19 @@ export class TraderChangesChanger {
 		this.traderConfig = configServer.getConfig<ITraderConfig>(ConfigTypes.TRADER)
 		this.fenceService = container.resolve<FenceService>("FenceService")
 		this.fenceBaseAssortGenerator = container.resolve<FenceBaseAssortGenerator>("FenceBaseAssortGenerator")
+
+		this.stacticTraderList = {
+			// To ignore custom traders
+			PRAPOR: "54cb50c76803fa8b248b4571",
+			THERAPIST: "54cb57776803fa99248b456e",
+			FENCE: "579dc571d53a0658a154fbec",
+			SKIER: "58330581ace78e27b8b10cee",
+			PEACEKEEPER: "5935c25fb3acc3127c3d8cd9",
+			MECHANIC: "5a7c2eca46aef81a7ca2145d",
+			RAGMAN: "5ac3b934156ae10c4430e83c",
+			JAEGER: "5c0647fdd443bc2504c2d371",
+			REF: "6617beeaa9cfa777ca915b7c",
+		}
 	}
 
 	public apply(config: TraderChanges) {
@@ -35,38 +49,62 @@ export class TraderChangesChanger {
 			return
 		}
 
-		if (config.betterSalesToTraders) {
-			this.doBetterSalesToTraders()
+		try {
+			if (config.betterSalesToTraders) {
+				this.doBetterSalesToTraders()
+			}
+		} catch (error) {
+			this.logger.warning("TraderChanges: doBetterSalesToTraders failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.alternativeCategories) {
-			this.doAlternativeCategories()
+		try {
+			if (config.alternativeCategories) {
+				this.doAlternativeCategories()
+			}
+		} catch (error) {
+			this.logger.warning("TraderChanges: doAlternativeCategories failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.pacifistFence.enabled) {
-			this.doPacifistFence(config.pacifistFence.numberOfFenceOffers)
+		try {
+			if (config.pacifistFence.enabled) {
+				this.doPacifistFence(config.pacifistFence.numberOfFenceOffers)
+			}
+		} catch (error) {
+			this.logger.warning("TraderChanges: doPacifistFence failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.reasonablyPricedCases) {
-			this.doReasonablyPricedCases()
+		try {
+			if (config.reasonablyPricedCases) {
+				this.doReasonablyPricedCases()
+			}
+		} catch (error) {
+			this.logger.warning("TraderChanges: doReasonablyPricedCases failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.skierUsesEuros) {
-			this.doSkierUsesEuros()
+		try {
+			if (config.skierUsesEuros) {
+				this.doSkierUsesEuros()
+			}
+		} catch (error) {
+			this.logger.warning("TraderChanges: doSkierUsesEuros failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.biggerLimits.enabled) {
-			this.doBiggerLimits(config.biggerLimits.multiplier)
+		try {
+			if (config.biggerLimits.enabled) {
+				this.doBiggerLimits(config.biggerLimits.multiplier)
+			}
+		} catch (error) {
+			this.logger.warning("TraderChanges: doBiggerLimits failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 	}
 
 	private doBetterSalesToTraders() {
-		const traderList = this.tables.traders
-		if (!traderList) {
-			this.logger.warning("TraderChangesChanger: doBetterSalesToTraders: Trader list not found, skipping")
-			return
-		}
-
 		const buyPriceAdjustment = {
 			[Traders.PEACEKEEPER]: 7,
 			[Traders.SKIER]: 6,
@@ -77,12 +115,12 @@ export class TraderChangesChanger {
 			[Traders.THERAPIST]: 1,
 		}
 
-		for (const [traderID, trader] of Object.entries(traderList)) {
+		for (const [trader, traderID] of Object.entries(this.stacticTraderList)) {
 			let buyPriceCoef = 35
 			if (!Object.keys(buyPriceAdjustment).includes(traderID)) {
 				continue
 			}
-			for (const loyaltyLevel of trader.base.loyaltyLevels) {
+			for (const loyaltyLevel of this.tables.traders?.[traderID].base.loyaltyLevels) {
 				loyaltyLevel.buy_price_coef = buyPriceCoef
 				loyaltyLevel.buy_price_coef += buyPriceAdjustment[traderID]
 				buyPriceCoef -= 5
@@ -334,10 +372,7 @@ export class TraderChangesChanger {
 	}
 
 	private doBiggerLimits(multiplier: number) {
-		for (const traderID of Object.values(Traders)) {
-			if (traderID === Traders.LIGHTHOUSEKEEPER) {
-				continue
-			}
+		for (const traderID of Object.values(this.stacticTraderList)) {
 			const traderItems = this.tables.traders?.[traderID].assort?.items
 			if (!traderItems) {
 				this.logger.warning(`TraderChangesChanger: doBiggerLimits: traderItems for trader ${traderID} not found, skipping`)

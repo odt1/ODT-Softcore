@@ -19,7 +19,12 @@ export class FuelConsumptionChanger {
 		if (!config.enabled) {
 			return
 		}
-		this.doChangeFuelConsumption(config.fuelConsumptionMultiplier)
+		try {
+			this.doChangeFuelConsumption(config.fuelConsumptionMultiplier)
+		} catch (error) {
+			this.logger.warning("FuelConsumption: doChangeFuelConsumption failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
+		}
 	}
 
 	private doChangeFuelConsumption(multiplier: number) {

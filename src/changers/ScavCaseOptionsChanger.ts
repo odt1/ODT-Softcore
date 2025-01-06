@@ -43,16 +43,31 @@ export class ScavCaseOptionsChanger {
 			return
 		}
 
-		if (config.betterRewards) {
-			this.doBetterRewards()
+		try {
+			if (config.betterRewards) {
+				this.doBetterRewards()
+			}
+		} catch (error) {
+			this.logger.warning("ScavCaseOptions: doBetterRewards markedKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.rebalance) {
-			this.doRebalance()
+		try {
+			if (config.rebalance) {
+				this.doRebalance()
+			}
+		} catch (error) {
+			this.logger.warning("ScavCaseOptions: doRebalance markedKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.fasterScavcase.enabled) {
-			this.doFasterScavcase(config.fasterScavcase.speedMultiplier)
+		try {
+			if (config.fasterScavcase.enabled) {
+				this.doFasterScavcase(config.fasterScavcase.speedMultiplier)
+			}
+		} catch (error) {
+			this.logger.warning("ScavCaseOptions: doFasterScavcase markedKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
 		// this.debug()

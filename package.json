@@ -1,37 +1,37 @@
 {
-	"name": "softcore",
-	"version": "3.0.0",
-	"main": "src/Softcore.js",
-	"license": "MIT",
-	"author": "ODT",
-	"sptVersion": "~3.10",
-	"loadBefore": [],
-	"loadAfter": [],
-	"incompatibilities": [],
-	"contributors": [],
-	"isBundleMod": false,
-	"scripts": {
-		"setup": "npm i",
-		"build": "node ./build.mjs",
-		"buildinfo": "node ./build.mjs --verbose"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "1.8.3",
-		"@types/i18n": "~0.13",
-		"@types/node": "~22.0",
-		"@types/proper-lockfile": "~4.1",
-		"@types/semver": "~7.5",
-		"@types/ws": "~8.5",
-		"archiver": "^6.0",
-		"fs-extra": "11.2",
-		"ignore": "^5.2",
-		"tsyringe": "4.8.0",
-		"typescript": "~5.5"
-	},
-	"dependencies": {
-		"json-fixer": "~1.6",
-		"json5": "~2.2",
-		"jsonc": "~2.0",
-		"winston": "~3.13"
-	}
+    "name": "softcore",
+    "version": "3.0.2",
+    "main": "src/Softcore.js",
+    "license": "MIT",
+    "author": "ODT",
+    "sptVersion": "~3.10",
+    "loadBefore": [],
+    "loadAfter": [],
+    "incompatibilities": [],
+    "contributors": [],
+    "isBundleMod": false,
+    "scripts": {
+        "setup": "npm i",
+        "build": "node ./build.mjs",
+        "buildinfo": "node ./build.mjs --verbose"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "1.8.3",
+        "@types/i18n": "~0.13",
+        "@types/node": "~22.0",
+        "@types/proper-lockfile": "~4.1",
+        "@types/semver": "~7.5",
+        "@types/ws": "~8.5",
+        "archiver": "^6.0",
+        "fs-extra": "11.2",
+        "ignore": "^5.2",
+        "tsyringe": "4.8.0",
+        "typescript": "~5.5"
+    },
+    "dependencies": {
+        "json-fixer": "~1.6",
+        "json5": "~2.2",
+        "jsonc": "~2.0",
+        "winston": "~3.13"
+    }
 }

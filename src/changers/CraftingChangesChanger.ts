@@ -24,12 +24,22 @@ export class CraftingChangesChanger {
 			return
 		}
 
-		if (config.craftingRebalance) {
-			this.doCraftingRebalance()
+		try {
+			if (config.craftingRebalance) {
+				this.doCraftingRebalance()
+			}
+		} catch (error) {
+			this.logger.warning("CraftingChanges: doCraftingRebalance failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.additionalCraftingRecipes) {
-			this.doAdditionalCraftingRecipes()
+		try {
+			if (config.additionalCraftingRecipes) {
+				this.doAdditionalCraftingRecipes()
+			}
+		} catch (error) {
+			this.logger.warning("CraftingChanges: doAdditionalCraftingRecipes failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 	}
 

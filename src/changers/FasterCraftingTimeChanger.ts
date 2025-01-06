@@ -25,18 +25,41 @@ export class FasterCraftingTimeChanger {
 		if (!config.enabled) {
 			return
 		}
-		this.doFasterProductionForAll(config.baseCraftingTimeMultiplier)
 
-		if (config.hideoutSkillExpFix.enabled) {
-			this.doHideoutSkillExpFix(config.hideoutSkillExpFix.hideoutSkillExpMultiplier)
+		try {
+			this.doFasterProductionForAll(config.baseCraftingTimeMultiplier)
+		} catch (error) {
+			this.logger.warning("FasterCraftingTime: doFasterProductionForAll failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.fasterMoonshineProduction.enabled) {
-			this.doFasterProductionFor(ItemTpl.DRINK_BOTTLE_OF_FIERCE_HATCHLING_MOONSHINE, config.fasterMoonshineProduction.baseCraftingTimeMultiplier)
+		try {
+			if (config.hideoutSkillExpFix.enabled) {
+				this.doHideoutSkillExpFix(config.hideoutSkillExpFix.hideoutSkillExpMultiplier)
+			}
+		} catch (error) {
+			this.logger.warning("FasterCraftingTime: doHideoutSkillExpFix failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.fasterPurifiedWaterProduction.enabled) {
-			this.doFasterProductionFor(ItemTpl.DRINK_CANISTER_WITH_PURIFIED_WATER, config.fasterPurifiedWaterProduction.baseCraftingTimeMultiplier)
+		try {
+			if (config.fasterMoonshineProduction.enabled) {
+				this.doFasterProductionFor(ItemTpl.DRINK_BOTTLE_OF_FIERCE_HATCHLING_MOONSHINE, config.fasterMoonshineProduction.baseCraftingTimeMultiplier)
+			}
+		} catch (error) {
+			this.logger.warning(
+				"FasterCraftingTime: doFasterProductionFor DRINK_BOTTLE_OF_FIERCE_HATCHLING_MOONSHINE failed gracefully. Send bug report. Continue safely."
+			)
+			console.warn(error)
+		}
+
+		try {
+			if (config.fasterPurifiedWaterProduction.enabled) {
+				this.doFasterProductionFor(ItemTpl.DRINK_CANISTER_WITH_PURIFIED_WATER, config.fasterPurifiedWaterProduction.baseCraftingTimeMultiplier)
+			}
+		} catch (error) {
+			this.logger.warning("FasterCraftingTime: doFasterProductionFor DRINK_CANISTER_WITH_PURIFIED_WATER failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 	}
 

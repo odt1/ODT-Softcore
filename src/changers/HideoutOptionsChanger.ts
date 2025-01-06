@@ -27,36 +27,76 @@ export class HideoutOptionsChanger {
 			return
 		}
 
-		if (config.stashOptions.enabled) {
-			new StashOptionsChanger(this.container).apply(config.stashOptions)
+		try {
+			if (config.stashOptions.enabled) {
+				new StashOptionsChanger(this.container).apply(config.stashOptions)
+			}
+		} catch (error) {
+			this.logger.warning("HideoutOptions: StashOptionsChanger failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.hideoutContainers.enabled) {
-			new HideoutContainersChanger(this.container).apply(config.hideoutContainers)
+		try {
+			if (config.hideoutContainers.enabled) {
+				new HideoutContainersChanger(this.container).apply(config.hideoutContainers)
+			}
+		} catch (error) {
+			this.logger.warning("HideoutOptions: HideoutContainersChanger failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.fasterBitcoinFarming.enabled) {
-			new FasterBitcoinFarmingChanger(this.container).apply(config.fasterBitcoinFarming)
+		try {
+			if (config.fasterBitcoinFarming.enabled) {
+				new FasterBitcoinFarmingChanger(this.container).apply(config.fasterBitcoinFarming)
+			}
+		} catch (error) {
+			this.logger.warning("HideoutOptions: FasterBitcoinFarmingChanger failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.fasterCraftingTime.enabled) {
-			new FasterCraftingTimeChanger(this.container).apply(config.fasterCraftingTime)
+		try {
+			if (config.fasterCraftingTime.enabled) {
+				new FasterCraftingTimeChanger(this.container).apply(config.fasterCraftingTime)
+			}
+		} catch (error) {
+			this.logger.warning("HideoutOptions: FasterCraftingTimeChanger failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.fasterHideoutConstruction.enabled) {
-			new FasterHideoutConstructionChanger(this.container).apply(config.fasterHideoutConstruction)
+		try {
+			if (config.fasterHideoutConstruction.enabled) {
+				new FasterHideoutConstructionChanger(this.container).apply(config.fasterHideoutConstruction)
+			}
+		} catch (error) {
+			this.logger.warning("HideoutOptions: FasterHideoutConstructionChanger failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.fuelConsumption.enabled) {
-			new FuelConsumptionChanger(this.container).apply(config.fuelConsumption)
+		try {
+			if (config.fuelConsumption.enabled) {
+				new FuelConsumptionChanger(this.container).apply(config.fuelConsumption)
+			}
+		} catch (error) {
+			this.logger.warning("HideoutOptions: FuelConsumptionChanger failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.scavCaseOptions.enabled) {
-			new ScavCaseOptionsChanger(this.container).apply(config.scavCaseOptions)
+		try {
+			if (config.scavCaseOptions.enabled) {
+				new ScavCaseOptionsChanger(this.container).apply(config.scavCaseOptions)
+			}
+		} catch (error) {
+			this.logger.warning("HideoutOptions: ScavCaseOptionsChanger failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.allowGymTrainingWithMusclePain) {
-			this.doAllowGymTrainingWithMusclePain()
+		try {
+			if (config.allowGymTrainingWithMusclePain) {
+				this.doAllowGymTrainingWithMusclePain()
+			}
+		} catch (error) {
+			this.logger.warning("HideoutOptions: doAllowGymTrainingWithMusclePain failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 	}
 

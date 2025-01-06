@@ -23,12 +23,23 @@ export class HideoutContainersChanger {
 		if (!config.enabled) {
 			return
 		}
-		if (config.biggerHideoutContainers) {
-			this.doBiggerHideoutContainers()
+
+		try {
+			if (config.biggerHideoutContainers) {
+				this.doBiggerHideoutContainers()
+			}
+		} catch (error) {
+			this.logger.warning("HideoutContainers: doBiggerHideoutContainers failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.siccCaseBuff) {
-			this.doSiccCaseBuff()
+		try {
+			if (config.siccCaseBuff) {
+				this.doSiccCaseBuff()
+			}
+		} catch (error) {
+			this.logger.warning("HideoutContainers: doSiccCaseBuff failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 	}
 

@@ -25,19 +25,39 @@ export class OtherFleaMarketChangesChanger {
 		if (!config.enabled) {
 			return
 		}
-		if (config.sellingOnFlea) {
-			this.doSellingOnFlea()
+		try {
+			if (config.sellingOnFlea) {
+				this.doSellingOnFlea()
+			}
+		} catch (error) {
+			this.logger.warning("OtherFleaMarketChanges: doSellingOnFlea Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.onlyFoundInRaidItemsAllowedForBarters) {
-			this.adjustOnlyFIRforBarters()
+		try {
+			if (config.onlyFoundInRaidItemsAllowedForBarters) {
+				this.adjustOnlyFIRforBarters()
+			}
+		} catch (error) {
+			this.logger.warning("OtherFleaMarketChanges: adjustOnlyFIRforBarters Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.fleaPristineItems) {
-			this.adjustPristineItems()
+		try {
+			if (config.fleaPristineItems) {
+				this.adjustPristineItems()
+			}
+		} catch (error) {
+			this.logger.warning("OtherFleaMarketChanges: adjustPristineItems Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		this.increaseFleaPrices(config.fleaPricesIncreased)
+		try {
+			this.increaseFleaPrices(config.fleaPricesIncreased)
+		} catch (error) {
+			this.logger.warning("OtherFleaMarketChanges: increaseFleaPrices Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
+		}
 	}
 
 	private doSellingOnFlea() {

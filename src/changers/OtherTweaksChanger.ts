@@ -24,43 +24,94 @@ export class OtherTweaksChanger {
 		if (!config.enabled) {
 			return
 		}
-		if (config.skillExpBuffs) {
-			this.doSkillExpBuffs()
+		try {
+			if (config.skillExpBuffs) {
+				this.doSkillExpBuffs()
+			}
+		} catch (error) {
+			this.logger.warning("OtherTweaks: doSkillExpBuffs Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.signalPistolInSpecialSlots) {
-			this.doSignalPistolInSpecialSlots()
+		try {
+			if (config.signalPistolInSpecialSlots) {
+				this.doSignalPistolInSpecialSlots()
+			}
+		} catch (error) {
+			this.logger.warning("OtherTweaks: doSignalPistolInSpecialSlots Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.unexaminedItemsAreBack) {
-			this.doUnexaminedItemsAreBack()
+		try {
+			if (config.unexaminedItemsAreBack) {
+				this.doUnexaminedItemsAreBack()
+			}
+		} catch (error) {
+			this.logger.warning("OtherTweaks: doUnexaminedItemsAreBack Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.fasterExamineTime) {
-			this.doFasterExamineTime()
+		try {
+			if (config.fasterExamineTime) {
+				this.doFasterExamineTime()
+			}
+		} catch (error) {
+			this.logger.warning("OtherTweaks: doFasterExamineTime Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.removeBackpackRestrictions) {
-			this.doRemoveBackpackRestrictions()
+		try {
+			if (config.removeBackpackRestrictions) {
+				this.doRemoveBackpackRestrictions()
+			}
+		} catch (error) {
+			this.logger.warning("OtherTweaks: doRemoveBackpackRestrictions Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.removeDiscardLimit) {
-			this.doRemoveDiscardLimit()
+		try {
+			if (config.removeDiscardLimit) {
+				this.doRemoveDiscardLimit()
+			}
+		} catch (error) {
+			this.logger.warning("OtherTweaks: doRemoveDiscardLimit Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.reshalaAlwaysHasGoldenTT) {
-			this.doReshalaAlwaysHasGoldenTT()
+		try {
+			if (config.reshalaAlwaysHasGoldenTT) {
+				this.doReshalaAlwaysHasGoldenTT()
+			}
+		} catch (error) {
+			this.logger.warning("OtherTweaks: doReshalaAlwaysHasGoldenTT Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.biggerAmmoStacks.enabled) {
-			this.doBiggerAmmoStacks(config.biggerAmmoStacks.stackMultiplier)
+		try {
+			if (config.biggerAmmoStacks.enabled) {
+				this.doBiggerAmmoStacks(config.biggerAmmoStacks.stackMultiplier)
+			}
+		} catch (error) {
+			this.logger.warning("OtherTweaks: doBiggerAmmoStacks Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
-		if (config.questChanges) {
-			this.doQuestChanges()
+		try {
+			if (config.questChanges) {
+				this.doQuestChanges()
+			}
+		} catch (error) {
+			this.logger.warning("OtherTweaks: doQuestChanges Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
-		if (config.removeRaidItemLimits) {
-			this.doRemoveRaidItemLimits()
+
+		try {
+			if (config.removeRaidItemLimits) {
+				this.doRemoveRaidItemLimits()
+			}
+		} catch (error) {
+			this.logger.warning("OtherTweaks: doRemoveRaidItemLimits Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 	}
 	private doSkillExpBuffs() {
