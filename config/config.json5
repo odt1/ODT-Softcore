@@ -63,6 +63,10 @@
                 enabled: true,
                 baseCraftingTimeMultiplier: 10,
             },
+            fasterCultistCircle: {
+                enabled: true,
+                baseCraftingTimeMultiplier: 10,
+            },
         },
         fasterHideoutConstruction: {
             // Make construction of the hideout stations much faster.

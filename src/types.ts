@@ -64,6 +64,7 @@ export interface FasterCraftingTime {
 	hideoutSkillExpFix: HideoutSkillExpFix
 	fasterMoonshineProduction: FasterProduction
 	fasterPurifiedWaterProduction: FasterProduction
+	fasterCultistCircle: FasterProduction
 }
 
 export interface FasterProduction {

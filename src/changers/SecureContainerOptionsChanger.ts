@@ -93,7 +93,7 @@ export class SecureContainerOptionsChanger {
 		if (reward) {
 			const index = reward.requiredItems.indexOf("5732ee6a24597719ae0c0281")
 			if (index !== -1) {
-				reward.requiredItems[index] = "664a55d84a90fc2c8a6305c9"
+				reward.requiredItems[index] = "5c093ca986f7740a1867ab12"
 			}
 		}
 

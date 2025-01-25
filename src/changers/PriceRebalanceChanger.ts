@@ -49,14 +49,8 @@ export class PriceRebalanceChanger {
 			[ItemTpl.INFO_MILITARY_FLASH_DRIVE]: 224400,
 		}
 
-		const handbookItems = this.tables.templates?.handbook.Items
-		if (!handbookItems) {
-			this.logger.warning("PriceRebalance: doItemFixes: handbook not found")
-			return
-		}
-
 		for (const [itemTpl, price] of Object.entries(itemsToFix)) {
-			const item = handbookItems.find((item) => item.Id === itemTpl)
+			const item = this.tables.templates?.handbook.Items.find((item) => item.Id === itemTpl)
 			if (!item) {
 				this.logger.warning(`PriceRebalance: doItemFixes: item ${itemTpl} not found, skipping`)
 				continue

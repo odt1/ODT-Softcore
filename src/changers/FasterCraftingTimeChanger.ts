@@ -61,6 +61,15 @@ export class FasterCraftingTimeChanger {
 			this.logger.warning("FasterCraftingTime: doFasterProductionFor DRINK_CANISTER_WITH_PURIFIED_WATER failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
+
+		try {
+			if (config.fasterCultistCircle.enabled) {
+				this.doFasterCultistCircle(config.fasterCultistCircle.baseCraftingTimeMultiplier)
+			}
+		} catch (error) {
+			this.logger.warning("FasterCraftingTime: doFasterCultistCircle DRINK_CANISTER_WITH_PURIFIED_WATER failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
+		}
 	}
 
 	private doFasterProductionFor(itemTpl: ItemTpl, multiplier: number) {
@@ -100,5 +109,44 @@ export class FasterCraftingTimeChanger {
 
 	private doHideoutSkillExpFix(multiplier: number) {
 		this.hideoutConfig.hoursForSkillCrafting /= multiplier
+	}
+
+	private doFasterCultistCircle(multiplier: number) {
+		this.hideoutConfig.cultistCircle.hideoutTaskRewardTimeSeconds = Math.round(this.hideoutConfig.cultistCircle.hideoutTaskRewardTimeSeconds / multiplier)
+
+		for (const craft of this.hideoutConfig.cultistCircle.craftTimeThreshholds) {
+			craft.craftTimeSeconds = Math.round(craft.craftTimeSeconds / multiplier)
+		}
+
+		for (const craft of this.hideoutConfig.cultistCircle.directRewards) {
+			craft.craftTimeSeconds = Math.round(craft.craftTimeSeconds / multiplier)
+			/*
+			console.log(
+				`${craft.repeatable ? "Repeatable " : ""}Reward: ${craft.reward.map(
+					(x) => this.tables.locales?.global.en[`${x} Name`]
+				)} <== Required Items: ${craft.requiredItems.map((x) => this.tables.locales?.global.en[`${x} Name`])}`
+			)
+
+			Reward: Secure container Gamma <== Required Items: Secure container Gamma
+			Reward: Secure container Kappa <== Required Items: Secure container Theta
+			Reward: Cultist figurine <== Required Items: Spooky skull mask
+			Reward: Cultist knife <== Required Items: Spooky skull mask,Spooky skull mask,Spooky skull mask,Spooky skull mask,Spooky skull mask
+			Reward: Maska-1SCh bulletproof helmet (Killa Edition) <== Required Items: Killa figurine
+			Reward: Tagilla's welding mask "Gorilla",Tagilla's welding mask "UBEY" <== Required Items: Tagilla figurine
+			Reward: TT-33 7.62x25 TT pistol (Golden) <== Required Items: Reshala figurine
+			Reward: Baddie's red beard,Deadlyslob's beard oil <== Required Items: Den figurine
+			Reward: Bottle of Tarkovskaya vodka,Bottle of Tarkovskaya vodka,Bottle of Tarkovskaya vodka <== Required Items: Politician Mutkevich figurine
+			Reward: Scav Vest,Scav backpack <== Required Items: Scav figurine
+			Reward: Obdolbos 2 cocktail injector,Pack of sugar <== Required Items: Ryzhy figurine
+			Reward: Grizzly medical kit <== Required Items: BEAR operative figurine
+			Reward: HighCom Trooper TFO body armor (MultiCam) <== Required Items: USEC operative figurine
+			Repeatable Reward: Bottle of Fierce Hatchling moonshine <== Required Items: Relaxation room key
+			Repeatable Reward: Axel parrot figurine <== Required Items: Dundukk sport sunglasses
+			Repeatable Reward: Awl <== Required Items: Soap
+			Repeatable Reward: Light bulb,Light bulb <== Required Items: Zarya stun grenade
+			Repeatable Reward: GreenBat lithium battery,GreenBat lithium battery,Tetriz portable game console,Tetriz portable game console <== Required Items: Physical Bitcoin
+			Repeatable Reward: TerraGroup "Blue Folders" materials <== Required Items: LEDX Skin Transilluminator 
+			*/
+		}
 	}
 }

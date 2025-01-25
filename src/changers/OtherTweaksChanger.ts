@@ -135,6 +135,7 @@ export class OtherTweaksChanger {
 		}
 		// biome-ignore lint/complexity/noForEach: Makes it more readable.
 		this.items[ItemTpl.POCKETS_1X4_SPECIAL]._props.Slots?.forEach((x) => x._props.filters[0].Filter.push(ItemTpl.SIGNALPISTOL_ZID_SP81_26X75_SIGNAL_PISTOL))
+		this.items[ItemTpl.POCKETS_1X4_TUE]._props.Slots?.forEach((x) => x._props.filters[0].Filter.push(ItemTpl.SIGNALPISTOL_ZID_SP81_26X75_SIGNAL_PISTOL))
 	}
 	doUnexaminedItemsAreBack() {
 		if (!this.items) {

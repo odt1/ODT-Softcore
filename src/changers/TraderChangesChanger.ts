@@ -330,7 +330,7 @@ export class TraderChangesChanger {
 			}
 
 			if (barter[0][0]._tpl === ItemTpl.MONEY_ROUBLES) {
-				barter[0][0].count = Math.ceil(barter[0][0].count / euroPrice)
+				barter[0][0].count = Math.round((barter[0][0].count / euroPrice) * 100) / 100
 				barter[0][0]._tpl = ItemTpl.MONEY_EUROS
 			}
 		}
@@ -380,7 +380,7 @@ export class TraderChangesChanger {
 			}
 			for (const item of traderItems) {
 				if (item.upd?.BuyRestrictionMax) {
-					item.upd.BuyRestrictionMax *= multiplier
+					item.upd.BuyRestrictionMax = Math.round(item.upd.BuyRestrictionMax * multiplier)
 				}
 			}
 		}

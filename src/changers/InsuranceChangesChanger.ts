@@ -43,6 +43,10 @@ export class InsuranceChangesChanger {
 			this.logger.warning("InsuranceChanges: doTraderInsuranceChanges Traders.THERAPIST failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
+
+		// this.insuranceConfig.returnTimeOverrideSeconds = 1
+		this.insuranceConfig.runIntervalSeconds = 10
+		this.insuranceConfig.storageTimeOverrideSeconds = 2592000
 	}
 	doTraderInsuranceChanges(traderID: Traders, insuranceChanges: TraderInsuranceChanges) {
 		const trader = this.tables.traders?.[traderID]
@@ -52,7 +56,7 @@ export class InsuranceChangesChanger {
 		}
 		trader.base.insurance.min_return_hour = insuranceChanges.returnTime.min
 		trader.base.insurance.max_return_hour = insuranceChanges.returnTime.max
-		trader.base.insurance.max_storage_time = 720
+		// trader.base.insurance.max_storage_time = 720
 		this.insuranceConfig.returnChancePercent[traderID] = insuranceChanges.returnChance
 		this.insuranceConfig.chanceNoAttachmentsTakenPercent = 50
 		for (const loyaltyLevel of trader.base.loyaltyLevels) {
