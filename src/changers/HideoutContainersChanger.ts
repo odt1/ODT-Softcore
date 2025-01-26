@@ -54,8 +54,9 @@ export class HideoutContainersChanger {
 			{ tpl: ItemTpl.CONTAINER_MR_HOLODILNICK_THERMAL_BAG, cellsH: 10, cellsV: 10 },
 			{ tpl: ItemTpl.CONTAINER_MAGAZINE_CASE, cellsH: 10, cellsV: 7 },
 			{ tpl: ItemTpl.CONTAINER_ITEM_CASE, cellsH: 10, cellsV: 10 },
-			{ tpl: ItemTpl.CONTAINER_WEAPON_CASE, cellsH: 6, cellsV: 10 },
+			{ tpl: ItemTpl.CONTAINER_WEAPON_CASE, cellsH: 6, cellsV: 15 },
 			{ tpl: ItemTpl.CONTAINER_KEY_TOOL, cellsH: 5, cellsV: 5 },
+			{ tpl: ItemTpl.CONTAINER_THICC_WEAPON_CASE, cellsH: 14, cellsV: 15 },
 		]
 
 		for (const container of containersToModify) {
@@ -72,12 +73,15 @@ export class HideoutContainersChanger {
 	private doSiccCaseBuff() {
 		// Huge buff to SICC case to make it actually not shit and a direct upgrade to Docs. And while we are here, allow it to hold keytool. It's Softcore, who
 		const docsFilter = this.items?.[ItemTpl.CONTAINER_DOCUMENTS_CASE]._props.Grids?.[0]._props.filters[0].Filter
-		let siccFilter = this.items?.[ItemTpl.CONTAINER_SICC]._props.Grids?.[0]._props.filters[0].Filter
+		const siccFilter = this.items?.[ItemTpl.CONTAINER_SICC]._props.Grids?.[0]._props.filters[0].Filter
 		if (!docsFilter || !siccFilter) {
 			this.logger.warning("HideoutContainers: doSiccCaseBuff: docsFilter or siccFilter not found")
 			return
 		}
 		const mergeFilters = [...new Set([...docsFilter, ...siccFilter, ItemTpl.CONTAINER_KEY_TOOL])]
-		siccFilter = mergeFilters
+		this.items[ItemTpl.CONTAINER_SICC]._props.Grids[0]._props.filters[0].Filter = mergeFilters
+		// this.items[ItemTpl.CONTAINER_SICC]._props.Grids[0]._props.filters[0].Filter.forEach((x) => {
+		// 	console.log(this.tables.locales?.global.en[`${x} Name`])
+		// })
 	}
 }

@@ -29,7 +29,7 @@ export class OtherTweaksChanger {
 				this.doSkillExpBuffs()
 			}
 		} catch (error) {
-			this.logger.warning("OtherTweaks: doSkillExpBuffs Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("OtherTweaks: doSkillExpBuffs failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 
@@ -38,7 +38,7 @@ export class OtherTweaksChanger {
 				this.doSignalPistolInSpecialSlots()
 			}
 		} catch (error) {
-			this.logger.warning("OtherTweaks: doSignalPistolInSpecialSlots Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("OtherTweaks: doSignalPistolInSpecialSlots failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 
@@ -47,7 +47,7 @@ export class OtherTweaksChanger {
 				this.doUnexaminedItemsAreBack()
 			}
 		} catch (error) {
-			this.logger.warning("OtherTweaks: doUnexaminedItemsAreBack Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("OtherTweaks: doUnexaminedItemsAreBack failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 
@@ -56,7 +56,7 @@ export class OtherTweaksChanger {
 				this.doFasterExamineTime()
 			}
 		} catch (error) {
-			this.logger.warning("OtherTweaks: doFasterExamineTime Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("OtherTweaks: doFasterExamineTime failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 
@@ -65,7 +65,7 @@ export class OtherTweaksChanger {
 				this.doRemoveBackpackRestrictions()
 			}
 		} catch (error) {
-			this.logger.warning("OtherTweaks: doRemoveBackpackRestrictions Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("OtherTweaks: doRemoveBackpackRestrictions failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 
@@ -74,7 +74,7 @@ export class OtherTweaksChanger {
 				this.doRemoveDiscardLimit()
 			}
 		} catch (error) {
-			this.logger.warning("OtherTweaks: doRemoveDiscardLimit Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("OtherTweaks: doRemoveDiscardLimit failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 
@@ -83,7 +83,7 @@ export class OtherTweaksChanger {
 				this.doReshalaAlwaysHasGoldenTT()
 			}
 		} catch (error) {
-			this.logger.warning("OtherTweaks: doReshalaAlwaysHasGoldenTT Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("OtherTweaks: doReshalaAlwaysHasGoldenTT failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 
@@ -92,7 +92,7 @@ export class OtherTweaksChanger {
 				this.doBiggerAmmoStacks(config.biggerAmmoStacks.stackMultiplier)
 			}
 		} catch (error) {
-			this.logger.warning("OtherTweaks: doBiggerAmmoStacks Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("OtherTweaks: doBiggerAmmoStacks failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 
@@ -101,7 +101,7 @@ export class OtherTweaksChanger {
 				this.doQuestChanges()
 			}
 		} catch (error) {
-			this.logger.warning("OtherTweaks: doQuestChanges Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("OtherTweaks: doQuestChanges failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 
@@ -110,7 +110,15 @@ export class OtherTweaksChanger {
 				this.doRemoveRaidItemLimits()
 			}
 		} catch (error) {
-			this.logger.warning("OtherTweaks: doRemoveRaidItemLimits Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("OtherTweaks: doRemoveRaidItemLimits failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
+		}		
+		try {
+			if (true) {
+				this.doCurrencyStack()
+			}
+		} catch (error) {
+			this.logger.warning("OtherTweaks: doCurrencyStack failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 	}
@@ -233,5 +241,12 @@ export class OtherTweaksChanger {
 		}
 		// globals.config.RestrictionsInRaid.forEach((x) => console.log(`${x.TemplateId}, // ${this.tables.locales?.global.en[`${x.TemplateId} Name`]}`))
 		globals.config.RestrictionsInRaid = []
+	}
+
+	doCurrencyStack() {
+		this.items["569668774bdc2da2298b4568"]._props.StackMaxSize = 100000
+		this.items["5696686a4bdc2da3298b456a"]._props.StackMaxSize = 100000
+		this.items["5d235b4d86f7742e017bc88a"]._props.StackMaxSize = 100
+		this.items["5449016a4bdc2d6f028b456f"]._props.StackMaxSize = 1000000
 	}
 }
