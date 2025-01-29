@@ -7,6 +7,7 @@ import { ItemTpl } from "@spt/models/enums/ItemTpl"
 import { ItemType } from "@spt/models/eft/common/tables/ITemplateItem"
 import { ITemplateItem } from "@spt/models/eft/common/tables/ITemplateItem"
 import { BaseClasses } from "@spt/models/enums/BaseClasses"
+import { log } from "node:console"
 
 export class OtherTweaksChanger {
 	private logger: PrefixLogger
@@ -116,7 +117,7 @@ export class OtherTweaksChanger {
 		}
 
 		try {
-			if (true) {
+			if (config.biggerCurrencyStacks) {
 				this.doCurrencyStack()
 			}
 		} catch (error) {
@@ -125,7 +126,7 @@ export class OtherTweaksChanger {
 		}
 
 		try {
-			if (true) {
+			if (config.smallContainersInSpecialSlots) {
 				this.doToolsInSpecialSlots()
 			}
 		} catch (error) {
@@ -219,13 +220,12 @@ export class OtherTweaksChanger {
 		const crisis = this.tables.templates!.quests["60e71c48c1bfa3050473b8e5"]
 		crisis.conditions.AvailableForStart[1].value = 30
 
-		const dripout1 = this.tables.templates!.quests["6613f3007f6666d56807c929"]
-		dripout1.conditions.AvailableForFinish.find((x) => x.conditionType === "HandoverItem").value = 10
-		dripout1.conditions.AvailableForFinish.find((x) => x.conditionType === "CounterCreator").value = 20
-
-		const dripout2 = this.tables.templates!.quests["6613f307fca4f2f386029409"]
-		dripout2.conditions.AvailableForFinish.find((x) => x.conditionType === "HandoverItem").value = 10
-		dripout2.conditions.AvailableForFinish.find((x) => x.conditionType === "CounterCreator").value = 20
+		for (const quest of Object.values(this.tables.templates!.quests)) {
+			if (quest.QuestName?.includes("Drip-Out")) {
+				quest.conditions.AvailableForFinish.find((x) => x.conditionType === "HandoverItem").value = 10
+				quest.conditions.AvailableForFinish.find((x) => x.conditionType === "CounterCreator").value = 20
+			}
+		}
 	}
 
 	doRemoveRaidItemLimits() {

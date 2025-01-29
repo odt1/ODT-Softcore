@@ -233,9 +233,11 @@
             enabled: true,
             stackMultiplier: 10,
         },
-        // Better start for quests (Crisis).
+        // Better start for quests (Crisis). 5 times lower requirments for Drip-Out quests.  
         questChanges: true,
         // removeRaidItemLimits
         removeRaidItemLimits: true,
+        biggerCurrencyStacks: true,
+        smallContainersInSpecialSlots: true
     },
 }

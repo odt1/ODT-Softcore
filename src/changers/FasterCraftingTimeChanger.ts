@@ -74,18 +74,14 @@ export class FasterCraftingTimeChanger {
 
 	private doFasterProductionFor(itemTpl: ItemTpl, multiplier: number) {
 		const hideout = this.tables.hideout
-		if (!hideout) {
-			this.logger.warning("FasterCraftingTime: doFasterProductionFor: hideout not found, skipping")
-			return
-		}
 
-		const productionsForItem = hideout.production.recipes.filter((prod) => prod.endProduct === itemTpl)
+		const productionsForItem = hideout!.production.recipes.filter((prod) => prod.endProduct === itemTpl)
 		if (!productionsForItem) {
 			this.logger.warning(`FasterCraftingTime: doFasterProduction: productions for item ${itemTpl} not found, skipping`)
 			return
 		}
 		for (const production of productionsForItem) {
-			production.productionTime = Math.round(production.productionTime / multiplier)
+			production.productionTime = Math.ceil(production.productionTime / multiplier)
 		}
 	}
 
@@ -99,7 +95,7 @@ export class FasterCraftingTimeChanger {
 
 		for (const production of hideout!.production.recipes) {
 			if (!exclude.includes(production.endProduct)) {
-				production.productionTime = Math.round(production.productionTime / multiplier) + 1
+				production.productionTime = Math.ceil(production.productionTime / multiplier)
 			}
 		}
 	}
@@ -109,14 +105,14 @@ export class FasterCraftingTimeChanger {
 	}
 
 	private doFasterCultistCircle(multiplier: number) {
-		this.hideoutConfig.cultistCircle.hideoutTaskRewardTimeSeconds = Math.round(this.hideoutConfig.cultistCircle.hideoutTaskRewardTimeSeconds / multiplier)
+		this.hideoutConfig.cultistCircle.hideoutTaskRewardTimeSeconds = Math.ceil(this.hideoutConfig.cultistCircle.hideoutTaskRewardTimeSeconds / multiplier)
 
 		for (const craft of this.hideoutConfig.cultistCircle.craftTimeThreshholds) {
-			craft.craftTimeSeconds = Math.round(craft.craftTimeSeconds / multiplier)
+			craft.craftTimeSeconds = Math.ceil(craft.craftTimeSeconds / multiplier)
 		}
 
 		for (const craft of this.hideoutConfig.cultistCircle.directRewards) {
-			craft.craftTimeSeconds = Math.round(craft.craftTimeSeconds / multiplier)
+			craft.craftTimeSeconds = Math.ceil(craft.craftTimeSeconds / multiplier)
 			/*
 			console.log(
 				`${craft.repeatable ? "Repeatable " : ""}Reward: ${craft.reward.map(
