@@ -61,6 +61,6 @@ export class CraftingChangesChanger {
 	}
 
 	private doAdditionalCraftingRecipes() {
-		this.tables.hideout?.production.recipes.push(...additionalCraftingRecipes)
+		this.tables.hideout.production.recipes.push(...additionalCraftingRecipes)
 	}
 }

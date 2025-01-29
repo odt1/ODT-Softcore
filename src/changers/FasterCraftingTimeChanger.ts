@@ -96,10 +96,7 @@ export class FasterCraftingTimeChanger {
 			ItemTpl.DRINK_CANISTER_WITH_PURIFIED_WATER,
 		] as string[]
 		const hideout = this.tables.hideout
-		if (!hideout) {
-			this.logger.warning("FasterCraftingTime: doFasterProductionForAll: hideout not found, skipping")
-			return
-		}
+
 		for (const production of hideout.production.recipes) {
 			if (!exclude.includes(production.endProduct)) {
 				production.productionTime = Math.round(production.productionTime / multiplier) + 1

@@ -40,6 +40,7 @@ export const whitelist = [
 	"5e21ca18e4d47f0da15e77dd", // AK CNC Warrior 5.56x45 muzzle device adapter
 	"588226ef24597767af46e39c", // Magpul AFG tactical foregrip (Olive Drab)
 	"5ea05cf85ad9772e6624305d", // Tac-Kek FAST MT helmet (Replica)
+	"67449b6c89d5e1ddc603f504", // Contraband case key
 ]
 
 export const fleaBarterRequestWhitelist = [

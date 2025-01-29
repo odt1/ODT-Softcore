@@ -67,10 +67,6 @@ export class OtherFleaMarketChangesChanger {
 
 	private adjustOnlyFIRforBarters() {
 		const globals = this.tables.globals
-		if (!globals) {
-			this.logger.warning("OtherFleamarketChanges: adjustOnlyFIRforBarters: globals not found. Skipping.")
-			return
-		}
 		globals.config.RagFair.isOnlyFoundInRaidAllowed = true
 	}
 

@@ -44,11 +44,6 @@ export class HideoutContainersChanger {
 	}
 
 	private doBiggerHideoutContainers() {
-		if (!this.items) {
-			this.logger.warning("HideoutOptions: doBiggerHideoutContainers: items table not found")
-			return
-		}
-
 		const containersToModify = [
 			{ tpl: ItemTpl.CONTAINER_MEDICINE_CASE, cellsH: 10, cellsV: 10 },
 			{ tpl: ItemTpl.CONTAINER_MR_HOLODILNICK_THERMAL_BAG, cellsH: 10, cellsV: 10 },

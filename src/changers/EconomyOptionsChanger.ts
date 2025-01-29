@@ -78,10 +78,6 @@ export class EconomyOptionsChanger {
 
 	private updateRagfairMinUserLevel(level: number) {
 		const globals = this.tables.globals
-		if (!globals) {
-			this.logger.warning("EconomyOptions: updateRagfairMinUserLevel: globals not found")
-			return
-		}
 		globals.config.RagFair.minUserLevel = level
 	}
 }

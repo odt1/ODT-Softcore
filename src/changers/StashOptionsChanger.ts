@@ -32,7 +32,7 @@ export class StashOptionsChanger {
 				this.doProgressiveStash()
 			}
 		} catch (error) {
-			this.logger.warning("StashOptions: doProgressiveStash markedKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("StashOptions: doProgressiveStash failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 
@@ -41,7 +41,7 @@ export class StashOptionsChanger {
 				this.doBiggerStash()
 			}
 		} catch (error) {
-			this.logger.warning("StashOptions: doBiggerStash markedKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("StashOptions: doBiggerStash failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 
@@ -50,7 +50,7 @@ export class StashOptionsChanger {
 				this.doLessCurrencyForConstruction()
 			}
 		} catch (error) {
-			this.logger.warning("StashOptions: doLessCurrencyForConstruction markedKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("StashOptions: doLessCurrencyForConstruction failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 
@@ -59,17 +59,14 @@ export class StashOptionsChanger {
 				this.doEasierLoyalty()
 			}
 		} catch (error) {
-			this.logger.warning("StashOptions: doEasierLoyalty markedKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("StashOptions: doEasierLoyalty failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 	}
 
 	private doProgressiveStash() {
-		const profileTemplates = this.tables.templates?.profiles
-		if (!profileTemplates) {
-			this.logger.warning("SecureContainerOptions: doProgressiveStash: profileTemplates not found")
-			return
-		}
+		const profileTemplates = this.tables.templates.profiles
+
 		const basicStashBonuses = {
 			id: "64f5b9e5fa34f11b380756c0",
 			templateId: ItemTpl.STASH_STANDARD_STASH_10X30,
@@ -110,10 +107,6 @@ export class StashOptionsChanger {
 	}
 
 	private doBiggerStash() {
-		if (!this.items) {
-			this.logger.warning("HideoutOptions: doBiggerStash: items table not found")
-			return
-		}
 		const stashUpdates: Record<string, number> = {
 			[ItemTpl.STASH_STANDARD_STASH_10X30]: 50,
 			[ItemTpl.STASH_LEFT_BEHIND_STASH_10X40]: 100,
@@ -133,11 +126,8 @@ export class StashOptionsChanger {
 	}
 
 	private doLessCurrencyForConstruction() {
-		const hideoutStashStages = this.tables.hideout?.areas.find((area) => area.type === HideoutAreas.STASH)?.stages
-		if (!hideoutStashStages) {
-			this.logger.warning("HideoutOptions: doLessCurrencyForConstruction: hideoutStashStages not found")
-			return
-		}
+		const hideoutStashStages = this.tables.hideout.areas.find((area) => area.type === HideoutAreas.STASH).stages
+
 		for (const [_, stage] of Object.entries(hideoutStashStages)) {
 			const currencyRequirements = stage.requirements.filter((req) => req.templateId === Money.ROUBLES || req.templateId === Money.EUROS)
 			for (const currencyRequirement of currencyRequirements) {
@@ -149,11 +139,8 @@ export class StashOptionsChanger {
 	}
 
 	private doEasierLoyalty() {
-		const hideoutStashStages = this.tables.hideout?.areas.find((area) => area.type === HideoutAreas.STASH)?.stages
-		if (!hideoutStashStages) {
-			this.logger.warning("HideoutOptions: doEasierLoyalty: hideoutStashStages not found")
-			return
-		}
+		const hideoutStashStages = this.tables.hideout.areas.find((area) => area.type === HideoutAreas.STASH).stages
+
 		for (const [_, stage] of Object.entries(hideoutStashStages)) {
 			const loyaltylevels = stage.requirements.filter((req) => req.loyaltyLevel !== undefined)
 			for (const loyaltyLevel of loyaltylevels) {

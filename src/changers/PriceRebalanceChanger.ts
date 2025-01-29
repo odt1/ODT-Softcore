@@ -4,15 +4,18 @@ import { PriceRebalance } from "../types"
 import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables"
 import { PrefixLogger } from "../util/PrefixLogger"
 import { ItemTpl } from "@spt/models/enums/ItemTpl"
+import { HandbookHelper } from "@spt/helpers/HandbookHelper"
 
 export class PriceRebalanceChanger {
 	private logger: PrefixLogger
 	private tables: IDatabaseTables
+	private handbookHelper: HandbookHelper
 
 	constructor(container: DependencyContainer) {
 		this.logger = PrefixLogger.getInstance()
 		const databaseServer = container.resolve<DatabaseServer>("DatabaseServer")
 		this.tables = databaseServer.getTables()
+		this.handbookHelper = container.resolve<HandbookHelper>("HandbookHelper")
 	}
 
 	public apply(config: PriceRebalance) {
@@ -47,29 +50,20 @@ export class PriceRebalanceChanger {
 			[ItemTpl.FOOD_RYE_CROUTONS]: 2000,
 			[ItemTpl.INFO_INTELLIGENCE_FOLDER]: 588000,
 			[ItemTpl.INFO_MILITARY_FLASH_DRIVE]: 224400,
+			"67449b6c89d5e1ddc603f504": 32524 * 20, // Skier contraband case key
 		}
 
 		for (const [itemTpl, price] of Object.entries(itemsToFix)) {
-			const item = this.tables.templates?.handbook.Items.find((item) => item.Id === itemTpl)
-			if (!item) {
-				this.logger.warning(`PriceRebalance: doItemFixes: item ${itemTpl} not found, skipping`)
-				continue
-			}
-			item.Price = price
+			this.tables.templates.handbook.Items.find((item) => item.Id === itemTpl).Price = price
 		}
+
+		this.handbookHelper.hydrateLookup()
 	}
 
 	private doPriceRebalance() {
-		const handbookItems = this.tables.templates?.handbook.Items
-		if (!handbookItems) {
-			this.logger.warning("PriceRebalance: doPriceRebalance: handbook not found")
-			return
-		}
-		const fleaPrices = this.tables.templates?.prices
-		if (!fleaPrices) {
-			this.logger.warning("PriceRebalance: doPriceRebalance: fleaprices not found")
-			return
-		}
+		const handbookItems = this.tables.templates.handbook.Items
+		const fleaPrices = this.tables.templates.prices
+
 		for (const item of handbookItems) {
 			fleaPrices[item.Id] = item.Price
 		}

@@ -39,12 +39,12 @@ export class SecureContainerOptionsChanger {
 						this.doCollectorQuestRedone()
 					}
 				} catch (error) {
-					this.logger.warning("SecureContainerOptions: doCollectorQuestRedone markedKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+					this.logger.warning("SecureContainerOptions: doCollectorQuestRedone failed gracefully. Send bug report. Continue safely.")
 					console.warn(error)
 				}
 			}
 		} catch (error) {
-			this.logger.warning("SecureContainerOptions: doProgressiveContainers markedKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("SecureContainerOptions: doProgressiveContainers failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 
@@ -53,17 +53,14 @@ export class SecureContainerOptionsChanger {
 				this.doBiggerContainers()
 			}
 		} catch (error) {
-			this.logger.warning("SecureContainerOptions: doBiggerContainers markedKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("SecureContainerOptions: doBiggerContainers failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 	}
 
 	private doProgressiveContainers() {
-		const profileTemplates = this.tables.templates?.profiles
-		if (!profileTemplates) {
-			this.logger.warning("SecureContainerOptions: doProgressiveContainers: profileTemplates not found")
-			return
-		}
+		const profileTemplates = this.tables.templates.profiles
+
 		for (const profileName of Object.keys(profileTemplates)) {
 			const profile = profileTemplates[profileName]
 			const bearContainer = profile.bear.character.Inventory.items.find((x) => x.slotId === "SecuredContainer")
@@ -104,11 +101,7 @@ export class SecureContainerOptionsChanger {
 	}
 
 	private doCollectorQuestRedone() {
-		const quests = this.tables.templates?.quests
-		if (!quests) {
-			this.logger.warning("SecureContainerOptions: doCollectorQuestRedone: quests table not found")
-			return
-		}
+		const quests = this.tables.templates.quests
 		const collectorID = Object.keys(quests).find((key) => {
 			return quests[key].QuestName === "Collector"
 		})
@@ -133,10 +126,6 @@ export class SecureContainerOptionsChanger {
 			visibilityConditions: [],
 		})
 
-		if (!this.tables.locales) {
-			this.logger.warning("SecureContainerOptions: doCollectorQuestRedone: locales not found")
-			return
-		}
 		this.tables.locales.global.ru["639135534b15ca31f76bc319"] = "Передать носитель" // Тут нужен только фикс для русского, для всех остальных языков звучит как "Hand over the storage device"
 		// Start condition
 		quests[collectorID].conditions.AvailableForStart = [
@@ -164,10 +153,6 @@ export class SecureContainerOptionsChanger {
 	}
 
 	private modifyContainer(itemTpl: string, cellsV: number, cellsH: number) {
-		if (!this.items) {
-			this.logger.error("Softcore: SecureContainerOptions: items table not found")
-			return
-		}
 		if (this.items[itemTpl]?._props.Grids?.[0]._props) {
 			this.items[itemTpl]._props.Grids[0]._props.cellsV = cellsV
 			this.items[itemTpl]._props.Grids[0]._props.cellsH = cellsH

@@ -24,13 +24,13 @@ export class PacifistFleaMarketChanger {
 	public apply(config: PacifistFleaMarket) {
 		if (!config.enabled) {
 			return
-		} else {
-			try {
-				this.pacifistFleaMarket()
-			} catch (error) {
-				this.logger.warning("PacifistFleaMarket: pacifistFleaMarket Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
-				console.warn(error)
-			}
+		}
+
+		try {
+			this.pacifistFleaMarket()
+		} catch (error) {
+			this.logger.warning("PacifistFleaMarket: pacifistFleaMarket Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
 		}
 
 		try {
@@ -63,6 +63,7 @@ export class PacifistFleaMarketChanger {
 
 	private pacifistFleaMarket() {
 		const locale = this.tables.locales?.global.en // debug
+		// biome-ignore lint/correctness/noConstantCondition: <explanation>
 		if (false) {
 			// debug
 			// Handbook Categories generator
@@ -112,17 +113,8 @@ export class PacifistFleaMarketChanger {
 	private allowOnRagfair(whitelist, priceMultiplier: number) {
 		const whitelistItemIDs = whitelist as string[]
 
-		const items = this.tables.templates?.items
-		if (!items) {
-			this.logger.warning("PacifistFleaMarket: adjustedSellableOnRagfair: items table not found")
-			return
-		}
-
-		const prices = this.tables.templates?.prices
-		if (!prices) {
-			this.logger.warning("PacifistFleaMarket: prices table not found")
-			return
-		}
+		const items = this.tables.templates.items
+		const prices = this.tables.templates.prices
 
 		for (const itemID of whitelistItemIDs) {
 			const item = items[itemID]
@@ -133,7 +125,7 @@ export class PacifistFleaMarketChanger {
 
 			prices[itemID] = Math.round(prices[itemID] * priceMultiplier)
 			item._props.CanSellOnRagfair = true
-			this.ragfairConfig.dynamic.blacklist.custom = this.ragfairConfig.dynamic.blacklist.custom.filter((x) => x != itemID)
+			this.ragfairConfig.dynamic.blacklist.custom = this.ragfairConfig.dynamic.blacklist.custom.filter((x) => x !== itemID)
 		}
 	}
 }

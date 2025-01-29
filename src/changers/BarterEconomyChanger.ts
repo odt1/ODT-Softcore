@@ -101,11 +101,11 @@ export class BarterEconomyChanger {
 
 		for (const item in items) {
 			if (
-				items[item]._type == "Item" &&
+				items[item]._type === "Item" &&
 				!this.itemHelper.isOfBaseclasses(item, this.ragfairConfig.dynamic.barter.itemTypeBlacklist) &&
-				items[item]._parent != BaseClasses.MONEY
+				items[item]._parent !== BaseClasses.MONEY
 			) {
-				if (items[item]._props.QuestItem == true) {
+				if (items[item]._props.QuestItem === true) {
 					// Block quest items from being requested on flea
 					// console.log(`"${item}": ${fleaPrices[item]} // ${locale[`${item} Name`]}`)
 					fleaPrices[item] = 0
@@ -115,7 +115,7 @@ export class BarterEconomyChanger {
 					fleaPrices[item] = 0
 					// console.log(`${item}, // ${locale[`${item} Name`]}, ${fleaPrices[item]}`)
 				} else {
-					if (BSGblacklist.includes(item) && items[item]._props.CanSellOnRagfair == true) {
+					if (BSGblacklist.includes(item) && items[item]._props.CanSellOnRagfair === true) {
 						this.logger.warning(`\nItem ${locale[`${item} Name`]} can be bought on flea, don't use BSG blacklist unlockers with Barter Economy enabled!`)
 					}
 

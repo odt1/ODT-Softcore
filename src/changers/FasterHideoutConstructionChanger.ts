@@ -29,10 +29,7 @@ export class FasterHideoutConstructionChanger {
 
 	private doFasterHideoutConstruction(multiplier: number) {
 		const hideout = this.tables.hideout
-		if (!hideout) {
-			this.logger.warning("FasterHideoutConstruction: doFasterHideoutConstruction: hideout not found")
-			return
-		}
+
 		for (const area of hideout.areas) {
 			for (const [_, stage] of Object.entries(area.stages)) {
 				stage.constructionTime = Math.round(stage.constructionTime / multiplier)

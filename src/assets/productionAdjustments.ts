@@ -93,7 +93,7 @@ export const craftingAdjustments = [
 	{
 		id: ItemTpl.MEDICAL_SURV12_FIELD_SURGICAL_KIT,
 		adjust: (craft: IHideoutProduction) => {
-			let requirement = craft.requirements.find((requirement) => requirement.templateId === ItemTpl.MEDICAL_SURV12_FIELD_SURGICAL_KIT)
+			const requirement = craft.requirements.find((requirement) => requirement.templateId === ItemTpl.MEDICAL_SURV12_FIELD_SURGICAL_KIT)
 			if (!requirement) {
 				return
 			}
@@ -163,6 +163,7 @@ export const craftingAdjustments = [
 				return
 			}
 			requirement.requiredLevel = 2
+			// biome-ignore lint/complexity/noForEach: smol boi
 			craft.requirements.forEach((x) => {
 				if (x.count) {
 					x.count = 1

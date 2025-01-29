@@ -24,6 +24,7 @@ export class OtherTweaksChanger {
 		if (!config.enabled) {
 			return
 		}
+
 		try {
 			if (config.skillExpBuffs) {
 				this.doSkillExpBuffs()
@@ -112,7 +113,8 @@ export class OtherTweaksChanger {
 		} catch (error) {
 			this.logger.warning("OtherTweaks: doRemoveRaidItemLimits failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
-		}		
+		}
+
 		try {
 			if (true) {
 				this.doCurrencyStack()
@@ -121,13 +123,20 @@ export class OtherTweaksChanger {
 			this.logger.warning("OtherTweaks: doCurrencyStack failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
+
+		try {
+			if (true) {
+				this.doToolsInSpecialSlots()
+			}
+		} catch (error) {
+			this.logger.warning("OtherTweaks: doCurrencyStack failed gracefully. Send bug report. Continue safely.")
+			console.warn(error)
+		}
 	}
+
 	private doSkillExpBuffs() {
 		const globals = this.tables.globals
-		if (!globals) {
-			this.logger.warning("OtherTweaksChanger: adjustSkillExp: globals not found")
-			return
-		}
+
 		globals.config.SkillsSettings.Vitality.DamageTakenAction *= 10
 		globals.config.SkillsSettings.Sniper.WeaponShotAction *= 10
 		globals.config.SkillsSettings.Surgery.SurgeryAction *= 10
@@ -137,14 +146,9 @@ export class OtherTweaksChanger {
 	}
 
 	doSignalPistolInSpecialSlots() {
-		if (!this.items) {
-			this.logger.warning("OtherTweaksChanger: doSignalPistolInSpecialSlots: items not found")
-			return
-		}
-		// biome-ignore lint/complexity/noForEach: Makes it more readable.
-		this.items[ItemTpl.POCKETS_1X4_SPECIAL]._props.Slots?.forEach((x) => x._props.filters[0].Filter.push(ItemTpl.SIGNALPISTOL_ZID_SP81_26X75_SIGNAL_PISTOL))
-		this.items[ItemTpl.POCKETS_1X4_TUE]._props.Slots?.forEach((x) => x._props.filters[0].Filter.push(ItemTpl.SIGNALPISTOL_ZID_SP81_26X75_SIGNAL_PISTOL))
+		this.pushToSpecialSlots(ItemTpl.SIGNALPISTOL_ZID_SP81_26X75_SIGNAL_PISTOL)
 	}
+
 	doUnexaminedItemsAreBack() {
 		if (!this.items) {
 			this.logger.warning("OtherTweaksChanger: doFasterExamineTime: items not found")
@@ -164,22 +168,16 @@ export class OtherTweaksChanger {
 			}
 		}
 	}
+
 	doFasterExamineTime() {
-		if (!this.items) {
-			this.logger.warning("OtherTweaksChanger: doFasterExamineTime: items not found")
-			return
-		}
 		for (const item of Object.values(this.items)) {
 			if (item._props.ExamineTime) {
 				item._props.ExamineTime = 0.2
 			}
 		}
 	}
+
 	doRemoveBackpackRestrictions() {
-		if (!this.items) {
-			this.logger.warning("OtherTweaksChanger: doBiggerAmmoStacks: items not found")
-			return
-		}
 		for (const item of Object.values(this.items)) {
 			if (item._type !== ItemType.ITEM) {
 				continue
@@ -194,59 +192,81 @@ export class OtherTweaksChanger {
 			}
 		}
 	}
+
 	doRemoveDiscardLimit() {
-		if (!this.items) {
-			this.logger.warning("OtherTweaksChanger: doRemoveDiscardLimit: items not found")
-			return
-		}
 		for (const item of Object.values(this.items)) {
 			if (item._type === ItemType.ITEM) {
 				item._props.DiscardLimit = -1
 			}
 		}
 	}
+
 	doReshalaAlwaysHasGoldenTT() {
-		const reshala = this.tables.bots?.types.bossbully
-		if (!reshala) {
-			this.logger.warning("OtherTweaksChanger: doReshalaAlwaysHasGoldenTT: reshala not found")
-			return
-		}
+		const reshala = this.tables.bots.types.bossbully
 		reshala.chances.equipment.Holster = 100
 		reshala.inventory.equipment.Holster = { "5b3b713c5acfc4330140bd8d": 1 }
 	}
+
 	doBiggerAmmoStacks(stackMultiplier: number) {
-		if (!this.items) {
-			this.logger.warning("OtherTweaksChanger: doBiggerAmmoStacks: items not found")
-			return
-		}
 		for (const item of Object.values(this.items)) {
 			if (item._parent === BaseClasses.AMMO && item._props.StackMaxSize) {
 				item._props.StackMaxSize *= stackMultiplier
 			}
 		}
 	}
+
 	doQuestChanges() {
 		const crisis = this.tables.templates?.quests["60e71c48c1bfa3050473b8e5"]
-		if (!crisis) {
-			this.logger.warning("OtherTweaksChanger: doQuestChanges: Crisis not found")
-			return
-		}
 		crisis.conditions.AvailableForStart[1].value = 30
+
+		const dripout1 = this.tables.templates?.quests["6613f3007f6666d56807c929"]
+		dripout1.conditions.AvailableForFinish.find((x) => x.conditionType === "HandoverItem").value = 10
+		dripout1.conditions.AvailableForFinish.find((x) => x.conditionType === "CounterCreator").value = 20
+
+		const dripout2 = this.tables.templates?.quests["6613f307fca4f2f386029409"]
+		dripout2.conditions.AvailableForFinish.find((x) => x.conditionType === "HandoverItem").value = 10
+		dripout2.conditions.AvailableForFinish.find((x) => x.conditionType === "CounterCreator").value = 20
 	}
+
 	doRemoveRaidItemLimits() {
 		const globals = this.tables.globals
-		if (!globals) {
-			this.logger.warning("OtherTweaksChanger: doRemoveRaidItemLimits: globals not found")
-			return
-		}
 		// globals.config.RestrictionsInRaid.forEach((x) => console.log(`${x.TemplateId}, // ${this.tables.locales?.global.en[`${x.TemplateId} Name`]}`))
 		globals.config.RestrictionsInRaid = []
 	}
 
 	doCurrencyStack() {
-		this.items["569668774bdc2da2298b4568"]._props.StackMaxSize = 100000
-		this.items["5696686a4bdc2da3298b456a"]._props.StackMaxSize = 100000
-		this.items["5d235b4d86f7742e017bc88a"]._props.StackMaxSize = 100
-		this.items["5449016a4bdc2d6f028b456f"]._props.StackMaxSize = 1000000
+		this.items[ItemTpl.MONEY_EUROS]._props.StackMaxSize = 100000
+		this.items[ItemTpl.MONEY_DOLLARS]._props.StackMaxSize = 100000
+		this.items[ItemTpl.MONEY_GP_COIN]._props.StackMaxSize = 100
+		this.items[ItemTpl.MONEY_ROUBLES]._props.StackMaxSize = 1000000
+	}
+
+	doToolsInSpecialSlots() {
+		const tools = [
+			ItemTpl.CONTAINER_DOGTAG_CASE,
+			ItemTpl.CONTAINER_INJECTOR_CASE,
+			ItemTpl.CONTAINER_KEY_TOOL,
+			ItemTpl.CONTAINER_KEYCARD_HOLDER_CASE,
+			ItemTpl.CONTAINER_SIMPLE_WALLET,
+			ItemTpl.CONTAINER_WZ_WALLET,
+		]
+
+		for (const tool of tools) {
+			this.pushToSpecialSlots(tool)
+		}
+	}
+
+	pushToSpecialSlots(itemID) {
+		const pockets = [ItemTpl.POCKETS_1X4_SPECIAL, ItemTpl.POCKETS_1X4_TUE]
+
+		for (const pocket of pockets) {
+			for (const slot of this.items[pocket]._props.Slots) {
+				const allowedItems = slot._props.filters[0].Filter
+
+				if (!allowedItems.includes(itemID)) {
+					allowedItems.push(itemID)
+				}
+			}
+		}
 	}
 }

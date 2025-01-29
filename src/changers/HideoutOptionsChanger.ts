@@ -102,10 +102,7 @@ export class HideoutOptionsChanger {
 
 	private doAllowGymTrainingWithMusclePain() {
 		const globals = this.tables.globals
-		if (!globals) {
-			this.logger.warning("HideoutOptions: doAllowGymTrainingWithMusclePain: globals not found")
-			return
-		}
+
 		globals.config.Health.Effects.SevereMusclePain.GymEffectivity = 0.75
 	}
 }

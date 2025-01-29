@@ -77,22 +77,8 @@ export class ScavCaseOptionsChanger {
 		// Set of all buyable items
 		const buyableitems = new Set()
 		const traderlist = this.tables.traders
-		if (!traderlist) {
-			this.logger.warning("ScavCaseOptionsChanger: doBetterRewards: traderlist not found")
-			return
-		}
-
-		const items = this.tables.templates?.items
-		if (!items) {
-			this.logger.warning("ScavCaseOptionsChanger: doBetterRewards: this.tables.templates.items not found")
-			return
-		}
-
-		const handbook = this.tables.templates?.handbook
-		if (!handbook) {
-			this.logger.warning("ScavCaseOptionsChanger: doBetterRewards: this.tables.templates?.handbook not found")
-			return
-		}
+		const items = this.tables.templates.items
+		const handbook = this.tables.templates.handbook
 
 		for (const [_, trader] of Object.entries(traderlist)) {
 			if (_ === Traders.LIGHTHOUSEKEEPER) {
@@ -103,7 +89,7 @@ export class ScavCaseOptionsChanger {
 				this.logger.warning(`ScavCaseOptionsChanger: doBetterRewards: trader.assort.items for trader ${_} not found`)
 				return
 			}
-			items.filter((x) => this.tables.templates?.items[x._tpl]?._parent != "65649eb40bf0ed77b8044453").map((x) => buyableitems.add(x._tpl)) // ignore armor incerts
+			items.filter((x) => this.tables.templates?.items[x._tpl]?._parent !== "65649eb40bf0ed77b8044453").map((x) => buyableitems.add(x._tpl)) // ignore armor incerts
 		}
 		// Shitlist generator for scav case rewards. Filters A LOT of crap out, but very conservatevely. Blacklist included in ./docs folder check it out.
 		// Always includes items in carefully curated whitelist. Always includes unbuyable and/or cheap items not included in whitelist (such as anodized red gear, but also some crap like scav only hats). Always includes items worth > 10000. Filters everything else out. Spent a lot of time thinking about this, really proud of myself. In the end, just makes sure you almost always get something of valuable or usable.
@@ -122,13 +108,13 @@ export class ScavCaseOptionsChanger {
 
 		for (const i in items) {
 			const item = items[i]
-			if (item._type == "Item") {
+			if (item._type === "Item") {
 				//	if (debug) {
 				//		item._props.ExaminedByDefault = true // For my sanity
 				//	}
 				let handbookPrice = this.handbookHelper.getTemplatePrice(item._id)
 
-				if (item._parent == "543be5cb4bdc2deb348b4568") {
+				if (item._parent === "543be5cb4bdc2deb348b4568") {
 					try {
 						// Ammo boxes price patch/fix, their data in handbook is always 1k, this makes them valued as ammo*count they contain.
 						const count = item._props?.StackSlots[0]?._max_count
@@ -137,7 +123,7 @@ export class ScavCaseOptionsChanger {
 						const value = Math.round(this.handbookHelper.getTemplatePrice(ammo) * count)
 						handbookPrice = value
 
-						const ammoboxHandbook = handbook.Items.find((x) => x.Id == item._id)
+						const ammoboxHandbook = handbook.Items.find((x) => x.Id === item._id)
 						ammoboxHandbook.Price = value
 						// console.log(`${item._id}, // ${this.tables.locales?.global.en[`${item._id} Name`]}: ${handbook.Items.find((x) => x.Id == item._id)!.Price}`)
 					} catch (error) {
@@ -179,7 +165,7 @@ export class ScavCaseOptionsChanger {
 
 	private scavCaseItemFilter(itemID) {
 		const items = this.tables.templates?.items
-		const item = items![itemID]
+		const item = items[itemID]
 
 		if (item._parent === "") {
 			return false
@@ -189,7 +175,7 @@ export class ScavCaseOptionsChanger {
 			return false
 		}
 
-		if (item._props.QuestItem == true) {
+		if (item._props.QuestItem === true) {
 			return false
 		}
 
@@ -240,18 +226,18 @@ export class ScavCaseOptionsChanger {
 	}
 
 	private doFasterScavcase(multiplier: number) {
-		for (const [_, recipe] of Object.entries(this.tables.hideout!.production.scavRecipes)) {
+		for (const [_, recipe] of Object.entries(this.tables.hideout.production.scavRecipes)) {
 			recipe.productionTime = Math.round(recipe.productionTime / multiplier)
 		}
 	}
 
 	private doRebalance() {
 		this.scavCaseConfig.rewardItemValueRangeRub = scavcaseRewardItemValueRangeRubReworked
-		this.tables.hideout!.production.scavRecipes = scavCaseRecipesReworked
+		this.tables.hideout.production.scavRecipes = scavCaseRecipesReworked
 	}
 
 	private debug() {
-		for (const [_, recipe] of Object.entries(this.tables.hideout!.production.scavRecipes)) {
+		for (const [_, recipe] of Object.entries(this.tables.hideout.production.scavRecipes)) {
 			// console.log(recipe)
 			recipe.requirements[0].templateId = ItemTpl.MONEY_ROUBLES
 			recipe.productionTime = 3 // doesn't work for DEV account, SPT has forced check "this.profileHelper.isDeveloperAccount(sessionID) ? 40 : modifiedScavCaseTime". Need to manually modify profile edition string after creation.

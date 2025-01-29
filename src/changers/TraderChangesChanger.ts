@@ -120,7 +120,7 @@ export class TraderChangesChanger {
 			if (!Object.keys(buyPriceAdjustment).includes(traderID)) {
 				continue
 			}
-			for (const loyaltyLevel of this.tables.traders?.[traderID].base.loyaltyLevels) {
+			for (const loyaltyLevel of this.tables.traders[traderID].base.loyaltyLevels) {
 				loyaltyLevel.buy_price_coef = buyPriceCoef
 				loyaltyLevel.buy_price_coef += buyPriceAdjustment[traderID]
 				buyPriceCoef -= 5
@@ -130,10 +130,7 @@ export class TraderChangesChanger {
 
 	private doAlternativeCategories() {
 		const traderList = this.tables.traders
-		if (!traderList) {
-			this.logger.warning("TraderChangesChanger: doAlternativeCategories: Trader list not found, skipping")
-			return
-		}
+
 		traderList[Traders.THERAPIST].base.items_buy.category.push(...[BaseClasses.MEDICAL_SUPPLIES, BaseClasses.HOUSEHOLD_GOODS])
 		traderList[Traders.THERAPIST].base.items_buy.category = traderList[Traders.THERAPIST].base.items_buy.category.filter(
 			(baseclass) => baseclass !== BaseClasses.BARTER_ITEM
@@ -150,6 +147,7 @@ export class TraderChangesChanger {
 		this.traderConfig.fence.itemTypeLimits = Object.fromEntries(Object.values(itemBaseClasses).map((key) => [key.replaceAll(" ", ""), numberOfFenceOffers])) // replaceAll is for SPT typo in BaseClasses enums. But anyway, if all BaseClasses used intead of pure (excluding Notes) manual listed itemBaseClasses, Fence breaks.
 
 		// SPT GITM BUG PART 1 WITH MedicalSupplies, wasted 3 hours on this. MedicalSupplies in itemTypeLimits OR preventDuplicateOffersOfCategory break Fence, GG
+		// biome-ignore lint/performance/noDelete: <explanation>
 		delete this.traderConfig.fence.itemTypeLimits["57864c8c245977548867e7f1"]
 
 		const items = this.tables.templates?.items
@@ -158,14 +156,15 @@ export class TraderChangesChanger {
 			return
 		}
 
+		// biome-ignore lint/correctness/noConstantCondition: <explanation>
 		if (false) {
 			// Pure base classes generator, excludes Nodes, Nodes break Fence and possibly other instances
 			let iii = []
 			for (const item in items) {
-				if (items[item]._type == "Item") {
+				if (items[item]._type === "Item") {
 					iii.push(items[item]._parent)
 				}
-				if (items[item]._parent == "5448f3ac4bdc2dce718b4569" && !items[item]._props.QuestItem) {
+				if (items[item]._parent === "5448f3ac4bdc2dce718b4569" && !items[item]._props.QuestItem) {
 					// console.log(`"${item}", // ${items[item]._name}`) // MedicalSupplies in itemTypeLimits OR preventDuplicateOffersOfCategory break Fence, GG
 				}
 			}
@@ -184,7 +183,7 @@ export class TraderChangesChanger {
 		// this.traderConfig.fence.blacklist.forEach((x) => console.log(`"${x}", // ${items[x]._name}`)) // debug
 
 		// SPT GITM BUG PART 2 WITH MedicalSupplies, wasted 3 hours on this. MedicalSupplies in itemTypeLimits OR preventDuplicateOffersOfCategory break Fence, GG
-		this.traderConfig.fence.preventDuplicateOffersOfCategory = fenceWhitelist.filter((x) => x != "57864c8c245977548867e7f1")
+		this.traderConfig.fence.preventDuplicateOffersOfCategory = fenceWhitelist.filter((x) => x !== "57864c8c245977548867e7f1")
 		this.traderConfig.fence.assortSize = numberOfFenceOffers
 		this.traderConfig.fence.equipmentPresetMinMax.min = 0
 		this.traderConfig.fence.equipmentPresetMinMax.max = 0
@@ -266,11 +265,7 @@ export class TraderChangesChanger {
 	}
 
 	private modifyTraderBarters(trader: Traders, targetItemID: ItemTpl, adjustments: Record<string, (requirement) => void>) {
-		const traderAssort = this.tables.traders?.[trader].assort
-		if (!traderAssort) {
-			this.logger.warning("TraderChangesChanger: modifyTraderBarters: Trader ${trader} assort not found, skipping")
-			return
-		}
+		const traderAssort = this.tables.traders[trader].assort
 
 		// Find barter IDs for the target template
 		const barterIDs = Object.values(traderAssort.items).map((assortItem) => {
@@ -294,21 +289,10 @@ export class TraderChangesChanger {
 	}
 
 	private doSkierUsesEuros() {
-		const skier = this.tables.traders?.[Traders.SKIER]
-		if (!skier) {
-			this.logger.warning("TraderChangesChanger: doSkierUsesEuros: Skier not found, skipping")
-			return
-		}
-		const handbookItems = this.tables.templates?.handbook.Items
-		if (!handbookItems) {
-			this.logger.warning("TraderChangesChanger: doSkierUsesEuros: Handbook not found, skipping")
-			return
-		}
-		const euroPrice = handbookItems.find((x) => x.Id === ItemTpl.MONEY_EUROS)?.Price
-		if (!euroPrice) {
-			this.logger.warning("TraderChangesChanger: doSkierUsesEuros: Euro price not found, skipping")
-			return
-		}
+		const skier = this.tables.traders[Traders.SKIER]
+		const handbookItems = this.tables.templates.handbook.Items
+		const euroPrice = handbookItems.find((x) => x.Id === ItemTpl.MONEY_EUROS).Price
+
 		skier.base.currency = "EUR"
 		skier.base.balance_eur = 700000
 
@@ -317,12 +301,7 @@ export class TraderChangesChanger {
 		}
 
 		const skierAssorts = skier.assort
-		if (!skierAssorts) {
-			this.logger.warning("TraderChangesChanger: doSkierUsesEuros: Skier assort not found, skipping")
-			return
-		}
-
-		const eurBarterID = skierAssorts.items.find((item) => item._tpl === ItemTpl.MONEY_EUROS)?._id
+		const eurBarterID = skierAssorts.items.find((item) => item._tpl === ItemTpl.MONEY_EUROS)._id
 
 		for (const [ID, barter] of Object.entries(skierAssorts.barter_scheme)) {
 			if (ID === eurBarterID) {
@@ -336,11 +315,8 @@ export class TraderChangesChanger {
 		}
 
 		//Adjust SKier Quest Rewards
-		const quests = this.tables.templates?.quests
-		if (!quests) {
-			this.logger.warning("TraderChangesChanger: doSkierUsesEuros: Quests not found, skipping")
-			return
-		}
+		const quests = this.tables.templates.quests
+
 		for (const quest of Object.values(quests)) {
 			if (quest.traderId === Traders.SKIER) {
 				const rewards = quest.rewards.Success
@@ -373,7 +349,7 @@ export class TraderChangesChanger {
 
 	private doBiggerLimits(multiplier: number) {
 		for (const traderID of Object.values(this.stacticTraderList)) {
-			const traderItems = this.tables.traders?.[traderID].assort?.items
+			const traderItems = this.tables.traders[traderID].assort.items
 			if (!traderItems) {
 				this.logger.warning(`TraderChangesChanger: doBiggerLimits: traderItems for trader ${traderID} not found, skipping`)
 				continue
