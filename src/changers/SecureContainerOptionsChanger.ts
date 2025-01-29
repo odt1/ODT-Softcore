@@ -59,7 +59,7 @@ export class SecureContainerOptionsChanger {
 	}
 
 	private doProgressiveContainers() {
-		const profileTemplates = this.tables.templates.profiles
+		const profileTemplates = this.tables.templates!.profiles
 
 		for (const profileName of Object.keys(profileTemplates)) {
 			const profile = profileTemplates[profileName]
@@ -101,7 +101,7 @@ export class SecureContainerOptionsChanger {
 	}
 
 	private doCollectorQuestRedone() {
-		const quests = this.tables.templates.quests
+		const quests = this.tables.templates!.quests
 		const collectorID = Object.keys(quests).find((key) => {
 			return quests[key].QuestName === "Collector"
 		})
@@ -126,7 +126,7 @@ export class SecureContainerOptionsChanger {
 			visibilityConditions: [],
 		})
 
-		this.tables.locales.global.ru["639135534b15ca31f76bc319"] = "Передать носитель" // Тут нужен только фикс для русского, для всех остальных языков звучит как "Hand over the storage device"
+		this.tables.locales!.global.ru["639135534b15ca31f76bc319"] = "Передать носитель" // Тут нужен только фикс для русского, для всех остальных языков звучит как "Hand over the storage device"
 		// Start condition
 		quests[collectorID].conditions.AvailableForStart = [
 			{
@@ -153,9 +153,9 @@ export class SecureContainerOptionsChanger {
 	}
 
 	private modifyContainer(itemTpl: string, cellsV: number, cellsH: number) {
-		if (this.items[itemTpl]?._props.Grids?.[0]._props) {
-			this.items[itemTpl]._props.Grids[0]._props.cellsV = cellsV
-			this.items[itemTpl]._props.Grids[0]._props.cellsH = cellsH
+		if (this.items![itemTpl]?._props.Grids?.[0]._props) {
+			this.items![itemTpl]._props.Grids[0]._props.cellsV = cellsV
+			this.items![itemTpl]._props.Grids[0]._props.cellsH = cellsH
 		} else {
 			this.logger.warning(`Softcore: modifyContainer: Failed to modify container with Tpl ${itemTpl}, skipping`)
 		}

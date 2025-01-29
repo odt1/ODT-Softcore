@@ -23,7 +23,8 @@
         "rules": {
             "recommended": true,
             "style": {
-                "useImportType": "off"
+                "useImportType": "off",
+                "noNonNullAssertion": "info"
             }
         }
     },
@@ -42,9 +43,9 @@
             "**/.editorconfig"
         ],
         "attributePosition": "auto",
-        "indentStyle": "space",
+        "indentStyle": "tab",
         "indentWidth": 4,
-        "lineWidth": 120,
+        "lineWidth": 160,
         "lineEnding": "lf"
     },
     "javascript": {

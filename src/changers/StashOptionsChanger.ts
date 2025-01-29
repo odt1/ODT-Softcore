@@ -65,7 +65,7 @@ export class StashOptionsChanger {
 	}
 
 	private doProgressiveStash() {
-		const profileTemplates = this.tables.templates.profiles
+		const profileTemplates = this.tables.templates!.profiles
 
 		const basicStashBonuses = {
 			id: "64f5b9e5fa34f11b380756c0",
@@ -116,7 +116,7 @@ export class StashOptionsChanger {
 		}
 
 		for (const [itemTpl, stashSize] of Object.entries(stashUpdates)) {
-			const stashItem = this.items[itemTpl]
+			const stashItem = this.items![itemTpl]
 			if (stashItem?._props?.Grids?.[0]?._props) {
 				stashItem._props.Grids[0]._props.cellsV = stashSize
 			} else {

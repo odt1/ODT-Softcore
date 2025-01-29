@@ -120,7 +120,7 @@ export class TraderChangesChanger {
 			if (!Object.keys(buyPriceAdjustment).includes(traderID)) {
 				continue
 			}
-			for (const loyaltyLevel of this.tables.traders[traderID].base.loyaltyLevels) {
+			for (const loyaltyLevel of this.tables.traders![traderID].base.loyaltyLevels) {
 				loyaltyLevel.buy_price_coef = buyPriceCoef
 				loyaltyLevel.buy_price_coef += buyPriceAdjustment[traderID]
 				buyPriceCoef -= 5
@@ -131,13 +131,13 @@ export class TraderChangesChanger {
 	private doAlternativeCategories() {
 		const traderList = this.tables.traders
 
-		traderList[Traders.THERAPIST].base.items_buy.category.push(...[BaseClasses.MEDICAL_SUPPLIES, BaseClasses.HOUSEHOLD_GOODS])
-		traderList[Traders.THERAPIST].base.items_buy.category = traderList[Traders.THERAPIST].base.items_buy.category.filter(
+		traderList![Traders.THERAPIST].base.items_buy.category.push(...[BaseClasses.MEDICAL_SUPPLIES, BaseClasses.HOUSEHOLD_GOODS])
+		traderList![Traders.THERAPIST].base.items_buy.category = traderList![Traders.THERAPIST].base.items_buy.category.filter(
 			(baseclass) => baseclass !== BaseClasses.BARTER_ITEM
 		)
 
-		traderList[Traders.RAGMAN].base.items_buy.category.push(BaseClasses.JEWELRY)
-		traderList[Traders.SKIER].base.items_buy.category.push(BaseClasses.INFO)
+		traderList![Traders.RAGMAN].base.items_buy.category.push(BaseClasses.JEWELRY)
+		traderList![Traders.SKIER].base.items_buy.category.push(BaseClasses.INFO)
 	}
 
 	private doPacifistFence(numberOfFenceOffers: number) {
@@ -161,7 +161,7 @@ export class TraderChangesChanger {
 			// Pure base classes generator, excludes Nodes, Nodes break Fence and possibly other instances
 			let iii = []
 			for (const item in items) {
-				if (items[item]._type === "Item") {
+				if (items![item]._type === "Item") {
 					iii.push(items[item]._parent)
 				}
 				if (items[item]._parent === "5448f3ac4bdc2dce718b4569" && !items[item]._props.QuestItem) {
@@ -265,7 +265,11 @@ export class TraderChangesChanger {
 	}
 
 	private modifyTraderBarters(trader: Traders, targetItemID: ItemTpl, adjustments: Record<string, (requirement) => void>) {
-		const traderAssort = this.tables.traders[trader].assort
+		const traderAssort = this.tables.traders![trader].assort
+		if (!traderAssort) {
+			this.logger.error(`traderAssort of trader ${trader} not found`)
+			return
+		}
 
 		// Find barter IDs for the target template
 		const barterIDs = Object.values(traderAssort.items).map((assortItem) => {
@@ -289,9 +293,9 @@ export class TraderChangesChanger {
 	}
 
 	private doSkierUsesEuros() {
-		const skier = this.tables.traders[Traders.SKIER]
-		const handbookItems = this.tables.templates.handbook.Items
-		const euroPrice = handbookItems.find((x) => x.Id === ItemTpl.MONEY_EUROS).Price
+		const skier = this.tables.traders![Traders.SKIER]
+		const handbookItems = this.tables.templates!.handbook.Items
+		const euroPrice = handbookItems.find((x) => x.Id === ItemTpl.MONEY_EUROS)!.Price
 
 		skier.base.currency = "EUR"
 		skier.base.balance_eur = 700000
@@ -301,9 +305,9 @@ export class TraderChangesChanger {
 		}
 
 		const skierAssorts = skier.assort
-		const eurBarterID = skierAssorts.items.find((item) => item._tpl === ItemTpl.MONEY_EUROS)._id
+		const eurBarterID = skierAssorts!.items.find((item) => item._tpl === ItemTpl.MONEY_EUROS)!._id
 
-		for (const [ID, barter] of Object.entries(skierAssorts.barter_scheme)) {
+		for (const [ID, barter] of Object.entries(skierAssorts!.barter_scheme)) {
 			if (ID === eurBarterID) {
 				continue
 			}
@@ -315,7 +319,7 @@ export class TraderChangesChanger {
 		}
 
 		//Adjust SKier Quest Rewards
-		const quests = this.tables.templates.quests
+		const quests = this.tables.templates!.quests
 
 		for (const quest of Object.values(quests)) {
 			if (quest.traderId === Traders.SKIER) {
@@ -349,7 +353,7 @@ export class TraderChangesChanger {
 
 	private doBiggerLimits(multiplier: number) {
 		for (const traderID of Object.values(this.stacticTraderList)) {
-			const traderItems = this.tables.traders[traderID].assort.items
+			const traderItems = this.tables.traders![traderID].assort.items
 			if (!traderItems) {
 				this.logger.warning(`TraderChangesChanger: doBiggerLimits: traderItems for trader ${traderID} not found, skipping`)
 				continue

@@ -54,15 +54,20 @@ export class PriceRebalanceChanger {
 		}
 
 		for (const [itemTpl, price] of Object.entries(itemsToFix)) {
-			this.tables.templates.handbook.Items.find((item) => item.Id === itemTpl).Price = price
+			const item = this.tables.templates!.handbook.Items.find((item) => item.Id === itemTpl)
+			if (!item) {
+				this.logger.error(`Item ${itemTpl} not found in handbook`)
+				return
+			}
+			item.Price = price
 		}
 
 		this.handbookHelper.hydrateLookup()
 	}
 
 	private doPriceRebalance() {
-		const handbookItems = this.tables.templates.handbook.Items
-		const fleaPrices = this.tables.templates.prices
+		const handbookItems = this.tables.templates!.handbook.Items
+		const fleaPrices = this.tables.templates!.prices
 
 		for (const item of handbookItems) {
 			fleaPrices[item.Id] = item.Price

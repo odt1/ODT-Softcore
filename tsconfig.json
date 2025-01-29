@@ -14,7 +14,7 @@
         "paths": {
             "@spt/*": ["./types/*"]
         },
-        "strictNullChecks": false,
+        "strictNullChecks": true,
     },
     "exclude": ["node_modules", "dist", "tmp"],
 }

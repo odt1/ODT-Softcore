@@ -55,7 +55,7 @@ export class HideoutContainersChanger {
 		]
 
 		for (const container of containersToModify) {
-			const item = this.items[container.tpl]
+			const item = this.items?.[container.tpl]
 			if (item?._props?.Grids?.[0]?._props) {
 				item._props.Grids[0]._props.cellsH = container.cellsH
 				item._props.Grids[0]._props.cellsV = container.cellsV

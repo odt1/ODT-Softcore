@@ -116,7 +116,7 @@ export class BarterEconomyChanger {
 					// console.log(`${item}, // ${locale[`${item} Name`]}, ${fleaPrices[item]}`)
 				} else {
 					if (BSGblacklist.includes(item) && items[item]._props.CanSellOnRagfair === true) {
-						this.logger.warning(`\nItem ${locale[`${item} Name`]} can be bought on flea, don't use BSG blacklist unlockers with Barter Economy enabled!`)
+						this.logger.warning(`\nItem ${locale?.[`${item} Name`]} can be bought on flea, don't use BSG blacklist unlockers with Barter Economy enabled!`)
 					}
 
 					// Log for whitelisted items for barter REQUESTS

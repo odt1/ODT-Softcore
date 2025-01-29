@@ -29,6 +29,6 @@ export class FuelConsumptionChanger {
 
 	private doChangeFuelConsumption(multiplier: number) {
 		const hideout = this.tables.hideout
-		hideout.settings.generatorFuelFlowRate *= multiplier // сука. 33 строчки чтобы изменить одну переменную.
+		hideout!.settings.generatorFuelFlowRate *= multiplier // сука. 33 строчки чтобы изменить одну переменную.
 	}
 }

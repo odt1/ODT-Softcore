@@ -50,6 +50,10 @@ export class InsuranceChangesChanger {
 	}
 	doTraderInsuranceChanges(traderID: Traders, insuranceChanges: TraderInsuranceChanges) {
 		const trader = this.tables.traders?.[traderID]
+		if (!trader) {
+			this.logger.error(`Trader ${traderID} not found.`)
+			return
+		}
 
 		trader.base.insurance.min_return_hour = insuranceChanges.returnTime.min
 		trader.base.insurance.max_return_hour = insuranceChanges.returnTime.max

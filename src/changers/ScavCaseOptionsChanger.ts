@@ -77,8 +77,8 @@ export class ScavCaseOptionsChanger {
 		// Set of all buyable items
 		const buyableitems = new Set()
 		const traderlist = this.tables.traders
-		const items = this.tables.templates.items
-		const handbook = this.tables.templates.handbook
+		const items = this.tables.templates!.items
+		const handbook = this.tables.templates!.handbook
 
 		for (const [_, trader] of Object.entries(traderlist)) {
 			if (_ === Traders.LIGHTHOUSEKEEPER) {
@@ -164,8 +164,8 @@ export class ScavCaseOptionsChanger {
 	}
 
 	private scavCaseItemFilter(itemID) {
-		const items = this.tables.templates?.items
-		const item = items[itemID]
+		const items = this.tables.templates!.items
+		const item = items![itemID]
 
 		if (item._parent === "") {
 			return false
@@ -226,18 +226,18 @@ export class ScavCaseOptionsChanger {
 	}
 
 	private doFasterScavcase(multiplier: number) {
-		for (const [_, recipe] of Object.entries(this.tables.hideout.production.scavRecipes)) {
+		for (const [_, recipe] of Object.entries(this.tables.hideout!.production.scavRecipes)) {
 			recipe.productionTime = Math.round(recipe.productionTime / multiplier)
 		}
 	}
 
 	private doRebalance() {
 		this.scavCaseConfig.rewardItemValueRangeRub = scavcaseRewardItemValueRangeRubReworked
-		this.tables.hideout.production.scavRecipes = scavCaseRecipesReworked
+		this.tables.hideout!.production.scavRecipes = scavCaseRecipesReworked
 	}
 
 	private debug() {
-		for (const [_, recipe] of Object.entries(this.tables.hideout.production.scavRecipes)) {
+		for (const [_, recipe] of Object.entries(this.tables.hideout!.production.scavRecipes)) {
 			// console.log(recipe)
 			recipe.requirements[0].templateId = ItemTpl.MONEY_ROUBLES
 			recipe.productionTime = 3 // doesn't work for DEV account, SPT has forced check "this.profileHelper.isDeveloperAccount(sessionID) ? 40 : modifiedScavCaseTime". Need to manually modify profile edition string after creation.

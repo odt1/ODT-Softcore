@@ -40,17 +40,17 @@ export class FasterBitcoinFarmingChanger {
 
 	private doFasterBitcoinFarming(baseBitcoinTimeMultiplier: number, gpuEfficiency: number) {
 		const hideout = this.tables.hideout
-		const bitcoinProductions = hideout.production.recipes.filter((production) => production.endProduct === ItemTpl.BARTER_PHYSICAL_BITCOIN)
+		const bitcoinProductions = hideout!.production.recipes.filter((production) => production.endProduct === ItemTpl.BARTER_PHYSICAL_BITCOIN)
 
 		for (const prod of bitcoinProductions) {
 			prod.productionTime = Math.round(prod.productionTime / baseBitcoinTimeMultiplier)
 		}
 
-		hideout.settings.gpuBoostRate = gpuEfficiency
+		hideout!.settings.gpuBoostRate = gpuEfficiency
 	}
 
 	private setBitcoinPriceTo100k() {
 		const bitcoinHandbook = this.tables.templates?.handbook.Items.find((item) => item.Id === ItemTpl.BARTER_PHYSICAL_BITCOIN)
-		bitcoinHandbook.Price = 100000
+		bitcoinHandbook!.Price = 100000
 	}
 }

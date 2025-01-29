@@ -78,6 +78,6 @@ export class EconomyOptionsChanger {
 
 	private updateRagfairMinUserLevel(level: number) {
 		const globals = this.tables.globals
-		globals.config.RagFair.minUserLevel = level
+		globals!.config.RagFair.minUserLevel = level
 	}
 }

@@ -67,10 +67,10 @@ export class PacifistFleaMarketChanger {
 		if (false) {
 			// debug
 			// Handbook Categories generator
-			const handbookCategories = this.tables.templates?.handbook.Categories
+			const handbookCategories = this.tables.templates!.handbook.Categories
 			for (const handbookCategorie in handbookCategories) {
 				// console.log(handbookCategories[handbookCategorie].Id)
-				console.log(`"${handbookCategories[handbookCategorie].Id}", // ${locale[handbookCategories[handbookCategorie].Id]}`)
+				console.log(`"${handbookCategories[handbookCategorie].Id}", // ${locale![handbookCategories[handbookCategorie].Id]}`)
 			}
 		}
 
@@ -113,8 +113,8 @@ export class PacifistFleaMarketChanger {
 	private allowOnRagfair(whitelist, priceMultiplier: number) {
 		const whitelistItemIDs = whitelist as string[]
 
-		const items = this.tables.templates.items
-		const prices = this.tables.templates.prices
+		const items = this.tables.templates!.items
+		const prices = this.tables.templates!.prices
 
 		for (const itemID of whitelistItemIDs) {
 			const item = items[itemID]

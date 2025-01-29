@@ -67,7 +67,7 @@ export class OtherFleaMarketChangesChanger {
 
 	private adjustOnlyFIRforBarters() {
 		const globals = this.tables.globals
-		globals.config.RagFair.isOnlyFoundInRaidAllowed = true
+		globals!.config.RagFair.isOnlyFoundInRaidAllowed = true
 	}
 
 	private adjustPristineItems() {

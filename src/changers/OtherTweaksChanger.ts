@@ -137,12 +137,12 @@ export class OtherTweaksChanger {
 	private doSkillExpBuffs() {
 		const globals = this.tables.globals
 
-		globals.config.SkillsSettings.Vitality.DamageTakenAction *= 10
-		globals.config.SkillsSettings.Sniper.WeaponShotAction *= 10
-		globals.config.SkillsSettings.Surgery.SurgeryAction *= 10
+		globals!.config.SkillsSettings.Vitality.DamageTakenAction *= 10
+		globals!.config.SkillsSettings.Sniper.WeaponShotAction *= 10
+		globals!.config.SkillsSettings.Surgery.SurgeryAction *= 10
 		// biome-ignore lint/complexity/noForEach: Small array.
-		Object.values(globals.config.SkillsSettings.MagDrills).forEach((x) => x * 10)
-		globals.config.SkillsSettings.WeaponTreatment.SkillPointsPerRepair *= 100
+		Object.values(globals!.config.SkillsSettings.MagDrills).forEach((x) => x * 10)
+		globals!.config.SkillsSettings.WeaponTreatment.SkillPointsPerRepair *= 100
 	}
 
 	doSignalPistolInSpecialSlots() {
@@ -202,7 +202,7 @@ export class OtherTweaksChanger {
 	}
 
 	doReshalaAlwaysHasGoldenTT() {
-		const reshala = this.tables.bots.types.bossbully
+		const reshala = this.tables.bots!.types.bossbully
 		reshala.chances.equipment.Holster = 100
 		reshala.inventory.equipment.Holster = { "5b3b713c5acfc4330140bd8d": 1 }
 	}
@@ -216,14 +216,14 @@ export class OtherTweaksChanger {
 	}
 
 	doQuestChanges() {
-		const crisis = this.tables.templates?.quests["60e71c48c1bfa3050473b8e5"]
+		const crisis = this.tables.templates!.quests["60e71c48c1bfa3050473b8e5"]
 		crisis.conditions.AvailableForStart[1].value = 30
 
-		const dripout1 = this.tables.templates?.quests["6613f3007f6666d56807c929"]
+		const dripout1 = this.tables.templates!.quests["6613f3007f6666d56807c929"]
 		dripout1.conditions.AvailableForFinish.find((x) => x.conditionType === "HandoverItem").value = 10
 		dripout1.conditions.AvailableForFinish.find((x) => x.conditionType === "CounterCreator").value = 20
 
-		const dripout2 = this.tables.templates?.quests["6613f307fca4f2f386029409"]
+		const dripout2 = this.tables.templates!.quests["6613f307fca4f2f386029409"]
 		dripout2.conditions.AvailableForFinish.find((x) => x.conditionType === "HandoverItem").value = 10
 		dripout2.conditions.AvailableForFinish.find((x) => x.conditionType === "CounterCreator").value = 20
 	}
@@ -231,14 +231,14 @@ export class OtherTweaksChanger {
 	doRemoveRaidItemLimits() {
 		const globals = this.tables.globals
 		// globals.config.RestrictionsInRaid.forEach((x) => console.log(`${x.TemplateId}, // ${this.tables.locales?.global.en[`${x.TemplateId} Name`]}`))
-		globals.config.RestrictionsInRaid = []
+		globals!.config.RestrictionsInRaid = []
 	}
 
 	doCurrencyStack() {
-		this.items[ItemTpl.MONEY_EUROS]._props.StackMaxSize = 100000
-		this.items[ItemTpl.MONEY_DOLLARS]._props.StackMaxSize = 100000
-		this.items[ItemTpl.MONEY_GP_COIN]._props.StackMaxSize = 100
-		this.items[ItemTpl.MONEY_ROUBLES]._props.StackMaxSize = 1000000
+		this.items![ItemTpl.MONEY_EUROS]._props.StackMaxSize = 100000
+		this.items![ItemTpl.MONEY_DOLLARS]._props.StackMaxSize = 100000
+		this.items![ItemTpl.MONEY_GP_COIN]._props.StackMaxSize = 100
+		this.items![ItemTpl.MONEY_ROUBLES]._props.StackMaxSize = 1000000
 	}
 
 	doToolsInSpecialSlots() {

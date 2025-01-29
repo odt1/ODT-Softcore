@@ -30,7 +30,7 @@ export class FasterHideoutConstructionChanger {
 	private doFasterHideoutConstruction(multiplier: number) {
 		const hideout = this.tables.hideout
 
-		for (const area of hideout.areas) {
+		for (const area of hideout!.areas) {
 			for (const [_, stage] of Object.entries(area.stages)) {
 				stage.constructionTime = Math.round(stage.constructionTime / multiplier)
 			}

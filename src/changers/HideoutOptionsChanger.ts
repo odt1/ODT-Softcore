@@ -102,7 +102,6 @@ export class HideoutOptionsChanger {
 
 	private doAllowGymTrainingWithMusclePain() {
 		const globals = this.tables.globals
-
-		globals.config.Health.Effects.SevereMusclePain.GymEffectivity = 0.75
+		globals!.config.Health.Effects.SevereMusclePain.GymEffectivity = 0.75
 	}
 }

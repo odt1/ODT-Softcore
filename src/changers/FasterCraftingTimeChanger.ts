@@ -97,7 +97,7 @@ export class FasterCraftingTimeChanger {
 		] as string[]
 		const hideout = this.tables.hideout
 
-		for (const production of hideout.production.recipes) {
+		for (const production of hideout!.production.recipes) {
 			if (!exclude.includes(production.endProduct)) {
 				production.productionTime = Math.round(production.productionTime / multiplier) + 1
 			}
