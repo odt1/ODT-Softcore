@@ -48,7 +48,7 @@ export class ScavCaseOptionsChanger {
 				this.doBetterRewards()
 			}
 		} catch (error) {
-			this.logger.warning("ScavCaseOptions: doBetterRewards markedKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("ScavCaseOptions: doBetterRewards markedKeys failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 
@@ -57,7 +57,7 @@ export class ScavCaseOptionsChanger {
 				this.doRebalance()
 			}
 		} catch (error) {
-			this.logger.warning("ScavCaseOptions: doRebalance markedKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("ScavCaseOptions: doRebalance markedKeys failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 
@@ -66,7 +66,7 @@ export class ScavCaseOptionsChanger {
 				this.doFasterScavcase(config.fasterScavcase.speedMultiplier)
 			}
 		} catch (error) {
-			this.logger.warning("ScavCaseOptions: doFasterScavcase markedKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("ScavCaseOptions: doFasterScavcase markedKeys failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 

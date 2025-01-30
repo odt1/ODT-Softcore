@@ -189,6 +189,8 @@ export interface OtherTweaks {
 	biggerAmmoStacks: BiggerAmmoStacks
 	questChanges: boolean
 	removeRaidItemLimits: boolean
+	biggerCurrencyStacks: boolean
+	smallContainersInSpecialSlots: boolean
 }
 
 export interface BiggerAmmoStacks {

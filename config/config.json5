@@ -237,7 +237,9 @@
         questChanges: true,
         // removeRaidItemLimits
         removeRaidItemLimits: true,
+        // Rubles stack to 1kk, Euro and Dollars to 100k, GP to 100.
         biggerCurrencyStacks: true,
-        smallContainersInSpecialSlots: true
+        // Allow 1x1 cases (DOGTAG_CASE, INJECTOR_CASE, KEY_TOOL, KEYCARD_HOLDER_CASE, SIMPLE_WALLET, WZ_WALLET) in special slots. 
+        smallContainersInSpecialSlots: false
     },
 }

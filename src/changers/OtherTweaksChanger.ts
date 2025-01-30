@@ -127,7 +127,7 @@ export class OtherTweaksChanger {
 
 		try {
 			if (config.smallContainersInSpecialSlots) {
-				this.doToolsInSpecialSlots()
+				this.doSmallContainersInSpecialSlots()
 			}
 		} catch (error) {
 			this.logger.warning("OtherTweaks: doCurrencyStack failed gracefully. Send bug report. Continue safely.")
@@ -241,7 +241,7 @@ export class OtherTweaksChanger {
 		this.items![ItemTpl.MONEY_ROUBLES]._props.StackMaxSize = 1000000
 	}
 
-	doToolsInSpecialSlots() {
+	doSmallContainersInSpecialSlots() {
 		const tools = [
 			ItemTpl.CONTAINER_DOGTAG_CASE,
 			ItemTpl.CONTAINER_INJECTOR_CASE,

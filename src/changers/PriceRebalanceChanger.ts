@@ -28,14 +28,14 @@ export class PriceRebalanceChanger {
 				this.doItemFixes()
 			}
 		} catch (error) {
-			this.logger.warning("PriceRebalance: doItemFixes markedKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("PriceRebalance: doItemFixes markedKeys failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 
 		try {
 			this.doPriceRebalance()
 		} catch (error) {
-			this.logger.warning("PacifistFleaMarket: doPriceRebalance markedKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("PacifistFleaMarket: doPriceRebalance markedKeys failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 	}

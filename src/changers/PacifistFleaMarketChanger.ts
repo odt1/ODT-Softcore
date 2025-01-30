@@ -29,7 +29,7 @@ export class PacifistFleaMarketChanger {
 		try {
 			this.pacifistFleaMarket()
 		} catch (error) {
-			this.logger.warning("PacifistFleaMarket: pacifistFleaMarket Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("PacifistFleaMarket: pacifistFleaMarket failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 
@@ -38,7 +38,7 @@ export class PacifistFleaMarketChanger {
 				this.allowOnRagfair(whitelist, config.whitelist.priceMultiplier)
 			}
 		} catch (error) {
-			this.logger.warning("PacifistFleaMarket: allowOnRagfair whitelist Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("PacifistFleaMarket: allowOnRagfair whitelist failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 
@@ -47,7 +47,7 @@ export class PacifistFleaMarketChanger {
 				this.allowOnRagfair(questKeys, config.questKeys.priceMultiplier)
 			}
 		} catch (error) {
-			this.logger.warning("PacifistFleaMarket: allowOnRagfair questKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("PacifistFleaMarket: allowOnRagfair questKeys failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 
@@ -56,7 +56,7 @@ export class PacifistFleaMarketChanger {
 				this.allowOnRagfair(markedKeys, config.markedKeys.priceMultiplier)
 			}
 		} catch (error) {
-			this.logger.warning("PacifistFleaMarket: allowOnRagfair markedKeys Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("PacifistFleaMarket: allowOnRagfair markedKeys failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 	}

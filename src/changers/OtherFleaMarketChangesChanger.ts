@@ -30,7 +30,7 @@ export class OtherFleaMarketChangesChanger {
 				this.doSellingOnFlea()
 			}
 		} catch (error) {
-			this.logger.warning("OtherFleaMarketChanges: doSellingOnFlea Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("OtherFleaMarketChanges: doSellingOnFlea failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 
@@ -39,7 +39,7 @@ export class OtherFleaMarketChangesChanger {
 				this.adjustOnlyFIRforBarters()
 			}
 		} catch (error) {
-			this.logger.warning("OtherFleaMarketChanges: adjustOnlyFIRforBarters Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("OtherFleaMarketChanges: adjustOnlyFIRforBarters failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 
@@ -48,14 +48,14 @@ export class OtherFleaMarketChangesChanger {
 				this.adjustPristineItems()
 			}
 		} catch (error) {
-			this.logger.warning("OtherFleaMarketChanges: adjustPristineItems Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("OtherFleaMarketChanges: adjustPristineItems failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 
 		try {
 			this.increaseFleaPrices(config.fleaPricesIncreased)
 		} catch (error) {
-			this.logger.warning("OtherFleaMarketChanges: increaseFleaPrices Traders.PRAPOR failed gracefully. Send bug report. Continue safely.")
+			this.logger.warning("OtherFleaMarketChanges: increaseFleaPrices failed gracefully. Send bug report. Continue safely.")
 			console.warn(error)
 		}
 	}
