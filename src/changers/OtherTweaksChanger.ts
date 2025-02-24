@@ -91,7 +91,7 @@ export class OtherTweaksChanger {
 
 		try {
 			if (config.biggerAmmoStacks.enabled) {
-				this.doBiggerAmmoStacks(config.biggerAmmoStacks.stackMultiplier)
+				this.doBiggerAmmoStacks(config.biggerAmmoStacks.stackMultiplier, config.biggerAmmoStacks.divideWeightFix)
 			}
 		} catch (error) {
 			this.logger.warning("OtherTweaks: doBiggerAmmoStacks failed gracefully. Send bug report. Continue safely.")
@@ -208,10 +208,17 @@ export class OtherTweaksChanger {
 		reshala.inventory.equipment.Holster = { "5b3b713c5acfc4330140bd8d": 1 }
 	}
 
-	doBiggerAmmoStacks(stackMultiplier: number) {
+	doBiggerAmmoStacks(stackMultiplier: number, divideWeightFix: boolean) {
 		for (const item of Object.values(this.items)) {
 			if (item._parent === BaseClasses.AMMO && item._props.StackMaxSize) {
 				item._props.StackMaxSize *= stackMultiplier
+				if (divideWeightFix) {
+					const weight = item._props.Weight
+					const rounding1 = Math.round((weight / stackMultiplier) * 1000) / 1000
+					const rounding2 = Number((weight / stackMultiplier).toFixed(3))
+
+					item._props.Weight = rounding2
+				}
 			}
 		}
 	}
@@ -226,6 +233,13 @@ export class OtherTweaksChanger {
 				quest.conditions.AvailableForFinish.find((x) => x.conditionType === "CounterCreator").value = 20
 			}
 		}
+
+		const circulate = this.tables.templates!.quests["6663149f1d3ec95634095e75"]
+		circulate.conditions.AvailableForFinish[0].value = 50
+
+		const colleagues3 = this.tables.templates!.quests["5edac34d0bb72a50635c2bfa"]
+		colleagues3.conditions.AvailableForFinish.find((x) => x.id === "5f07025e27cec53d5d24fe25").onlyFoundInRaid = false
+		colleagues3.conditions.AvailableForFinish.find((x) => x.id === "5f04935cde3b9e0ecf03d864").onlyFoundInRaid = false
 	}
 
 	doRemoveRaidItemLimits() {

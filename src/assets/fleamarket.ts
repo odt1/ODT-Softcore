@@ -41,6 +41,7 @@ export const whitelist = [
 	"588226ef24597767af46e39c", // Magpul AFG tactical foregrip (Olive Drab)
 	"5ea05cf85ad9772e6624305d", // Tac-Kek FAST MT helmet (Replica)
 	"67449b6c89d5e1ddc603f504", // Contraband case key
+	ItemTpl.BARREL_MK47_409MM
 ]
 
 export const fleaBarterRequestWhitelist = [
@@ -172,6 +173,7 @@ export const requestWhitelist = {
 	"5e99711486f7744bfc4af328": 0, // Sanitar's first aid kit <- blacklist
 	"5e99735686f7744bfc4af32c": 0, // Sanitar kit <- blacklist
 	"5b9b9020e7ef6f5716480215": 0, // dogtagt <- blacklist
+	"660bbc47c38b837877075e47": 0 // encrypted flash drive
 }
 
 export const fleaListingsWhitelistHandBook = [

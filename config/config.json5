@@ -232,6 +232,8 @@
         biggerAmmoStacks: {
             enabled: true,
             stackMultiplier: 10,
+            // Fix for the bosses spawning with a hidden container full of huge ammo stacks and being overweighted. This is a janky fix to divide ammo weght by stack multiplier.
+            divideWeightFix: true 
         },
         // Better start for quests (Crisis). 5 times lower requirments for Drip-Out quests.  
         questChanges: true,
@@ -240,6 +242,6 @@
         // Rubles stack to 1kk, Euro and Dollars to 100k, GP to 100.
         biggerCurrencyStacks: true,
         // Allow 1x1 cases (DOGTAG_CASE, INJECTOR_CASE, KEY_TOOL, KEYCARD_HOLDER_CASE, SIMPLE_WALLET, WZ_WALLET) in special slots. 
-        smallContainersInSpecialSlots: false
+        smallContainersInSpecialSlots: true
     },
 }

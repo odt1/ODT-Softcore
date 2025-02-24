@@ -481,47 +481,47 @@ export const craftingAdjustments = [
 			]
 		},
 	},
-	{
-		id: ItemTpl.AMMO_57X28_SS190,
-		adjust: (craft: IHideoutProduction) => {
-			craft.requirements = [
-				{
-					areaType: 10,
-					requiredLevel: 2,
-					type: "Area",
-				},
-				{
-					templateId: ItemTpl.BARTER_HAND_DRILL,
-					type: "Tool",
-				},
-				{
-					templateId: ItemTpl.BARTER_PLIERS_ELITE,
-					type: "Tool",
-				},
-				{
-					templateId: ItemTpl.AMMO_57X28_SS197SR,
-					count: 180,
-					isFunctional: false,
-					isEncoded: false,
-					type: "Item",
-				},
-				{
-					templateId: ItemTpl.BARTER_GUNPOWDER_HAWK,
-					count: 1,
-					isFunctional: false,
-					isEncoded: false,
-					type: "Item",
-				},
-				{
-					templateId: ItemTpl.BARTER_PACK_OF_NAILS,
-					count: 2,
-					isFunctional: false,
-					isEncoded: false,
-					type: "Item",
-				},
-			]
-		},
-	},
+//	{
+//		id: ItemTpl.AMMO_57X28_SS190,
+//		adjust: (craft: IHideoutProduction) => {
+//			craft.requirements = [
+//				{
+//					areaType: 10,
+//					requiredLevel: 2,
+//					type: "Area",
+//				},
+//				{
+//					templateId: ItemTpl.BARTER_HAND_DRILL,
+//					type: "Tool",
+//				},
+//				{
+//					templateId: ItemTpl.BARTER_PLIERS_ELITE,
+//					type: "Tool",
+//				},
+//				{
+//					templateId: ItemTpl.AMMO_57X28_SS197SR,
+//					count: 180,
+//					isFunctional: false,
+//					isEncoded: false,
+//					type: "Item",
+//				},
+//				{
+//					templateId: ItemTpl.BARTER_GUNPOWDER_HAWK,
+//					count: 1,
+//					isFunctional: false,
+//					isEncoded: false,
+//					type: "Item",
+//				},
+//				{
+//					templateId: ItemTpl.BARTER_PACK_OF_NAILS,
+//					count: 2,
+//					isFunctional: false,
+//					isEncoded: false,
+//					type: "Item",
+//				},
+//			]
+//		},
+//	},
 	{
 		id: ItemTpl.AMMO_556X45_SOST,
 		adjust: (craft: IHideoutProduction) => {
@@ -602,40 +602,40 @@ export const craftingAdjustments = [
 			]
 		},
 	},
-	{
-		id: ItemTpl.AMMO_366TKM_APM,
-		adjust: (craft: IHideoutProduction) => {
-			craft.requirements = [
-				{
-					areaType: 10,
-					requiredLevel: 2,
-					type: "Area",
-				},
-				{
-					templateId: ItemTpl.AMMO_9X39_SPP,
-					count: 100,
-					isFunctional: false,
-					isEncoded: false,
-					type: "Item",
-				},
-				{
-					templateId: ItemTpl.AMMO_762X39_HP,
-					count: 100,
-					isFunctional: false,
-					isEncoded: false,
-					type: "Item",
-				},
-				{
-					templateId: ItemTpl.BARTER_PLIERS,
-					type: "Tool",
-				},
-				{
-					type: "QuestComplete",
-					questId: "5bc47dbf86f7741ee74e93b9",
-				},
-			]
-		},
-	},
+//	{
+//		id: ItemTpl.AMMO_366TKM_APM,
+//		adjust: (craft: IHideoutProduction) => {
+//			craft.requirements = [
+//				{
+//					areaType: 10,
+//					requiredLevel: 2,
+//					type: "Area",
+//				},
+//				{
+//					templateId: ItemTpl.AMMO_9X39_SPP,
+//					count: 100,
+//					isFunctional: false,
+//					isEncoded: false,
+//					type: "Item",
+//				},
+//				{
+//					templateId: ItemTpl.AMMO_762X39_HP,
+//					count: 100,
+//					isFunctional: false,
+//					isEncoded: false,
+//					type: "Item",
+//				},
+//				{
+//					templateId: ItemTpl.BARTER_PLIERS,
+//					type: "Tool",
+//				},
+//				{
+//					type: "QuestComplete",
+//					questId: "5bc47dbf86f7741ee74e93b9",
+//				},
+//			]
+//		},
+//	},
 	{
 		id: ItemTpl.BARTER_OFZ_30X165MM_SHELL,
 		adjust: (craft: IHideoutProduction) => {
