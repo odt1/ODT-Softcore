@@ -233,7 +233,7 @@
             enabled: true,
             stackMultiplier: 10,
             // Fix for the bosses spawning with a hidden container full of huge ammo stacks and being overweighted. This is a janky fix to divide ammo weght by stack multiplier.
-            divideWeightFix: true 
+            botAmmoStackFix: true 
         },
         // Better start for quests (Crisis). 5 times lower requirments for Drip-Out quests.  
         questChanges: true,

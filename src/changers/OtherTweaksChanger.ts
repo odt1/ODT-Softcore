@@ -7,18 +7,25 @@ import { ItemTpl } from "@spt/models/enums/ItemTpl"
 import { ItemType } from "@spt/models/eft/common/tables/ITemplateItem"
 import { ITemplateItem } from "@spt/models/eft/common/tables/ITemplateItem"
 import { BaseClasses } from "@spt/models/enums/BaseClasses"
+import { ConfigServer } from "@spt/servers/ConfigServer"
+import { ConfigTypes } from "@spt/models/enums/ConfigTypes"
+import { IBotConfig } from "@spt/models/spt/config/IBotConfig"
+
 import { log } from "node:console"
 
 export class OtherTweaksChanger {
 	private logger: PrefixLogger
 	private tables: IDatabaseTables
 	private items: Record<string, ITemplateItem> | undefined
+	private botConfig: IBotConfig
 
 	constructor(container: DependencyContainer) {
 		this.logger = PrefixLogger.getInstance()
 		const databaseServer = container.resolve<DatabaseServer>("DatabaseServer")
+		const configServer = container.resolve<ConfigServer>("ConfigServer")
 		this.tables = databaseServer.getTables()
 		this.items = this.tables.templates?.items
+		this.botConfig = configServer.getConfig<IBotConfig>(ConfigTypes.BOT)
 	}
 
 	public apply(config: OtherTweaks) {
@@ -91,7 +98,7 @@ export class OtherTweaksChanger {
 
 		try {
 			if (config.biggerAmmoStacks.enabled) {
-				this.doBiggerAmmoStacks(config.biggerAmmoStacks.stackMultiplier, config.biggerAmmoStacks.divideWeightFix)
+				this.doBiggerAmmoStacks(config.biggerAmmoStacks.stackMultiplier, config.biggerAmmoStacks.botAmmoStackFix)
 			}
 		} catch (error) {
 			this.logger.warning("OtherTweaks: doBiggerAmmoStacks failed gracefully. Send bug report. Continue safely.")
@@ -208,16 +215,12 @@ export class OtherTweaksChanger {
 		reshala.inventory.equipment.Holster = { "5b3b713c5acfc4330140bd8d": 1 }
 	}
 
-	doBiggerAmmoStacks(stackMultiplier: number, divideWeightFix: boolean) {
+	doBiggerAmmoStacks(stackMultiplier: number, botAmmoStackFix: boolean) {
 		for (const item of Object.values(this.items)) {
 			if (item._parent === BaseClasses.AMMO && item._props.StackMaxSize) {
 				item._props.StackMaxSize *= stackMultiplier
-				if (divideWeightFix) {
-					const weight = item._props.Weight
-					const rounding1 = Math.round((weight / stackMultiplier) * 1000) / 1000
-					const rounding2 = Number((weight / stackMultiplier).toFixed(3))
-
-					item._props.Weight = rounding2
+				if (botAmmoStackFix) {
+					this.botConfig.secureContainerAmmoStackCount = Math.round(this.botConfig.secureContainerAmmoStackCount / stackMultiplier)
 				}
 			}
 		}

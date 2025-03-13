@@ -196,5 +196,5 @@ export interface OtherTweaks {
 export interface BiggerAmmoStacks {
 	enabled: boolean
 	stackMultiplier: number
-	divideWeightFix: boolean
+	botAmmoStackFix: boolean
 }
