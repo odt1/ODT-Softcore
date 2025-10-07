@@ -376,6 +376,17 @@ export const craftingAdjustments = [
 				}
 			}
 		},
+	},	
+	{
+		id: ItemTpl.BARTER_BROKEN_LCD,
+		adjust: (craft: IHideoutProduction) => {
+			craft.count = 1
+			for (const requirement of craft.requirements) {
+				if (requirement.count) {
+					requirement.count = 1
+				}
+			}
+		},
 	},
 	{
 		id: ItemTpl.AMMO_23X75_ZVEZDA,

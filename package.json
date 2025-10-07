@@ -1,10 +1,10 @@
 {
     "name": "softcore",
-    "version": "3.2.0",
+    "version": "3.3.0",
     "main": "src/Softcore.js",
     "license": "MIT",
     "author": "ODT",
-    "sptVersion": "~3.10",
+    "sptVersion": "~3.11",
     "loadBefore": [],
     "loadAfter": [],
     "incompatibilities": [],
@@ -26,7 +26,11 @@
         "fs-extra": "11.2",
         "ignore": "^5.2",
         "tsyringe": "4.8.0",
-        "typescript": "~5.5"
+        "typescript": "5.8",
+        "@typescript-eslint/eslint-plugin": "7.2",
+        "@typescript-eslint/parser": "7.2",
+        "eslint": "8.57",
+        "winston": "3.12"
     },
     "dependencies": {
         "json-fixer": "~1.6",

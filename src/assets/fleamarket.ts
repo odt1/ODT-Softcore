@@ -34,14 +34,128 @@ export const whitelist = [
 	ItemTpl.VISORS_RAYBENCH_HIPSTER_RESERVE_SUNGLASSES,
 	// ItemTpl.FACECOVER_SHEMAGH_GREEN,
 	// ItemTpl.FACECOVER_GHOST_BALACLAVA,
-	ItemTpl.SILENCER_SUREFIRE_SOCOM556MINI_MONSTER_556X45_SOUND_SUPPRESSOR,
-	"59f8a37386f7747af3328f06", // Fortis Shift tactical foregrip
-	"5d025cc1d7ad1a53845279ef", // AR-15 HK Ergo PSG-1 style pistol grip
-	"5e21ca18e4d47f0da15e77dd", // AK CNC Warrior 5.56x45 muzzle device adapter
-	"588226ef24597767af46e39c", // Magpul AFG tactical foregrip (Olive Drab)
+	// ItemTpl.SILENCER_SUREFIRE_SOCOM556MINI_MONSTER_556X45_SOUND_SUPPRESSOR,
+	// "59f8a37386f7747af3328f06", // Fortis Shift tactical foregrip
+	// "5d025cc1d7ad1a53845279ef", // AR-15 HK Ergo PSG-1 style pistol grip
+	// "5e21ca18e4d47f0da15e77dd", // AK CNC Warrior 5.56x45 muzzle device adapter
+	// "588226ef24597767af46e39c", // Magpul AFG tactical foregrip (Olive Drab)
 	"5ea05cf85ad9772e6624305d", // Tac-Kek FAST MT helmet (Replica)
 	"67449b6c89d5e1ddc603f504", // Contraband case key
-	ItemTpl.BARREL_MK47_409MM
+	ItemTpl.BARREL_MK47_409MM,
+]
+
+export const actualBaseClasses = [
+	"566162e44bdc2d3f298b4573", // CompoundItem
+	"54009119af1c881c07000029", // Item
+	"5661632d4bdc2d903d8b456b", // StackableItem
+	"5447b5f14bdc2d61278b4567", // AssaultRifle
+	"543be5cb4bdc2deb348b4568", // AmmoBox
+	"5422acb9af1c889c16000029", // Weapon
+	"5c99f98d86f7745c314214b3", // KeyMechanical
+	"55802f3e4bdc2de7118b4584", // GearMod
+	"5447b5cf4bdc2d65278b4567", // Pistol
+	"543be6564bdc2df4348b4568", // ThrowWeap
+	"566168634bdc2d144c8b456c", // SearchableItem
+	"5448bc234bdc2d3c308b4569", // Magazine
+	"57bef4c42459772e8d35a53b", // ArmoredEquipment
+	"543be6674bdc2df1348b4569", // FoodDrink
+	"543be5664bdc2dd4348b4569", // Meds
+	"550aa4154bdc2dd8348b456b", // FunctionalMod
+	"5448e8d64bdc2dce718b4568", // Drink
+	"5448e8d04bdc2ddf718b4569", // Food
+	"543be5dd4bdc2deb348b4569", // Money
+	"55818b164bdc2ddc698b456c", // TacticalCombo
+	"550aa4cd4bdc2dd8348b456c", // Silencer
+	"5447e1d04bdc2dff2f8b4567", // Knife
+	"5447b6094bdc2dc3278b4567", // Shotgun
+	"5448bf274bdc2dfc2f8b456a", // MobContainer
+	"550aa4bf4bdc2dd6348b456b", // FlashHider
+	"55818add4bdc2d5b648b456f", // AssaultScope
+	"55818ae44bdc2dde698b456c", // OpticScope
+	"5448e5284bdc2dcb718b4567", // Vest
+	"5448e53e4bdc2d60728b4567", // Backpack
+	"5448f3ac4bdc2dce718b4569", // Medical
+	"5448f3a14bdc2d27728b4569", // Drugs
+	"5448f39d4bdc2d0a728b4568", // MedKit
+	"66abb0743f4d8b145b1612c1", // Multitools
+	"5485a8684bdc2da71d8b4567", // Ammo
+	"5448e54d4bdc2dcc718b4568", // Armor
+	"5448fe124bdc2da5018b4567", // Mod
+	"5448fe394bdc2d0d028b456c", // Muzzle
+	"55802f4a4bdc2ddb688b4569", // MasterMod
+	"5448e5724bdc2ddf718b4568", // Visors
+	"557596e64bdc2dc2118b4571", // Pockets
+	"555ef6e44bdc2de9068b457e", // Barrel
+	"5447b6254bdc2dc3278b4568", // SniperRifle
+	"55818ad54bdc2ddc698b4569", // Collimator
+	"550aa4dd4bdc2dc9348b4569", // MuzzleCombo
+	"55818a684bdc2ddd698b456d", // PistolGrip
+	"55818af64bdc2d5b648b4570", // Foregrip
+	"5448fe7a4bdc2d6f028b456b", // Sights
+	"55818a304bdc2db5418b457d", // Receiver
+	"55818a6f4bdc2db9688b456b", // Charge
+	"55818a104bdc2db9688b4569", // Handguard
+	"55818b224bdc2dde698b456f", // Mount
+	"55818a594bdc2db9688b456a", // Stock
+	"55818ac54bdc2d5b648b456e", // IronSight
+	"55d720f24bdc2d88028b456d", // Inventory
+	"5a74651486f7744e73386dd1", // AuxiliaryMod
+	"5a341c4086f77401f2541505", // Headwear
+	"543be5f84bdc2dd4348b456a", // Equipment
+	"5645bcb74bdc2ded0b8b4578", // Headphones
+	"55818b014bdc2ddc698b456b", // Launcher
+	"566965d44bdc2d814c8b4571", // LootContainer
+	"566abbb64bdc2d144c8b457d", // Stash
+	"5671435f4bdc2d96058b4569", // LockableContainer
+	"57864ee62459775490116fc1", // Battery
+	"57864a66245977548f04a81f", // Electronics
+	"57864e4c24597754843f8723", // Lubricant
+	"567583764bdc2d98058b456e", // StationaryContainer
+	"55818afb4bdc2dde698b456d", // Bipod
+	"56ea9461d2720b67698b456f", // Gasblock
+	"5a2c3a9486f774688b05e574", // NightVision
+	"5a341c4686f77469e155819e", // FaceCover
+	"57864a3d24597754843f8721", // Jewelry
+	"590c745b86f7743cc433c5f2", // Other
+	"57864ada245977548638de91", // BuildingMaterial
+	"57864c322459775490116fbf", // HouseholdGoods
+	"5447b5fc4bdc2d87278b4567", // AssaultCarbine
+	"567849dd4bdc2d150f8b456e", // Map
+	"5c164d2286f774194c5e69fa", // Keycard
+	"55818acf4bdc2dde698b456b", // CompactCollimator
+	"5447b6194bdc2d67278b4567", // MarksmanRifle
+	"5795f317245977243854e041", // SimpleContainer
+	"5448eb774bdc2d0a728b4567", // BarterItem
+	"5447b5e04bdc2d62278b4567", // Smg
+	"55818b084bdc2d5b648b4571", // Flashlight
+	"57864bb7245977548b3b66c2", // Tool
+	"5448ecbe4bdc2d60728b4568", // Info
+	"616eb7aea207f41933308f46", // RepairKits
+	"5447e0e74bdc2d3c308b4567", // SpecItem
+	"57864c8c245977548867e7f1", // MedicalSupplies
+	"55818aeb4bdc2ddc698b456a", // SpecialScope
+	"5b3f15d486f77432d0509248", // ArmBand
+	"5447bed64bdc2d97278b4568", // MachineGun
+	"5448f3a64bdc2d60728b456a", // Stimulator
+	"5d21f59b6dbe99052b54ef83", // ThermalVision
+	"543be5e94bdc2df1348b4568", // Key
+	"5d650c3e815116009f6201d2", // Fuel
+	"5447bedf4bdc2d87278b4568", // GrenadeLauncher
+	"5f4fbaaca5573a5ac31db429", // Compass
+	"6050cac987d3f925bf016837", // SortingTable
+	"617f1ef5e8b54b0998387733", // Revolver
+	"610720f290b75a49ff2e5e25", // CylinderMagazine
+	"61605ddea09d851a0a0c1bbc", // PortableRangeFinder
+	"627a137bf21bc425b06ab944", // SpringDrivenCylinder
+	"62e9103049c018f425059f38", // RadioTransmitter
+	"62f109593b54472778797866", // RandomLootContainer
+	"63da6da4784a55176c018dba", // HideoutAreaContainer
+	"65649eb40bf0ed77b8044453", // BuiltInInserts
+	"644120aa86ffbe10ee032b6f", // ArmorPlate
+	"64b69b0c8f3be32ed22682f8", // CultistAmulet
+	"65ddcc7aef36f6413d0829b9", // MarkOfUnknown
+	"6672e40ebb23210ae87d39eb", // PlantingKits
+	"6759673c76e93d8eb20b2080" // Flyer
 ]
 
 export const fleaBarterRequestWhitelist = [
@@ -157,6 +271,7 @@ export const fleaBarterRequestWhitelist = [
 	// BaseClasses.CHARGING_HANDLE,
 	// BaseClasses.COMB_MUZZLE_DEVICE,
 	// BaseClasses.HIDEOUT_AREA_CONTAINER,
+	// "6759673c76e93d8eb20b2080", // Flyer
 ]
 
 export const requestWhitelist = {
@@ -173,7 +288,10 @@ export const requestWhitelist = {
 	"5e99711486f7744bfc4af328": 0, // Sanitar's first aid kit <- blacklist
 	"5e99735686f7744bfc4af32c": 0, // Sanitar kit <- blacklist
 	"5b9b9020e7ef6f5716480215": 0, // dogtagt <- blacklist
-	"660bbc47c38b837877075e47": 0 // encrypted flash drive
+	"660bbc47c38b837877075e47": 0, // encrypted flash drive
+	"67586c61a0c49554ed0bb4a8": 0, // SHYSHKA
+	"67586af7036d7f3da60c3612": 0, // pickles
+	"67586b7e49c2fa592e0d8ed9": 0, // olivie
 }
 
 export const fleaListingsWhitelistHandBook = [

@@ -7,7 +7,7 @@ import { ConfigServer } from "@spt/servers/ConfigServer"
 import { ConfigTypes } from "@spt/models/enums/ConfigTypes"
 import { IRagfairConfig } from "@spt/models/spt/config/IRagfairConfig"
 import { MinMax } from "@spt/models/common/MinMax"
-import { fleaBarterRequestWhitelist, requestWhitelist, BSGblacklist } from "../assets/fleamarket"
+import { fleaBarterRequestWhitelist, requestWhitelist, BSGblacklist, actualBaseClasses } from "../assets/fleamarket"
 import { IItemConfig } from "@spt/models/spt/config/IItemConfig"
 import { ItemTpl } from "@spt/models/enums/ItemTpl"
 import { BaseClasses } from "@spt/models/enums/BaseClasses"
@@ -81,7 +81,24 @@ export class BarterEconomyChanger {
 	private doBarterEconomy() {
 		const locale = this.tables.locales?.global.en // debug
 
-		const barterBlacklist = Object.values(BaseClasses).filter((baseClass) => !fleaBarterRequestWhitelist.includes(baseClass)) as string[]
+		if (false) {
+			// debug
+			const set = new Set()
+
+			const items = this.tables.templates!.items
+			for (const item in items) {
+				set.add(items[item]._parent)
+				// console.log(handbookCategories[handbookCategorie].Id)
+				// console.log(`"${handbookCategories[handbookCategorie].Id}", // ${locale![handbookCategories[handbookCategorie].Id]}`)
+			}
+			for (const item of set) {
+				// console.log(handbookCategories[handbookCategorie].Id)
+				console.log(`"${item}", // ${items[item]?._name}`)
+			}
+			
+		}
+		
+		const barterBlacklist = actualBaseClasses.filter(baseClass => !fleaBarterRequestWhitelist.includes(baseClass))
 		this.ragfairConfig.dynamic.barter.itemTypeBlacklist = barterBlacklist
 		this.ragfairConfig.dynamic.barter.minRoubleCostToBecomeBarter = 100
 

@@ -167,7 +167,13 @@ export class OtherTweaksChanger {
 				item._parent === BaseClasses.BUILT_IN_INSERTS ||
 				item._parent === BaseClasses.MAGAZINE ||
 				item._parent === BaseClasses.CYLINDER_MAGAZINE ||
-				item._parent === BaseClasses.ARMOR_PLATE
+				item._parent === BaseClasses.ARMOR_PLATE ||
+				item._id === "6662e9aca7e0b43baa3d5f74" || 
+				item._id === "6662e9cda7e0b43baa3d5f76" || 
+				item._id === "6662e9f37fa79a6d83730fa0" || 
+				item._id === "6662ea05f6259762c56f3189" ||
+				item._id === "59f32c3b86f77472a31742f0" ||
+				item._id === "59f32bb586f774757e1e8442"
 			) {
 				continue
 			}
